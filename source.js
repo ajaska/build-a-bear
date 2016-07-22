@@ -8,8 +8,10 @@ for (var i = 1; i < 99999; i++) {
 
 let initialCartFormData = new FormData(document.getElementById('SSR_SSENRL_CART'));
 
-let enrolledCourses = parseEnrolledCoursesTable();
-let shoppingCartCourses = parseShoppingCartTable();
+let enrolledTableRows = document.querySelectorAll("tr [id^='trSTDNT_ENRL_SSVW']");
+let enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
+let shoppingCartTableRows = document.querySelectorAll("tr [id^='trSSR_REGFORM_VW']");
+let shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
 document.querySelector('html').innerHTML = "<pre>"+JSON.stringify(enrolledCourses, null, '\t')+"</pre>";
 document.querySelector('html').innerHTML += "<pre>"+JSON.stringify(shoppingCartCourses, null, '\t')+"</pre>";
 

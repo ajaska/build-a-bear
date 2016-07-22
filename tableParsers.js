@@ -1,62 +1,103 @@
-export function parseEnrolledCoursesTable() {
-  let enrolledTableRows = document.querySelectorAll("tr [id^='trSTDNT_ENRL_SSVW']");
-
-  let enrolledCourses = [];
-
-  for (let i=0; i < enrolledTableRows.length; ++i) {
-    let row = enrolledTableRows[i];
-    let columns = row.children;
-    enrolledCourses.push({
-      course: columns[0].innerText.split('\n')[0],
-      id: columns[0].innerText.split('\n')[1],
-      desc: columns[1].innerText.trim(),
-      time: columns[2].innerText.trim(),
-      loc: columns[3].innerText.trim(),
-      instructor: columns[4].innerText.trim(),
-      units: columns[5].innerText.trim(),
-      waitlisted: columns[6].innerHTML.indexOf('Wait Listed') !== -1
-    })
-  }
-  return enrolledCourses;
+const schemaTypes = {
+  course_id: Symbol("Class"), // COMPSCI 162-00 \n (27170)
+  ccn: Symbol("Class Nbr"), // 27170
+  section: Symbol("Section"), // 101
+  desc: Symbol("Description"), // Op Sys And Sys Prog (Lecture)
+  time: Symbol("Days/Times"), // MoWe 5:00PM - 6:29PM
+  room: Symbol("Room"), // Valley Life Sciences 2050
+  instructor: Symbol("Instructor"), // A. Joseph
+  units: Symbol("Units"), // 4.00
+  enrollment_status: Symbol("Status"), // Enrolled, Dropped, Waitlisted
 }
 
-export function parseShoppingCartTable() {
-  let shoppingCartRows = document.querySelectorAll("tr [id^='trSSR_REGFORM_VW']");
-
-  let shoppingCartCourses = [];
-
-  for (let i=0; i < shoppingCartRows.length; ++i) {
-    let row = shoppingCartRows[i];
-    let columns = row.children;
-    shoppingCartCourses.push({
-      course: columns[1].innerText.split('\n')[0],
-      id: columns[1].innerText.split('\n')[1],
-      time: columns[2].innerText.trim(),
-      loc: columns[3].innerText.trim(),
-      instructor: columns[4].innerText.trim(),
-      units: columns[5].innerText.trim(),
-      waitlisted: columns[6].innerHTML.indexOf('Wait Listed') !== -1
-    })
+class Column {
+  constructor(position, type) {
+    this.position = position;
+    this.type = type;
   }
-  return shoppingCartCourses;
 }
 
-
-export function parseDiscussionTable(tableRows) {
-  let sections = [];
-
-  for (let i=0; i < tableRows.length; ++i) {
-    let row = tableRows[i];
-    let columns = row.children;
-    sections.push({
-      ccn: columns[1].innerText.trim(),
-      section: columns[2].innerText.trim(),
-      time: columns[3].innerText.trim(),
-      loc: columns[4].innerText.trim(),
-      instructor: columns[5].innerText.trim(),
-      waitlisted: columns[6].innerHTML.indexOf('Wait Listed') !== -1
-    });
+function tableParser(tableSchema) {
+  return function(tableRows) {
+    let data = [];
+    for (let i=0; i<tableRows.length; ++i) {
+      let row = tableRows[i];
+      let columns = row.children;
+      let rowInfo = tableSchema.reduce(function(rowInfo, columnSchema) {
+        let parsedInfo = parseColumn(
+          columns[columnSchema.position],
+          columnSchema.type
+        );
+        return Object.assign(rowInfo, parsedInfo);
+      }, {});
+      data.push(rowInfo)
+    }
+    return data;
   }
-
-  return sections;
 }
+
+function parseColumn(column, columnType) {
+  switch (columnType) {
+    case schemaTypes.course_id:
+      let course = column.innerText.split('\n')[0];
+      let id = column.innerText.split('\n')[1];
+      id = id.replace("(", "").replace(")", "");
+      return { course: course, id: id }
+    case schemaTypes.ccn:
+      return { id: column.innerText.trim() }
+    case schemaTypes.section:
+      return { section: column.innerText.trim() }
+    case schemaTypes.desc:
+      return { desc: column.innerText.trim() }
+    case schemaTypes.time:
+      return { time: column.innerText.trim() }
+    case schemaTypes.room:
+      return { room: column.innerText.trim() }
+    case schemaTypes.instructor:
+      return { instructor: column.innerText.trim() }
+    case schemaTypes.units:
+      return { units: column.innerText.trim() }
+    case schemaTypes.enrollment_status:
+      if (column.innerHTML.indexOf("Wait Listed" !== -1)) {
+        return { enrollment_status: "Wait listed" }
+      } else if (column.innerHTML.indexOf("Enrolled" !== -1)) {
+        return { enrollment_status: "Enrolled" }
+      } else if (column.innerHTML.indexOf("Dropped" !== -1)) {
+        return { enrollment_status: "Dropped" }
+      }
+      break;
+    default:
+      break;
+  }
+  console.log(columnType);
+  console.log(JSON.stringify(column));
+  throw "Don't know how to parse column type";
+}
+
+export const parseEnrolledCoursesTable = tableParser([
+  new Column(0, schemaTypes.course_id),
+  new Column(1, schemaTypes.desc),
+  new Column(2, schemaTypes.time),
+  new Column(3, schemaTypes.room),
+  new Column(4, schemaTypes.instructor),
+  new Column(5, schemaTypes.units),
+  new Column(6, schemaTypes.enrollment_status),
+]);
+
+export const parseShoppingCartTable = tableParser([
+  new Column(1, schemaTypes.course_id),
+  new Column(2, schemaTypes.time),
+  new Column(3, schemaTypes.room),
+  new Column(4, schemaTypes.instructor),
+  new Column(5, schemaTypes.units),
+  new Column(6, schemaTypes.enrollment_status),
+]);
+
+export const parseDiscussionTable = tableParser([
+  new Column(1, schemaTypes.ccn),
+  new Column(2, schemaTypes.section),
+  new Column(3, schemaTypes.time),
+  new Column(4, schemaTypes.room),
+  new Column(5, schemaTypes.instructor),
+  new Column(6, schemaTypes.enrollment_status),
+]);
