@@ -12,8 +12,11 @@
     ]
   },
   "dependencies": {
+    "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "es6-promise": "^3.2.1",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
     "whatwg-fetch": "^1.0.0"
   }
 }
