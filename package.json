@@ -1,0 +1,19 @@
+{
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
+  "dependencies": {
+    "babelify": "^7.3.0",
+    "es6-promise": "^3.2.1",
+    "whatwg-fetch": "^1.0.0"
+  }
+}
