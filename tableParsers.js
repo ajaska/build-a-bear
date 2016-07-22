@@ -7,7 +7,8 @@ const schemaTypes = {
   room: Symbol("Room"), // Valley Life Sciences 2050
   instructor: Symbol("Instructor"), // A. Joseph
   units: Symbol("Units"), // 4.00
-  enrollment_status: Symbol("Status"), // Enrolled, Dropped, Waitlisted
+  enrollment_status: Symbol("Status"), // Enrolled, Dropped, Wait Listed
+  availability: Symbol("Availability"), // Open, Closed, Wait List
 }
 
 class Column {
@@ -58,14 +59,24 @@ function parseColumn(column, columnType) {
     case schemaTypes.units:
       return { units: column.innerText.trim() }
     case schemaTypes.enrollment_status:
-      if (column.innerHTML.indexOf("Wait Listed" !== -1)) {
-        return { enrollment_status: "Wait listed" }
-      } else if (column.innerHTML.indexOf("Enrolled" !== -1)) {
+      if (column.innerHTML.includes("Wait Listed")) {
+        return { enrollment_status: "Wait Listed" }
+      } else if (column.innerHTML.includes("Enrolled")) {
         return { enrollment_status: "Enrolled" }
-      } else if (column.innerHTML.indexOf("Dropped" !== -1)) {
+      } else if (column.innerHTML.includes("Dropped")) {
         return { enrollment_status: "Dropped" }
       }
-      break;
+      return { enrollment_status: "Unknown" }
+    case schemaTypes.availability:
+      if (column.innerHTML.includes("Wait List")) {
+        return { availability: "Wait List" }
+      } else if (column.innerHTML.includes("Closed")) {
+        return { availability: "Closed" }
+      } else if (column.innerHTML.includes("Open")) {
+        return { availability: "Open" }
+      }
+      return { availability: "Unknown" }
+
     default:
       break;
   }
@@ -90,7 +101,7 @@ export const parseShoppingCartTable = tableParser([
   new Column(3, schemaTypes.room),
   new Column(4, schemaTypes.instructor),
   new Column(5, schemaTypes.units),
-  new Column(6, schemaTypes.enrollment_status),
+  new Column(6, schemaTypes.availability),
 ]);
 
 export const parseDiscussionTable = tableParser([
@@ -99,5 +110,5 @@ export const parseDiscussionTable = tableParser([
   new Column(3, schemaTypes.time),
   new Column(4, schemaTypes.room),
   new Column(5, schemaTypes.instructor),
-  new Column(6, schemaTypes.enrollment_status),
+  new Column(6, schemaTypes.availability),
 ]);
