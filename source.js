@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { parseEnrolledCoursesTable, parseShoppingCartTable } from './tableParsers';
-import { getSectionsForCCN } from './actions';
+import { getSectionsForCCN, selectSection, confirmChoice } from './actions';
 
 
 let formData = [];
@@ -103,9 +103,16 @@ class EnrolledCourses extends React.Component {
 }
 
 
+/*
 getSectionsForCCN(33647, formData).then(function({ formData, sections }) {
-  document.querySelector('html').innerHTML += "<pre>"+JSON.stringify(sections, null, '\t')+"</pre>";
+  return selectSection(0, formData);
+}).then(function({formData}) {
+  return confirmChoice(formData);
+}).then(function({formData, courses}) {
+  console.log(shoppingCartCourses);
+  console.log(courses);
 })
+*/
 
 let root = document.getElementById('root');
 
