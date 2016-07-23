@@ -1,15 +1,17 @@
-import $ from 'jquery';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import App from './app/components/App'
 
 import { parseEnrolledCoursesTable, parseShoppingCartTable } from './tableParsers';
-import { getSectionsForCCN, selectSection, confirmChoice } from './actions';
+// import { getSectionsForCCN, selectSection, confirmChoice } from './actions';
+import { setShoppingCart } from './app/actions/shoppingCart';
 
+import configureStore from './app/store';
 
-let formData = [];
+let formData = new FormData();
 let enrolledCourses = [];
 let shoppingCartCourses = [];
-
 
 function initialize() {
   // Remove any existing setInterval calls
@@ -28,80 +30,17 @@ function initialize() {
 
 initialize();
 
-
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <ShoppingCart courses={ shoppingCartCourses } />
-        <EnrolledCourses courses={ enrolledCourses } />
-      </div>
-    )
-  }
-}
-
-
-class ShoppingCart extends React.Component {
-  render() {
-    if (!this.props.courses) {
-      return <div>No courses</div>
-    }
-
-    let course_header = Object.keys(this.props.courses[0]).map(
-      (key, i) => <th key={i}>{ key }</th>
-    );
-    let course_rows = this.props.courses.map((row, i) => {
-      return <tr key={i}>{Object.keys(row).map((key, i) => <td key={i}>{row[key]}</td>)}</tr>
-    });
-    return (
-      <div>
-        <div>
-          This is the shopping cart.
-        </div>
-        <div>
-          <table>
-            <thead>
-              <tr>{course_header}</tr>
-            </thead>
-            <tbody>{course_rows}</tbody>
-          </table>
-        </div>
-      </div>
-    )
-  }
-}
-
-
-class EnrolledCourses extends React.Component {
-  render() {
-    if (!this.props.courses) {
-      return <div>No courses</div>
-    }
-
-    let course_header = Object.keys(this.props.courses[0]).map(
-      (key, i) => <th key={i}>{ key }</th>
-    );
-    let course_rows = this.props.courses.map((row, i) => {
-      return <tr key={i}>{Object.keys(row).map((key, i) => <td key={i}>{row[key]}</td>)}</tr>
-    });
-    return (
-      <div>
-        <div>
-          This is the enrolled courses.
-        </div>
-        <div>
-          <table>
-            <thead>
-              <tr>{course_header}</tr>
-            </thead>
-            <tbody>{course_rows}</tbody>
-          </table>
-        </div>
-      </div>
-    )
-  }
-}
-
+let store = configureStore();
+Promise.all([
+  store.dispatch(setShoppingCart({courses: shoppingCartCourses})),
+]).then(() => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+})
 
 /*
 getSectionsForCCN(33647, formData).then(function({ formData, sections }) {
@@ -113,10 +52,3 @@ getSectionsForCCN(33647, formData).then(function({ formData, sections }) {
   console.log(courses);
 })
 */
-
-let root = document.getElementById('root');
-
-ReactDOM.render(
-  <App />,
-  root
-);
