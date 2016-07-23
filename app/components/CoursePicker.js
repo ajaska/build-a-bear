@@ -3,11 +3,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 class CoursePicker extends React.Component {
   handleChange(event) {
-    this.props.setCCN({ccn: event.target.value})
-  }
-
-  validateCCN(ccn) {
-    return ccn === "33647"
+    this.props.changedCCN({ccn: event.target.value})
   }
 
   render() {
@@ -19,9 +15,13 @@ class CoursePicker extends React.Component {
         <div>
           <input
             type="text"
-            value={this.props.coursePicker.ccn}
+            value={this.props.coursePicker.get("ccn")}
             onChange={this.handleChange.bind(this)}
           />
+        </div>
+        <div>
+          The name of this course is {this.props.coursePicker.get("course_name")}.
+          {this.props.coursePicker.get("dept")} - {this.props.coursePicker.get("dept_number")}
         </div>
       </div>
     )
@@ -34,6 +34,7 @@ CoursePicker.propTypes = {
     sections: ImmutablePropTypes.list.isRequired,
     dept: React.PropTypes.string.isRequired,
     dept_number: React.PropTypes.string.isRequired,
+    course_name: React.PropTypes.string.isRequired,
   }).isRequired
 }
 
