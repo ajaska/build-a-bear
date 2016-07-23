@@ -2,7 +2,7 @@ import * as ActionType from '../actions/enrolled';
 import Immutable from 'immutable';
 
 let defaultState = Immutable.fromJS({
-  courses: {}
+  courses: []
 });
 
 export default function(state = defaultState, action) {

@@ -6,6 +6,7 @@ import App from './app/components/App'
 import { parseEnrolledCoursesTable, parseShoppingCartTable } from './tableParsers';
 // import { getSectionsForCCN, selectSection, confirmChoice } from './actions';
 import { setShoppingCart } from './app/actions/shoppingCart';
+import { setEnrolledCourses } from './app/actions/enrolled';
 
 import configureStore from './app/store';
 
@@ -33,6 +34,7 @@ initialize();
 let store = configureStore();
 Promise.all([
   store.dispatch(setShoppingCart({courses: shoppingCartCourses})),
+  store.dispatch(setEnrolledCourses({courses: enrolledCourses})),
 ]).then(() => {
   render(
     <Provider store={store}>
