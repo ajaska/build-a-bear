@@ -7,6 +7,13 @@ class CoursePicker extends React.Component {
   }
 
   render() {
+    let sections = this.props.coursePicker.get('sections').toJS().map((section, i) => {
+      return (
+        <div key={i}>
+          Section choice {i}: {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
+        </div>
+      )
+    });
     return (
       <div>
         <div>
@@ -22,6 +29,9 @@ class CoursePicker extends React.Component {
         <div>
           The name of this course is {this.props.coursePicker.get("course_name")}.
           {this.props.coursePicker.get("dept")} - {this.props.coursePicker.get("dept_number")}
+        </div>
+        <div> Available sections:
+          { sections }
         </div>
       </div>
     )

@@ -1,4 +1,5 @@
 import * as ActionType from '../actions/coursePicker';
+import * as APIActionType from '../actions/api';
 import Immutable from 'immutable';
 
 let defaultState = Immutable.fromJS({
@@ -19,6 +20,10 @@ export default function(state = defaultState, action) {
       return state.set('dept_number', action.dept_number)
     case ActionType.SET_COURSE_NAME:
       return state.set('course_name', action.course_name)
+    case ActionType.CLEAR_SECTIONS:
+      return state.set('sections', Immutable.fromJS([]))
+    case APIActionType.RECEIVE_SECTIONS:
+      return state.set('sections', Immutable.fromJS(action.sections))
     default:
       return state
   }

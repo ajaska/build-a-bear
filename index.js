@@ -3,10 +3,10 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './app/components/App'
 
-import { parseEnrolledCoursesTable, parseShoppingCartTable } from './tableParsers';
-// import { getSectionsForCCN, selectSection, confirmChoice } from './actions';
+import { parseEnrolledCoursesTable, parseShoppingCartTable } from './app/lib/tableParsers';
 import { setShoppingCart } from './app/actions/shoppingCart';
 import { setEnrolledCourses } from './app/actions/enrolled';
+import { setFormdata } from './app/actions/api';
 
 import configureStore from './app/store';
 
@@ -35,6 +35,7 @@ let store = configureStore();
 Promise.all([
   store.dispatch(setShoppingCart({courses: shoppingCartCourses})),
   store.dispatch(setEnrolledCourses({courses: enrolledCourses})),
+  store.dispatch(setFormdata({formData: formData})),
 ]).then(() => {
   render(
     <Provider store={store}>
