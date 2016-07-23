@@ -1,5 +1,8 @@
 from collections import namedtuple
+import sys
 import json
+
+sys.setrecursionlimit(15000)
 
 # Course = namedtuple('Course', ['ccn', 'dept', 'dept_number', 'section', 'type', 'title', 'units', 'room', 'days', 'start', 'end', 'instructors'])
 Course = namedtuple('Course', ['ccn', 'dept', 'dept_number', 'section', 'type', 'title']) 
@@ -102,7 +105,20 @@ with open('courses-raw.txt') as f:
             ))
         i += 1
 courses = list(courses)
+
+# This is horrifically inefficient
+def filter_discussions(course):
+    if course.type != 'DIS':
+        return True
+    possible_lecs = len(list(filter(lambda x: x.dept == course.dept and x.dept_number == course.dept_number and x.type == 'LEC', courses))) > 0
+    if possible_lecs:
+        return False
+    return True
+    
 courses = sorted(courses, key=lambda x: x.ccn)
+print(courses)
+courses = list(filter(filter_discussions, courses))
+print(courses)
 depts = sorted(list(set(course.dept for course in courses)))
 with open('depts.json', 'w') as f:
     json.dump(depts, f, separators=(',',':'))
