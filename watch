@@ -1,1 +1,1 @@
-watchify source.js -o meme-app.js -v
+watchify index.js -o meme-app.js -v
