@@ -62,17 +62,37 @@ export function getSectionsForCCN({ccn}) {
     return postFormData(url, formData).then(function(body) {
       let parser = new DOMParser();
       let doc = parser.parseFromString(body, "text/html");
-      let rows = doc.querySelectorAll("tr [id^='trSSR_CLS_TBL']");
-      let sections = parseDiscussionTable(rows);
       let newForm = doc.getElementById('SSR_SSENRL_CART');
       let newFormData = new FormData(newForm);
-      dispatch(setFormdata({formData: newFormData}))
+
+      let viewall = doc.querySelector("[id^='SSR_CLS_TBL_R1$fviewall$0']");
+      if (viewall && viewall.innerText.includes("View All")) {
+        newFormData.set('ICAJAX', '0');
+        newFormData.set('ICAction', 'SSR_CLS_TBL_R1$fviewall$0');
+        return postFormData(url, newFormData).then(function(body) {
+          let parser = new DOMParser();
+          let doc = parser.parseFromString(body, "text/html");
+          let newForm = doc.getElementById('SSR_SSENRL_CART');
+          let newFormData = new FormData(newForm);
+          let rows = doc.querySelectorAll("tr [id^='trSSR_CLS_TBL']");
+          let sections = parseDiscussionTable(rows);
+
+          return {formData: newFormData, sections: sections}
+        });
+      } else {
+        let rows = doc.querySelectorAll("tr [id^='trSSR_CLS_TBL']");
+        let sections = parseDiscussionTable(rows);
+
+        return {formData: newFormData, sections: sections}
+      }
+    }).then(function({formData, sections}) {
+      dispatch(setFormdata({formData: formData}))
       return dispatch(receiveSections({
         ccn: ccn,
         sections: sections
       }))
     });
-  }
+  };
 }
 
 
