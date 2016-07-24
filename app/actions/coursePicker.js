@@ -1,4 +1,4 @@
-import { getSectionsForCCN } from './api'
+import { getSectionsForCCN, cancelShoppingCartAdd } from './api'
 
 export const SET_CCN = Symbol('SET_CCN');
 export const SET_DEPT = Symbol('SET_DEPT');
@@ -9,7 +9,7 @@ export const CLEAR_SECTIONS = Symbol('CLEAR_SECTIONS');
 let ccn_indexed = require('../data/ccn_indexed.json');
 
 export function changedCCN({ccn}) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch(setCCN({ccn: ccn}));
 
     if (ccn_indexed.hasOwnProperty(ccn)) {
@@ -22,7 +22,10 @@ export function changedCCN({ccn}) {
       dispatch(setDept({dept: ""}));
       dispatch(setDeptNumber({dept_number: ""}));
       dispatch(setCourseName({course_name: ""}));
-      dispatch(clearSections());
+      if (getState().coursePicker.get('sections').size > 0) {
+        dispatch(cancelShoppingCartAdd());
+        dispatch(clearSections());
+      }
     }
   }
 }

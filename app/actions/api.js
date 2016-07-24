@@ -56,6 +56,40 @@ export function getSectionsForCCN({ccn}) {
   }
 }
 
+
+export function cancelShoppingCartAdd() {
+  return (dispatch, getState) => {
+    let formData = getState().api.formData;
+
+    let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
+    formData.set('ICAJAX', '0');
+    formData.set('ICAction', 'DERIVED_CLS_DTL_CANCEL_PB');
+    return postFormData(url, formData).then(function(body) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(body, "text/html");
+      let newForm = doc.getElementById('SSR_SSENRL_CART');
+      let newFormData = new FormData(newForm);
+      return newFormData
+    }).then(function(formData) {
+      formData.set('ICAJAX', '0');
+      formData.set('ICAction', '#ICCancel');
+      return postFormData(url, formData)
+    }).then(function(body) { })
+    .then(() => fetch(url, { credentials: 'same-origin' }))
+    .then(response => response.text())
+    .then(function(body) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(body, "text/html");
+      let newForm = doc.getElementById('SSR_SSENRL_CART');
+      let newFormData = new FormData(newForm);
+      return dispatch(setFormdata({formData: newFormData}))
+    })
+
+
+  }
+}
+
+
 export function selectSection(choice, formData) {
   let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
   formData.set('ICAJAX', '0');

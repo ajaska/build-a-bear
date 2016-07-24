@@ -23,7 +23,10 @@ export default function(state = defaultState, action) {
     case ActionType.CLEAR_SECTIONS:
       return state.set('sections', Immutable.fromJS([]))
     case APIActionType.RECEIVE_SECTIONS:
-      return state.set('sections', Immutable.fromJS(action.sections))
+      if (state.get('ccn') === action.ccn) {
+        return state.set('sections', Immutable.fromJS(action.sections))
+      }
+      return state
     default:
       return state
   }
