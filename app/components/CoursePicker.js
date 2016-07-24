@@ -18,13 +18,31 @@ class CoursePicker extends React.Component {
   }
 
   render() {
-    let sections = this.props.coursePicker.sections.map((section, i) => {
-      return (
-        <option value={i} key={i}>
-          Section choice {i}: {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
-        </option>
-      )
-    });
+    let sections;
+    if(this.props.coursePicker.sections.length > 0) {
+      sections = this.props.coursePicker.sections.map((section, i) => {
+        return (
+          <option value={i} key={i}>
+            Section choice {i}: {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
+          </option>
+        )
+      });
+      sections = (
+        <select
+          value={this.props.coursePicker.selection}
+          onChange={this.handleSelector.bind(this)} >
+          { sections }
+        </select>
+      );
+    } else if (this.props.coursePicker.loading_sections) {
+      sections = <div>Loadingu</div>
+    } else if (this.props.coursePicker.ccn
+               && this.props.coursePicker.dept_number
+               && this.props.coursePicker.dept) {
+      sections = <div>Neato, no sections for this guy</div>
+    } else {
+      sections = <div>Waiting for course selection ^_^</div>
+    }
     return (
       <div>
         <div>
@@ -43,11 +61,7 @@ class CoursePicker extends React.Component {
             {this.props.coursePicker.dept} - {this.props.coursePicker.dept_number}
           </div>
           <div> Available sections:
-            <select
-              value={this.props.coursePicker.selection}
-              onChange={this.handleSelector.bind(this)} >
-              { sections }
-            </select>
+            {sections}
           </div>
           <input type="submit" value="Add" />
         </form>
@@ -60,6 +74,7 @@ CoursePicker.propTypes = {
   coursePicker: React.PropTypes.shape({
     ccn: React.PropTypes.string.isRequired,
     sections: React.PropTypes.array.isRequired,
+    loading_sections: React.PropTypes.bool.isRequired,
     dept: React.PropTypes.string.isRequired,
     dept_number: React.PropTypes.string.isRequired,
     course_name: React.PropTypes.string.isRequired,

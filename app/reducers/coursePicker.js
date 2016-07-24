@@ -5,6 +5,7 @@ import Immutable from 'immutable';
 let defaultState = Immutable.fromJS({
   ccn: "",
   sections: [],
+  loading_sections: false,
   dept: "",
   dept_number: "",
   course_name: "",
@@ -25,9 +26,12 @@ export default function(state = defaultState, action) {
       return state.set('sections', Immutable.fromJS([]))
     case ActionType.SET_SELECTION:
       return state.set('selection', action.selection)
+    case APIActionType.REQUEST_SECTIONS:
+      return state.set('loading_sections', true)
     case APIActionType.RECEIVE_SECTIONS:
       if (state.get('ccn') === action.ccn) {
         return state.set('sections', Immutable.fromJS(action.sections))
+                    .set('loading_sections', false)
       }
       return state
     default:

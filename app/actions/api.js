@@ -134,7 +134,14 @@ export function addCourse({ccn, selection}) {
 
     let formData = getState().api.formData;
 
-    return selectSection(selection, formData)
+    let chooseSection;
+    if(!selection) {
+      chooseSection = Promise.resolve({formData: formData})
+    } else {
+      chooseSection = selectSection(selection, formData)
+    }
+
+    return chooseSection
       .then(({formData}) => confirmChoice(formData))
       .then(({formData, courses}) => {
         dispatch(setFormdata({formData: formData}))
