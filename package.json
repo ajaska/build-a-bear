@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "redux-devtools": "^3.3.1"
-  }
+  },
+  "license" : "BSD-2-Clause"
 }
