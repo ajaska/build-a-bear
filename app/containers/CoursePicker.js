@@ -3,7 +3,7 @@ import CoursePicker from '../components/CoursePicker';
 import { changedCCN, clickedAdd, setSelection } from '../actions/coursePicker';
 
 const mapStateToProps = (state, ownProps) => {
-  return { coursePicker: state.coursePicker }
+  return { coursePicker: state.coursePicker.toJS() }
 }
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 class CoursePicker extends React.Component {
   handleChange(event) {
@@ -13,13 +12,13 @@ class CoursePicker extends React.Component {
   clickedAdd(event) {
     event.preventDefault();
     this.props.clickedAdd({
-      ccn: this.props.coursePicker.get('ccn'),
-      selection: this.props.coursePicker.get('selection'),
+      ccn: this.props.coursePicker.ccn,
+      selection: this.props.coursePicker.selection,
     });
   }
 
   render() {
-    let sections = this.props.coursePicker.get('sections').toJS().map((section, i) => {
+    let sections = this.props.coursePicker.sections.map((section, i) => {
       return (
         <option value={i} key={i}>
           Section choice {i}: {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
@@ -35,17 +34,17 @@ class CoursePicker extends React.Component {
           <div>
             <input
               type="text"
-              value={this.props.coursePicker.get("ccn")}
+              value={this.props.coursePicker.ccn}
               onChange={this.handleChange.bind(this)}
             />
           </div>
           <div>
-            The name of this course is {this.props.coursePicker.get("course_name")}.
-            {this.props.coursePicker.get("dept")} - {this.props.coursePicker.get("dept_number")}
+            The name of this course is {this.props.coursePicker.course_name}.
+            {this.props.coursePicker.dept} - {this.props.coursePicker.dept_number}
           </div>
           <div> Available sections:
             <select
-              value={this.props.coursePicker.get('selection')}
+              value={this.props.coursePicker.selection}
               onChange={this.handleSelector.bind(this)} >
               { sections }
             </select>
@@ -58,9 +57,9 @@ class CoursePicker extends React.Component {
 }
 
 CoursePicker.propTypes = {
-  coursePicker: ImmutablePropTypes.mapContains({
+  coursePicker: React.PropTypes.shape({
     ccn: React.PropTypes.string.isRequired,
-    sections: ImmutablePropTypes.list.isRequired,
+    sections: React.PropTypes.array.isRequired,
     dept: React.PropTypes.string.isRequired,
     dept_number: React.PropTypes.string.isRequired,
     course_name: React.PropTypes.string.isRequired,
