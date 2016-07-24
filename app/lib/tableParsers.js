@@ -40,8 +40,9 @@ function tableParser(tableSchema) {
 function parseColumn(column, columnType) {
   switch (columnType) {
     case schemaTypes.course_id:
-      let course = column.innerText.split('\n')[0];
-      let id = column.innerText.split('\n')[1];
+      let text = column.innerText.trim();
+      let course = text.split(/\n+/)[0];
+      let id = text.split(/\n+/)[1];
       id = id.replace("(", "").replace(")", "");
       return { course: course, id: id }
     case schemaTypes.ccn:
