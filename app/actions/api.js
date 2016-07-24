@@ -3,10 +3,11 @@ import { postFormData } from '../lib/forms';
 
 
 export const REQUEST_COURSE_ADD = Symbol('REQUEST_COURSE_ADD');
-export function requestCourseAdd({ccn}) {
+export function requestCourseAdd({ccn, selection}) {
   return {
     type: REQUEST_COURSE_ADD,
-    ccn: ccn
+    ccn: ccn,
+    selection: selection
   }
 }
 
@@ -107,14 +108,13 @@ export function cancelShoppingCartAdd() {
   }
 }
 
-export function addCourse({ccn}) {
+export function addCourse({ccn, selection}) {
   return (dispatch, getState) => {
-    dispatch(requestCourseAdd({ccn: ccn}));
+    dispatch(requestCourseAdd({ccn: ccn, selection: selection}));
 
     let formData = getState().api.formData;
-    let selection = 0;
 
-    return selectSection(0, formData)
+    return selectSection(selection, formData)
       .then(({formData}) => confirmChoice(formData))
       .then(({formData, courses}) => {
         dispatch(setFormdata({formData: formData}))

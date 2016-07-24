@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import CoursePicker from '../components/CoursePicker';
-import { changedCCN, clickedAdd } from '../actions/coursePicker';
+import { changedCCN, clickedAdd, setSelection } from '../actions/coursePicker';
 
 const mapStateToProps = (state, ownProps) => {
   return { coursePicker: state.coursePicker }
@@ -11,8 +11,11 @@ const mapDispatchToProps = (dispatch) => {
     changedCCN: (ccn) => {
       dispatch(changedCCN(ccn))
     },
-    clickedAdd: (ccn) => {
-      dispatch(clickedAdd(ccn))
+    clickedAdd: (things) => {
+      dispatch(clickedAdd(things))
+    },
+    setSelection: (selection) => {
+      dispatch(setSelection(selection))
     },
   }
 }

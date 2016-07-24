@@ -6,16 +6,24 @@ class CoursePicker extends React.Component {
     this.props.changedCCN({ccn: event.target.value})
   }
 
+  handleSelector(event) {
+    this.props.setSelection({selection: event.target.value})
+  }
+
   clickedAdd(event) {
-    this.props.clickedAdd({ccn: this.props.coursePicker.get('ccn')});
+    event.preventDefault();
+    this.props.clickedAdd({
+      ccn: this.props.coursePicker.get('ccn'),
+      selection: this.props.coursePicker.get('selection'),
+    });
   }
 
   render() {
     let sections = this.props.coursePicker.get('sections').toJS().map((section, i) => {
       return (
-        <div key={i}>
+        <option value={i} key={i}>
           Section choice {i}: {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
-        </div>
+        </option>
       )
     });
     return (
@@ -23,21 +31,27 @@ class CoursePicker extends React.Component {
         <div>
           This is the course picker.
         </div>
-        <div>
-          <input
-            type="text"
-            value={this.props.coursePicker.get("ccn")}
-            onChange={this.handleChange.bind(this)}
-          />
-        </div>
-        <div>
-          The name of this course is {this.props.coursePicker.get("course_name")}.
-          {this.props.coursePicker.get("dept")} - {this.props.coursePicker.get("dept_number")}
-        </div>
-        <div> Available sections:
-          { sections }
-        </div>
-        <button onClick={this.clickedAdd.bind(this)} />
+        <form onSubmit={this.clickedAdd.bind(this)}>
+          <div>
+            <input
+              type="text"
+              value={this.props.coursePicker.get("ccn")}
+              onChange={this.handleChange.bind(this)}
+            />
+          </div>
+          <div>
+            The name of this course is {this.props.coursePicker.get("course_name")}.
+            {this.props.coursePicker.get("dept")} - {this.props.coursePicker.get("dept_number")}
+          </div>
+          <div> Available sections:
+            <select
+              value={this.props.coursePicker.get('selection')}
+              onChange={this.handleSelector.bind(this)} >
+              { sections }
+            </select>
+          </div>
+          <input type="submit" value="Add" />
+        </form>
       </div>
     )
   }
@@ -50,6 +64,7 @@ CoursePicker.propTypes = {
     dept: React.PropTypes.string.isRequired,
     dept_number: React.PropTypes.string.isRequired,
     course_name: React.PropTypes.string.isRequired,
+    selection: React.PropTypes.string.isRequired,
   }).isRequired
 }
 

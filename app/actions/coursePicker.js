@@ -4,6 +4,7 @@ export const SET_CCN = Symbol('SET_CCN');
 export const SET_DEPT = Symbol('SET_DEPT');
 export const SET_DEPT_NUMBER = Symbol('SET_DEPT_NUMBER');
 export const SET_COURSE_NAME  = Symbol('SET_COURSE_NAME');
+export const SET_SELECTION = Symbol('SET_SELECTION');
 export const CLEAR_SECTIONS = Symbol('CLEAR_SECTIONS');
 
 let ccn_indexed = require('../data/ccn_indexed.json');
@@ -17,7 +18,7 @@ export function changedCCN({ccn}) {
       dispatch(setDept({dept: data[0]}));
       dispatch(setDeptNumber({dept_number: data[1]}));
       dispatch(setCourseName({course_name: data[4]}));
-      dispatch(getSectionsForCCN({ccn: ccn}))
+      dispatch(getSectionsForCCN({ccn: ccn}));
     } else {
       dispatch(setDept({dept: ""}));
       dispatch(setDeptNumber({dept_number: ""}));
@@ -25,14 +26,15 @@ export function changedCCN({ccn}) {
       if (getState().coursePicker.get('sections').size > 0) {
         dispatch(cancelShoppingCartAdd());
         dispatch(clearSections());
+        dispatch(setSelection({selection: "0"}));
       }
     }
   }
 }
 
-export function clickedAdd({ccn}) {
+export function clickedAdd({ccn, selection}) {
   return (dispatch) => {
-    dispatch(addCourse({ccn: ccn}))
+    dispatch(addCourse({ccn: ccn, selection: selection}))
       .then(() => {
         dispatch(setCCN({ccn: ""}));
         dispatch(setDept({dept: ""}));
@@ -74,5 +76,12 @@ function setCourseName({course_name}) {
 function clearSections() {
   return {
     type: CLEAR_SECTIONS
+  }
+}
+
+export function setSelection({selection}) {
+  return {
+    type: SET_SELECTION,
+    selection: selection
   }
 }
