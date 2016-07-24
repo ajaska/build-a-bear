@@ -1,4 +1,4 @@
-import { getSectionsForCCN, cancelShoppingCartAdd } from './api'
+import { getSectionsForCCN, cancelShoppingCartAdd, addCourse } from './api'
 
 export const SET_CCN = Symbol('SET_CCN');
 export const SET_DEPT = Symbol('SET_DEPT');
@@ -27,6 +27,19 @@ export function changedCCN({ccn}) {
         dispatch(clearSections());
       }
     }
+  }
+}
+
+export function clickedAdd({ccn}) {
+  return (dispatch) => {
+    dispatch(addCourse({ccn: ccn}))
+      .then(() => {
+        dispatch(setCCN({ccn: ""}));
+        dispatch(setDept({dept: ""}));
+        dispatch(setDeptNumber({dept_number: ""}));
+        dispatch(setCourseName({course_name: ""}));
+        dispatch(clearSections());
+      })
   }
 }
 

@@ -6,6 +6,10 @@ class CoursePicker extends React.Component {
     this.props.changedCCN({ccn: event.target.value})
   }
 
+  clickedAdd(event) {
+    this.props.clickedAdd({ccn: this.props.coursePicker.get('ccn')});
+  }
+
   render() {
     let sections = this.props.coursePicker.get('sections').toJS().map((section, i) => {
       return (
@@ -33,6 +37,7 @@ class CoursePicker extends React.Component {
         <div> Available sections:
           { sections }
         </div>
+        <button onClick={this.clickedAdd.bind(this)} />
       </div>
     )
   }

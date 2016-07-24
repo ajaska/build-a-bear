@@ -2,6 +2,24 @@ import { parseDiscussionTable, parseShoppingCartTable } from '../lib/tableParser
 import { postFormData } from '../lib/forms';
 
 
+export const REQUEST_COURSE_ADD = Symbol('REQUEST_COURSE_ADD');
+export function requestCourseAdd({ccn}) {
+  return {
+    type: REQUEST_COURSE_ADD,
+    ccn: ccn
+  }
+}
+
+export const RECEIVE_COURSE_ADD = Symbol("RECEIVE_COURSE_ADD");
+export function receiveCourseAdd({ccn, courses}) {
+  return {
+    type: RECEIVE_COURSE_ADD,
+    ccn: ccn,
+    courses: courses
+  }
+}
+
+
 export const SET_FORMDATA = Symbol('SET_FORMDATA');
 export function setFormdata({formData}) {
   return {
@@ -89,6 +107,21 @@ export function cancelShoppingCartAdd() {
   }
 }
 
+export function addCourse({ccn}) {
+  return (dispatch, getState) => {
+    dispatch(requestCourseAdd({ccn: ccn}));
+
+    let formData = getState().api.formData;
+    let selection = 0;
+
+    return selectSection(0, formData)
+      .then(({formData}) => confirmChoice(formData))
+      .then(({formData, courses}) => {
+        dispatch(setFormdata({formData: formData}))
+        return dispatch(receiveCourseAdd({ccn: ccn, courses: courses}))
+      })
+  }
+}
 
 export function selectSection(choice, formData) {
   let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
