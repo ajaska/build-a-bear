@@ -23,6 +23,7 @@ export function changedCCN({ccn}) {
     if (ccn_indexed.hasOwnProperty(ccn)) {
       let data = ccn_indexed[ccn];
       dispatch(setDept({dept: data[0]}));
+      dispatch(setDeptNumbers({deptNumbers: Object.keys(dept_indexed[data[0]])}))
       dispatch(setDeptNumber({deptNumber: data[1]}));
       dispatch(setCourseName({courseName: data[4]}));
       dispatch(getSectionsForCCN({ccn: ccn}));
