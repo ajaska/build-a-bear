@@ -1,0 +1,630 @@
+@font-face {
+  font-family: 'Calibre-Regular';
+  src: url('fonts/Calibre-Regular.woff');
+}
+
+@font-face {
+  font-family: 'Calibre-Semibold';
+  src: url('fonts/Calibre-Semibold.woff');
+}
+
+@font-face {
+  font-family: 'Calibre-Bold';
+  src: url('fonts/Calibre-Bold.woff');
+}
+
+// CSS for the main containers
+.main-container {
+  max-width: 100%;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.left-data-container {
+  width: 72%;
+  float: left;
+  display: inline-block;
+}
+
+.side-panel-container {
+  margin-left: 1%;
+  width: 27%;
+  float: right;
+  display: inline-block;
+}
+
+$primary-blue: #4279FF;
+$primary-red: #FF8080;
+$primary-gray: #EEEEEE;
+$font-stack: 'Calibre-Regular', sans-serif;
+$font-semibold: 'Calibre-Semibold', sans-serif;
+$font-bold: 'Calibre-Bold', sans-serif;
+
+// Styling for generic base elements
+
+html {
+  font-family: $font-stack;
+}
+
+body {
+  margin: 0px;
+}
+
+button {
+  cursor: pointer;
+  outline: 0;
+  background-color: $primary-blue;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.25rem;
+}
+
+input, select {
+  padding-top: 0.15rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.15rem;
+}
+
+select {
+  outline: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  background-color: white !important;
+
+  // Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow
+  background:
+    linear-gradient(45deg, transparent 50%, $primary-blue 50%),
+    linear-gradient(135deg, $primary-blue 50%, transparent 50%);
+    // linear-gradient(to right, $primary-blue, $primary-blue);
+  background-position:
+    calc(100% - 12px) calc(0.4rem + 2px),
+    calc(100% - 8px) calc(0.4rem + 2px);
+    // 100% 0;
+  background-size:
+    4px 4px,
+    4px 4px;
+    // 2em 2em;
+  background-repeat: no-repeat;
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+}
+
+input {
+  outline: 0;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;
+}
+
+:-ms-input-placeholder {
+   color: black;
+}
+
+input:focus {
+  outline: 0;
+}
+
+a {
+  color: black;
+}
+
+.outline-blue {
+  border: 1px solid $primary-blue;
+}
+
+.color-blue {
+  color: $primary-blue;
+}
+
+.semibold {
+  font-family: $font-semibold;
+}
+
+// CSS for the banner and subtext
+
+.banner {
+  width: 100%;
+  background-color: $primary-blue;
+}
+
+.banner-text {
+  color: white;
+  font-size: 1.2rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.my-academics-link {
+  text-decoration: none;
+}
+
+.class-enrollment-subtitle {
+  display: inline-block;
+  border-bottom: 0.2rem solid $primary-blue;
+  font-size: 1.2rem;
+  line-height: 0.9rem;
+  margin-bottom: 0rem;
+}
+
+.current-semester-subtitle {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-size: 2.5rem;
+}
+
+// CSS for the courses-table
+
+.courses-table-enroll th {
+  font-weight: normal;
+  min-width: 1rem;
+}
+
+.courses-table-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem;
+  margin-bottom: 2rem;
+}
+
+.courses-table-header-row th {
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.8rem;
+  text-align: left;
+  background-color: $primary-blue;
+  color: white;
+}
+
+.courses-table-waitlisted {
+  background-color: $primary-gray;
+  border-spacing: 0rem;
+}
+
+.courses-table-waitlisted p {
+  padding-top: 0.3rem;
+}
+
+.courses-table-waitlisted td {
+  background-color: $primary-gray;
+}
+
+.courses-table-header-drop-class {
+  text-align: center;
+  width: 4rem;
+}
+
+.courses-table-entry {
+  text-align: left;
+  font-size: 1.1rem;
+  border: 1px solid black;
+}
+
+.courses-table-entry td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
+  line-height: 1.75rem;
+}
+
+.courses-table-entry .class-drop {
+  text-align: center;
+}
+
+.courses-table-entry td {
+  border-bottom: 1px solid $primary-gray;
+}
+
+.courses-table-entry td:first-child {
+  border-left: 1px solid $primary-gray;
+  width: 50px;
+}
+
+.courses-table-entry td:last-child {
+  border-right: 1px solid $primary-gray;
+  width: 50px;
+}
+
+.courses-table-entry td:nth-child(2) {
+  font-family: $font-semibold;
+  text-transform: uppercase;
+}
+
+.discussion-swap {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.5rem;
+}
+
+// Calendar
+
+.cal-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem;
+}
+
+.cal-header-row {
+  position: relative;
+  height: 20px;
+  text-align: center;
+}
+
+.cal-body {
+  position: relative;
+  height: 1000px;
+  min-height: 250px;
+  text-transform: uppercase;
+}
+
+.cal-header-row-entry {
+  position: absolute;
+  width: 20%;
+  top: 0px;
+  height: 25px;
+  background-color: $primary-gray;
+  padding-top: 0.75rem;
+}
+
+.cal-header-row {
+  .cal-header-row-entry:nth-child(1) {
+    left: 0%;
+  }
+  .cal-header-row-entry:nth-child(2) {
+    left: 20%;
+  }
+  .cal-header-row-entry:nth-child(3) {
+    left: 40%;
+  }
+  .cal-header-row-entry:nth-child(4) {
+    left: 60%;
+  }
+  .cal-header-row-entry:nth-child(5) {
+    left: 80%;
+  }
+}
+
+.cal-dotw-column {
+  display: inline-block;
+  height: 100%;
+  width: calc(20% - 4px);
+  border-bottom: 1px solid $primary-gray;
+  border-right: 1px solid $primary-gray;
+}
+
+.monday-column {
+  border-left: 1px solid $primary-gray;
+}
+
+.friday-column {
+  width: calc(20% - 5px);
+}
+
+// CSS rules for lecture entries
+
+// the header is 50px "worth of shit"
+
+// Monday = 0, Tuesday = 1, etc...
+// the left attribute is the (day of the week * 20% + 1%);
+// one half hour is worth 45 pixels
+    // we subtract 5 when the class ends to give a space before the next one starts
+    // 2 hour class -> 4 * 80 - 5
+    // for the body of a lecture, the height is half hours * 80 - 5 - 27 * 2
+    // the top value is 30 + 80 * half hours
+
+.lecture-entry {
+  width: calc(18% - 4px);
+  text-align: left;
+  position: absolute;
+  top: calc(30px);
+  left: 1%;
+}
+
+.lecture-entry2 {
+  width: calc(18% - 4px);
+  text-align: left;
+  position: absolute;
+  top: calc(30px + 100px);
+  left: 21%;
+}
+
+.lecture-entry-body2 {
+  height: calc(8 * 50px - 10px - 0.5rem - 27px * 2) !important;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: white;
+  border-left: 1px solid $primary-gray;
+  border-right: 1px solid $primary-gray;
+}
+
+.other-entry {
+  width: calc(18% - 4px);
+  text-align: left;
+  position: absolute;
+  top: calc(30px + 200px);
+  left: 1%;
+}
+
+.lecture-entry-header {
+  background-color: $primary-blue;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  color: white;
+}
+
+.lecture-entry-body {
+  height: calc(4 * 50px - 10px - 0.5rem - 27px * 2);
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: white;
+  border-left: 1px solid $primary-gray;
+  border-right: 1px solid $primary-gray;
+}
+
+.lecture-entry-footer {
+  height: 27px;
+  background-color: $primary-gray;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.other-entry-body {
+  height: calc(4 * 50px - 0.5rem - 10px);
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: $primary-blue;
+  color: white;
+  border-radius: 0.25rem;
+}
+
+// Phase 2 signup panel
+
+.phase2-signup-panel {
+  background-color: $primary-gray;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.phase2-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem;
+}
+
+.phase2-header-text {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.phase2-date, .phase2-time {
+  color: $primary-blue;
+}
+
+.phase2-add-calendar-alert {
+  padding: 0.8rem 1.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+}
+
+// Shopping cart contents panel
+
+.sc-panel {
+  background-color: $primary-gray;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.sc-header-text {
+  margin: 0rem;
+}
+
+.sc-class-item {
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
+  background-color: white;
+}
+
+.sc-clear-row {
+  text-align: right;
+}
+
+.sc-clear-button {
+  display: inline-block;
+  background-color: $primary-red;
+  margin-left: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+}
+
+.sc-clear {
+  display: inline-block;
+  font-size: 0.9rem;
+}
+
+.sc-course-info {
+  margin-top: 0.2rem;
+}
+
+.sc-course-info-name {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.sc-course-info-left {
+  width: 68%;
+  display: inline-block;
+}
+
+.sc-course-info-right {
+  width: 30%;
+  text-align: right;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+.sc-course-add {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+// Add Class Panel
+
+.add-class-panel {
+  background-color: $primary-gray;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.add-class-header {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  border-bottom: 0.2rem solid $primary-blue;
+  font-family: $font-semibold;
+  font-size: 1.2rem;
+  line-height: 0.9rem;
+}
+
+.add-class-error-msg {
+  display:inline-block;
+  float: right;
+  font-size: 0.8rem;
+  line-height: 0.75rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.35rem;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: $primary-red;
+  color: white;
+}
+
+.add-class-form {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.add-class-CCN {
+  width: 25%;
+}
+
+.add-class-section {
+  width: 71%;
+  // why doesn't this work if the width is 75% and no margin?
+  margin-left: 2%;
+}
+
+.add-class-form-row {
+  margin-bottom: 0.35rem;
+}
+
+.add-class-department {
+  width: 48%;
+}
+
+.add-class-course-number {
+  width: 48%;
+  margin-left: 2%;
+}
+
+.add-class-class-name {
+  width: 60%;
+}
+
+.add-class-lab, .add-class-discussion {
+  margin-bottom: 0.05rem;
+  width: 99%;
+}
+
+.add-class-waitlist-status {
+  display: inline-block;
+  width: 37%;
+  margin-left: 1%;
+  font-size: 0.8rem;
+}
+
+.add-class-waitlist-row {
+  width: 99%;
+  text-align: right;
+}
+
+.add-class-waitlist {
+  font-size: 0.9rem;
+}
+
+.add-class-waitlist-button {
+  margin-left: 0.4rem;
+  margin-right: 1.2rem;
+}
+
+.add-class-submit-button {
+  margin-top: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+}
+
+// Units summary panel
+
+.units-summary-panel {
+  background-color: $primary-gray;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.units-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem;
+  font-family: $font-semibold;
+}
+
+.units-header-text {
+  font-weight: bold;
+  font-size: 1.3rem;
+  font-family: $font-semibold;
+}
+
+.units-total {
+  color: $primary-blue;
+}
+
+.units-remaining {
+  color: $primary-red;
+}

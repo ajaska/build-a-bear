@@ -1,0 +1,483 @@
+@font-face {
+  font-family: 'Calibre-Regular';
+  src: url("fonts/Calibre-Regular.woff"); }
+@font-face {
+  font-family: 'Calibre-Semibold';
+  src: url("fonts/Calibre-Semibold.woff"); }
+@font-face {
+  font-family: 'Calibre-Bold';
+  src: url("fonts/Calibre-Bold.woff"); }
+.main-container {
+  max-width: 100%;
+  margin-right: 2rem;
+  margin-left: 2rem; }
+
+.left-data-container {
+  width: 72%;
+  float: left;
+  display: inline-block; }
+
+.side-panel-container {
+  margin-left: 1%;
+  width: 27%;
+  float: right;
+  display: inline-block; }
+
+html {
+  font-family: "Calibre-Regular", sans-serif; }
+
+body {
+  margin: 0px; }
+
+button {
+  cursor: pointer;
+  outline: 0;
+  background-color: #4279FF;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.25rem; }
+
+input, select {
+  padding-top: 0.15rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.15rem; }
+
+select {
+  outline: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  background-color: white !important;
+  background: linear-gradient(45deg, transparent 50%, #4279FF 50%), linear-gradient(135deg, #4279FF 50%, transparent 50%);
+  background-position: calc(100% - 12px) calc(0.4rem + 2px), calc(100% - 8px) calc(0.4rem + 2px);
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat;
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+input {
+  outline: 0; }
+
+::-webkit-input-placeholder {
+  color: black; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: black; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: black; }
+
+:-ms-input-placeholder {
+  color: black; }
+
+input:focus {
+  outline: 0; }
+
+a {
+  color: black; }
+
+.outline-blue {
+  border: 1px solid #4279FF; }
+
+.color-blue {
+  color: #4279FF; }
+
+.semibold {
+  font-family: "Calibre-Semibold", sans-serif; }
+
+.banner {
+  width: 100%;
+  background-color: #4279FF; }
+
+.banner-text {
+  color: white;
+  font-size: 1.2rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem; }
+
+.my-academics-link {
+  text-decoration: none; }
+
+.class-enrollment-subtitle {
+  display: inline-block;
+  border-bottom: 0.2rem solid #4279FF;
+  font-size: 1.2rem;
+  line-height: 0.9rem;
+  margin-bottom: 0rem; }
+
+.current-semester-subtitle {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-size: 2.5rem; }
+
+.courses-table-enroll th {
+  font-weight: normal;
+  min-width: 1rem; }
+
+.courses-table-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem;
+  margin-bottom: 2rem; }
+
+.courses-table-header-row th {
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.8rem;
+  text-align: left;
+  background-color: #4279FF;
+  color: white; }
+
+.courses-table-waitlisted {
+  background-color: #EEEEEE;
+  border-spacing: 0rem; }
+
+.courses-table-waitlisted p {
+  padding-top: 0.3rem; }
+
+.courses-table-waitlisted td {
+  background-color: #EEEEEE; }
+
+.courses-table-header-drop-class {
+  text-align: center;
+  width: 4rem; }
+
+.courses-table-entry {
+  text-align: left;
+  font-size: 1.1rem;
+  border: 1px solid black; }
+
+.courses-table-entry td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
+  line-height: 1.75rem; }
+
+.courses-table-entry .class-drop {
+  text-align: center; }
+
+.courses-table-entry td {
+  border-bottom: 1px solid #EEEEEE; }
+
+.courses-table-entry td:first-child {
+  border-left: 1px solid #EEEEEE;
+  width: 50px; }
+
+.courses-table-entry td:last-child {
+  border-right: 1px solid #EEEEEE;
+  width: 50px; }
+
+.courses-table-entry td:nth-child(2) {
+  font-family: "Calibre-Semibold", sans-serif;
+  text-transform: uppercase; }
+
+.discussion-swap {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.5rem; }
+
+.cal-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem; }
+
+.cal-header-row {
+  position: relative;
+  height: 20px;
+  text-align: center; }
+
+.cal-body {
+  position: relative;
+  height: 1000px;
+  min-height: 250px;
+  text-transform: uppercase; }
+
+.cal-header-row-entry {
+  position: absolute;
+  width: 20%;
+  top: 0px;
+  height: 25px;
+  background-color: #EEEEEE;
+  padding-top: 0.75rem; }
+
+.cal-header-row .cal-header-row-entry:nth-child(1) {
+  left: 0%; }
+.cal-header-row .cal-header-row-entry:nth-child(2) {
+  left: 20%; }
+.cal-header-row .cal-header-row-entry:nth-child(3) {
+  left: 40%; }
+.cal-header-row .cal-header-row-entry:nth-child(4) {
+  left: 60%; }
+.cal-header-row .cal-header-row-entry:nth-child(5) {
+  left: 80%; }
+
+.cal-dotw-column {
+  display: inline-block;
+  height: 100%;
+  width: calc(20% - 4px);
+  border-bottom: 1px solid #EEEEEE;
+  border-right: 1px solid #EEEEEE; }
+
+.monday-column {
+  border-left: 1px solid #EEEEEE; }
+
+.friday-column {
+  width: calc(20% - 5px); }
+
+.lecture-entry {
+  width: calc(18% - 4px);
+  text-align: left;
+  position: absolute;
+  top: calc(30px);
+  left: 1%; }
+
+.lecture-entry2 {
+  width: calc(18% - 4px);
+  text-align: left;
+  position: absolute;
+  top: calc(30px + 100px);
+  left: 21%; }
+
+.lecture-entry-body2 {
+  height: calc(8 * 50px - 10px - 0.5rem - 27px * 2) !important;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: white;
+  border-left: 1px solid #EEEEEE;
+  border-right: 1px solid #EEEEEE; }
+
+.other-entry {
+  width: calc(18% - 4px);
+  text-align: left;
+  position: absolute;
+  top: calc(30px + 200px);
+  left: 1%; }
+
+.lecture-entry-header {
+  background-color: #4279FF;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  color: white; }
+
+.lecture-entry-body {
+  height: calc(4 * 50px - 10px - 0.5rem - 27px * 2);
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: white;
+  border-left: 1px solid #EEEEEE;
+  border-right: 1px solid #EEEEEE; }
+
+.lecture-entry-footer {
+  height: 27px;
+  background-color: #EEEEEE;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem; }
+
+.other-entry-body {
+  height: calc(4 * 50px - 0.5rem - 10px);
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: #4279FF;
+  color: white;
+  border-radius: 0.25rem; }
+
+.phase2-signup-panel {
+  background-color: #EEEEEE;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem; }
+
+.phase2-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem; }
+
+.phase2-header-text {
+  font-weight: bold;
+  font-size: 1.3rem; }
+
+.phase2-date, .phase2-time {
+  color: #4279FF; }
+
+.phase2-add-calendar-alert {
+  padding: 0.8rem 1.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem; }
+
+.sc-panel {
+  background-color: #EEEEEE;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem; }
+
+.sc-header-text {
+  margin: 0rem; }
+
+.sc-class-item {
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border-radius: 0.25rem;
+  background-color: white; }
+
+.sc-clear-row {
+  text-align: right; }
+
+.sc-clear-button {
+  display: inline-block;
+  background-color: #FF8080;
+  margin-left: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem; }
+
+.sc-clear {
+  display: inline-block;
+  font-size: 0.9rem; }
+
+.sc-course-info {
+  margin-top: 0.2rem; }
+
+.sc-course-info-name {
+  text-transform: uppercase;
+  font-size: 1.2rem; }
+
+.sc-course-info-left {
+  width: 68%;
+  display: inline-block; }
+
+.sc-course-info-right {
+  width: 30%;
+  text-align: right;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  display: inline-block; }
+
+.sc-course-add {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem; }
+
+.add-class-panel {
+  background-color: #EEEEEE;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem; }
+
+.add-class-header {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  border-bottom: 0.2rem solid #4279FF;
+  font-family: "Calibre-Semibold", sans-serif;
+  font-size: 1.2rem;
+  line-height: 0.9rem; }
+
+.add-class-error-msg {
+  display: inline-block;
+  float: right;
+  font-size: 0.8rem;
+  line-height: 0.75rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.35rem;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #FF8080;
+  color: white; }
+
+.add-class-form {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; }
+
+.add-class-CCN {
+  width: 25%; }
+
+.add-class-section {
+  width: 71%;
+  margin-left: 2%; }
+
+.add-class-form-row {
+  margin-bottom: 0.35rem; }
+
+.add-class-department {
+  width: 48%; }
+
+.add-class-course-number {
+  width: 48%;
+  margin-left: 2%; }
+
+.add-class-class-name {
+  width: 60%; }
+
+.add-class-lab, .add-class-discussion {
+  margin-bottom: 0.05rem;
+  width: 99%; }
+
+.add-class-waitlist-status {
+  display: inline-block;
+  width: 37%;
+  margin-left: 1%;
+  font-size: 0.8rem; }
+
+.add-class-waitlist-row {
+  width: 99%;
+  text-align: right; }
+
+.add-class-waitlist {
+  font-size: 0.9rem; }
+
+.add-class-waitlist-button {
+  margin-left: 0.4rem;
+  margin-right: 1.2rem; }
+
+.add-class-submit-button {
+  margin-top: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem; }
+
+.units-summary-panel {
+  background-color: #EEEEEE;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem; }
+
+.units-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem;
+  font-family: "Calibre-Semibold", sans-serif; }
+
+.units-header-text {
+  font-weight: bold;
+  font-size: 1.3rem;
+  font-family: "Calibre-Semibold", sans-serif; }
+
+.units-total {
+  color: #4279FF; }
+
+.units-remaining {
+  color: #FF8080; }
+
+/*# sourceMappingURL=main.css.map */
