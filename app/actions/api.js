@@ -50,9 +50,26 @@ export function receiveSections({ccn, formData, sections}) {
   }
 }
 
+function sectionFromLecture({ccn, state}) {
+  let sections = state.shoppingCart.toJS().courses;
+  let matching_sections = sections.filter(section => section.id === ccn);
+  if (!(matching_sections.length === 1)) {
+    return false
+  }
+  let course_desc = matching_sections[0].course.split('-')[0];
+  return sections.filter(section => section.course.split('-')[0] === course_desc && (!section.selectable))
+}
+
 export function getSectionsForCCN({ccn}) {
   return (dispatch, getState) => {
     dispatch(requestSections({ccn: ccn}))
+    let alreadyInCart = sectionFromLecture({ccn: ccn, state: getState()});
+    if (alreadyInCart.length > 0) {
+      return dispatch(receiveSections({
+        ccn: ccn,
+        sections: alreadyInCart
+      }))
+    }
     let formData = getState().api.formData;
 
     let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
@@ -134,30 +151,33 @@ export function addCourse({ccn, selection}) {
   return (dispatch, getState) => {
     dispatch(requestCourseAdd({ccn: ccn, selection: selection}));
 
+    let addedToShoppingCart;
     let formData = getState().api.formData;
-
-    let chooseSection;
-    if(!selection) {
-      chooseSection = Promise.resolve({formData: formData})
+    let courses = getState().shoppingCart.toJS().courses;
+    if (courses.filter(course => course.id === ccn).length === 1) {
+      addedToShoppingCart = Promise.resolve({formData: formData, courses: courses})
     } else {
-      chooseSection = selectSection(selection, formData)
+      let chooseSection;
+      if(!selection) {
+        chooseSection = Promise.resolve({formData: formData})
+      } else {
+        chooseSection = selectSection(selection, formData)
+      }
+      addedToShoppingCart = chooseSection.then(({formData}) => confirmChoice(formData))
     }
+    return addedToShoppingCart.then(({formData, courses}) => {
+      let selectableCourses = courses.filter(course => course.selectable);
+      let courseToAddPos = courses.map(course => course.id).indexOf(ccn);
 
-    return chooseSection
-      .then(({formData}) => confirmChoice(formData))
-      .then(({formData, courses}) => {
-        let selectableCourses = courses.filter(course => course.selectable);
-        let courseToAddPos = courses.map(course => course.id).indexOf(ccn);
-
-        return dispatch(addFromShoppingCart({
-          formData: formData,
-          positions: selectableCourses,
-          positionToEnroll: courseToAddPos,
-        }))
-      }).then(function({formData, enrolledCourses, shoppingCartCourses}) {
-        dispatch(setFormData({formData: formData}))
-        return dispatch(receiveCourseAdd({ccn: ccn, enrolledCourses: shoppingCartCourses}))
-      })
+      return dispatch(addFromShoppingCart({
+        formData: formData,
+        positions: selectableCourses,
+        positionToEnroll: courseToAddPos,
+      }))
+    }).then(function({formData, enrolledCourses, shoppingCartCourses}) {
+      dispatch(setFormData({formData: formData}))
+      return dispatch(receiveCourseAdd({ccn: ccn, enrolledCourses: enrolledCourses, shoppingCartCourses: shoppingCartCourses}))
+    })
   }
 }
 
