@@ -1,0 +1,240 @@
+$half-hour-block-size: 50px;
+$visual-gap-size: 10px;
+
+// Absolute left positioning
+.monday {
+  left: 1%;
+}
+
+.tuesday {
+  left: 21%;
+}
+
+.wednesday {
+  left: 41%;
+}
+
+.thursday {
+  left: 61%;
+}
+
+.friday {
+  left: 81%;
+}
+
+// Absolute top positioning
+// Not sure if we need this ...
+
+// Solutions
+// 1) Parse the start times, add these classes, then calculate the difference between the earliest one and 630 in terms of half-hour blocks,
+// subtract 50 * that difference from all class heights
+// 2) Don't use these declarations, add inline-styling on render
+
+.am-630 {
+  top: calc(30px + 0 * #{$half-hour-block-size});
+}
+
+.am-7 {
+  top: calc(30px + 1 * #{$half-hour-block-size});
+}
+
+.am-730 {
+  top: calc(30px + 2 * #{$half-hour-block-size});
+}
+
+.am-8 {
+  top: calc(30px + 3 * #{$half-hour-block-size});
+}
+
+.am-830 {
+  top: calc(30px + 4 * #{$half-hour-block-size});
+}
+
+.am-9 {
+  top: calc(30px + 5 * #{$half-hour-block-size});
+}
+
+.am-930 {
+  top: calc(30px + 6 * #{$half-hour-block-size});
+}
+
+.am-10 {
+  top: calc(30px + 7 * #{$half-hour-block-size});
+}
+
+.am-1030 {
+  top: calc(30px + 8 * #{$half-hour-block-size});
+}
+
+.am-11 {
+  top: calc(30px + 9 * #{$half-hour-block-size});
+}
+
+.am-1130 {
+  top: calc(30px + 10 * #{$half-hour-block-size});
+}
+
+.pm-12 {
+  top: calc(30px + 11 * #{$half-hour-block-size});
+}
+
+.pm-1230 {
+  top: calc(30px + 12 * #{$half-hour-block-size});
+}
+
+.pm-1 {
+  top: calc(30px + 13 * #{$half-hour-block-size});
+}
+
+.pm-130 {
+  top: calc(30px + 14 * #{$half-hour-block-size});
+}
+
+.pm-2 {
+  top: calc(30px + 15 * #{$half-hour-block-size});
+}
+
+.pm-230 {
+  top: calc(30px + 16 * #{$half-hour-block-size});
+}
+
+.pm-3 {
+  top: calc(30px + 17 * #{$half-hour-block-size});
+}
+
+.pm-330 {
+  top: calc(30px + 18 * #{$half-hour-block-size});
+}
+
+.pm-4 {
+  top: calc(30px + 19 * #{$half-hour-block-size});
+}
+
+.pm-430 {
+  top: calc(30px + 20 * #{$half-hour-block-size});
+}
+
+.pm-5 {
+  top: calc(30px + 21 * #{$half-hour-block-size});
+}
+
+.pm-530 {
+  top: calc(30px + 22 * #{$half-hour-block-size});
+}
+
+.pm-6 {
+  top: calc(30px + 23 * #{$half-hour-block-size});
+}
+
+.pm-630 {
+  top: calc(30px + 24 * #{$half-hour-block-size});
+}
+
+.pm-7 {
+  top: calc(30px + 25 * #{$half-hour-block-size});
+}
+
+.pm-730 {
+  top: calc(30px + 26 * #{$half-hour-block-size});
+}
+
+.pm-8 {
+  top: calc(30px + 27 * #{$half-hour-block-size});
+}
+
+.pm-830 {
+  top: calc(30px + 28 * #{$half-hour-block-size});
+}
+
+.pm-9 {
+  top: calc(30px + 29 * #{$half-hour-block-size});
+}
+
+.pm-930 {
+  top: calc(30px + 30 * #{$half-hour-block-size});
+}
+
+.pm-10 {
+  top: calc(30px + 31 * #{$half-hour-block-size});
+}
+
+// Height positioning
+// One half-hour block is considered as #{$half-hour-block-size}.block-
+// The last block is only 40px to create a visual gap inbetween classes.block-
+// - #{$visual-gap-size}, visual gap
+// - 27px * 2, the header and footer for lecture entries
+// - 0.5rem, handle the padding-top for the body of the entries
+
+.cal-body {
+  .lecture-entry {
+    // The class should be added to the .block-lecture-entry-body div
+    .block-1 {
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-2 {
+      height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-3 {
+      height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-4 {
+      height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-5 {
+      height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-6 {
+      height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-7 {
+      height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-8 {
+      height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-9 {
+      height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+    .block-10 {
+      height: calc(10 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+    }
+  }
+  .other-entry-body {
+    .block-1 {
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-2 {
+      height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-3 {
+      height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-4 {
+      height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-5 {
+      height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-6 {
+      height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-7 {
+      height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-8 {
+      height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-9 {
+      height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+    .block-10 {
+      height: calc(10 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+    }
+  }
+}

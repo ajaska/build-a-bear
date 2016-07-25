@@ -1,3 +1,161 @@
+.monday {
+  left: 1%; }
+
+.tuesday {
+  left: 21%; }
+
+.wednesday {
+  left: 41%; }
+
+.thursday {
+  left: 61%; }
+
+.friday {
+  left: 81%; }
+
+.am-630 {
+  top: calc(30px + 0 * 50px); }
+
+.am-7 {
+  top: calc(30px + 1 * 50px); }
+
+.am-730 {
+  top: calc(30px + 2 * 50px); }
+
+.am-8 {
+  top: calc(30px + 3 * 50px); }
+
+.am-830 {
+  top: calc(30px + 4 * 50px); }
+
+.am-9 {
+  top: calc(30px + 5 * 50px); }
+
+.am-930 {
+  top: calc(30px + 6 * 50px); }
+
+.am-10 {
+  top: calc(30px + 7 * 50px); }
+
+.am-1030 {
+  top: calc(30px + 8 * 50px); }
+
+.am-11 {
+  top: calc(30px + 9 * 50px); }
+
+.am-1130 {
+  top: calc(30px + 10 * 50px); }
+
+.pm-12 {
+  top: calc(30px + 11 * 50px); }
+
+.pm-1230 {
+  top: calc(30px + 12 * 50px); }
+
+.pm-1 {
+  top: calc(30px + 13 * 50px); }
+
+.pm-130 {
+  top: calc(30px + 14 * 50px); }
+
+.pm-2 {
+  top: calc(30px + 15 * 50px); }
+
+.pm-230 {
+  top: calc(30px + 16 * 50px); }
+
+.pm-3 {
+  top: calc(30px + 17 * 50px); }
+
+.pm-330 {
+  top: calc(30px + 18 * 50px); }
+
+.pm-4 {
+  top: calc(30px + 19 * 50px); }
+
+.pm-430 {
+  top: calc(30px + 20 * 50px); }
+
+.pm-5 {
+  top: calc(30px + 21 * 50px); }
+
+.pm-530 {
+  top: calc(30px + 22 * 50px); }
+
+.pm-6 {
+  top: calc(30px + 23 * 50px); }
+
+.pm-630 {
+  top: calc(30px + 24 * 50px); }
+
+.pm-7 {
+  top: calc(30px + 25 * 50px); }
+
+.pm-730 {
+  top: calc(30px + 26 * 50px); }
+
+.pm-8 {
+  top: calc(30px + 27 * 50px); }
+
+.pm-830 {
+  top: calc(30px + 28 * 50px); }
+
+.pm-9 {
+  top: calc(30px + 29 * 50px); }
+
+.pm-930 {
+  top: calc(30px + 30 * 50px); }
+
+.pm-10 {
+  top: calc(30px + 31 * 50px); }
+
+.cal-body .lecture-entry .block-1 {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  height: calc(1 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-2 {
+  height: calc(2 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-3 {
+  height: calc(3 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-4 {
+  height: calc(4 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-5 {
+  height: calc(5 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-6 {
+  height: calc(6 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-7 {
+  height: calc(7 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-8 {
+  height: calc(8 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-9 {
+  height: calc(9 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-10 {
+  height: calc(10 * 50px - 10px - 0.5rem - 27px * 2); }
+.cal-body .other-entry-body .block-1 {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  height: calc(1 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-2 {
+  height: calc(2 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-3 {
+  height: calc(3 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-4 {
+  height: calc(4 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-5 {
+  height: calc(5 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-6 {
+  height: calc(6 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-7 {
+  height: calc(7 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-8 {
+  height: calc(8 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-9 {
+  height: calc(9 * 50px - 10px - 0.5rem); }
+.cal-body .other-entry-body .block-10 {
+  height: calc(10 * 50px - 10px - 0.5rem); }
+
 @font-face {
   font-family: 'Calibre-Regular';
   src: url("../fonts/Calibre-Regular.woff"); }
@@ -50,6 +208,7 @@ select {
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
   background-color: white !important;
+  /* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
   background: linear-gradient(45deg, transparent 50%, #4279FF 50%), linear-gradient(135deg, #4279FF 50%, transparent 50%);
   background-position: calc(100% - 12px) calc(0.4rem + 2px), calc(100% - 8px) calc(0.4rem + 2px);
   background-size: 4px 4px, 4px 4px;
@@ -189,7 +348,8 @@ a {
 .cal-enroll {
   width: 100%;
   border-radius: 5rem;
-  border-spacing: 0rem; }
+  border-spacing: 0rem;
+  margin-bottom: 3rem; }
 
 .cal-header-row {
   position: relative;
@@ -237,32 +397,12 @@ a {
 .lecture-entry {
   width: calc(18% - 4px);
   text-align: left;
-  position: absolute;
-  top: calc(30px);
-  left: 1%; }
-
-.lecture-entry2 {
-  width: calc(18% - 4px);
-  text-align: left;
-  position: absolute;
-  top: calc(30px + 100px);
-  left: 21%; }
-
-.lecture-entry-body2 {
-  height: calc(8 * 50px - 10px - 0.5rem - 27px * 2) !important;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-top: 0.5rem;
-  background-color: white;
-  border-left: 1px solid #EEEEEE;
-  border-right: 1px solid #EEEEEE; }
+  position: absolute; }
 
 .other-entry {
   width: calc(18% - 4px);
   text-align: left;
-  position: absolute;
-  top: calc(30px + 200px);
-  left: 1%; }
+  position: absolute; }
 
 .lecture-entry-header {
   background-color: #4279FF;
@@ -274,7 +414,6 @@ a {
   color: white; }
 
 .lecture-entry-body {
-  height: calc(4 * 50px - 10px - 0.5rem - 27px * 2);
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
@@ -296,6 +435,10 @@ a {
   background-color: #4279FF;
   color: white;
   border-radius: 0.25rem; }
+
+.waitlisted-entry .lecture-entry-header, .waitlisted-entry .lecture-entry-body, .waitlisted-entry .lecture-entry-footer, .waitlisted-entry .other-entry-body {
+  background-color: #EEEEEE !important;
+  color: black !important; }
 
 .phase2-signup-panel {
   background-color: #EEEEEE;

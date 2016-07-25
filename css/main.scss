@@ -1,3 +1,5 @@
+@import '_calendar_entries.scss';
+
 @font-face {
   font-family: 'Calibre-Regular';
   src: url('../fonts/Calibre-Regular.woff');
@@ -74,7 +76,7 @@ select {
   -webkit-border-radius: 0px;
   background-color: white !important;
 
-  // Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow
+  /* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
   background:
     linear-gradient(45deg, transparent 50%, $primary-blue 50%),
     linear-gradient(135deg, $primary-blue 50%, transparent 50%);
@@ -259,6 +261,7 @@ a {
   width: 100%;
   border-radius: 5rem;
   border-spacing: 0rem;
+  margin-bottom: 3rem;
 }
 
 .cal-header-row {
@@ -333,34 +336,12 @@ a {
   width: calc(18% - 4px);
   text-align: left;
   position: absolute;
-  top: calc(30px);
-  left: 1%;
-}
-
-.lecture-entry2 {
-  width: calc(18% - 4px);
-  text-align: left;
-  position: absolute;
-  top: calc(30px + 100px);
-  left: 21%;
-}
-
-.lecture-entry-body2 {
-  height: calc(8 * 50px - 10px - 0.5rem - 27px * 2) !important;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-top: 0.5rem;
-  background-color: white;
-  border-left: 1px solid $primary-gray;
-  border-right: 1px solid $primary-gray;
 }
 
 .other-entry {
   width: calc(18% - 4px);
   text-align: left;
   position: absolute;
-  top: calc(30px + 200px);
-  left: 1%;
 }
 
 .lecture-entry-header {
@@ -374,7 +355,6 @@ a {
 }
 
 .lecture-entry-body {
-  height: calc(4 * 50px - 10px - 0.5rem - 27px * 2);
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
@@ -398,6 +378,13 @@ a {
   background-color: $primary-blue;
   color: white;
   border-radius: 0.25rem;
+}
+
+.waitlisted-entry {
+  .lecture-entry-header, .lecture-entry-body, .lecture-entry-footer, .other-entry-body {
+    background-color: $primary-gray !important;
+    color: black !important;
+  }
 }
 
 // Phase 2 signup panel
