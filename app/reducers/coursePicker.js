@@ -2,13 +2,15 @@ import * as ActionType from '../actions/coursePicker';
 import * as APIActionType from '../actions/api';
 import Immutable from 'immutable';
 
+let depts_file = require('../data/depts.json');
+
 let defaultState = Immutable.fromJS({
   ccn: "",
   sections: [],
   isLoadingSections: false,
   isAddingCourse: false,
   dept: "",
-  deptOptions: [],
+  deptOptions: Object.keys(depts_file),
   deptNumber: "",
   deptNumbers: [],
   courseName: "",

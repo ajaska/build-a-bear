@@ -53,7 +53,16 @@ function parseColumn(column, columnType) {
     case schemaTypes.section:
       return { section: column.innerText.trim() }
     case schemaTypes.desc:
-      return { desc: column.innerText.trim() }
+      let desc = column.innerText.trim();
+      let type = 'unknown';
+      if (desc.includes("Lecture")) {
+        type = 'Lecture';
+      } else if (desc.includes("Discussion")) {
+        type = 'Discussion';
+      } else if (desc.includes("Lab")) {
+        type = 'Lab';
+      }
+      return { desc: desc, type: type }
     case schemaTypes.time:
       return { time: column.innerText.trim() }
     case schemaTypes.room:

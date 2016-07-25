@@ -31,63 +31,76 @@ class CoursePicker extends React.Component {
       sections = this.props.sections.map((section, i) => {
         return (
           <option value={i} key={i}>
-            Section choice {i}: {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
+            {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
           </option>
         )
       });
-      sections = (
-        <select
-          value={this.props.selection}
-          onChange={this.handleSelector.bind(this)} >
-          { sections }
-        </select>
-      );
     } else if (this.props.isLoadingSections) {
-      sections = <div>Loadingu</div>
+      sections = [];
     } else if (this.props.ccn
                && this.props.deptNumber
                && this.props.dept) {
-      sections = <div>Neato, no sections for this guy</div>
+      sections = [];
     } else {
-      sections = <div>Waiting for course selection ^_^</div>
+      sections = [];
     }
+    let depts = this.props.deptOptions.map((dept, i) => <option value={dept} key={i}>{ dept }</option>);
+    let deptNumbers = alphanumSort(this.props.deptNumbers, false).map((dn, i) => <option value={dn} key={i}>{ dn }</option>);
     return (
-      <div>
-        <div>
-          This is the course picker.
-        </div>
-        <form onSubmit={this.clickedAdd.bind(this)}>
-          <div>
+      <div className="add-class-panel">
+        <div className="add-class-header">Add Class</div><div className="add-class-error-msg">This conflicts with your schedule.</div>
+        <div className="add-class-form">
+          <div className="add-class-form-row">
             <input
+              className="add-class-CCN outline-blue"
+              placeholder="CCN"
               type="text"
               value={this.props.ccn}
               onChange={this.handleCCNChange.bind(this)}
             />
+            <select
+              className="add-class-section"
+              value={this.props.selection}
+              onChange={this.handleSelector.bind(this)} >
+              <option value="" key={-1} disabled>Section</option>
+              { sections }
+            </select>
           </div>
-          <div>
-            The name of this course is {this.props.courseName}.
-            <input
-              type="text"
-              value={this.props.dept}
-              onChange={this.handleDeptChange.bind(this)}
-            />
-            -
-            <input
-              type="text"
-              value={this.props.deptNumber}
-              onChange={this.handleDeptNumberChange.bind(this)}
-            />
-          <div>{this.props.deptOptions.join(", ")}</div>
-          <div>{this.props.deptNumbers.join(", ")}</div>
+          <div className="add-class-form-row">
+            <select className="add-class-department outline-blue" value={this.props.dept} onChange={this.handleDeptChange.bind(this)} >
+                <option value="" disabled>Department</option>
+                { depts }
+            </select>
+            <select className="add-class-course-number" value={this.props.deptNumber} onChange={this.handleDeptNumberChange.bind(this)} >
+                <option value="" disabled>Course Number</option>
+                { deptNumbers }
+            </select>
           </div>
-          <div> Available sections:
-            {sections}
+          <div className="add-class-form-row">
+            <select className="add-class-class-name" value="">
+                <option value="" disabled>{this.props.courseName}</option>
+            </select>
+            <div className="add-class-waitlist-status">Status: <span className="color-blue">Waitlist Open</span></div>
           </div>
-          { this.props.ccnInCart && <div>Already in the cart, dummy</div> }
-          <input type="submit" value="Add" />
-        </form>
+          <div className="add-class-form-row">
+            <select className="add-class-discussion">
+                <option value="" disabled selected>Choose a discussion section</option>
+                <option value="memes">Memes</option>
+            </select>
+          </div>
+          <div className="add-class-form-row">
+            <select className="add-class-lab">
+                <option value="" disabled selected>Choose a lab section</option>
+                <option value="memes">Memes</option>
+            </select>
+          </div>
+          <div className="add-class-form-row add-class-waitlist-row">
+            <label className="add-class-waitlist">Waitlist class if full<input className="add-class-waitlist-button" type="checkbox" name="waitlist" id="waitlist"/></label>
+            <button className="add-class-submit-button">Add</button>
+          </div>
+        </div>
       </div>
-    )
+      )
   }
 }
 
@@ -102,5 +115,43 @@ CoursePicker.propTypes = {
   courseName: React.PropTypes.string.isRequired,
   selection: React.PropTypes.string.isRequired,
 }
+
+// http://web.archive.org/web/20130826203933/http://my.opera.com/GreyWyvern/blog/show.dml/1671288
+function alphanumSort (arr, caseInsensitive) {
+  for (var z = 0, t; t = arr[z]; z++) {
+    arr[z] = [];
+    var x = 0, y = -1, n = 0, i, j;
+
+    while (i = (j = t.charAt(x++)).charCodeAt(0)) {
+      var m = (i == 46 || (i >=48 && i <= 57));
+      if (m !== n) {
+        arr[z][++y] = "";
+        n = m;
+      }
+      arr[z][y] += j;
+    }
+  }
+
+  arr.sort(function(a, b) {
+    for (var x = 0, aa, bb; (aa = a[x]) && (bb = b[x]); x++) {
+      if (caseInsensitive) {
+        aa = aa.toLowerCase();
+        bb = bb.toLowerCase();
+      }
+      if (aa !== bb) {
+        var c = Number(aa), d = Number(bb);
+        if (c == aa && d == bb) {
+          return c - d;
+        } else return (aa > bb) ? 1 : -1;
+      }
+    }
+    return a.length - b.length;
+  });
+
+  for (var z = 0; z < arr.length; z++)
+    arr[z] = arr[z].join("");
+  return arr;
+}
+
 
 export default CoursePicker;
