@@ -83,6 +83,7 @@ class CoursePicker extends React.Component {
           <div> Available sections:
             {sections}
           </div>
+          { this.props.ccnInCart && <div>Already in the cart, dummy</div> }
           <input type="submit" value="Add" />
         </form>
       </div>
