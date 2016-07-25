@@ -6,7 +6,7 @@ import App from './app/components/App'
 import { parseEnrolledCoursesTable, parseShoppingCartTable } from './app/lib/tableParsers';
 import { setShoppingCart } from './app/actions/shoppingCart';
 import { setEnrolledCourses } from './app/actions/enrolled';
-import { setFormdata } from './app/actions/api';
+import { setFormData, addFromShoppingCart } from './app/actions/api';
 
 import configureStore from './app/store';
 
@@ -35,7 +35,7 @@ let store = configureStore();
 Promise.all([
   store.dispatch(setShoppingCart({courses: shoppingCartCourses})),
   store.dispatch(setEnrolledCourses({courses: enrolledCourses})),
-  store.dispatch(setFormdata({formData: formData})),
+  store.dispatch(setFormData({formData: formData})),
 ]).then(() => {
   render(
     <Provider store={store}>
@@ -43,7 +43,15 @@ Promise.all([
     </Provider>,
     document.getElementById('root')
   );
+}).then(() => {
+  store.dispatch(addFromShoppingCart({
+    formData: formData,
+    positions: [0, 2, 3],
+    positionToEnroll: 3,
+  }))
 })
+
+
 
 /*
 getSectionsForCCN(33647, formData).then(function({ formData, sections }) {

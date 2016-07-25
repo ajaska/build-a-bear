@@ -1,4 +1,6 @@
-import { parseDiscussionTable, parseShoppingCartTable } from '../lib/tableParsers'
+import { parseDiscussionTable, parseEnrolledCoursesTable, parseShoppingCartTable } from '../lib/tableParsers'
+import { setShoppingCart } from './shoppingCart';
+import { setEnrolledCourses } from './enrolled';
 import { postFormData } from '../lib/forms';
 
 
@@ -22,7 +24,7 @@ export function receiveCourseAdd({ccn, courses}) {
 
 
 export const SET_FORMDATA = Symbol('SET_FORMDATA');
-export function setFormdata({formData}) {
+export function setFormData({formData}) {
   return {
     type: SET_FORMDATA,
     formData: formData
@@ -45,6 +47,16 @@ export function receiveSections({ccn, formData, sections}) {
     ccn: ccn,
     sections: sections
   }
+}
+
+export const REQUEST_REAL_COURSE_ADD = Symbol('REQUEST_REAL_COURSE_ADD');
+export function requestRealCourseAdd() {
+  return { type: REQUEST_REAL_COURSE_ADD }
+}
+
+export const RECEIVE_REAL_COURSE_ADD = Symbol("RECEIVE_REAL_COURSE_ADD");
+export function receiveRealCourseAdd() {
+  return { type: RECEIVE_REAL_COURSE_ADD }
 }
 
 
@@ -86,7 +98,7 @@ export function getSectionsForCCN({ccn}) {
         return {formData: newFormData, sections: sections}
       }
     }).then(function({formData, sections}) {
-      dispatch(setFormdata({formData: formData}))
+      dispatch(setFormData({formData: formData}))
       return dispatch(receiveSections({
         ccn: ccn,
         sections: sections
@@ -121,7 +133,7 @@ export function cancelShoppingCartAdd() {
       let doc = parser.parseFromString(body, "text/html");
       let newForm = doc.getElementById('SSR_SSENRL_CART');
       let newFormData = new FormData(newForm);
-      return dispatch(setFormdata({formData: newFormData}))
+      return dispatch(setFormData({formData: newFormData}))
     })
 
 
@@ -144,7 +156,7 @@ export function addCourse({ccn, selection}) {
     return chooseSection
       .then(({formData}) => confirmChoice(formData))
       .then(({formData, courses}) => {
-        dispatch(setFormdata({formData: formData}))
+        dispatch(setFormData({formData: formData}))
         return dispatch(receiveCourseAdd({ccn: ccn, courses: courses}))
       })
   }
@@ -192,4 +204,47 @@ export function confirmChoice(formData, permissionNumber = '',  graded = true, w
     let newFormData = new FormData(newForm);
     return { formData: newFormData, courses: shoppingCartCourses }
   });
+}
+
+export function addFromShoppingCart({formData, positions, positionToEnroll}) {
+  return (dispatch) => {
+    dispatch(requestRealCourseAdd());
+    let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
+
+    formData.set('ICAJAX', '0');
+    formData.set('ICAction', 'DERIVED_REGFRM1_LINK_ADD_ENRL');
+    formData.set('DERIVED_REGFRM1_CLASS_NBR', '');
+    formData.set('DERIVED_REGFRM1_SSR_CLS_SRCH_TYPE$249$', '06');
+    for (let i=0; i < positions.length; ++i) {
+      formData.set('P_SELECT$chk$' + positions[i].toString(), 'N');
+    }
+    formData.set('P_SELECT$chk$' + positionToEnroll.toString(), 'Y');
+    formData.set('P_SELECT$' + positionToEnroll.toString(), 'Y');
+
+    return postFormData(url, formData).then(function(body) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(body, "text/html");
+      let newForm = doc.getElementById('SSR_SSENRL_ADD');
+      let newFormData = new FormData(newForm);
+      return { formData: newFormData }
+    }).then(function({formData}) {
+      let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_ADD.GBL';
+      formData.set('ICAJAX', '0');
+      formData.set('ICAction', 'DERIVED_REGFRM1_SSR_PB_SUBMIT');
+      return postFormData(url, formData)
+    }).then(function(body) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(body, "text/html");
+      let enrolledTableRows = doc.querySelectorAll("tr [id^='trSTDNT_ENRL_SSVW']");
+      let shoppingCartTableRows = doc.querySelectorAll("tr [id^='trSSR_REGFORM_VW']");
+      let enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
+      let shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
+      let formData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+      return Promise.all([
+        dispatch(setShoppingCart({courses: shoppingCartCourses})),
+        dispatch(setEnrolledCourses({courses: enrolledCourses})),
+        dispatch(setFormData({formData: formData})),
+      ])
+    }).then(() => dispatch(receiveRealCourseAdd()))
+  }
 }
