@@ -1,8 +1,16 @@
 import React, { PropTypes } from 'react';
 
 class CoursePicker extends React.Component {
-  handleChange(event) {
+  handleCCNChange(event) {
     this.props.changedCCN({ccn: event.target.value})
+  }
+
+  handleDeptChange(event) {
+    this.props.changedDept({dept: event.target.value})
+  }
+
+  handleDeptNumberChange(event) {
+    this.props.changedDeptNumber({dept_number: event.target.value})
   }
 
   handleSelector(event) {
@@ -53,12 +61,24 @@ class CoursePicker extends React.Component {
             <input
               type="text"
               value={this.props.coursePicker.ccn}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleCCNChange.bind(this)}
             />
           </div>
           <div>
             The name of this course is {this.props.coursePicker.course_name}.
-            {this.props.coursePicker.dept} - {this.props.coursePicker.dept_number}
+            <input
+              type="text"
+              value={this.props.coursePicker.dept}
+              onChange={this.handleDeptChange.bind(this)}
+            />
+            -
+            <input
+              type="text"
+              value={this.props.coursePicker.dept_number}
+              onChange={this.handleDeptNumberChange.bind(this)}
+            />
+          <div>{this.props.coursePicker.dept_options.join(", ")}</div>
+          <div>{this.props.coursePicker.dept_numbers.join(", ")}</div>
           </div>
           <div> Available sections:
             {sections}
