@@ -14,11 +14,12 @@ export function requestCourseAdd({ccn, selection}) {
 }
 
 export const RECEIVE_COURSE_ADD = Symbol("RECEIVE_COURSE_ADD");
-export function receiveCourseAdd({ccn, courses}) {
+export function receiveCourseAdd({ccn, enrolledCourses, shoppingCartCourses}) {
   return {
     type: RECEIVE_COURSE_ADD,
     ccn: ccn,
-    courses: courses
+    enrolledCourses: enrolledCourses,
+    shoppingCartCourses: shoppingCartCourses
   }
 }
 
@@ -48,17 +49,6 @@ export function receiveSections({ccn, formData, sections}) {
     sections: sections
   }
 }
-
-export const REQUEST_REAL_COURSE_ADD = Symbol('REQUEST_REAL_COURSE_ADD');
-export function requestRealCourseAdd() {
-  return { type: REQUEST_REAL_COURSE_ADD }
-}
-
-export const RECEIVE_REAL_COURSE_ADD = Symbol("RECEIVE_REAL_COURSE_ADD");
-export function receiveRealCourseAdd() {
-  return { type: RECEIVE_REAL_COURSE_ADD }
-}
-
 
 export function getSectionsForCCN({ccn}) {
   return (dispatch, getState) => {
@@ -156,8 +146,17 @@ export function addCourse({ccn, selection}) {
     return chooseSection
       .then(({formData}) => confirmChoice(formData))
       .then(({formData, courses}) => {
+        let selectableCourses = courses.filter(course => course.selectable);
+        let courseToAddPos = courses.map(course => course.id).indexOf(ccn);
+
+        return dispatch(addFromShoppingCart({
+          formData: formData,
+          positions: selectableCourses,
+          positionToEnroll: courseToAddPos,
+        }))
+      }).then(function({formData, enrolledCourses, shoppingCartCourses}) {
         dispatch(setFormData({formData: formData}))
-        return dispatch(receiveCourseAdd({ccn: ccn, courses: courses}))
+        return dispatch(receiveCourseAdd({ccn: ccn, enrolledCourses: shoppingCartCourses}))
       })
   }
 }
@@ -208,7 +207,6 @@ export function confirmChoice(formData, permissionNumber = '',  graded = true, w
 
 export function addFromShoppingCart({formData, positions, positionToEnroll}) {
   return (dispatch) => {
-    dispatch(requestRealCourseAdd());
     let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
 
     formData.set('ICAJAX', '0');
@@ -232,7 +230,12 @@ export function addFromShoppingCart({formData, positions, positionToEnroll}) {
       formData.set('ICAJAX', '0');
       formData.set('ICAction', 'DERIVED_REGFRM1_SSR_PB_SUBMIT');
       return postFormData(url, formData)
-    }).then(function(body) {
+    }).then(() => {
+      let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
+      return fetch(url, { credentials: 'same-origin' })
+    })
+    .then(response => response.text())
+    .then(function(body) {
       let parser = new DOMParser();
       let doc = parser.parseFromString(body, "text/html");
       let enrolledTableRows = doc.querySelectorAll("tr [id^='trSTDNT_ENRL_SSVW']");
@@ -240,11 +243,7 @@ export function addFromShoppingCart({formData, positions, positionToEnroll}) {
       let enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
       let shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
       let formData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
-      return Promise.all([
-        dispatch(setShoppingCart({courses: shoppingCartCourses})),
-        dispatch(setEnrolledCourses({courses: enrolledCourses})),
-        dispatch(setFormData({formData: formData})),
-      ])
-    }).then(() => dispatch(receiveRealCourseAdd()))
+      return {formData: formData, enrolledCourses: enrolledCourses, shoppingCartCourses}
+    })
   }
 }

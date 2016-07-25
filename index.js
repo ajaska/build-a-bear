@@ -43,23 +43,4 @@ Promise.all([
     </Provider>,
     document.getElementById('root')
   );
-}).then(() => {
-  store.dispatch(addFromShoppingCart({
-    formData: formData,
-    positions: [0, 2, 3],
-    positionToEnroll: 3,
-  }))
 })
-
-
-
-/*
-getSectionsForCCN(33647, formData).then(function({ formData, sections }) {
-  return selectSection(0, formData);
-}).then(function({formData}) {
-  return confirmChoice(formData);
-}).then(function({formData, courses}) {
-  console.log(shoppingCartCourses);
-  console.log(courses);
-})
-*/

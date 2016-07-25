@@ -1,4 +1,5 @@
 const schemaTypes = {
+  selectable: Symbol("Selectable"), // [x]
   course_id: Symbol("Class"), // COMPSCI 162-00 \n (27170)
   ccn: Symbol("Class Nbr"), // 27170
   section: Symbol("Section"), // 101
@@ -39,11 +40,13 @@ function tableParser(tableSchema) {
 
 function parseColumn(column, columnType) {
   switch (columnType) {
+    case schemaTypes.selectable:
+      return { selectable: column.innerHTML.includes("checkbox") }
     case schemaTypes.course_id:
       let text = column.innerText.trim();
       let course = text.split(/\n+/)[0];
       let id = text.split(/\n+/)[1];
-      id = id.replace("(", "").replace(")", "");
+      id = id.replace("(", "").replace(")", "").trim();
       return { course: course, id: id }
     case schemaTypes.ccn:
       return { id: column.innerText.trim() }
@@ -97,6 +100,7 @@ export const parseEnrolledCoursesTable = tableParser([
 ]);
 
 export const parseShoppingCartTable = tableParser([
+  new Column(0, schemaTypes.selectable),
   new Column(1, schemaTypes.course_id),
   new Column(2, schemaTypes.time),
   new Column(3, schemaTypes.room),

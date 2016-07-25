@@ -6,6 +6,7 @@ let defaultState = Immutable.fromJS({
   ccn: "",
   sections: [],
   isLoadingSections: false,
+  isAddingCourse: false,
   dept: "",
   deptOptions: [],
   deptNumber: "",
@@ -42,6 +43,15 @@ export default function(state = defaultState, action) {
                   .set('selection', defaultState.get('selection'))
     case ActionType.SET_SELECTION:
       return state.set('selection', action.selection)
+    case APIActionType.REQUEST_COURSE_ADD:
+      return state.set('isAddingCourse', true)
+    case APIActionType.RECEIVE_COURSE_ADD:
+      return state.set('dept', defaultState.get('dept'))
+                  .set('deptOptions', defaultState.get('deptOptions'))
+                  .set('deptNumber', defaultState.get('deptNumber'))
+                  .set('deptNumbers', defaultState.get('deptNumbers'))
+                  .set('courseName', defaultState.get('courseName'))
+                  .set('ccn', defaultState.get('ccn'))
     case APIActionType.REQUEST_SECTIONS:
       return state.set('isLoadingSections', true)
     case APIActionType.RECEIVE_SECTIONS:
