@@ -5,12 +5,12 @@ import Immutable from 'immutable';
 let defaultState = Immutable.fromJS({
   ccn: "",
   sections: [],
-  loading_sections: false,
+  isLoadingSections: false,
   dept: "",
-  dept_options: [],
-  dept_number: "",
-  dept_numbers: [],
-  course_name: "",
+  deptOptions: [],
+  deptNumber: "",
+  deptNumbers: [],
+  courseName: "",
   selection: "0",
 })
 
@@ -21,33 +21,33 @@ export default function(state = defaultState, action) {
     case ActionType.SET_DEPT:
       return state.set('dept', action.dept)
     case ActionType.SET_DEPT_OPTIONS:
-      return state.set('dept_options', action.dept_options)
+      return state.set('deptOptions', action.deptOptions)
     case ActionType.SET_DEPT_NUMBER:
-      return state.set('dept_number', action.dept_number)
+      return state.set('deptNumber', action.deptNumber)
     case ActionType.SET_DEPT_NUMBERS:
-      return state.set('dept_numbers', Immutable.fromJS(action.dept_numbers))
+      return state.set('deptNumbers', Immutable.fromJS(action.deptNumbers))
     case ActionType.CLEAR_CCN:
       return state.set('ccn', defaultState.get('ccn'))
     case ActionType.CLEAR_DEPT:
       return state.set('dept', defaultState.get('dept'))
-                  .set('dept_options', defaultState.get('dept_options'))
-                  .set('dept_number', defaultState.get('dept_number'))
-                  .set('dept_numbers', defaultState.get('dept_numbers'))
+                  .set('deptOptions', defaultState.get('deptOptions'))
+                  .set('deptNumber', defaultState.get('deptNumber'))
+                  .set('deptNumbers', defaultState.get('deptNumbers'))
     case ActionType.SET_COURSE_NAME:
-      return state.set('course_name', action.course_name)
+      return state.set('courseName', action.courseName)
     case ActionType.CLEAR_COURSE:
-      return state.set('course_name', defaultState.get('course_name'))
+      return state.set('courseName', defaultState.get('courseName'))
     case ActionType.CLEAR_SECTIONS:
       return state.set('sections', defaultState.get('sections'))
                   .set('selection', defaultState.get('selection'))
     case ActionType.SET_SELECTION:
       return state.set('selection', action.selection)
     case APIActionType.REQUEST_SECTIONS:
-      return state.set('loading_sections', true)
+      return state.set('isLoadingSections', true)
     case APIActionType.RECEIVE_SECTIONS:
       if (state.get('ccn') === action.ccn) {
         return state.set('sections', Immutable.fromJS(action.sections))
-                    .set('loading_sections', false)
+                    .set('isLoadingSections', false)
       }
       return state
     default:

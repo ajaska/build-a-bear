@@ -23,8 +23,8 @@ export function changedCCN({ccn}) {
     if (ccn_indexed.hasOwnProperty(ccn)) {
       let data = ccn_indexed[ccn];
       dispatch(setDept({dept: data[0]}));
-      dispatch(setDeptNumber({dept_number: data[1]}));
-      dispatch(setCourseName({course_name: data[4]}));
+      dispatch(setDeptNumber({deptNumber: data[1]}));
+      dispatch(setCourseName({courseName: data[4]}));
       dispatch(getSectionsForCCN({ccn: ccn}));
     } else {
       dispatch(clearDept());
@@ -43,7 +43,7 @@ export function changedDept({dept}) {
 
     dispatch(clearCCN());
     dispatch(clearCourse());
-    dispatch(setDeptNumber({dept_number: ""}));
+    dispatch(setDeptNumber({deptNumber: ""}));
     if (getState().coursePicker.get('sections').size > 0) {
       dispatch(cancelShoppingCartAdd());
       dispatch(clearSections());
@@ -52,19 +52,19 @@ export function changedDept({dept}) {
     let real_dept = dept.toUpperCase();
     if (depts.hasOwnProperty(real_dept)) {
       real_dept = depts[real_dept];
-      let dept_numbers = dept_indexed[real_dept]
-      return dispatch(setDeptNumbers({dept_numbers: Object.keys(dept_numbers)}))
+      let deptNumbers = dept_indexed[real_dept]
+      return dispatch(setDeptNumbers({deptNumbers: Object.keys(deptNumbers)}))
     } else {
       let keys = Object.keys(depts);
       let possibleDepts = keys.filter(dept_name => dept_name.toUpperCase().startsWith(dept.toUpperCase()));
-      return dispatch(setDeptOptions({dept_options: possibleDepts}))
+      return dispatch(setDeptOptions({deptOptions: possibleDepts}))
     }
   }
 }
 
-export function changedDeptNumber({dept_number}) {
+export function changedDeptNumber({deptNumber}) {
   return (dispatch, getState) => {
-    dispatch(setDeptNumber({dept_number: dept_number}));
+    dispatch(setDeptNumber({deptNumber: deptNumber}));
     // THIS IS A BAD IDEA
     let dept = getState().coursePicker.get('dept').toUpperCase();
 
@@ -82,18 +82,18 @@ export function changedDeptNumber({dept_number}) {
     if (!dept_indexed.hasOwnProperty(real_dept)) {
       console.error("wtf -- invalid real_dept?: "+real_dept);
     }
-    let dept_numbers = dept_indexed[real_dept];
-    dept_number = dept_number.toUpperCase();
-    if (dept_numbers.hasOwnProperty(dept_number)) {
-      let ccn = dept_numbers[dept_number].toString();
+    let deptNumbers = dept_indexed[real_dept];
+    deptNumber = deptNumber.toUpperCase();
+    if (deptNumbers.hasOwnProperty(deptNumber)) {
+      let ccn = deptNumbers[deptNumber].toString();
       let data = ccn_indexed[ccn];
       dispatch(setCCN({ccn: ccn}));
-      dispatch(setCourseName({course_name: data[4]}));
+      dispatch(setCourseName({courseName: data[4]}));
       dispatch(getSectionsForCCN({ccn: ccn}));
     } else {
-      let keys = Object.keys(dept_numbers);
-      let possibleDeptsNumbers = keys.filter(dept_num => dept_num.toUpperCase().startsWith(dept_number.toUpperCase()));
-      return dispatch(setDeptNumbers({dept_numbers: possibleDeptsNumbers}))
+      let keys = Object.keys(deptNumbers);
+      let possibleDeptsNumbers = keys.filter(dept_num => dept_num.toUpperCase().startsWith(deptNumber.toUpperCase()));
+      return dispatch(setDeptNumbers({deptNumbers: possibleDeptsNumbers}))
     }
   }
 }
@@ -104,8 +104,8 @@ export function clickedAdd({ccn, selection}) {
       .then(() => {
         dispatch(setCCN({ccn: ""}));
         dispatch(setDept({dept: ""}));
-        dispatch(setDeptNumber({dept_number: ""}));
-        dispatch(setCourseName({course_name: ""}));
+        dispatch(setDeptNumber({deptNumber: ""}));
+        dispatch(setCourseName({courseName: ""}));
         dispatch(clearSections());
       })
   }
@@ -129,24 +129,24 @@ function setDept({dept}) {
   }
 }
 
-function setDeptNumber({dept_number}) {
+function setDeptNumber({deptNumber}) {
   return {
     type: SET_DEPT_NUMBER,
-    dept_number: dept_number
+    deptNumber: deptNumber
   }
 }
 
-function setDeptNumbers({dept_numbers}) {
+function setDeptNumbers({deptNumbers}) {
   return {
     type: SET_DEPT_NUMBERS,
-    dept_numbers: dept_numbers
+    deptNumbers: deptNumbers
   }
 }
 
-function setDeptOptions({dept_options}) {
+function setDeptOptions({deptOptions}) {
   return {
     type: SET_DEPT_OPTIONS,
-    dept_options: dept_options
+    deptOptions: deptOptions
   }
 }
 
@@ -154,10 +154,10 @@ function clearDept() {
   return { type: CLEAR_DEPT }
 }
 
-function setCourseName({course_name}) {
+function setCourseName({courseName}) {
   return {
     type: SET_COURSE_NAME,
-    course_name: course_name
+    courseName: courseName
   }
 }
 
