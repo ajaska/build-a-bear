@@ -7,13 +7,24 @@ class AddCourseModal extends React.Component {
   }
   
   render() {
-    if (!this.props.lecture || !this.props.discussion) {
+    if (!this.props.lecture) {
       return <div className="ui modal add-course-confirm"></div>;
     }
     let lecture = this.props.lecture;
     let lectureHeader= `${lecture.dept} ${lecture.deptNumber}-${lecture.section} LEC`;
-    let discussion = this.props.discussion;
-    let discussionHeader= `${lecture.dept} ${lecture.deptNumber}-${discussion.section} DISC`;
+    let sections = this.props.sections.map((section, i) => (
+      <div className="modal-class-item" key={i}>
+        <span className="modal-course-info-name semibold">{ `${lecture.dept} ${lecture.deptNumber}-${section.section}` }</span>
+        <div className="modal-course-info">
+          <div className="modal-course-info">
+            <span>
+              <span className="semibold"> { section.room} </span> | { section.time }<br />
+              Instructor: <span className="semibold">{ section.instructor }</span><br />
+            </span>
+          </div>
+        </div>
+      </div>
+    ));
     let lectureWaitlist;
     if (this.props.lectureAvailability) {
       lectureWaitlist = <span>You will be <span className="color-blue">on the waitlist</span>.</span>;
@@ -39,17 +50,7 @@ class AddCourseModal extends React.Component {
               </div>
             </div>
           </div>
-          <div className="modal-class-item">
-            <span className="modal-course-info-name semibold">{ discussionHeader }</span>
-            <div className="modal-course-info">
-              <div className="modal-course-info">
-                <span>
-                  <span className="semibold"> {discussion.room} </span> | { discussion.time }<br />
-                  Instructor: <span className="semibold">{ discussion.instructor }</span><br />
-                </span>
-              </div>
-            </div>
-          </div>
+          { sections }
         </div>
 
         <div className="modal-footer">
