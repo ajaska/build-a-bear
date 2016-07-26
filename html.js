@@ -8,12 +8,6 @@ export const page_source = `<!doctype html>
     <link rel="stylesheet" type="text/css" href="//js.six.ph/css/semantic/dimmer.min.css">
     <link rel="stylesheet" type="text/css" href="//js.six.ph/css/semantic/transition.min.css">
     <link rel="stylesheet" type="text/css" href="//js.six.ph/css/semantic/icon.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="//js.six.ph/scripts/semantic/modal.min.js"></script>
-    <script src="//js.six.ph/scripts/semantic/dropdown.min.js"></script>
-    <script src="//js.six.ph/scripts/semantic/dimmer.min.js"></script>
-    <script src="//js.six.ph/scripts/semantic/transition.min.js"></script>
-    <script src="//js.six.ph/scripts/main.js"></script>
   </head>
   <body>
     <div class="banner">

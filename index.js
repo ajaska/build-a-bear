@@ -29,6 +29,22 @@ function initialize() {
   shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
 
   document.querySelector('html').innerHTML = page_source;
+
+  const scriptsToAdd = [
+    "https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js",
+    "//js.six.ph/scripts/semantic/modal.min.js",
+    "//js.six.ph/scripts/semantic/dropdown.min.js",
+    "//js.six.ph/scripts/semantic/dimmer.min.js",
+    "//js.six.ph/scripts/semantic/transition.min.js",
+    //"//js.six.ph/scripts/main.js"
+  ];
+  for (let i=0; i<scriptsToAdd.length; ++i) {
+    let script = document.createElement('script');
+    script.src = scriptsToAdd[i];
+    script.type = "text/javascript";
+    script.async = false;
+    document.head.appendChild(script);
+  }
 }
 
 initialize();

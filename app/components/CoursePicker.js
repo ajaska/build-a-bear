@@ -21,13 +21,17 @@ class CoursePicker extends React.Component {
     this.props.changedLectureSelection({selection: event.target.value, sections: this.props.lectureSections})
   }
 
-  clickedAdd(event) {
+  handleClickedAdd(event) {
+    $('.add-course-confirm').modal('show');
+  }
+
+  /*clickedAdd(event) {
     event.preventDefault();
     this.props.clickedAdd({
       ccn: this.props.ccn,
       selection: this.props.selection,
     });
-  }
+  }*/
 
   render() {
     let lectureSections = this.props.lectureSections.map((lectureSection, i) => {
@@ -113,7 +117,7 @@ class CoursePicker extends React.Component {
           </div>
           <div className="add-class-form-row add-class-waitlist-row">
             <label className="add-class-waitlist">Waitlist class if full<input className="add-class-waitlist-button" type="checkbox" name="waitlist" id="waitlist"/></label>
-            <button className="add-class-submit-button" disabled={globalDisable} id="add-class">Add</button>
+            <button className="add-class-submit-button" onClick={this.handleClickedAdd.bind(this)} disabled={globalDisable} id="add-class">Add</button>
           </div>
         </div>
       </div>
