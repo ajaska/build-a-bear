@@ -1,4 +1,4 @@
-import { getSectionsForCCN, cancelShoppingCartAdd, addCourse } from './api'
+import { getSectionsAndAvailabilityForCCN, cancelShoppingCartAdd, addCourse } from './api'
 import { isValidCCN, isValidDept, isValidDeptNumber, lectureSectionFromCCN, lectureSectionsFromDept } from '../helpers/everything'
 
 export const SET_CCN = Symbol('SET_CCN');
@@ -25,7 +25,7 @@ export function changedCCN({ccn}) {
 
     if (isValidCCN(ccn)) {
       dispatch(setLectureSections([lectureSectionFromCCN(ccn)]));
-      dispatch(getSectionsForCCN({ccn: ccn}));
+      dispatch(getSectionsAndAvailabilityForCCN({ccn: ccn}));
     }
   }
 }
@@ -49,7 +49,7 @@ export function changedDeptNumber({deptNumber}) {
     if (isValidDeptNumber(dept, deptNumber)) {
       let lectureSections = lectureSectionsFromDept(dept, deptNumber);
       dispatch(setLectureSections(lectureSections));
-      dispatch(getSectionsForCCN({ccn: lectureSections[0].ccn}));
+      dispatch(getSectionsAndAvailabilityForCCN({ccn: lectureSections[0].ccn}));
     }
   }
 }
@@ -58,9 +58,7 @@ export function changedLectureSelection({selection, sections}) {
   return (dispatch, getState) => {
     dispatch(setLectureSection(selection));
 
-    return Promise.resolve(dispatch(cancelShoppingCartAdd())).then(() => {
-      return dispatch(getSectionsForCCN({ccn: sections[selection].ccn}));
-    })
+    return dispatch(getSectionsAndAvailabilityForCCN({ccn: sections[selection].ccn}));
   }
 }
 

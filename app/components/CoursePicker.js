@@ -58,6 +58,10 @@ class CoursePicker extends React.Component {
     }
     let depts = this.props.deptOptions.map((dept, i) => <option value={dept} key={i}>{ dept }</option>);
     let deptNumbers = alphanumSort(this.props.deptNumbers, false).map((dn, i) => <option value={dn} key={i}>{ dn }</option>);
+    let lectureAvailability = this.props.lectureAvailability;
+    if (this.props.isLoadingLectureAvailability) {
+      lectureAvailability = "Loading...";
+    }
     return (
       <div className="add-class-panel">
         <div className="add-class-header">Add Class</div><div className="add-class-error-msg">This conflicts with your schedule.</div>
@@ -92,7 +96,7 @@ class CoursePicker extends React.Component {
             <select className="add-class-class-name" value="">
                 <option value="" disabled>{this.props.courseName || "Course Name"}</option>
             </select>
-            <div className="add-class-waitlist-status">Status: <span className="color-blue">Waitlist Open</span></div>
+            <div className="add-class-waitlist-status">Status: <span className="color-blue">{lectureAvailability}</span></div>
           </div>
           <div className="add-class-form-row">
             <select
