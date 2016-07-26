@@ -86,8 +86,17 @@ select {
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
   background-color: white !important;
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+}
 
   /* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
+select:not(:disabled) {
   background:
     linear-gradient(45deg, transparent 50%, $primary-blue 50%),
     linear-gradient(135deg, $primary-blue 50%, transparent 50%);
@@ -101,13 +110,6 @@ select {
     4px 4px;
     // 2em 2em;
   background-repeat: no-repeat;
-  border-radius: 0;
-  margin: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-appearance:none;
-  -moz-appearance:none;
 }
 
 input {
