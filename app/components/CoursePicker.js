@@ -57,7 +57,7 @@ class CoursePicker extends React.Component {
     }
     let globalDisable = this.props.isLoadingSections || this.props.isLoadingLectureAvailability || this.props.isAddingCourse
     let enabled = {
-      lectureSection: !globalDisable && this.props.lectureSections.length > 0,
+      lectureSection: !globalDisable && this.props.lectureSections.length > 1,
       deptNumber: !globalDisable && this.props.deptNumbers.length > 0,
       section: !globalDisable && this.props.sections.length > 0,
     }
