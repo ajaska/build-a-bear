@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import CoursePicker from '../components/CoursePicker';
-import { changedCCN, changedDept, changedDeptNumber, clickedAdd, setSelection } from '../actions/coursePicker';
+import { changedCCN, changedDept, changedDeptNumber, clickedAdd, setSelection, changedLectureSelection } from '../actions/coursePicker';
+
+import { allDepts, deptNumbersForDept } from '../helpers/everything';
 
 function ccnInCart(state) {
   let courses = state.shoppingCart.toJS().courses;
@@ -9,9 +11,20 @@ function ccnInCart(state) {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  let cpState = state.coursePicker.toJS();
+  let lectureSection = cpState.lectureSections[cpState.lectureSection];
+  let courseName = "";
+  if (lectureSection) {
+    courseName = lectureSection.courseName;
+  }
   return Object.assign({},
     state.coursePicker.toJS(),
-    { ccnInCart: ccnInCart(state) }
+    {
+      ccnInCart: ccnInCart(state),
+      deptOptions: allDepts().sort(),
+      deptNumbers: deptNumbersForDept(cpState.dept),
+      courseName: courseName,
+    }
   )
 }
 
@@ -31,6 +44,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     setSelection: (selection) => {
       dispatch(setSelection(selection))
+    },
+    changedLectureSelection: (selection) => {
+      dispatch(changedLectureSelection(selection))
     },
   }
 }

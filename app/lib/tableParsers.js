@@ -44,10 +44,12 @@ function parseColumn(column, columnType) {
       return { selectable: column.innerHTML.includes("checkbox") }
     case schemaTypes.course_id:
       let text = column.innerText.trim();
+      // TODO: deprecate old course
       let course = text.split(/\n+/)[0];
+      let section = course.split('-')[1];
       let id = text.split(/\n+/)[1];
       id = id.replace("(", "").replace(")", "").trim();
-      return { course: course, id: id }
+      return { course: course, id: id, section: section }
     case schemaTypes.ccn:
       return { id: column.innerText.trim() }
     case schemaTypes.section:

@@ -1,7 +1,10 @@
 import { getSectionsForCCN, cancelShoppingCartAdd, addCourse } from './api'
+import { isValidCCN, isValidDept, isValidDeptNumber, lectureSectionFromCCN, lectureSectionsFromDept } from '../helpers/everything'
 
 export const SET_CCN = Symbol('SET_CCN');
 export const CLEAR_CCN = Symbol('CLEAR_CCN');
+export const SET_LECTURE_SECTION = Symbol('SET_LECTURE_SECTION');
+export const SET_LECTURE_SECTIONS = Symbol('SET_LECTURE_SECTIONS');
 export const SET_DEPT = Symbol('SET_DEPT');
 export const SET_DEPT_OPTIONS = Symbol('SET_DEPT_OPTIONS');
 export const SET_DEPT_NUMBER = Symbol('SET_DEPT_NUMBER');
@@ -20,20 +23,13 @@ export function changedCCN({ccn}) {
   return (dispatch, getState) => {
     dispatch(setCCN({ccn: ccn}));
 
-    if (ccn_indexed.hasOwnProperty(ccn)) {
-      let data = ccn_indexed[ccn];
-      dispatch(setDept({dept: data[0]}));
-      dispatch(setDeptNumbers({deptNumbers: Object.keys(dept_indexed[data[0]])}))
-      dispatch(setDeptNumber({deptNumber: data[1]}));
-      dispatch(setCourseName({courseName: data[4]}));
+    if (getState().coursePicker.get('isAddingToShoppingCart')) {
+      dispatch(cancelShoppingCartAdd());
+    }
+
+    if (isValidCCN(ccn)) {
+      dispatch(setLectureSections([lectureSectionFromCCN(ccn)]));
       dispatch(getSectionsForCCN({ccn: ccn}));
-    } else {
-      dispatch(clearDept());
-      dispatch(clearCourse());
-      if (getState().coursePicker.get('sections').size > 0) {
-        dispatch(cancelShoppingCartAdd());
-        dispatch(clearSections());
-      }
     }
   }
 }
@@ -42,23 +38,8 @@ export function changedDept({dept}) {
   return (dispatch, getState) => {
     dispatch(setDept({dept: dept}));
 
-    dispatch(clearCCN());
-    dispatch(clearCourse());
-    dispatch(setDeptNumber({deptNumber: ""}));
-    if (getState().coursePicker.get('sections').size > 0) {
+    if (getState().coursePicker.get('isAddingToShoppingCart')) {
       dispatch(cancelShoppingCartAdd());
-      dispatch(clearSections());
-    }
-
-    let real_dept = dept.toUpperCase();
-    if (depts.hasOwnProperty(real_dept)) {
-      real_dept = depts[real_dept];
-      let deptNumbers = dept_indexed[real_dept]
-      return dispatch(setDeptNumbers({deptNumbers: Object.keys(deptNumbers)}))
-    } else {
-      let keys = Object.keys(depts);
-      let possibleDepts = keys.filter(dept_name => dept_name.toUpperCase().startsWith(dept.toUpperCase()));
-      return dispatch(setDeptOptions({deptOptions: possibleDepts}))
     }
   }
 }
@@ -69,33 +50,29 @@ export function changedDeptNumber({deptNumber}) {
     // THIS IS A BAD IDEA
     let dept = getState().coursePicker.get('dept').toUpperCase();
 
-    dispatch(clearCCN());
-    dispatch(clearCourse());
-    if (getState().coursePicker.get('sections').size > 0) {
+    if (getState().coursePicker.get('isAddingToShoppingCart')) {
       dispatch(cancelShoppingCartAdd());
-      dispatch(clearSections());
     }
 
-    if (!depts.hasOwnProperty(dept)) {
+    if (!isValidDept(dept)) {
       console.error("wtf -- invalid dept?: "+dept);
     }
-    let real_dept = depts[dept];
-    if (!dept_indexed.hasOwnProperty(real_dept)) {
-      console.error("wtf -- invalid real_dept?: "+real_dept);
+
+    if (isValidDeptNumber(dept, deptNumber)) {
+      let lectureSections = lectureSectionsFromDept(dept, deptNumber);
+      dispatch(setLectureSections(lectureSections));
+      dispatch(getSectionsForCCN({ccn: lectureSections[0].ccn}));
     }
-    let deptNumbers = dept_indexed[real_dept];
-    deptNumber = deptNumber.toUpperCase();
-    if (deptNumbers.hasOwnProperty(deptNumber)) {
-      let ccn = deptNumbers[deptNumber].toString();
-      let data = ccn_indexed[ccn];
-      dispatch(setCCN({ccn: ccn}));
-      dispatch(setCourseName({courseName: data[4]}));
-      dispatch(getSectionsForCCN({ccn: ccn}));
-    } else {
-      let keys = Object.keys(deptNumbers);
-      let possibleDeptsNumbers = keys.filter(dept_num => dept_num.toUpperCase().startsWith(deptNumber.toUpperCase()));
-      return dispatch(setDeptNumbers({deptNumbers: possibleDeptsNumbers}))
-    }
+  }
+}
+
+export function changedLectureSelection({selection, sections}) {
+  return (dispatch, getState) => {
+    dispatch(setLectureSection(selection));
+
+    return Promise.resolve(dispatch(cancelShoppingCartAdd())).then(() => {
+      return dispatch(getSectionsForCCN({ccn: sections[selection].ccn}));
+    })
   }
 }
 
@@ -121,6 +98,20 @@ function setCCN({ccn}) {
 
 function clearCCN() {
   return { type: CLEAR_CCN }
+}
+
+function setLectureSection(lectureSection) {
+  return {
+    type: SET_LECTURE_SECTION,
+    lectureSection: lectureSection
+  }
+}
+
+function setLectureSections(lectureSections) {
+  return {
+    type: SET_LECTURE_SECTIONS,
+    lectureSections: lectureSections
+  }
 }
 
 function setDept({dept}) {

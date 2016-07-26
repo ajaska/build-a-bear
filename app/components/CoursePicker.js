@@ -17,6 +17,10 @@ class CoursePicker extends React.Component {
     this.props.setSelection({selection: event.target.value})
   }
 
+  handleLectureSelector(event) {
+    this.props.changedLectureSelection({selection: event.target.value, sections: this.props.lectureSections})
+  }
+
   clickedAdd(event) {
     event.preventDefault();
     this.props.clickedAdd({
@@ -26,6 +30,14 @@ class CoursePicker extends React.Component {
   }
 
   render() {
+    let lectureSections = this.props.lectureSections.map((lectureSection, i) => {
+      return (
+        <option value={i} key={i}>
+          {lectureSection.toString()}
+        </option>
+       )
+    })
+    let lectureSelection = (this.props.lectureSections.length === 0 ? "" : this.props.lectureSection);
     let sections;
     if(this.props.sections.length > 0) {
       sections = this.props.sections.map((section, i) => {
@@ -60,10 +72,10 @@ class CoursePicker extends React.Component {
             />
             <select
               className="add-class-section"
-              value={this.props.selection}
-              onChange={this.handleSelector.bind(this)} >
-              <option value="" key={-1} disabled>Section</option>
-              { sections }
+              value={ lectureSelection }
+              onChange={this.handleLectureSelector.bind(this)} >
+              <option value="" disabled>Section</option>
+              { lectureSections }
             </select>
           </div>
           <div className="add-class-form-row">
@@ -83,14 +95,17 @@ class CoursePicker extends React.Component {
             <div className="add-class-waitlist-status">Status: <span className="color-blue">Waitlist Open</span></div>
           </div>
           <div className="add-class-form-row">
-            <select className="add-class-discussion">
-                <option value="" disabled selected>Choose a discussion section</option>
-                <option value="memes">Memes</option>
+            <select
+              className="add-class-discussion"
+              value={this.props.selection}
+              onChange={this.handleSelector.bind(this)} >
+              <option value="" disabled>Choose a discussion section</option>
+              { sections }
             </select>
           </div>
           <div className="add-class-form-row">
-            <select className="add-class-lab">
-                <option value="" disabled selected>Choose a lab section</option>
+            <select className="add-class-lab" value="">
+                <option value="" disabled>Choose a lab section</option>
                 <option value="memes">Memes</option>
             </select>
           </div>
