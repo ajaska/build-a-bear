@@ -11,11 +11,11 @@ let defaultState = Immutable.fromJS({
   lectureAvailability: "",
   isLoadingLectureAvailability: false,
   sections: [],
-  isInSearch: false,
   isLoadingSections: false,
   dept: "",
   deptNumber: "",
   selection: "0",
+  isAddingCourse: false,
 })
 
 export default function(state = defaultState, action) {

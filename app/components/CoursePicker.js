@@ -38,29 +38,24 @@ class CoursePicker extends React.Component {
        )
     })
     let lectureSelection = (this.props.lectureSections.length === 0 ? "" : this.props.lectureSection);
-    let sections;
-    if(this.props.sections.length > 0) {
-      sections = this.props.sections.map((section, i) => {
-        return (
-          <option value={i} key={i}>
-            {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
-          </option>
-        )
-      });
-    } else if (this.props.isLoadingSections) {
-      sections = [];
-    } else if (this.props.ccn
-               && this.props.deptNumber
-               && this.props.dept) {
-      sections = [];
-    } else {
-      sections = [];
-    }
+    let sections = this.props.sections.map((section, i) => {
+      return (
+        <option value={i} key={i}>
+          {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
+        </option>
+      )
+    });
     let depts = this.props.deptOptions.map((dept, i) => <option value={dept} key={i}>{ dept }</option>);
     let deptNumbers = alphanumSort(this.props.deptNumbers, false).map((dn, i) => <option value={dn} key={i}>{ dn }</option>);
     let lectureAvailability = this.props.lectureAvailability;
     if (this.props.isLoadingLectureAvailability) {
       lectureAvailability = "Loading...";
+    }
+    let globalDisable = this.props.isLoadingSections || this.props.isLoadingLectureAvailability || this.props.isAddingCourse
+    let enabled = {
+      lectureSection: !globalDisable && this.props.lectureSections.length > 0,
+      deptNumber: !globalDisable && this.props.deptNumbers.length > 0,
+      section: !globalDisable && this.props.sections.length > 0,
     }
     return (
       <div className="add-class-panel">
@@ -69,6 +64,7 @@ class CoursePicker extends React.Component {
           <div className="add-class-form-row">
             <input
               className="add-class-CCN outline-blue"
+              disabled={ globalDisable }
               placeholder="CCN"
               type="text"
               value={this.props.ccn}
@@ -76,6 +72,7 @@ class CoursePicker extends React.Component {
             />
             <select
               className="add-class-section"
+              disabled={ !enabled.lectureSection }
               value={ lectureSelection }
               onChange={this.handleLectureSelector.bind(this)} >
               <option value="" disabled>Section</option>
@@ -83,17 +80,17 @@ class CoursePicker extends React.Component {
             </select>
           </div>
           <div className="add-class-form-row">
-            <select className="add-class-department outline-blue" value={this.props.dept} onChange={this.handleDeptChange.bind(this)} >
+            <select className="add-class-department outline-blue" disabled={globalDisable} value={this.props.dept} onChange={this.handleDeptChange.bind(this)} >
                 <option value="" disabled>Department</option>
                 { depts }
             </select>
-            <select className="add-class-course-number" value={this.props.deptNumber} onChange={this.handleDeptNumberChange.bind(this)} >
+            <select className="add-class-course-number" disabled={!enabled.deptNumber} value={this.props.deptNumber} onChange={this.handleDeptNumberChange.bind(this)} >
                 <option value="" disabled>Course Number</option>
                 { deptNumbers }
             </select>
           </div>
           <div className="add-class-form-row">
-            <select className="add-class-class-name" value="">
+            <select className="add-class-class-name" value="" disabled>
                 <option value="" disabled>{this.props.courseName || "Course Name"}</option>
             </select>
             <div className="add-class-waitlist-status">Status: <span className="color-blue">{lectureAvailability}</span></div>
@@ -101,6 +98,7 @@ class CoursePicker extends React.Component {
           <div className="add-class-form-row">
             <select
               className="add-class-discussion"
+              disabled={ !enabled.section }
               value={this.props.selection}
               onChange={this.handleSelector.bind(this)} >
               <option value="" disabled>{this.props.isLoadingSections ? "Loading discussion sections..." : "Choose a discussion section"}</option>
