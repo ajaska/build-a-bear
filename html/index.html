@@ -1,22 +1,105 @@
 <html>
   <head>
-    <link href='https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="../css/semantic/dropdown.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/semantic/modal.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/semantic/dimmer.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/semantic/transition.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/semantic/icon.min.css">
     <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../scripts/semantic/modal.min.js"></script>
+    <script src="../scripts/semantic/dropdown.min.js"></script>
+    <script src="../scripts/semantic/dimmer.min.js"></script>
+    <script src="../scripts/semantic/transition.min.js"></script>
+    <script src="../scripts/main.js"></script>
   </head>
   <body>
+    <!-- Confirm class drop modal -->
+    <div class="ui modal drop-course-confirm">
+      <div class="modal-header clearfix">
+          <span class="modal-header-text">Drop Class Confirmation</span><span class="modal-cancel"><i id="drop-close" class="modal-cancel-icon remove icon"></i></span>
+      </div>
+      <p class="modal-confirm-text">Are you sure you want to drop:</p>
+      <div class="modal-body">
+        <!-- Lecture -->
+        <div class="modal-class-item">
+          <span class="modal-course-info-name semibold">Math 113-006 LEC <span class="color-blue">(4.0 Units)</span></span>
+          <div class="modal-course-info">
+            <div class="modal-course-info">
+              <span>
+                <span class="semibold color-blue">Abstract Algebra</span><br>
+                <span class="semibold">100 Evans</span> | TuTh 9:30-11AM<br>
+                Instructor: <span class="semibold">E. Frenkel</span><br>
+                Grading Option: <span class="semibold">P/NP</span><br>
+                You will be <span class="color-blue">14/100</span> on the waitlist</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <span class="modal-confirm-text">You will have <span class="color-blue">10.0</span> total units.<button class="modal-confirm-button">Confirm</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Confirm class add modal -->
+    <div class="ui modal add-course-confirm">
+      <div class="modal-header clearfix">
+          <span class="modal-header-text">Add Class Confirmation</span><span class="modal-cancel"><i id="add-close" class="modal-cancel-icon remove icon"></i></span>
+      </div>
+      <p class="modal-confirm-text">Are you sure you want to add:</p>
+      <div class="modal-body">
+        <!-- Lecture -->
+        <div class="modal-class-item">
+          <span class="modal-course-info-name semibold">Math 113-006 LEC <span class="color-blue">(4.0 Units)</span></span>
+          <div class="modal-course-info">
+            <div class="modal-course-info">
+              <span>
+                <span class="semibold color-blue">Abstract Algebra</span><br>
+                <span class="semibold">100 Evans</span> | TuTh 9:30-11AM<br>
+                Instructor: <span class="semibold">E. Frenkel</span><br>
+                Grading Option: <span class="semibold">P/NP</span><br>
+                You will be <span class="color-blue">14/100</span> on the waitlist</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Discussion and/or Lab -->
+        <div class="modal-class-item">
+          <span class="modal-course-info-name semibold">Math 113-006 DISC</span>
+          <div class="modal-course-info">
+            <div class="modal-course-info">
+              <span>
+                <span class="semibold color-blue">Abstract Algebra</span><br>
+                <span class="semibold">100 Evans</span> | TuTh 9:30-11AM<br>
+                Instructor: <span class="semibold">E. Frenkel</span><br>
+                Grading Option: <span class="semibold">P/NP</span><br>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <span class="modal-confirm-text">You will have <span class="color-blue">10.0</span> total units.<button class="modal-confirm-button">Confirm</button>
+        </div>
+
+      </div>
+    </div>
+
     <div class="banner">
       <p class="banner-text">CalCentral</p>
     </div>
     <div class="main-container">
       <div>
-        <a class="my-academics-link" href="https://calcentral.berkeley.edu/academics">< Return to My Academics</a>
+        <a class="my-academics-link" href="https://calcentral.berkeley.edu/academics">&lt; Return to My Academics</a>
       </div>
 
       <div>
         <p class="class-enrollment-subtitle semibold">Class Enrollment</p>
       </div>
       <h1 class="current-semester-subtitle">Fall 2016 - Undergraduate</h1>
-      <div class="left-data-container">
+      <div class="main-data-container">
         <table class="courses-table-enroll">
           <tr class="courses-table-header-row">
             <th class="courses-table-header-drop-class">&nbsp;</th>
@@ -31,7 +114,7 @@
             <th>&nbsp;</th>
           </tr>
           <tr class="courses-table-entry">
-            <td class="class-drop">x<br>&nbsp;</td>
+            <td class="class-drop"><i id="drop-class" class="courses-drop-course remove icon"></i></td>
             <td>Math 113-006 <br> Math 113-601</td>
             <td>Lecture <br> Discussion</td>
             <td>MWF 8-9AM <br> TBA</td>
@@ -43,7 +126,7 @@
             <td>&nbsp; <br><button class="discussion-swap">Swap</button></td>
           </tr>
           <tr class="courses-table-entry">
-            <td class="class-drop">x<br>&nbsp;</td>
+            <td class="class-drop"><i id="drop-class" class="courses-drop-course remove icon"></i></td>
             <td>Math 113-006 <br> Math 113-601</td>
             <td>Lecture <br> Discussion</td>
             <td>MWF 8-9AM <br> TBA</td>
@@ -65,7 +148,7 @@
             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
           </tr>
           <tr class="courses-table-entry">
-            <td class="class-drop">x<br>&nbsp;</td>
+            <td class="class-drop"><i id="drop-class" class="courses-drop-course remove icon"></i></td>
             <td>Math 113-006 <br> Math 113-601</td>
             <td>Lecture <br> Discussion</td>
             <td>MWF 8-9AM <br> TBA</td>
@@ -77,7 +160,7 @@
             <td>&nbsp; <br><button class="discussion-swap">Swap</button></td>
           </tr>
           <tr class="courses-table-entry">
-            <td class="class-drop">x<br>&nbsp;</td>
+            <td class="class-drop"><i id="drop-class" class="courses-drop-course remove icon"></i></td>
             <td>Math 113-006 <br> Math 113-601</td>
             <td>Lecture <br> Discussion</td>
             <td>MWF 8-9AM <br> TBA</td>
@@ -157,14 +240,25 @@
             </div>
           </div>
 
-          <div class="sc-clear-row">
-            <p class="sc-clear">You can add these classes <br>or clear your cart.<button class="sc-clear-button">Clear Cart</button>
+          <div class="sc-footer clearfix">
+            <span class="sc-clear-text">Add these classes or clear your cart.<span><button class="sc-clear-button">Clear Cart</button>
           </div>
         </div>
         <!-- Add class panel -->
         <div class="add-class-panel">
           <div class="add-class-header">Add Class</div><div class="add-class-error-msg">This conflicts with your schedule.</div>
           <div class="add-class-form">
+            <!-- DON'T TAKE THIS HTML -->
+            <!-- <div class="add-class-form-row">
+              <div id="test" class="ui fluid search selection dropdown">
+                <input type="hidden" name="country">
+                <i class="dropdown icon"></i>
+                <div class="default text">Select Country</div>
+                <div class="menu">
+                <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
+                <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
+              </div>
+            </div> -->
             <div class="add-class-form-row">
               <input class="add-class-CCN outline-blue" placeholder="CCN"></input>
               <select class="add-class-section">
@@ -203,7 +297,7 @@
             </div>
             <div class="add-class-form-row add-class-waitlist-row">
               <label class="add-class-waitlist">Waitlist class if full<input class="add-class-waitlist-button" type="checkbox" name="waitlist" id="waitlist"/></label>
-              <button class="add-class-submit-button">Add</button>
+              <button class="add-class-submit-button" id="add-class">Add</button>
             </div>
           </div>
         </div>

@@ -1,5 +1,12 @@
 @import '_calendar_entries.scss';
 
+$primary-blue: #4279FF;
+$primary-red: #FF8080;
+$primary-gray: #EEEEEE;
+$font-stack: 'Calibre-Regular', sans-serif;
+$font-semibold: 'Calibre-Semibold', sans-serif;
+$font-bold: 'Calibre-Bold', sans-serif;
+
 @font-face {
   font-family: 'Calibre-Regular';
   src: url('../fonts/Calibre-Regular.woff');
@@ -15,6 +22,17 @@
   src: url('../fonts/Calibre-Bold.woff');
 }
 
+@font-face {
+  font-family: 'Icons';
+  src: url("semantic/themes/default/assets/fonts/icons.eot");
+  src: url("semantic/themes/default/assets/fonts/icons.eot?#iefix") format('embedded-opentype'), url("semantic/themes/default/assets/fonts/icons.woff") format('woff'), url("semantic/themes/default/assets/fonts/icons.ttf") format('truetype'), url("semantic/themes/default/assets/fonts/icons.svg#icons") format('svg');
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-decoration: inherit;
+  text-transform: none;
+}
+
 // CSS for the main containers
 .main-container {
   max-width: 100%;
@@ -22,7 +40,7 @@
   margin-left: 2rem;
 }
 
-.left-data-container {
+.main-data-container {
   width: 72%;
   float: left;
   display: inline-block;
@@ -34,13 +52,6 @@
   float: right;
   display: inline-block;
 }
-
-$primary-blue: #4279FF;
-$primary-red: #FF8080;
-$primary-gray: #EEEEEE;
-$font-stack: 'Calibre-Regular', sans-serif;
-$font-semibold: 'Calibre-Semibold', sans-serif;
-$font-bold: 'Calibre-Bold', sans-serif;
 
 // Styling for generic base elements
 
@@ -139,6 +150,140 @@ a {
   font-family: $font-semibold;
 }
 
+.clearfix {
+    overflow: auto;
+}
+
+// Error page
+
+.error-dialog {
+  width: auto;
+  margin-bottom: 2rem;
+}
+
+.error-dialog-icon .icon {
+  color: $primary-red;
+  font-size: 50px !important;
+}
+
+.error-dialog-icon {
+  position: absolute;
+  text-align: center;
+  display: inline-block;
+  width: 65px;
+  top: 38.5%;
+  left: 31.5%;
+}
+
+.error-dialog-msg {
+  display: inline-block;
+  width: 400px;
+}
+
+// Modals
+
+.add-course-confirm, .drop-course-confirm {
+  left: 0rem !important;
+  top: 40% !important;
+  height: auto !important;
+  width: 34% !important;
+  margin-right: 33% !important;
+  margin-left: 33% !important;
+}
+
+.modal-header {
+  background-color: $primary-blue;
+  color: white;
+  height: 1.7rem;
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 0.4rem;
+}
+
+.modal-header-text {
+  float: left;
+}
+
+.modal-cancel {
+  float: right;
+  margin-right: 1rem;
+}
+
+.modal-cancel-icon {
+  font-size: 1.5rem;
+  -ms-transform: translate(0px, -0.3rem); /* IE 9 */
+  -webkit-transform: translate(0px, -0.3rem); /* Safari */
+  transform: translate(0px, -0.3rem);
+}
+
+.modal-confirm-text {
+  padding-left: 1rem;
+  margin-bottom: 0px;
+}
+
+.modal-class-item {
+  background-color: $primary-gray;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-body {
+  padding: 0.5rem 1rem;
+  height: 100%;
+}
+
+.modal-course-info {
+  margin-top: 0.2rem;
+}
+
+.modal-course-info-name {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+
+.modal-course-info {
+  width: 100%;
+  display: inline-block;
+}
+
+.modal-footer {
+  text-align: right;
+  margin-bottom: 0.5rem;
+}
+
+.modal-confirm-button {
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  padding: 0.5rem 0.75rem;
+}
+
+// Loading page
+
+.absolute-center-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  text-align: center;
+}
+
+.loading-msg-logo-text {
+  color: $primary-blue;
+  font-size: 1.2rem;
+}
+
+.loading-msg {
+  font-size: 1.5rem;
+  font-family: $font-semibold;
+}
+
 // CSS for the banner and subtext
 
 .banner {
@@ -197,6 +342,10 @@ a {
 .courses-table-waitlisted {
   background-color: $primary-gray;
   border-spacing: 0rem;
+}
+
+.courses-drop-course {
+  color: $primary-red;
 }
 
 .courses-table-waitlisted p {
@@ -438,12 +587,7 @@ a {
   background-color: white;
 }
 
-.sc-clear-row {
-  text-align: right;
-}
-
 .sc-clear-button {
-  display: inline-block;
   background-color: $primary-red;
   margin-left: 0.8rem;
   padding: 0.5rem 0.8rem;
@@ -451,8 +595,12 @@ a {
   letter-spacing: 0.1rem;
 }
 
-.sc-clear {
-  display: inline-block;
+.sc-footer {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.sc-clear-text {
   font-size: 0.9rem;
 }
 
@@ -513,7 +661,7 @@ a {
   padding-top: 0.5rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   background-color: $primary-red;
   color: white;
 }
