@@ -25,12 +25,14 @@ export default function(state = defaultState, action) {
       return state.set('lectureSection', acl)
                   .set('ccn', state.get('lectureSections')[acl].ccn)
                   .set('sections', [])
+                  .set('isLoadingSections', true)
     case ActionType.SET_LECTURE_SECTIONS:
       return state.set('dept', action.lectureSections[0].dept)
                   .set('deptNumber', action.lectureSections[0].deptNumber)
                   .set('lectureSections', action.lectureSections)
                   .set('lectureSection', "0")
                   .set('ccn', action.lectureSections[0].ccn)
+                  .set('isLoadingSections', true)
     case ActionType.SET_DEPT:
       return defaultState.set('dept', action.dept)
     case ActionType.SET_DEPT_NUMBER:

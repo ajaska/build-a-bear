@@ -99,7 +99,7 @@ class CoursePicker extends React.Component {
               className="add-class-discussion"
               value={this.props.selection}
               onChange={this.handleSelector.bind(this)} >
-              <option value="" disabled>Choose a discussion section</option>
+              <option value="" disabled>{this.props.isLoadingSections ? "Loading discussion sections..." : "Choose a discussion section"}</option>
               { sections }
             </select>
           </div>
