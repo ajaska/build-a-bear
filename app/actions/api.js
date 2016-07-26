@@ -59,6 +59,14 @@ export function receiveSectionAvailability({ccn, availability}) {
   }
 }
 
+export const RECEIVE_SECTION_AVAILABILITY_ERROR = Symbol('RECEIVE_SECTION_AVAILABILITY_ERROR');
+export function receiveSectionAvailabilityError({error}) {
+  return {
+    type: RECEIVE_SECTION_AVAILABILITY_ERROR,
+    error: error,
+  }
+}
+
 export const CANCELED_CART_ADD = Symbol('CANCELED_CART_ADD');
 export function canceledCartAdd() {
   return { type: CANCELED_CART_ADD }
@@ -116,6 +124,12 @@ function parseSectionPage(body) {
   return maybeViewAll.then(({body, formData}) => {
     let doc = docFromBody(body);
     let newFormData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+
+    let warnings = doc.querySelector('.SSSMSGWARNINGTEXT');
+    if (warnings) {
+      throw warnings.innerText;
+    }
+
     let sectionTables = doc.querySelectorAll("table[id^='SSR_CLS_TBL_R']");
     let sectionTypes = sectionTables.length;
 
@@ -217,6 +231,14 @@ export function getSectionsAndAvailabilityForCCN({ccn}) {
       }).then(({formData, availability}) => {
         dispatch(receiveSectionAvailability({ccn: ccn, availability: availability}))
         return { formData: formData }
+      }).catch((reason) => {
+        if (reason.includes("The class number entered is not valid")) {
+          dispatch(receiveSectionAvailabilityError({error: reason}))
+        } else if (false) {
+        } else {
+          throw reason;
+        }
+        return reloadMainPage()
       }).then(({formData}) => {
         return dispatch(cancelShoppingCartAdd({formData}))
       })
@@ -287,6 +309,20 @@ export function addCourse({ccn, selection}) {
   }
 }
 
+function reloadMainPage() {
+  return fetch(CART_URL, { credentials: 'same-origin' })
+    .then(response => response.text())
+    .then(function(body) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(body, "text/html");
+      let enrolledTableRows = doc.querySelectorAll("tr [id^='trSTDNT_ENRL_SSVW']");
+      let shoppingCartTableRows = doc.querySelectorAll("tr [id^='trSSR_REGFORM_VW']");
+      let enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
+      let shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
+      let formData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+      return {formData: formData, enrolledCourses: enrolledCourses, shoppingCartCourses}
+    })
+}
 
 export function addFromShoppingCart({formData, positions, positionToEnroll}) {
   return (dispatch) => {

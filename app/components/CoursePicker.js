@@ -75,7 +75,8 @@ class CoursePicker extends React.Component {
     ));
     return (
       <div className="add-class-panel">
-        <div className="add-class-header">Add Class</div><div className="add-class-error-msg">This conflicts with your schedule.</div>
+        <div className="add-class-header">Add Class</div>
+        { this.props.error && <div className="add-class-error-msg">{this.props.error}</div> }
         <div className="add-class-form">
           <div className="add-class-form-row">
             <input

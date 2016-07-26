@@ -6,6 +6,7 @@ import { deptNumbersForDept } from '../helpers/everything'
 
 let defaultState = Immutable.fromJS({
   ccn: "",
+  error: "",
   lectureSections: [],
   lectureSection: "",
   lectureAvailability: "",
@@ -72,6 +73,8 @@ export default function(state = defaultState, action) {
                     .set('isLoadingLectureAvailability', false)
       }
       return state;
+    case APIActionType.RECEIVE_SECTION_AVAILABILITY_ERROR:
+      return defaultState.set('error', action.error)
     default:
       return state
   }
