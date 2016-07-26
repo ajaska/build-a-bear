@@ -30,7 +30,7 @@ class AddCourseModal extends React.Component {
       </div>
     ));
     let lectureWaitlist;
-    if (this.props.lectureAvailability) {
+    if (this.props.lectureAvailability.includes('Wait List')) {
       lectureWaitlist = <span>You will be <span className="color-blue">on the waitlist</span>.</span>;
     }
     return (
