@@ -8,7 +8,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="left-data-container">
+        <div className="main-data-container">
           <EnrolledCourses />
         </div>
         <div className="side-panel-container">
