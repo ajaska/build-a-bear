@@ -13,12 +13,12 @@ class CoursePicker extends React.Component {
     this.props.changedDeptNumber({deptNumber: event.target.value})
   }
 
-  handleSelector(event) {
-    this.props.setSelection({selection: event.target.value})
+  handleSelector(which, event) {
+    this.props.setSelection({which: which, selection: event.target.value})
   }
 
   handleLectureSelector(event) {
-    this.props.changedLectureSelection({selection: event.target.value, sections: this.props.lectureSections})
+    this.props.changedLectureSelection({selection: event.target.value, lectureSections: this.props.lectureSections})
   }
 
   handleClickedAdd(event) {
@@ -42,13 +42,6 @@ class CoursePicker extends React.Component {
        )
     })
     let lectureSelection = (this.props.lectureSections.length === 0 ? "" : this.props.lectureSection);
-    let sections = this.props.sections.map((section, i) => {
-      return (
-        <option value={i} key={i}>
-          {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
-        </option>
-      )
-    });
     let depts = this.props.deptOptions.map((dept, i) => <option value={dept} key={i}>{ dept }</option>);
     let deptNumbers = alphanumSort(this.props.deptNumbers, false).map((dn, i) => <option value={dn} key={i}>{ dn }</option>);
     let lectureAvailability = this.props.lectureAvailability;
@@ -59,8 +52,27 @@ class CoursePicker extends React.Component {
     let enabled = {
       lectureSection: !globalDisable && this.props.lectureSections.length > 1,
       deptNumber: !globalDisable && this.props.deptNumbers.length > 0,
-      section: !globalDisable && this.props.sections.length > 0,
+      //section: !globalDisable && this.props.sectionGroups.length > 0,
     }
+    const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => {
+      return (
+        <option value={i} key={i}>
+          {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
+        </option>
+      )
+    }));
+    let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
+      <div className="add-class-form-row" key={i}>
+        <select
+          className="add-class-discussion"
+          disabled={ globalDisable || sectionGroup.length <= 1 }
+          value={this.props.selections[i]}
+          onChange={this.handleSelector.bind(this, i)} >
+          <option value="" disabled>{this.props.isLoadingSections ? "Loading sections..." : "Choose a section"}</option>
+          { sectionsForSectionGroup(sectionGroup) }
+        </select>
+      </div>
+    ));
     return (
       <div className="add-class-panel">
         <div className="add-class-header">Add Class</div><div className="add-class-error-msg">This conflicts with your schedule.</div>
@@ -99,22 +111,8 @@ class CoursePicker extends React.Component {
             </select>
             <div className="add-class-waitlist-status">Status: <span className="color-blue">{lectureAvailability}</span></div>
           </div>
-          <div className="add-class-form-row">
-            <select
-              className="add-class-discussion"
-              disabled={ !enabled.section }
-              value={this.props.selection}
-              onChange={this.handleSelector.bind(this)} >
-              <option value="" disabled>{this.props.isLoadingSections ? "Loading discussion sections..." : "Choose a discussion section"}</option>
-              { sections }
-            </select>
-          </div>
-          <div className="add-class-form-row">
-            <select className="add-class-lab" value="">
-                <option value="" disabled>Choose a lab section</option>
-                <option value="memes">Memes</option>
-            </select>
-          </div>
+
+          { sectionSelectors }
           <div className="add-class-form-row add-class-waitlist-row">
             <label className="add-class-waitlist">Waitlist class if full<input className="add-class-waitlist-button" type="checkbox" name="waitlist" id="waitlist"/></label>
             <button className="add-class-submit-button" onClick={this.handleClickedAdd.bind(this)} disabled={globalDisable} id="add-class">Add</button>
@@ -127,14 +125,14 @@ class CoursePicker extends React.Component {
 
 CoursePicker.propTypes = {
   ccn: React.PropTypes.string.isRequired,
-  sections: React.PropTypes.array.isRequired,
+  sectionGroups: React.PropTypes.array.isRequired,
   isLoadingSections: React.PropTypes.bool.isRequired,
   dept: React.PropTypes.string.isRequired,
   deptNumber: React.PropTypes.string.isRequired,
   deptOptions: React.PropTypes.array.isRequired,
   deptNumbers: React.PropTypes.array.isRequired,
   courseName: React.PropTypes.string.isRequired,
-  selection: React.PropTypes.string.isRequired,
+  selections: React.PropTypes.array.isRequired,
 }
 
 // http://web.archive.org/web/20130826203933/http://my.opera.com/GreyWyvern/blog/show.dml/1671288

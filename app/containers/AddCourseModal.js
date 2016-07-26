@@ -8,17 +8,20 @@ const mapStateToProps = (state, ownProps) => {
 
   let coursePicker = state.coursePicker.toJS();
   let lecture = coursePicker.lectureSections[coursePicker.lectureSection];
-  let discussion = coursePicker.sections[coursePicker.selection];
+  let sections = [];
+  for (let i=0; i<coursePicker.sectionGroups.length; ++i) {
+    sections.push(coursePicker.sectionGroups[i][coursePicker.selections[i]]);
+  }
 
   let ccnSelection = {
     ccn: coursePicker.ccn,
-    selection: coursePicker.selection,
+    selections: coursePicker.selections,
   };
 
   return {
     beforeUnits: units,
     lecture: lecture,
-    discussion: discussion,
+    sections: sections,
     lectureAvailability: coursePicker.lectureAvailability,
     ccnSelection: ccnSelection,
   }

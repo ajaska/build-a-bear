@@ -10,11 +10,11 @@ let defaultState = Immutable.fromJS({
   lectureSection: "",
   lectureAvailability: "",
   isLoadingLectureAvailability: false,
-  sections: [],
+  sectionGroups: [],
+  selections: [],
   isLoadingSections: false,
   dept: "",
   deptNumber: "",
-  selection: "0",
   isAddingCourse: false,
 })
 
@@ -26,7 +26,7 @@ export default function(state = defaultState, action) {
       let acl = action.lectureSection;
       return state.set('lectureSection', acl)
                   .set('ccn', state.get('lectureSections')[acl].ccn)
-                  .set('sections', [])
+                  .set('sectionGroups', defaultState.get('sectionGroups'))
                   .set('isLoadingSections', true)
     case ActionType.SET_LECTURE_SECTIONS:
       return state.set('dept', action.lectureSections[0].dept)
@@ -46,10 +46,10 @@ export default function(state = defaultState, action) {
       return state.set('dept', defaultState.get('dept'))
                   .set('deptNumber', defaultState.get('deptNumber'))
     case ActionType.CLEAR_SECTIONS:
-      return state.set('sections', defaultState.get('sections'))
-                  .set('selection', defaultState.get('selection'))
+      return state.set('sectionGroups', defaultState.get('sectionGroups'))
+                  .set('selections', defaultState.get('selections'))
     case ActionType.SET_SELECTION:
-      return state.set('selection', action.selection)
+      return state.setIn(['selections', action.which], action.selection)
     case APIActionType.REQUEST_COURSE_ADD:
       return state.set('isAddingCourse', true)
     case APIActionType.RECEIVE_COURSE_ADD:
@@ -61,7 +61,8 @@ export default function(state = defaultState, action) {
                   .set('isLoadingLectureAvailability', true)
     case APIActionType.RECEIVE_SECTIONS:
       if (state.get('ccn') === action.ccn) {
-        return state.set('sections', Immutable.fromJS(action.sections))
+        return state.set('sectionGroups', Immutable.fromJS(action.sectionGroups))
+                    .set('selections', Immutable.fromJS(Array(action.sectionGroups.length).fill('0')))
                     .set('isLoadingSections', false)
       }
       return state

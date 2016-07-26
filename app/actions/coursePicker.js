@@ -54,17 +54,17 @@ export function changedDeptNumber({deptNumber}) {
   }
 }
 
-export function changedLectureSelection({selection, sections}) {
-  return (dispatch, getState) => {
+export function changedLectureSelection({selection, lectureSections}) {
+  return (dispatch) => {
     dispatch(setLectureSection(selection));
 
-    return dispatch(getSectionsAndAvailabilityForCCN({ccn: sections[selection].ccn}));
+    return dispatch(getSectionsAndAvailabilityForCCN({ccn: lectureSections[selection].ccn}));
   }
 }
 
-export function clickedAdd({ccn, selection}) {
+export function clickedAdd({ccn, selections}) {
   return (dispatch) => {
-    dispatch(addCourse({ccn: ccn, selection: selection}))
+    dispatch(addCourse({ccn: ccn, selections: selections}))
       .then(() => {
         dispatch(setCCN({ccn: ""}));
         dispatch(setDept({dept: ""}));
@@ -149,9 +149,10 @@ function clearSections() {
   }
 }
 
-export function setSelection({selection}) {
+export function setSelection({selection, which}) {
   return {
     type: SET_SELECTION,
-    selection: selection
+    selection: selection,
+    which: which,
   }
 }

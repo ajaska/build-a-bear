@@ -3,7 +3,7 @@ import React from 'react';
 class AddCourseModal extends React.Component {
   handleAddClicked(event) {
     event.preventDefault();
-    this.props.clickedAdd(this.props.ccnSelection);
+    this.props.clickedAdd(this.props.ccnSelections);
   }
   
   render() {

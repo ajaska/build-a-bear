@@ -42,11 +42,11 @@ export function requestSections({ccn}) {
 }
 
 export const RECEIVE_SECTIONS = Symbol('RECEIVE_SECTIONS');
-export function receiveSections({ccn, formData, sections}) {
+export function receiveSections({ccn, formData, sectionGroups}) {
   return {
     type: RECEIVE_SECTIONS,
     ccn: ccn,
-    sections: sections
+    sectionGroups: sectionGroups
   }
 }
 
@@ -66,17 +66,21 @@ export function canceledCartAdd() {
 
 const CART_URL = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
 
-function sectionFromLecture({ccn, state}) {
+function sectionsFromLecture({ccn, state}) {
   let sections = state.shoppingCart.toJS().courses;
   let matching_sections = sections.filter(section => section.id === ccn);
   if (!(matching_sections.length === 1)) {
-    return false
+    return { alreadyInCart: false, availability: false }
   }
+  let availability = matching_sections[0].availability
   let course_desc = matching_sections[0].course.split('-')[0];
-  return sections.filter(section => section.course.split('-')[0] === course_desc && (!section.selectable))
+  let alreadyInCart = sections.filter(section => section.course.split('-')[0] === course_desc && (!section.selectable))
+                              .map(section => [section, ])
+  return { availability: availability, alreadyInCart: alreadyInCart }
 }
 
-function mainPageToSections({formData, ccn}) {
+// WARNING: If this doesn't return any sections, you're ON THE CONFIRMATION PAGE
+function mainPageToSectionsOrConfirmation({formData, ccn}) {
   formData.set('ICAJAX', '0');
   formData.set('ICAction', 'DERIVED_REGFRM1_SSR_PB_ADDTOLIST2$9$');
   formData.set('DERIVED_REGFRM1_CLASS_NBR', ccn.toString());
@@ -112,8 +116,20 @@ function parseSectionPage(body) {
   return maybeViewAll.then(({body, formData}) => {
     let doc = docFromBody(body);
     let newFormData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
-    let rows = doc.querySelectorAll("tr [id^='trSSR_CLS_TBL']");
-    return { formData: newFormData, sections: parseDiscussionTable(rows) };
+    let sectionTables = doc.querySelectorAll("table[id^='SSR_CLS_TBL_R']");
+    let sectionTypes = sectionTables.length;
+
+    if (sectionTypes === 0) {
+      // Fuck, we're on the confirmation page HACK TIME
+      return { formData: newFormData, sectionGroups: [], maybeBody: body }
+    }
+
+    let sectionGroups = [];
+    for (let i=0; i < sectionTypes; ++i) {
+      let rows = doc.querySelectorAll(`tr [id^='trSSR_CLS_TBL_R${i+1}']`);
+      sectionGroups.push(parseDiscussionTable(rows));
+    }
+    return { formData: newFormData, sectionGroups: sectionGroups, maybeBody: '' };
   })
 }
 
@@ -123,10 +139,17 @@ function sectionPageToViewAll({formData}) {
   return postFormData(CART_URL, formData)
 }
 
-function sectionPageToConfirmation({formData, sectionChoice}) {
+/* MAGIC: if there are no sectionChoices WE ARE ON THE CONFIRMATION PAGE ALREADY */
+function sectionPageToConfirmation({formData, sectionChoices, maybeBody}) {
+  if (sectionChoices.length === 0 && maybeBody) {
+    return parseConfirmationPage(maybeBody)
+  }
   formData.set('ICAJAX', '0');
   formData.set('ICAction', 'DERIVED_CLS_DTL_NEXT_PB');
-  formData.set('SSR_CLS_TBL_R1$sels$1$$0', sectionChoice.toString());
+  for (let i=0; i<sectionChoices.length; i++) {
+    let choice = sectionChoices[i].toString();
+    formData.set(`SSR_CLS_TBL_R${i+1}$sels$${choice}$$0`, choice);
+  }
   return postFormData(CART_URL, formData).then(body => parseConfirmationPage(body))
 }
 
@@ -176,20 +199,21 @@ function confirmationPageToMainPage(formData, permissionNumber = '',  graded = t
 export function getSectionsAndAvailabilityForCCN({ccn}) {
   return (dispatch, getState) => {
     dispatch(requestSections({ccn: ccn}))
-    let alreadyInCart = sectionFromLecture({ccn: ccn, state: getState()});
+    let { alreadyInCart, availability } = sectionsFromLecture({ccn: ccn, state: getState()});
     if (alreadyInCart.length > 0) {
-      return dispatch(receiveSections({
-        ccn: ccn,
-        sections: alreadyInCart
-      }))
+      return Promise.all([
+        dispatch(receiveSections({ccn: ccn, sectionGroups: alreadyInCart})),
+        dispatch(receiveSectionAvailability({ccn: ccn, availability: availability}))
+      ])
     }
     let formData = getState().api.formData;
-    return mainPageToSections({formData: formData, ccn: ccn})
-      .then(({formData, sections}) => {
-        dispatch(receiveSections({ccn: ccn, sections: sections}))
-        return { formData: formData }
-      }).then(({formData}) => {
-        return sectionPageToConfirmation({formData: formData, sectionChoice: 0})
+    return mainPageToSectionsOrConfirmation({formData: formData, ccn: ccn})
+      .then(({formData, sectionGroups, maybeBody}) => {
+        dispatch(receiveSections({ccn: ccn, sectionGroups: sectionGroups}))
+        return { formData: formData, sectionGroups: sectionGroups, maybeBody }
+      }).then(({formData, sectionGroups, maybeBody}) => {
+        let sectionChoices = Array(sectionGroups.length).fill("0");
+        return sectionPageToConfirmation({formData: formData, sectionChoices: sectionChoices, maybeBody: maybeBody})
       }).then(({formData, availability}) => {
         dispatch(receiveSectionAvailability({ccn: ccn, availability: availability}))
         return { formData: formData }
@@ -229,9 +253,9 @@ export function cancelShoppingCartAdd({formData}) {
   }
 }
 
-function addToShoppingCart({ccn, selection, formData}) {
-  return mainPageToSections({ccn: ccn, formData: formData})
-    .then(({formData}) => sectionPageToConfirmation({formData: formData, sectionChoice: selection}))
+function addToShoppingCart({ccn, selections, formData}) {
+  return mainPageToSectionsOrConfirmation({ccn: ccn, formData: formData})
+    .then(({formData}) => sectionPageToConfirmation({formData: formData, sectionChoices: selections}))
     .then(({formData}) => confirmationPageToMainPage(formData))
 }
 
@@ -245,14 +269,7 @@ export function addCourse({ccn, selection}) {
     if (courses.filter(course => course.id === ccn).length === 1) {
       addedToShoppingCart = Promise.resolve({formData: formData, courses: courses})
     } else {
-      // let chooseSection;
-      /* if(!selection) {
-        chooseSection = Promise.resolve({formData: formData})
-      } else {
-        chooseSection = selectSection(selection, formData)
-      } */
       addedToShoppingCart = addToShoppingCart({ccn: ccn, selection: selection, formData: formData})
-      // addedToShoppingCart = chooseSection.then(({formData}) => confirmChoice(formData))
     }
     return addedToShoppingCart.then(({formData, courses}) => {
       let selectableCourses = courses.filter(course => course.selectable);
