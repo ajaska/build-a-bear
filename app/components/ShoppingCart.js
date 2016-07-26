@@ -6,24 +6,28 @@ class ShoppingCart extends React.Component {
       return (<div>No courses</div>)
     }
 
-    let course_header = Object.keys(this.props.courses[0]).map(
-      (key, i) => <th key={i}>{ key }</th>
-    );
-    let course_rows = this.props.courses.map((row, i) => {
-      return <tr key={i}>{Object.keys(row).map((key, i) => <td key={i}>{row[key]}</td>)}</tr>
+    let course_rows = this.props.courses.filter(course=>course.selectable).map((course, i) => {
+      return (
+        <div className="sc-class-item" key={i}>
+          <span className="sc-course-info-name semibold">{course.course} <span className="color-blue">({course.units} Units)</span></span>
+          <div className="sc-course-info">
+            <div className="sc-course-info-left">
+              <span className="semibold">{course.room}</span><span> | {course.time}</span><br />
+              <span>Instructor: </span><span className="semibold">{course.instructor}</span>
+            </div>
+            <div className="sc-course-info-right">
+              <button className="sc-course-add">Add</button>
+            </div>
+          </div>
+        </div>
+      )
     });
     return (
-      <div>
-        <div>
-          This is the shopping cart.
-        </div>
-        <div>
-          <table>
-            <thead>
-              <tr>{course_header}</tr>
-            </thead>
-            <tbody>{course_rows}</tbody>
-          </table>
+      <div className="sc-panel">
+        <p className="sc-header-text">This app doesn't use shopping cart, but we noticed you already have these classes in it:</p>
+        { course_rows }
+        <div className="sc-clear-row">
+          <p className="sc-clear">You can add these classes <br />or clear your cart.<button className="sc-clear-button">Clear Cart</button></p>
         </div>
       </div>
     )

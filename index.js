@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './app/components/App'
 
+import { page_source } from './html'
+
 import { parseEnrolledCoursesTable, parseShoppingCartTable } from './app/lib/tableParsers';
 import { setShoppingCart } from './app/actions/shoppingCart';
 import { setEnrolledCourses } from './app/actions/enrolled';
@@ -26,7 +28,7 @@ function initialize() {
   enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
   shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
 
-  document.querySelector('html').innerHTML = '<!doctype html><html><head><title>Schedule Builder</title></head><body><div id="root"></div></body></html>';
+  document.querySelector('html').innerHTML = page_source;
 }
 
 initialize();

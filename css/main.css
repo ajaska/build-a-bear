@@ -158,22 +158,23 @@
 
 @font-face {
   font-family: 'Calibre-Regular';
-  src: url("../fonts/Calibre-Regular.woff"); }
+  src: url("//js.six.ph/fonts/Calibre-Regular.woff"); }
 @font-face {
   font-family: 'Calibre-Semibold';
-  src: url("../fonts/Calibre-Semibold.woff"); }
+  src: url("//js.six.ph/fonts/Calibre-Semibold.woff"); }
 @font-face {
   font-family: 'Calibre-Bold';
-  src: url("../fonts/Calibre-Bold.woff"); }
+  src: url("//js.six.ph/fonts/Calibre-Bold.woff"); }
 @font-face {
   font-family: 'Icons';
-  src: url("semantic/themes/default/assets/fonts/icons.eot");
-  src: url("semantic/themes/default/assets/fonts/icons.eot?#iefix") format("embedded-opentype"), url("semantic/themes/default/assets/fonts/icons.woff") format("woff"), url("semantic/themes/default/assets/fonts/icons.ttf") format("truetype"), url("semantic/themes/default/assets/fonts/icons.svg#icons") format("svg");
+  src: url("//js.six.ph/fonts/icons.eot");
+  src: url("//js.six.ph/fonts/icons.eot?#iefix") format("embedded-opentype"), url("../fonts/icons.woff") format("woff"), url("../fonts/icons.ttf") format("truetype"), url("../fonts/icons.svg#icons") format("svg");
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-decoration: inherit;
   text-transform: none; }
+
 .main-container {
   max-width: 100%;
   margin-right: 2rem;
