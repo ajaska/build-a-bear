@@ -1,6 +1,10 @@
 import React from 'react';
 
 class AddCourseModal extends React.Component {
+  handleClose(event) {
+    $('.add-course-confirm').modal('hide');
+  }
+
   handleAddClicked(event) {
     event.preventDefault();
     this.props.clickedAdd(this.props.ccnSelections);
@@ -31,8 +35,9 @@ class AddCourseModal extends React.Component {
     }
     return (
       <div className="ui modal add-course-confirm">
-        <div className="modal-header clearfix">
-            <span className="modal-header-text">Add Class Confirmation</span><span className="modal-cancel"><i id="add-close" className="modal-cancel-icon remove icon"></i></span>
+        <div className="modal-header clearfix" onClick={this.handleClose.bind(this)}>
+            <span className="modal-header-text">Add Class Confirmation</span>
+            <span className="modal-cancel"><i id="add-close" className="modal-cancel-icon remove icon"></i></span>
         </div>
         <p className="modal-confirm-text">Are you sure you want to add:</p>
         <div className="modal-body">

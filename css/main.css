@@ -309,6 +309,7 @@ a {
   float: left; }
 
 .modal-cancel {
+  cursor: pointer;
   float: right;
   margin-right: 1rem; }
 
