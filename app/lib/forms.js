@@ -19,6 +19,8 @@ export function postFormData(url, formData) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Content-Length': urlEncodedData.length,
+      'cache-control': 'no-cache',
+      'pragma': 'no-cache',
     },
     body: urlEncodedData,
     credentials: 'same-origin'
