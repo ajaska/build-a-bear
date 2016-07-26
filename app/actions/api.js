@@ -232,6 +232,9 @@ export function getSectionsAndAvailabilityForCCN({ccn}) {
         dispatch(receiveSectionAvailability({ccn: ccn, availability: availability}))
         return { formData: formData }
       }).catch((reason) => {
+        if (!(typeof reason === 'string' || reason instanceof String)) {
+          throw reason;
+        }
         if (reason.includes("The class number entered is not valid")) {
           dispatch(receiveSectionAvailabilityError({error: reason}))
         } else if (false) {
