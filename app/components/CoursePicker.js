@@ -90,7 +90,7 @@ class CoursePicker extends React.Component {
           </div>
           <div className="add-class-form-row">
             <select className="add-class-class-name" value="">
-                <option value="" disabled>{this.props.courseName}</option>
+                <option value="" disabled>{this.props.courseName || "Course Name"}</option>
             </select>
             <div className="add-class-waitlist-status">Status: <span className="color-blue">Waitlist Open</span></div>
           </div>

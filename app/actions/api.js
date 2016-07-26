@@ -50,6 +50,11 @@ export function receiveSections({ccn, formData, sections}) {
   }
 }
 
+export const CANCELED_CART_ADD = Symbol('CANCELED_CART_ADD');
+export function canceledCartAdd() {
+  return { type: CANCELED_CART_ADD }
+}
+
 function sectionFromLecture({ccn, state}) {
   let sections = state.shoppingCart.toJS().courses;
   let matching_sections = sections.filter(section => section.id === ccn);
@@ -60,8 +65,16 @@ function sectionFromLecture({ccn, state}) {
   return sections.filter(section => section.course.split('-')[0] === course_desc && (!section.selectable))
 }
 
+function cancelIfAlreadyAdding({dispatch, state}) {
+  if (state.api.isAddingToShoppingCart) {
+    return Promise.resolve(dispatch(cancelShoppingCartAdd()))
+  }
+  return Promise.resolve()
+}
+
 export function getSectionsForCCN({ccn}) {
   return (dispatch, getState) => {
+    let cancel_first = cancelIfAlreadyAdding({dispatch: dispatch, state: getState()})
     dispatch(requestSections({ccn: ccn}))
     let alreadyInCart = sectionFromLecture({ccn: ccn, state: getState()});
     if (alreadyInCart.length > 0) {
@@ -78,7 +91,8 @@ export function getSectionsForCCN({ccn}) {
     formData.set('DERIVED_REGFRM1_CLASS_NBR', ccn.toString());
     formData.set('DERIVED_REGFRM1_SSR_CLS_SRCH_TYPE$249$', '06');
 
-    return postFormData(url, formData).then(function(body) {
+    return cancel_first.then(() => {
+      postFormData(url, formData).then(function(body) {
       let parser = new DOMParser();
       let doc = parser.parseFromString(body, "text/html");
       let newForm = doc.getElementById('SSR_SSENRL_CART');
@@ -111,6 +125,7 @@ export function getSectionsForCCN({ccn}) {
         sections: sections
       }))
     });
+    })
   };
 }
 
@@ -141,7 +156,7 @@ export function cancelShoppingCartAdd() {
       let newForm = doc.getElementById('SSR_SSENRL_CART');
       let newFormData = new FormData(newForm);
       return dispatch(setFormData({formData: newFormData}))
-    })
+    }).then(() => dispatch(canceledCartAdd()))
 
 
   }

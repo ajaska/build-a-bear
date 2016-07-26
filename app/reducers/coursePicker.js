@@ -11,7 +11,6 @@ let defaultState = Immutable.fromJS({
   sections: [],
   isInSearch: false,
   isLoadingSections: false,
-  isAddingToShoppingCart: false,
   dept: "",
   deptNumber: "",
   selection: "0",
@@ -21,7 +20,6 @@ export default function(state = defaultState, action) {
   switch(action.type) {
     case ActionType.SET_CCN:
       return defaultState.set('ccn', action.ccn)
-                         .set('isAddingToShoppingCart', state.get('isAddingToShoppingCart'))
     case ActionType.SET_LECTURE_SECTION:
       let acl = action.lectureSection;
       return state.set('lectureSection', acl)
@@ -35,11 +33,9 @@ export default function(state = defaultState, action) {
                   .set('ccn', action.lectureSections[0].ccn)
     case ActionType.SET_DEPT:
       return defaultState.set('dept', action.dept)
-                         .set('isAddingToShoppingCart', state.get('isAddingToShoppingCart'))
     case ActionType.SET_DEPT_NUMBER:
       return defaultState.set('deptNumber', action.deptNumber)
                          .set('dept', state.get('dept'))
-                         .set('isAddingToShoppingCart', state.get('isAddingToShoppingCart'))
     case ActionType.CLEAR_CCN:
       return state.set('ccn', defaultState.get('ccn'))
     case ActionType.CLEAR_DEPT:
@@ -56,7 +52,6 @@ export default function(state = defaultState, action) {
       return state.set('dept', defaultState.get('dept'))
                   .set('deptNumber', defaultState.get('deptNumber'))
                   .set('ccn', defaultState.get('ccn'))
-                  .set('isAddingToShoppingCart', false)
     case APIActionType.REQUEST_SECTIONS:
       return state.set('isLoadingSections', true)
     case APIActionType.RECEIVE_SECTIONS:

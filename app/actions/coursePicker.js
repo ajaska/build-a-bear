@@ -23,10 +23,6 @@ export function changedCCN({ccn}) {
   return (dispatch, getState) => {
     dispatch(setCCN({ccn: ccn}));
 
-    if (getState().coursePicker.get('isAddingToShoppingCart')) {
-      dispatch(cancelShoppingCartAdd());
-    }
-
     if (isValidCCN(ccn)) {
       dispatch(setLectureSections([lectureSectionFromCCN(ccn)]));
       dispatch(getSectionsForCCN({ccn: ccn}));
@@ -37,10 +33,6 @@ export function changedCCN({ccn}) {
 export function changedDept({dept}) {
   return (dispatch, getState) => {
     dispatch(setDept({dept: dept}));
-
-    if (getState().coursePicker.get('isAddingToShoppingCart')) {
-      dispatch(cancelShoppingCartAdd());
-    }
   }
 }
 
@@ -49,10 +41,6 @@ export function changedDeptNumber({deptNumber}) {
     dispatch(setDeptNumber({deptNumber: deptNumber}));
     // THIS IS A BAD IDEA
     let dept = getState().coursePicker.get('dept').toUpperCase();
-
-    if (getState().coursePicker.get('isAddingToShoppingCart')) {
-      dispatch(cancelShoppingCartAdd());
-    }
 
     if (!isValidDept(dept)) {
       console.error("wtf -- invalid dept?: "+dept);
