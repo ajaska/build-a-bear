@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
 
 class ShoppingCart extends React.Component {
+  onAddClick(ccn, event) {
+    this.props.setCCN({ccn: ccn.toString()});
+  }
+
   render() {
     if (!this.props.courses || this.props.courses.size === 0) {
       return (<div>No courses</div>)
@@ -16,7 +20,7 @@ class ShoppingCart extends React.Component {
               <span>Instructor: </span><span className="semibold">{course.instructor}</span>
             </div>
             <div className="sc-course-info-right">
-              <button className="sc-course-add">Add</button>
+              <button className="sc-course-add" onClick={this.onAddClick.bind(this, course.id)}>Add</button>
             </div>
           </div>
         </div>
