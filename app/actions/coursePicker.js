@@ -40,7 +40,7 @@ export function changedDeptNumber({deptNumber}) {
   return (dispatch, getState) => {
     dispatch(setDeptNumber({deptNumber: deptNumber}));
     // THIS IS A BAD IDEA
-    let dept = getState().coursePicker.get('dept').toUpperCase();
+    let dept = getState().coursePicker.get('dept');
 
     if (!isValidDept(dept)) {
       console.error("wtf -- invalid dept?: "+dept);
