@@ -8,6 +8,7 @@ class AddCourseModal extends React.Component {
   handleAddClicked(event) {
     event.preventDefault();
     this.props.clickedAdd(this.props.ccnSelection);
+    $('.add-course-confirm').modal('hide');
   }
   
   render() {
