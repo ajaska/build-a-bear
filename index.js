@@ -34,7 +34,8 @@ function initialize() {
   if (enrolledTableRows.length > 0) {
     enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
   }
-  if (shoppingCartTableRows.length > 0) {
+  if (shoppingCartTableRows.length > 0 &&
+      !shoppingCartTableRows[0].innerText.includes('shopping cart is empty')) {
     shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
   }
 
