@@ -7,7 +7,7 @@ class AddCourseModal extends React.Component {
 
   handleAddClicked(event) {
     event.preventDefault();
-    this.props.clickedAdd(this.props.ccnSelections);
+    this.props.clickedAdd(this.props.ccnSelection);
   }
   
   render() {

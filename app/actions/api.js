@@ -5,11 +5,11 @@ import { postFormData } from '../lib/forms';
 
 
 export const REQUEST_COURSE_ADD = Symbol('REQUEST_COURSE_ADD');
-export function requestCourseAdd({ccn, selection}) {
+export function requestCourseAdd({ccn, selections}) {
   return {
     type: REQUEST_COURSE_ADD,
     ccn: ccn,
-    selection: selection
+    selections: selections
   }
 }
 
@@ -284,9 +284,9 @@ function addToShoppingCart({ccn, selections, formData}) {
     .then(({formData}) => confirmationPageToMainPage(formData))
 }
 
-export function addCourse({ccn, selection}) {
+export function addCourse({ccn, selections}) {
   return (dispatch, getState) => {
-    dispatch(requestCourseAdd({ccn: ccn, selection: selection}));
+    dispatch(requestCourseAdd({ccn: ccn, selections: selections}));
 
     let addedToShoppingCart;
     let formData = getState().api.formData;
@@ -294,7 +294,7 @@ export function addCourse({ccn, selection}) {
     if (courses.filter(course => course.id === ccn).length === 1) {
       addedToShoppingCart = Promise.resolve({formData: formData, courses: courses})
     } else {
-      addedToShoppingCart = addToShoppingCart({ccn: ccn, selection: selection, formData: formData})
+      addedToShoppingCart = addToShoppingCart({ccn: ccn, selections: selections, formData: formData})
     }
     return addedToShoppingCart.then(({formData, courses}) => {
       let selectableCourses = courses.filter(course => course.selectable);
