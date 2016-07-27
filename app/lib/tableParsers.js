@@ -63,6 +63,8 @@ function parseColumn(column, columnType) {
         type = 'Discussion';
       } else if (desc.includes("Lab")) {
         type = 'Lab';
+      } else if (desc.includes("Recitation")) {
+        type = 'Recitation';
       }
       return { desc: desc, type: type }
     case schemaTypes.time:

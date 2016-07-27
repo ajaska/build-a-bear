@@ -1,9 +1,13 @@
 import React, { PropTypes } from 'react';
 
 class ShoppingCart extends React.Component {
+  onAddClick(ccn, event) {
+    this.props.setCCN({ccn: ccn.toString()});
+  }
+
   render() {
-    if (!this.props.courses || this.props.courses.size === 0) {
-      return (<div>No courses</div>)
+    if (!this.props.courses || this.props.courses.length === 0) {
+      return (<div>debug info: no courses in shopping cart</div>)
     }
 
     let course_rows = this.props.courses.filter(course=>course.selectable).map((course, i) => {
@@ -16,7 +20,7 @@ class ShoppingCart extends React.Component {
               <span>Instructor: </span><span className="semibold">{course.instructor}</span>
             </div>
             <div className="sc-course-info-right">
-              <button className="sc-course-add">Add</button>
+              <button className="sc-course-add" onClick={this.onAddClick.bind(this, course.id)}>Add</button>
             </div>
           </div>
         </div>
@@ -26,8 +30,8 @@ class ShoppingCart extends React.Component {
       <div className="sc-panel">
         <p className="sc-header-text">This app doesn't use shopping cart, but we noticed you already have these classes in it:</p>
         { course_rows }
-        <div className="sc-clear-row">
-          <p className="sc-clear">You can add these classes <br />or clear your cart.<button className="sc-clear-button">Clear Cart</button></p>
+        <div className="sc-foot clearfix">
+          <span className="sc-clear-text">Add these classes or clear your cart.</span><button className="sc-clear-button">Clear Cart</button>
         </div>
       </div>
     )

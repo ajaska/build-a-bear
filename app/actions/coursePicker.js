@@ -1,4 +1,4 @@
-import { getSectionsForCCN, cancelShoppingCartAdd, addCourse } from './api'
+import { getSectionsAndAvailabilityForCCN, cancelShoppingCartAdd, addCourse } from './api'
 import { isValidCCN, isValidDept, isValidDeptNumber, lectureSectionFromCCN, lectureSectionsFromDept } from '../helpers/everything'
 
 export const SET_CCN = Symbol('SET_CCN');
@@ -25,7 +25,7 @@ export function changedCCN({ccn}) {
 
     if (isValidCCN(ccn)) {
       dispatch(setLectureSections([lectureSectionFromCCN(ccn)]));
-      dispatch(getSectionsForCCN({ccn: ccn}));
+      dispatch(getSectionsAndAvailabilityForCCN({ccn: ccn}));
     }
   }
 }
@@ -40,7 +40,7 @@ export function changedDeptNumber({deptNumber}) {
   return (dispatch, getState) => {
     dispatch(setDeptNumber({deptNumber: deptNumber}));
     // THIS IS A BAD IDEA
-    let dept = getState().coursePicker.get('dept').toUpperCase();
+    let dept = getState().coursePicker.get('dept');
 
     if (!isValidDept(dept)) {
       console.error("wtf -- invalid dept?: "+dept);
@@ -49,24 +49,22 @@ export function changedDeptNumber({deptNumber}) {
     if (isValidDeptNumber(dept, deptNumber)) {
       let lectureSections = lectureSectionsFromDept(dept, deptNumber);
       dispatch(setLectureSections(lectureSections));
-      dispatch(getSectionsForCCN({ccn: lectureSections[0].ccn}));
+      dispatch(getSectionsAndAvailabilityForCCN({ccn: lectureSections[0].ccn}));
     }
   }
 }
 
-export function changedLectureSelection({selection, sections}) {
-  return (dispatch, getState) => {
+export function changedLectureSelection({selection, lectureSections}) {
+  return (dispatch) => {
     dispatch(setLectureSection(selection));
 
-    return Promise.resolve(dispatch(cancelShoppingCartAdd())).then(() => {
-      return dispatch(getSectionsForCCN({ccn: sections[selection].ccn}));
-    })
+    return dispatch(getSectionsAndAvailabilityForCCN({ccn: lectureSections[selection].ccn}));
   }
 }
 
-export function clickedAdd({ccn, selection}) {
+export function clickedAdd({ccn, selections}) {
   return (dispatch) => {
-    dispatch(addCourse({ccn: ccn, selection: selection}))
+    dispatch(addCourse({ccn: ccn, selections: selections}))
       .then(() => {
         dispatch(setCCN({ccn: ""}));
         dispatch(setDept({dept: ""}));
@@ -151,9 +149,10 @@ function clearSections() {
   }
 }
 
-export function setSelection({selection}) {
+export function setSelection({selection, which}) {
   return {
     type: SET_SELECTION,
-    selection: selection
+    selection: selection,
+    which: which,
   }
 }

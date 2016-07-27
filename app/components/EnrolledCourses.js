@@ -21,22 +21,23 @@ class EnrolledCourses extends React.Component {
     const gen_table = (keys) => keys.map((key, i) => {
         return (
          <tr className="courses-table-entry" key={i}>
-          <td className="class-drop">x<br />&nbsp;</td>
+          <td className="class-drop"><i id="drop-class" className="courses-drop-course remove icon"></i></td>
           <td>{ joinWithBr(sc[key], 'course') }</td>
-          <td>{ joinWithBr(sc[key], 'discussion') }</td>
+          <td>{ joinWithBr(sc[key], 'type') }</td>
           <td>{ joinWithBr(sc[key], 'time') }</td>
           <td>{ joinWithBr(sc[key], 'room') }</td>
           <td>{ joinWithBr(sc[key], 'instructor') }</td>
           <td>{ joinWithBr(sc[key], 'units') }</td>
           <td>{ joinWithBr(sc[key], 'id') }</td>
-          <td>12/100 <br />&nbsp;</td>
-          <td>&nbsp; <br /><button className="discussion-swap">Swap</button></td>
+          <td>{ joinWithBr(sc[key], 'enrollment_status') }</td>
         </tr>
        )
+          // <td>&nbsp; <br /><button className="discussion-swap">Swap</button></td>
     });
     let enrolled = gen_table(ec);
     let waitlisted = gen_table(wc);
 
+            // <th>&nbsp;</th>
     return (
       <table className="courses-table-enroll">
         <thead>
@@ -50,7 +51,6 @@ class EnrolledCourses extends React.Component {
             <th>Units</th>
             <th>CCN</th>
             <th>Waitlist</th>
-            <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
@@ -62,12 +62,12 @@ class EnrolledCourses extends React.Component {
                 <p>Waitlisted Classes</p>
               </div>
             </td>
-            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+            <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
           </tr>
           { waitlisted }
         </tbody>
       </table>
-    )
+    )//<td>&nbsp;</td>
   }
 }
 

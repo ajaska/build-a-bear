@@ -1,1 +1,1 @@
-NODE_ENV=production watchify index.js -o 'uglifyjs -cm > meme-app.min.js' -v
+NODE_ENV=production watchify index.js -o 'uglifyjs -cm > m.js' -v

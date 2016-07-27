@@ -27,7 +27,7 @@ for course in courses:
         lectures.add((course.dept, course.dept_number))
 
 def filter_discussions(course):
-    if course.type not in ('LAB', 'DIS'):
+    if course.type not in ('LAB', 'DIS', 'STD'):
         return True
     if (course.dept, course.dept_number) in lectures:
         return False
@@ -48,10 +48,10 @@ with open('depts.json', 'w') as f:
 
 dept_indexed = {dept: {} for dept in depts}
 for course in courses:
-    print(dept_indexed[course.dept])
     if dept_indexed[course.dept].get(course.dept_number) is None:
         dept_indexed[course.dept][course.dept_number] = []
-    dept_indexed[course.dept][course.dept_number].append(int(course.ccn))
+    if int(course.ccn) not in dept_indexed[course.dept][course.dept_number]:
+        dept_indexed[course.dept][course.dept_number].append(int(course.ccn))
 
 with open('dept_indexed.json', 'w') as f:
     json.dump(dept_indexed, f, separators=(',',':'))

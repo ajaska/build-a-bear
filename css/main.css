@@ -212,8 +212,8 @@ q:before, q:after {
   src: url("../fonts/Calibre-Bold.woff"); }
 @font-face {
   font-family: 'Icons';
-  src: url("../fonts/icons.eot");
-  src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"), url("../fonts/icons.woff") format("woff"), url("../fonts/icons.ttf") format("truetype"), url("../fonts/icons.svg#icons") format("svg");
+  src: url("//js.six.ph/fonts/icons.eot");
+  src: url("//js.six.ph/fonts/icons.eot?#iefix") format("embedded-opentype"), url("//js.six.ph/fonts/icons.woff") format("woff"), url("//js.six.ph/fonts/icons.ttf") format("truetype"), url("//js.six.ph/fonts/icons.svg#icons") format("svg");
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -262,11 +262,6 @@ select {
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
   background-color: white !important;
-  /* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
-  background: linear-gradient(45deg, transparent 50%, #4279FF 50%), linear-gradient(135deg, #4279FF 50%, transparent 50%);
-  background-position: calc(100% - 12px) calc(0.4rem + 2px), calc(100% - 8px) calc(0.4rem + 2px);
-  background-size: 4px 4px, 4px 4px;
-  background-repeat: no-repeat;
   border-radius: 0;
   margin: 0;
   -webkit-box-sizing: border-box;
@@ -274,6 +269,13 @@ select {
   box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none; }
+
+  /* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
+select:not(:disabled) {
+  background: linear-gradient(45deg, transparent 50%, #4279FF 50%), linear-gradient(135deg, #4279FF 50%, transparent 50%);
+  background-position: calc(100% - 12px) calc(0.4rem + 2px), calc(100% - 8px) calc(0.4rem + 2px);
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat; }
 
 input {
   outline: 0; }
@@ -396,6 +398,7 @@ input.search {
   float: left; }
 
 .modal-cancel {
+  cursor: pointer;
   float: right;
   margin-right: 1rem; }
 

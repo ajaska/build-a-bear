@@ -39,9 +39,6 @@ const mapDispatchToProps = (dispatch) => {
     changedDeptNumber: (deptNumber) => {
       dispatch(changedDeptNumber(deptNumber))
     },
-    clickedAdd: (things) => {
-      dispatch(clickedAdd(things))
-    },
     setSelection: (selection) => {
       dispatch(setSelection(selection))
     },

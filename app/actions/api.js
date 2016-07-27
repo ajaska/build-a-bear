@@ -5,11 +5,11 @@ import { postFormData } from '../lib/forms';
 
 
 export const REQUEST_COURSE_ADD = Symbol('REQUEST_COURSE_ADD');
-export function requestCourseAdd({ccn, selection}) {
+export function requestCourseAdd({ccn, selections}) {
   return {
     type: REQUEST_COURSE_ADD,
     ccn: ccn,
-    selection: selection
+    selections: selections
   }
 }
 
@@ -42,11 +42,28 @@ export function requestSections({ccn}) {
 }
 
 export const RECEIVE_SECTIONS = Symbol('RECEIVE_SECTIONS');
-export function receiveSections({ccn, formData, sections}) {
+export function receiveSections({ccn, formData, sectionGroups}) {
   return {
     type: RECEIVE_SECTIONS,
     ccn: ccn,
-    sections: sections
+    sectionGroups: sectionGroups
+  }
+}
+
+export const RECEIVE_SECTION_AVAILABILITY = Symbol('RECEIVE_SECTION_AVAILABILITY');
+export function receiveSectionAvailability({ccn, availability}) {
+  return {
+    type: RECEIVE_SECTION_AVAILABILITY,
+    ccn: ccn,
+    availability: availability
+  }
+}
+
+export const RECEIVE_SECTION_AVAILABILITY_ERROR = Symbol('RECEIVE_SECTION_AVAILABILITY_ERROR');
+export function receiveSectionAvailabilityError({error}) {
+  return {
+    type: RECEIVE_SECTION_AVAILABILITY_ERROR,
+    error: error,
   }
 }
 
@@ -55,90 +72,187 @@ export function canceledCartAdd() {
   return { type: CANCELED_CART_ADD }
 }
 
-function sectionFromLecture({ccn, state}) {
+const CART_URL = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
+
+function sectionsFromLecture({ccn, state}) {
   let sections = state.shoppingCart.toJS().courses;
   let matching_sections = sections.filter(section => section.id === ccn);
   if (!(matching_sections.length === 1)) {
-    return false
+    return { alreadyInCart: false, availability: false }
   }
+  let availability = matching_sections[0].availability
   let course_desc = matching_sections[0].course.split('-')[0];
-  return sections.filter(section => section.course.split('-')[0] === course_desc && (!section.selectable))
+  let alreadyInCart = sections.filter(section => section.course.split('-')[0] === course_desc && (!section.selectable))
+                              .map(section => [section, ])
+  return { availability: availability, alreadyInCart: alreadyInCart }
 }
 
-function cancelIfAlreadyAdding({dispatch, state}) {
-  if (state.api.isAddingToShoppingCart) {
-    return Promise.resolve(dispatch(cancelShoppingCartAdd()))
-  }
-  return Promise.resolve()
+// WARNING: If this doesn't return any sections, you're ON THE CONFIRMATION PAGE
+function mainPageToSectionsOrConfirmation({formData, ccn}) {
+  formData.set('ICAJAX', '0');
+  formData.set('ICAction', 'DERIVED_REGFRM1_SSR_PB_ADDTOLIST2$9$');
+  formData.set('DERIVED_REGFRM1_CLASS_NBR', ccn.toString());
+  formData.set('DERIVED_REGFRM1_SSR_CLS_SRCH_TYPE$249$', '06');
+
+  return postFormData(CART_URL, formData).then(body => parseSectionPage(body))
 }
 
-export function getSectionsForCCN({ccn}) {
-  return (dispatch, getState) => {
-    return cancelIfAlreadyAdding({dispatch: dispatch, state: getState()}).then(() => {
-      dispatch(requestSections({ccn: ccn}))
-      let alreadyInCart = sectionFromLecture({ccn: ccn, state: getState()});
-      if (alreadyInCart.length > 0) {
-        return dispatch(receiveSections({
-          ccn: ccn,
-          sections: alreadyInCart
-        }))
-      }
-      let formData = getState().api.formData;
+function docFromBody(body) {
+  let parser = new DOMParser();
+  return parser.parseFromString(body, "text/html");
+}
 
-      let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
-      formData.set('ICAJAX', '0');
-      formData.set('ICAction', 'DERIVED_REGFRM1_SSR_PB_ADDTOLIST2$9$');
-      formData.set('DERIVED_REGFRM1_CLASS_NBR', ccn.toString());
-      formData.set('DERIVED_REGFRM1_SSR_CLS_SRCH_TYPE$249$', '06');
+function parseSectionPage(body) {
+  let doc = docFromBody(body);
+  let newForm = doc.getElementById('SSR_SSENRL_CART');
+  let newFormData = new FormData(newForm);
+  if (!newForm) { throw "Error code 3" }
 
-      postFormData(url, formData).then(function(body) {
-      let parser = new DOMParser();
-      let doc = parser.parseFromString(body, "text/html");
+  let maybeViewAll;
+
+  let viewAll = doc.querySelector("[id^='SSR_CLS_TBL_R1$fviewall$0']");
+  if (viewAll && viewAll.innerText.includes("View All")) {
+    maybeViewAll = sectionPageToViewAll({formData: newFormData}).then((body) => {
+      let doc = docFromBody(body);
       let newForm = doc.getElementById('SSR_SSENRL_CART');
-      if(!newForm) { throw "Error code 3" }
       let newFormData = new FormData(newForm);
-
-      let viewall = doc.querySelector("[id^='SSR_CLS_TBL_R1$fviewall$0']");
-      if (viewall && viewall.innerText.includes("View All")) {
-        newFormData.set('ICAJAX', '0');
-        newFormData.set('ICAction', 'SSR_CLS_TBL_R1$fviewall$0');
-        return postFormData(url, newFormData).then(function(body) {
-          let parser = new DOMParser();
-          let doc = parser.parseFromString(body, "text/html");
-          let newForm = doc.getElementById('SSR_SSENRL_CART');
-          if(!newForm) { throw "Error code 4" }
-          let newFormData = new FormData(newForm);
-          let rows = doc.querySelectorAll("tr [id^='trSSR_CLS_TBL']");
-          let sections = parseDiscussionTable(rows);
-
-          return {formData: newFormData, sections: sections}
-        });
-      } else {
-        let rows = doc.querySelectorAll("tr [id^='trSSR_CLS_TBL']");
-        let sections = parseDiscussionTable(rows);
-
-        return {formData: newFormData, sections: sections}
-      }
-    }).then(function({formData, sections}) {
-      dispatch(setFormData({formData: formData}))
-      return dispatch(receiveSections({
-        ccn: ccn,
-        sections: sections
-      }))
-    });
+      return {body: body, formData: newFormData}
     })
-  };
+  } else {
+    maybeViewAll = Promise.resolve({body: body, formData: newFormData})
+  }
+  return maybeViewAll.then(({body, formData}) => {
+    let doc = docFromBody(body);
+    let newFormData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+
+    let warnings = doc.querySelector('.SSSMSGWARNINGTEXT');
+    if (warnings) {
+      throw warnings.innerText;
+    }
+
+    let sectionTables = doc.querySelectorAll("table[id^='SSR_CLS_TBL_R']");
+    let sectionTypes = sectionTables.length;
+
+    if (sectionTypes === 0) {
+      // Fuck, we're on the confirmation page HACK TIME
+      return { formData: newFormData, sectionGroups: [], maybeBody: body }
+    }
+
+    let sectionGroups = [];
+    for (let i=0; i < sectionTypes; ++i) {
+      let rows = doc.querySelectorAll(`tr [id^='trSSR_CLS_TBL_R${i+1}']`);
+      sectionGroups.push(parseDiscussionTable(rows));
+    }
+    return { formData: newFormData, sectionGroups: sectionGroups, maybeBody: '' };
+  })
+}
+
+function sectionPageToViewAll({formData}) {
+  formData.set('ICAJAX', '0');
+  formData.set('ICAction', 'SSR_CLS_TBL_R1$fviewall$0');
+  return postFormData(CART_URL, formData)
+}
+
+/* MAGIC: if there are no sectionChoices WE ARE ON THE CONFIRMATION PAGE ALREADY */
+function sectionPageToConfirmation({formData, sectionChoices, maybeBody}) {
+  if (sectionChoices.length === 0 && maybeBody) {
+    return parseConfirmationPage(maybeBody)
+  }
+  formData.set('ICAJAX', '0');
+  formData.set('ICAction', 'DERIVED_CLS_DTL_NEXT_PB');
+  for (let i=0; i<sectionChoices.length; i++) {
+    let choice = sectionChoices[i].toString();
+    formData.set(`SSR_CLS_TBL_R${i+1}$sels$${choice}$$0`, choice);
+  }
+  return postFormData(CART_URL, formData).then(body => parseConfirmationPage(body))
+}
+
+function parseConfirmationPage(body) {
+  let doc = docFromBody(body);
+  let newFormData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+  let waitlistedDiv = doc.querySelector("[id^='win0divDERIVED_CLS_DTL_SSR_DESCRSHORT$0']");
+  let availability = "Unknown";
+  if (waitlistedDiv.innerText.includes("Open")) {
+    availability = "Open";
+  } else if (waitlistedDiv.innerText.includes("Wait List")) {
+    availability = "Wait List";
+  } else if (waitlistedDiv.innerText.includes("Closed")) {
+    availability = "Closed";
+  }
+  return { formData: newFormData, availability: availability }
+}
+
+function confirmationPageToMainPage(formData, permissionNumber = '',  graded = true, waitlistOk = false) {
+  formData.set('ICAJAX', '0');
+  formData.set('ICAction', 'DERIVED_CLS_DTL_NEXT_PB$280$');
+
+  formData.set('DERIVED_CLS_DTL_CLASS_PRMSN_NBR$118$', permissionNumber.toString());
+  if (waitlistOk) {
+    formData.set('DERIVED_CLS_DTL_WAIT_LIST_OKAY$125$$chk', 'Y');
+    formData.set('DERIVED_CLS_DTL_WAIT_LIST_OKAY$125$', 'Y');
+  } else {
+    formData.set('DERIVED_CLS_DTL_WAIT_LIST_OKAY$125$$chk', 'N');
+  }
+  if (graded) {
+    formData.set('DERIVED_CLS_DTL_SSR_GRADE_BASIS_SS$30$', 'GRD');
+  } else {
+    formData.set('DERIVED_CLS_DTL_SSR_GRADE_BASIS_SS$30$', 'GRD');
+  }
+
+  return postFormData(CART_URL, formData).then(function(body) {
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(body, "text/html");
+    let shoppingCartTableRows = doc.querySelectorAll("tr [id^='trSSR_REGFORM_VW']");
+    let shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
+    let newForm = doc.getElementById('SSR_SSENRL_CART');
+    let newFormData = new FormData(newForm);
+    return { formData: newFormData, courses: shoppingCartCourses }
+  });
+}
+
+export function getSectionsAndAvailabilityForCCN({ccn}) {
+  return (dispatch, getState) => {
+    dispatch(requestSections({ccn: ccn}))
+    let { alreadyInCart, availability } = sectionsFromLecture({ccn: ccn, state: getState()});
+    if (alreadyInCart.length > 0) {
+      return Promise.all([
+        dispatch(receiveSections({ccn: ccn, sectionGroups: alreadyInCart})),
+        dispatch(receiveSectionAvailability({ccn: ccn, availability: availability}))
+      ])
+    }
+    let formData = getState().api.formData;
+    return mainPageToSectionsOrConfirmation({formData: formData, ccn: ccn})
+      .then(({formData, sectionGroups, maybeBody}) => {
+        dispatch(receiveSections({ccn: ccn, sectionGroups: sectionGroups}))
+        return { formData: formData, sectionGroups: sectionGroups, maybeBody }
+      }).then(({formData, sectionGroups, maybeBody}) => {
+        let sectionChoices = Array(sectionGroups.length).fill("0");
+        return sectionPageToConfirmation({formData: formData, sectionChoices: sectionChoices, maybeBody: maybeBody})
+      }).then(({formData, availability}) => {
+        dispatch(receiveSectionAvailability({ccn: ccn, availability: availability}))
+        return { formData: formData }
+      }).catch((reason) => {
+        if (!(typeof reason === 'string' || reason instanceof String)) {
+          throw reason;
+        }
+        if (reason.includes("The class number entered is not valid")) {
+          dispatch(receiveSectionAvailabilityError({error: reason}))
+        } else if (false) {
+        } else {
+          throw reason;
+        }
+        return reloadMainPage()
+      }).then(({formData}) => {
+        return dispatch(cancelShoppingCartAdd({formData}))
+      })
+  }
 }
 
 
-export function cancelShoppingCartAdd() {
+export function cancelShoppingCartAdd({formData}) {
   return (dispatch, getState) => {
-    let formData = getState().api.formData;
-
-    let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
-    formData.set('ICAJAX', '0');
     formData.set('ICAction', 'DERIVED_CLS_DTL_CANCEL_PB');
-    return postFormData(url, formData).then(function(body) {
+    return postFormData(CART_URL, formData).then(function(body) {
       let parser = new DOMParser();
       let doc = parser.parseFromString(body, "text/html");
       let newForm = doc.getElementById('SSR_SSENRL_CART');
@@ -149,9 +263,9 @@ export function cancelShoppingCartAdd() {
       formData.set('ICAJAX', '1');
       formData.set('ICAction', '#ICCancel');
       formData.set('ICNAVTYPEDROPDWN', '0');
-      return postFormData(url, formData)
+      return postFormData(CART_URL, formData)
     }).then(function(body) { })
-    .then(() => fetch(url, { credentials: 'same-origin' }))
+    .then(() => fetch(CART_URL, { credentials: 'same-origin' }))
     .then(response => response.text())
     .then(function(body) {
       let parser = new DOMParser();
@@ -161,14 +275,18 @@ export function cancelShoppingCartAdd() {
       let newFormData = new FormData(newForm);
       return dispatch(setFormData({formData: newFormData}))
     }).then(() => {dispatch(canceledCartAdd())})
-
-
   }
 }
 
-export function addCourse({ccn, selection}) {
+function addToShoppingCart({ccn, selections, formData}) {
+  return mainPageToSectionsOrConfirmation({ccn: ccn, formData: formData})
+    .then(({formData}) => sectionPageToConfirmation({formData: formData, sectionChoices: selections}))
+    .then(({formData}) => confirmationPageToMainPage(formData))
+}
+
+export function addCourse({ccn, selections}) {
   return (dispatch, getState) => {
-    dispatch(requestCourseAdd({ccn: ccn, selection: selection}));
+    dispatch(requestCourseAdd({ccn: ccn, selections: selections}));
 
     let addedToShoppingCart;
     let formData = getState().api.formData;
@@ -176,13 +294,7 @@ export function addCourse({ccn, selection}) {
     if (courses.filter(course => course.id === ccn).length === 1) {
       addedToShoppingCart = Promise.resolve({formData: formData, courses: courses})
     } else {
-      let chooseSection;
-      if(!selection) {
-        chooseSection = Promise.resolve({formData: formData})
-      } else {
-        chooseSection = selectSection(selection, formData)
-      }
-      addedToShoppingCart = chooseSection.then(({formData}) => confirmChoice(formData))
+      addedToShoppingCart = addToShoppingCart({ccn: ccn, selections: selections, formData: formData})
     }
     return addedToShoppingCart.then(({formData, courses}) => {
       let selectableCourses = courses.filter(course => course.selectable);
@@ -200,48 +312,19 @@ export function addCourse({ccn, selection}) {
   }
 }
 
-export function selectSection(choice, formData) {
-  let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
-  formData.set('ICAJAX', '0');
-  formData.set('ICAction', 'DERIVED_CLS_DTL_NEXT_PB');
-  formData.set('SSR_CLS_TBL_R1$sels$1$$0', choice.toString());
-
-  return postFormData(url, formData).then(function(body) {
-    let parser = new DOMParser();
-    let doc = parser.parseFromString(body, "text/html");
-    let newForm = doc.getElementById('SSR_SSENRL_CART');
-    let newFormData = new FormData(newForm);
-    return { formData: newFormData }
-  });
-}
-
-export function confirmChoice(formData, permissionNumber = '',  graded = true, waitlistOk = false) {
-  let url = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
-  formData.set('ICAJAX', '0');
-  formData.set('ICAction', 'DERIVED_CLS_DTL_NEXT_PB$280$');
-
-  formData.set('DERIVED_CLS_DTL_CLASS_PRMSN_NBR$118$', permissionNumber.toString());
-  if (waitlistOk) {
-    formData.set('DERIVED_CLS_DTL_WAIT_LIST_OKAY$125$$chk', 'Y');
-    formData.set('DERIVED_CLS_DTL_WAIT_LIST_OKAY$125$', 'Y');
-  } else {
-    formData.set('DERIVED_CLS_DTL_WAIT_LIST_OKAY$125$$chk', 'N');
-  }
-  if (graded) {
-    formData.set('DERIVED_CLS_DTL_SSR_GRADE_BASIS_SS$30$', 'GRD');
-  } else {
-    formData.set('DERIVED_CLS_DTL_SSR_GRADE_BASIS_SS$30$', 'GRD');
-  }
-
-  return postFormData(url, formData).then(function(body) {
-    let parser = new DOMParser();
-    let doc = parser.parseFromString(body, "text/html");
-    let shoppingCartTableRows = doc.querySelectorAll("tr [id^='trSSR_REGFORM_VW']");
-    let shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
-    let newForm = doc.getElementById('SSR_SSENRL_CART');
-    let newFormData = new FormData(newForm);
-    return { formData: newFormData, courses: shoppingCartCourses }
-  });
+function reloadMainPage() {
+  return fetch(CART_URL, { credentials: 'same-origin' })
+    .then(response => response.text())
+    .then(function(body) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(body, "text/html");
+      let enrolledTableRows = doc.querySelectorAll("tr [id^='trSTDNT_ENRL_SSVW']");
+      let shoppingCartTableRows = doc.querySelectorAll("tr [id^='trSSR_REGFORM_VW']");
+      let enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
+      let shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
+      let formData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+      return {formData: formData, enrolledCourses: enrolledCourses, shoppingCartCourses}
+    })
 }
 
 export function addFromShoppingCart({formData, positions, positionToEnroll}) {

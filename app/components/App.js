@@ -3,12 +3,14 @@ import ShoppingCart from '../containers/ShoppingCart'
 import EnrolledCourses from '../containers/EnrolledCourses'
 import CoursePicker from '../containers/CoursePicker';
 import UnitSummary from '../containers/UnitSummary';
+import AddCourseModal from '../containers/AddCourseModal';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="left-data-container">
+        <AddCourseModal />
+        <div className="main-data-container">
           <EnrolledCourses />
         </div>
         <div className="side-panel-container">
