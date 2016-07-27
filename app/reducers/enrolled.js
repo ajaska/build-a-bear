@@ -2,18 +2,18 @@ import * as ActionType from '../actions/enrolled';
 import * as APIActionType from '../actions/api';
 import Immutable from 'immutable';
 
-let defaultState = Immutable.fromJS({
-  courses: []
+const defaultState = Immutable.fromJS({
+  courses: [],
 });
 
-export default function(state = defaultState, action) {
-  switch(action.type) {
+export default function (state = defaultState, action) {
+  switch (action.type) {
     case ActionType.SET_ENROLLED_COURSES:
-      return state.set('courses', action.courses)
+      return state.set('courses', action.courses);
     case APIActionType.RECEIVE_COURSE_ADD:
-      return state.set('courses', action.enrolledCourses)
+      return state.set('courses', action.enrolledCourses);
     default:
-      return state
+      return state;
   }
 }
 
