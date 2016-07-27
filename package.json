@@ -25,7 +25,12 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^5.2.2",
     "redux-devtools": "^3.3.1"
   },
-  "license" : "BSD-2-Clause"
+  "license": "BSD-2-Clause"
 }
