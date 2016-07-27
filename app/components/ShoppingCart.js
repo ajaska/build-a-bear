@@ -6,7 +6,7 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    if (!this.props.courses || this.props.courses.size === 0) {
+    if (!this.props.courses || this.props.courses.length === 0) {
       return (<div>debug info: no courses in shopping cart</div>)
     }
 
