@@ -2,29 +2,24 @@ import 'whatwg-fetch';
 
 
 function urlEncodeFormData(formData) {
-  let urlEncodedData = "";
-  let urlEncodedDataPairs = [];
-  for(let pair of formData.entries()) {
-     urlEncodedDataPairs.push(encodeURIComponent(pair[0]) + '=' + encodeURIComponent(pair[1]));
+  const urlEncodedDataPairs = [];
+  for (const pair of formData.entries()) {
+    urlEncodedDataPairs.push(`${encodeURIComponent(pair[0])}=${encodeURIComponent(pair[1])}`);
   }
-  urlEncodedData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
-  return urlEncodedData;
+  return urlEncodedDataPairs.join('&').replace(/%20/g, '+');
 }
 
 
 export function postFormData(url, formData) {
-  let urlEncodedData = urlEncodeFormData(formData);
+  const urlEncodedData = urlEncodeFormData(formData);
   return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Content-Length': urlEncodedData.length,
       'cache-control': 'no-cache',
-      'pragma': 'no-cache',
     },
     body: urlEncodedData,
-    credentials: 'same-origin'
-  }).then(function(response) {
-    return response.text();
-  })
+    credentials: 'same-origin',
+  }).then(response => response.text());
 }
