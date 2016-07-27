@@ -34,7 +34,7 @@ function initialize() {
   if (enrolledTableRows.length > 0) {
     enrolledCourses = parseEnrolledCoursesTable(enrolledTableRows);
   }
-  if (shoppingCartCourses.length > 0) {
+  if (shoppingCartTableRows.length > 0) {
     shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
   }
 
