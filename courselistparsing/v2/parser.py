@@ -27,7 +27,7 @@ for course in courses:
         lectures.add((course.dept, course.dept_number))
 
 def filter_discussions(course):
-    if course.type not in ('LAB', 'DIS'):
+    if course.type not in ('LAB', 'DIS', 'STD'):
         return True
     if (course.dept, course.dept_number) in lectures:
         return False
