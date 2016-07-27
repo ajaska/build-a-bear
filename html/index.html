@@ -16,7 +16,7 @@
   <body>
     <!-- Confirm class drop modal -->
     <div class="ui modal drop-course-confirm">
-      <div class="modal-header clearfix">
+      <div class="modal-header headerfix">
           <span class="modal-header-text">Drop Class Confirmation</span><span class="modal-cancel"><i id="drop-close" class="modal-cancel-icon remove icon"></i></span>
       </div>
       <p class="modal-confirm-text">Are you sure you want to drop:</p>
@@ -36,16 +36,15 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <span class="modal-confirm-text">You will have <span class="color-blue">10.0</span> total units.<button class="modal-confirm-button">Confirm</button>
-        </div>
-
+      </div>
+      <div class="modal-footer">
+        <span class="modal-confirm-text">You will have <span class="color-blue">10.0</span> total units.<button class="modal-confirm-button">Confirm</button>
       </div>
     </div>
 
     <!-- Confirm class add modal -->
     <div class="ui modal add-course-confirm">
-      <div class="modal-header clearfix">
+      <div class="modal-header headerfix">
           <span class="modal-header-text">Add Class Confirmation</span><span class="modal-cancel"><i id="add-close" class="modal-cancel-icon remove icon"></i></span>
       </div>
       <p class="modal-confirm-text">Are you sure you want to add:</p>
@@ -79,19 +78,17 @@
             </div>
           </div>
         </div>
-
-        <div class="modal-footer">
-          <span class="modal-confirm-text">You will have <span class="color-blue">10.0</span> total units.<button class="modal-confirm-button">Confirm</button>
-        </div>
-
+      </div>
+      <div class="modal-footer">
+        <span class="modal-confirm-text">You will have <span class="color-blue">10.0</span> total units.<button class="modal-confirm-button">Confirm</button>
       </div>
     </div>
 
     <div class="banner">
-      <p class="banner-text">CalCentral</p>
+      <p class="banner-text">Build-a-Bear</p>
     </div>
     <div class="main-container">
-      <div>
+      <div class="my-academics-link-wrapper">
         <a class="my-academics-link" href="https://calcentral.berkeley.edu/academics">&lt; Return to My Academics</a>
       </div>
 
@@ -141,7 +138,7 @@
             <td>&nbsp;</td>
             <td>
               <div>
-                <p>Waitlisted Classes</p>
+                <span class="courses-table-waitlisted-text">Waitlisted Classes</span>
               </div>
             </td>
             <!-- Empty table entries to have the background color stretch across. -->
@@ -228,37 +225,26 @@
           <p class="sc-header-text">This app doesn't use shopping cart, but we noticed you already have these classes in it:</p>
           <div class="sc-class-item">
             <span class="sc-course-info-name semibold">Math 113-006 LEC <span class="color-blue">(4.0 Units)</span></span>
-            <div class="sc-course-info">
+            <div class="sc-course-info clearfix">
               <div class="sc-course-info-left">
                 <span class="semibold color-blue">Abstract Algebra</span><br>
-                <span class="semibold">100 Evans</span><span> | TuTh 9:30-11AM</span><br>
+                <span class="semibold">100 Evans</span><br><span>TuTh 9:30-11AM</span><br>
                 <span>Instructor: </span><span class="semibold">E. Frenkel</span>
               </div>
               <div class="sc-course-info-right">
-                <button class="sc-course-add">Add</button>
+                <button class="sc-course-delete">Delete</button><button class="sc-course-add">Add</button>
               </div>
             </div>
           </div>
 
           <div class="sc-footer clearfix">
-            <span class="sc-clear-text">Add these classes or clear your cart.<span><button class="sc-clear-button">Clear Cart</button>
+            <span class="sc-clear-text">You can either add these classes or clear your cart.<span>
           </div>
         </div>
         <!-- Add class panel -->
         <div class="add-class-panel">
           <div class="add-class-header">Add Class</div><div class="add-class-error-msg">This conflicts with your schedule.</div>
           <div class="add-class-form">
-            <!-- DON'T TAKE THIS HTML -->
-            <!-- <div class="add-class-form-row">
-              <div id="test" class="ui fluid search selection dropdown">
-                <input type="hidden" name="country">
-                <i class="dropdown icon"></i>
-                <div class="default text">Select Country</div>
-                <div class="menu">
-                <div class="item" data-value="af"><i class="af flag"></i>Afghanistan</div>
-                <div class="item" data-value="ax"><i class="ax flag"></i>Aland Islands</div>
-              </div>
-            </div> -->
             <div class="add-class-form-row">
               <input class="add-class-CCN outline-blue" placeholder="CCN"></input>
               <select class="add-class-section">
@@ -267,14 +253,24 @@
               </select>
             </div>
             <div class="add-class-form-row">
-              <select class="add-class-department outline-blue">
-                  <option value="" disabled selected>Department</option>
-                  <option value="memes">Memes</option>
-              </select>
-              <select class="add-class-course-number">
-                  <option value="" disabled selected>Course Number</option>
-                  <option value="memes">Memes</option>
-              </select>
+              <div id="test1" class="ui fluid search selection dropdown add-class-department border-blue">
+                <input type="hidden" name="country">
+                <i class="dropdown icon"></i>
+                <div class="default text">Department</div>
+                <div class="menu">
+                  <div class="item" data-value="af">Afghanistan</div>
+                  <div class="item" data-value="ax">Aland Islands</div>
+                </div>
+              </div>
+              <div id="test2" class="ui fluid search selection dropdown add-class-course-number border-blue">
+                <input type="hidden" name="country">
+                <i class="dropdown icon"></i>
+                <div class="default text">Course Number</div>
+                <div class="menu">
+                  <div class="item" data-value="af">Afghanistan</div>
+                  <div class="item" data-value="ax">Aland Islands</div>
+                </div>
+              </div>
             </div>
             <div class="add-class-form-row">
               <select class="add-class-class-name">

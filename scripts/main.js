@@ -1,5 +1,6 @@
 $(document).ready(function() {
-  // $('#test').dropdown();
+  $('#test1').dropdown();
+  $('#test2').dropdown();
   $('#add-class').click(function() {
     $('.add-course-confirm').modal('show');
   })

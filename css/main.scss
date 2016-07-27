@@ -1,4 +1,5 @@
 @import '_calendar_entries.scss';
+@import '_reset.scss';
 
 $primary-blue: #4279FF;
 $primary-red: #FF8080;
@@ -139,7 +140,7 @@ a {
 }
 
 .outline-blue {
-  border: 1px solid $primary-blue;
+  border: 1px solid $primary-blue !important;
 }
 
 .color-blue {
@@ -151,7 +152,62 @@ a {
 }
 
 .clearfix {
-    overflow: auto;
+  overflow: auto;
+}
+
+.headerfix {
+  overflow: visible;
+}
+
+// Searchable dropdown overrides
+.ui.fluid.search.selection.dropdown {
+  margin: 0rem;
+  padding: 0rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(166, 166, 166);
+  min-height: 0px;
+  border-radius: 0rem;
+}
+
+.default.text {
+  margin: 0rem;
+  padding: 0.3rem 0rem 0rem 0.1rem;
+  font-size: 0.8rem;
+  color: black;
+  font-family: $font-stack;
+}
+
+.dropdown.icon {
+  padding: 0.1rem 0.2rem 0rem 0rem !important;
+  color: $primary-blue !important;
+}
+
+input.search {
+  margin: 0rem !important;
+  padding: 0.2rem 0rem 0.05rem 0.1rem !important
+}
+
+.message {
+  font-size: 0.8rem !important;
+  padding: 0.2rem 0rem 0.05rem 0.1rem !important
+}
+
+.ui.search.dropdown > .text {
+  font-size: 0.8rem !important;
+  padding: 0.2rem 0rem 0.05rem 0.1rem !important
+}
+
+.ui.selection.dropdown .menu > .item.selected {
+  background-color: $primary-blue;
+  color: white;
+}
+
+.ui.selection.dropdown .menu > .item {
+  margin: 0rem !important;
+  padding: 0.3rem 0rem 0rem 0.1rem !important;
+  font-size: 0.8rem !important;
+  font-family: $font-stack !important;
 }
 
 // Error page
@@ -230,7 +286,7 @@ a {
 }
 
 .modal-body {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0rem 1rem;
   height: 100%;
 }
 
@@ -250,7 +306,8 @@ a {
 
 .modal-footer {
   text-align: right;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
 }
 
 .modal-confirm-button {
@@ -277,6 +334,7 @@ a {
 .loading-msg-logo-text {
   color: $primary-blue;
   font-size: 1.2rem;
+  margin-bottom: 2rem;
 }
 
 .loading-msg {
@@ -293,6 +351,8 @@ a {
 
 .banner-text {
   color: white;
+  margin-top: 0rem;
+  margin-left: 2rem;
   font-size: 1.2rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -307,7 +367,7 @@ a {
   border-bottom: 0.2rem solid $primary-blue;
   font-size: 1.2rem;
   line-height: 0.9rem;
-  margin-bottom: 0rem;
+  margin-bottom: 1rem;
 }
 
 .current-semester-subtitle {
@@ -342,6 +402,10 @@ a {
 .courses-table-waitlisted {
   background-color: $primary-gray;
   border-spacing: 0rem;
+}
+
+.courses-table-waitlisted > td > div {
+  padding: 0.5rem 0rem 0.3rem 0rem;
 }
 
 .courses-drop-course {
@@ -564,7 +628,7 @@ a {
 .phase2-add-calendar-alert {
   padding: 0.8rem 1.8rem;
   font-size: 0.8rem;
-  letter-spacing: 0.1rem;
+
 }
 
 // Shopping cart contents panel
@@ -592,12 +656,11 @@ a {
   margin-left: 0.8rem;
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem;
-  letter-spacing: 0.1rem;
+
 }
 
 .sc-footer {
   margin-top: 1rem;
-  text-align: right;
 }
 
 .sc-clear-text {
@@ -605,6 +668,7 @@ a {
 }
 
 .sc-course-info {
+  position: relative;
   margin-top: 0.2rem;
 }
 
@@ -614,21 +678,26 @@ a {
 }
 
 .sc-course-info-left {
-  width: 68%;
-  display: inline-block;
+  width: 50%;
 }
 
 .sc-course-info-right {
-  width: 30%;
-  text-align: right;
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0rem;
   font-size: 0.8rem;
   margin-top: 0.5rem;
-  display: inline-block;
+
 }
 
-.sc-course-add {
+.sc-course-add, .sc-course-delete {
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem;
+}
+
+.sc-course-delete {
+  background-color: $primary-red;
+  margin-right: 0.5rem;
 }
 
 // Add Class Panel
@@ -686,16 +755,18 @@ a {
 }
 
 .add-class-department {
-  width: 48%;
+  width: 47% !important;
+  display: inline-block !important;
 }
 
 .add-class-course-number {
-  width: 48%;
-  margin-left: 2%;
+  display: inline-block !important;
+  width: 48% !important;
+  margin-left: 2% !important;
 }
 
 .add-class-class-name {
-  width: 60%;
+  width: 60% !important;
 }
 
 .add-class-lab, .add-class-discussion {
@@ -711,7 +782,7 @@ a {
 }
 
 .add-class-waitlist-row {
-  width: 99%;
+  width: 100%;
   text-align: right;
 }
 
@@ -728,7 +799,7 @@ a {
   margin-top: 0.8rem;
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem;
-  letter-spacing: 0.1rem;
+
 }
 
 // Units summary panel

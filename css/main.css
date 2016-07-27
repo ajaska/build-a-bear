@@ -156,25 +156,69 @@
 .cal-body .other-entry-body .block-10 {
   height: calc(10 * 50px - 10px - 0.5rem); }
 
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline; }
+
+html,
+body {
+  height: 100%; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
 @font-face {
   font-family: 'Calibre-Regular';
-  src: url("//js.six.ph/fonts/Calibre-Regular.woff"); }
+  src: url("../fonts/Calibre-Regular.woff"); }
 @font-face {
   font-family: 'Calibre-Semibold';
-  src: url("//js.six.ph/fonts/Calibre-Semibold.woff"); }
+  src: url("../fonts/Calibre-Semibold.woff"); }
 @font-face {
   font-family: 'Calibre-Bold';
-  src: url("//js.six.ph/fonts/Calibre-Bold.woff"); }
+  src: url("../fonts/Calibre-Bold.woff"); }
 @font-face {
   font-family: 'Icons';
-  src: url("//js.six.ph/fonts/icons.eot");
-  src: url("//js.six.ph/fonts/icons.eot?#iefix") format("embedded-opentype"), url("../fonts/icons.woff") format("woff"), url("../fonts/icons.ttf") format("truetype"), url("../fonts/icons.svg#icons") format("svg");
+  src: url("../fonts/icons.eot");
+  src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"), url("../fonts/icons.woff") format("woff"), url("../fonts/icons.ttf") format("truetype"), url("../fonts/icons.svg#icons") format("svg");
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-decoration: inherit;
   text-transform: none; }
-
 .main-container {
   max-width: 100%;
   margin-right: 2rem;
@@ -255,7 +299,7 @@ a {
   color: black; }
 
 .outline-blue {
-  border: 1px solid #4279FF; }
+  border: 1px solid #4279FF !important; }
 
 .color-blue {
   color: #4279FF; }
@@ -265,6 +309,51 @@ a {
 
 .clearfix {
   overflow: auto; }
+
+.headerfix {
+  overflow: visible; }
+
+.ui.fluid.search.selection.dropdown {
+  margin: 0rem;
+  padding: 0rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #a6a6a6;
+  min-height: 0px;
+  border-radius: 0rem; }
+
+.default.text {
+  margin: 0rem;
+  padding: 0.3rem 0rem 0rem 0.1rem;
+  font-size: 0.8rem;
+  color: black;
+  font-family: "Calibre-Regular", sans-serif; }
+
+.dropdown.icon {
+  padding: 0.1rem 0.2rem 0rem 0rem !important;
+  color: #4279FF !important; }
+
+input.search {
+  margin: 0rem !important;
+  padding: 0.2rem 0rem 0.05rem 0.1rem !important; }
+
+.message {
+  font-size: 0.8rem !important;
+  padding: 0.2rem 0rem 0.05rem 0.1rem !important; }
+
+.ui.search.dropdown > .text {
+  font-size: 0.8rem !important;
+  padding: 0.2rem 0rem 0.05rem 0.1rem !important; }
+
+.ui.selection.dropdown .menu > .item.selected {
+  background-color: #4279FF;
+  color: white; }
+
+.ui.selection.dropdown .menu > .item {
+  margin: 0rem !important;
+  padding: 0.3rem 0rem 0rem 0.1rem !important;
+  font-size: 0.8rem !important;
+  font-family: "Calibre-Regular", sans-serif !important; }
 
 .error-dialog {
   width: auto;
@@ -329,7 +418,7 @@ a {
   margin-bottom: 1rem; }
 
 .modal-body {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem 0rem 1rem;
   height: 100%; }
 
 .modal-course-info {
@@ -345,7 +434,8 @@ a {
 
 .modal-footer {
   text-align: right;
-  margin-bottom: 0.5rem; }
+  margin-bottom: 1rem;
+  margin-right: 1rem; }
 
 .modal-confirm-button {
   margin-left: 1rem;
@@ -365,7 +455,8 @@ a {
 
 .loading-msg-logo-text {
   color: #4279FF;
-  font-size: 1.2rem; }
+  font-size: 1.2rem;
+  margin-bottom: 2rem; }
 
 .loading-msg {
   font-size: 1.5rem;
@@ -377,6 +468,8 @@ a {
 
 .banner-text {
   color: white;
+  margin-top: 0rem;
+  margin-left: 2rem;
   font-size: 1.2rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem; }
@@ -389,7 +482,7 @@ a {
   border-bottom: 0.2rem solid #4279FF;
   font-size: 1.2rem;
   line-height: 0.9rem;
-  margin-bottom: 0rem; }
+  margin-bottom: 1rem; }
 
 .current-semester-subtitle {
   margin-top: 1rem;
@@ -417,6 +510,9 @@ a {
 .courses-table-waitlisted {
   background-color: #EEEEEE;
   border-spacing: 0rem; }
+
+.courses-table-waitlisted > td > div {
+  padding: 0.5rem 0rem 0.3rem 0rem; }
 
 .courses-drop-course {
   color: #FF8080; }
@@ -582,8 +678,7 @@ a {
 
 .phase2-add-calendar-alert {
   padding: 0.8rem 1.8rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.1rem; }
+  font-size: 0.8rem; }
 
 .sc-panel {
   background-color: #EEEEEE;
@@ -604,17 +699,16 @@ a {
   background-color: #FF8080;
   margin-left: 0.8rem;
   padding: 0.5rem 0.8rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.1rem; }
+  font-size: 0.8rem; }
 
 .sc-footer {
-  margin-top: 1rem;
-  text-align: right; }
+  margin-top: 1rem; }
 
 .sc-clear-text {
   font-size: 0.9rem; }
 
 .sc-course-info {
+  position: relative;
   margin-top: 0.2rem; }
 
 .sc-course-info-name {
@@ -622,19 +716,22 @@ a {
   font-size: 1.2rem; }
 
 .sc-course-info-left {
-  width: 68%;
-  display: inline-block; }
+  width: 50%; }
 
 .sc-course-info-right {
-  width: 30%;
-  text-align: right;
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0rem;
   font-size: 0.8rem;
-  margin-top: 0.5rem;
-  display: inline-block; }
+  margin-top: 0.5rem; }
 
-.sc-course-add {
+.sc-course-add, .sc-course-delete {
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem; }
+
+.sc-course-delete {
+  background-color: #FF8080;
+  margin-right: 0.5rem; }
 
 .add-class-panel {
   background-color: #EEEEEE;
@@ -681,14 +778,16 @@ a {
   margin-bottom: 0.35rem; }
 
 .add-class-department {
-  width: 48%; }
+  width: 47% !important;
+  display: inline-block !important; }
 
 .add-class-course-number {
-  width: 48%;
-  margin-left: 2%; }
+  display: inline-block !important;
+  width: 48% !important;
+  margin-left: 2% !important; }
 
 .add-class-class-name {
-  width: 60%; }
+  width: 60% !important; }
 
 .add-class-lab, .add-class-discussion {
   margin-bottom: 0.05rem;
@@ -701,7 +800,7 @@ a {
   font-size: 0.8rem; }
 
 .add-class-waitlist-row {
-  width: 99%;
+  width: 100%;
   text-align: right; }
 
 .add-class-waitlist {
@@ -714,8 +813,7 @@ a {
 .add-class-submit-button {
   margin-top: 0.8rem;
   padding: 0.5rem 0.8rem;
-  font-size: 0.8rem;
-  letter-spacing: 0.1rem; }
+  font-size: 0.8rem; }
 
 .units-summary-panel {
   background-color: #EEEEEE;
