@@ -52,7 +52,7 @@ class AddCourseModal extends React.Component {
     }
     return (
       <div className="ui modal add-course-confirm">
-        <div className="modal-header clearfix" onClick={this.handleClose}>
+        <div className="modal-header headerfix" onClick={this.handleClose}>
           <span className="modal-header-text">Add Class Confirmation</span>
           <span className="modal-cancel">
             <i id="add-close" className="modal-cancel-icon remove icon"></i>

@@ -2,7 +2,7 @@ if (window.buildabearloaded) { throw new Error('Already running'); }
 window.buildabearloaded = true;
 
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './app/components/App';
 
@@ -14,7 +14,6 @@ import { setEnrolledCourses } from './app/actions/enrolled';
 import { setFormData } from './app/actions/api';
 
 import configureStore from './app/store';
-
 
 let formData = new FormData();
 let enrolledCourses = [];
@@ -38,37 +37,24 @@ function initialize() {
       !shoppingCartTableRows[0].innerText.includes('shopping cart is empty')) {
     shoppingCartCourses = parseShoppingCartTable(shoppingCartTableRows);
   }
-
-  const scriptsToAdd = [
-    'https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js',
-    '//js.six.ph/scripts/semantic/modal.min.js',
-    '//js.six.ph/scripts/semantic/dropdown.min.js',
-    '//js.six.ph/scripts/semantic/dimmer.min.js',
-    '//js.six.ph/scripts/semantic/transition.min.js',
-    //"//js.six.ph/scripts/main.js"
-  ];
-  for (let i = 0; i < scriptsToAdd.length; ++i) {
-    const script = document.createElement('script');
-    script.src = scriptsToAdd[i];
-    script.type = 'text/javascript';
-    script.async = false;
-    document.head.appendChild(script);
-  }
 }
 
 initialize();
+goReact();
 
-let store = configureStore();
-Promise.all([
-  store.dispatch(setShoppingCart({ courses: shoppingCartCourses })),
-  store.dispatch(setEnrolledCourses({ courses: enrolledCourses })),
-  store.dispatch(setFormData({ formData })),
-]).then(() => {
-  document.querySelector('body').innerHTML = body;
-  render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
-  );
-});
+function goReact() {
+  let store = configureStore();
+  Promise.all([
+    store.dispatch(setShoppingCart({ courses: shoppingCartCourses })),
+    store.dispatch(setEnrolledCourses({ courses: enrolledCourses })),
+    store.dispatch(setFormData({ formData })),
+  ]).then(() => {
+    document.querySelector('body').innerHTML = body;
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root')
+    );
+  });
+}

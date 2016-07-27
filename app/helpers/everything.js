@@ -1,6 +1,6 @@
-let ccn_indexed = require('../data/ccn_indexed.json');
-let depts = require('../data/depts.json');
-let dept_indexed = require('../data/dept_indexed.json');
+import ccn_indexed from '../data/ccn_indexed.json';
+import depts from '../data/depts.json';
+import dept_indexed from '../data/dept_indexed.json';
 
 
 export function isValidCCN(ccn) {

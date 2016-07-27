@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 function joinWithBr(arr, property) {
   let items = [];
@@ -59,7 +59,7 @@ class EnrolledCourses extends React.Component {
             <td>&nbsp;</td>
             <td>
               <div>
-                <p>Waitlisted Classes</p>
+                <span className="courses-table-waitlisted-text">Waitlisted Classes</span>
               </div>
             </td>
             <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
@@ -72,7 +72,7 @@ class EnrolledCourses extends React.Component {
 }
 
 EnrolledCourses.propTypes = {
-  courses: PropTypes.object.isRequired
+  courses: React.PropTypes.object.isRequired
 }
 
 export default EnrolledCourses;
