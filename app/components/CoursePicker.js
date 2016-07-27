@@ -64,6 +64,7 @@ class CoursePicker extends React.Component {
       value: i.toString(),
       label: `${section.id} | ${section.time} | ${section.room} | ${section.instructor} | ${section.availability}`
     })));
+    let resetValue = {value: ""};
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
       <div className="add-class-form-row" key={i}>
         <Select
@@ -78,7 +79,6 @@ class CoursePicker extends React.Component {
         />
       </div>
     ));
-    let resetValue = {value: ""};
     return (
       <div className="add-class-panel">
         <div className="add-class-header">Add Class</div>
@@ -91,7 +91,6 @@ class CoursePicker extends React.Component {
               placeholder="CCN"
               type="text"
               value={this.props.ccn}
-              resetValue={resetValue}
               onChange={this.handleCCNChange}
             />
             <Select

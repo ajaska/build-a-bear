@@ -13,7 +13,7 @@ rollup({
   entry: 'index.js',
   plugins: [
     replace({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('development')
     }),
     json(),
     babel({
