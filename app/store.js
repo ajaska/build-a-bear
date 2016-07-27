@@ -13,7 +13,7 @@ const logger = createLogger({
   level: 'info',
   collapsed: false,
   logger: console,
-  predicate: (getState, action) => true
+  predicate: () => true,
 });
 
 const createStoreWithMiddleware = applyMiddleware(
