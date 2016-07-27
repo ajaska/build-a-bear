@@ -7,7 +7,7 @@ class ShoppingCart extends React.Component {
 
   render() {
     if (!this.props.courses || this.props.courses.size === 0) {
-      return (<div>No courses</div>)
+      return (<div>debug info: no courses in shopping cart</div>)
     }
 
     let course_rows = this.props.courses.filter(course=>course.selectable).map((course, i) => {
