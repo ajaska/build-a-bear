@@ -203,13 +203,13 @@ q:before, q:after {
 
 @font-face {
   font-family: 'Calibre-Regular';
-  src: url("../fonts/Calibre-Regular.woff"); }
+  src: url("//js.six.ph/fonts/Calibre-Regular.woff"); }
 @font-face {
   font-family: 'Calibre-Semibold';
-  src: url("../fonts/Calibre-Semibold.woff"); }
+  src: url("//js.six.ph/fonts/Calibre-Semibold.woff"); }
 @font-face {
   font-family: 'Calibre-Bold';
-  src: url("../fonts/Calibre-Bold.woff"); }
+  src: url("//js.six.ph/fonts/Calibre-Bold.woff"); }
 @font-face {
   font-family: 'Icons';
   src: url("../fonts/icons.eot");

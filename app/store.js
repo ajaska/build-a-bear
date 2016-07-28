@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import rootReducer from './reducers';
+import rootReducer from './reducers/index';
 
 
 const logger = createLogger({
@@ -13,7 +13,7 @@ const logger = createLogger({
   level: 'info',
   collapsed: false,
   logger: console,
-  predicate: (getState, action) => true
+  predicate: () => true,
 });
 
 const createStoreWithMiddleware = applyMiddleware(

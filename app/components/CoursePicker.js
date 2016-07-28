@@ -1,82 +1,88 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import Select from 'react-select';
 
 class CoursePicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleCCNChange = this.handleCCNChange.bind(this);
+    this.handleSelector = this.handleSelector.bind(this);
+    this.handleLectureSelector = this.handleLectureSelector.bind(this);
+  }
+
   handleCCNChange(event) {
-    this.props.changedCCN({ccn: event.target.value})
+    this.props.changedCCN({ ccn: event.target.value });
   }
 
-  handleDeptChange(event) {
-    this.props.changedDept({dept: event.target.value})
+  handleDeptChange({value}) {
+    this.props.changedDept({ dept: value });
   }
 
-  handleDeptNumberChange(event) {
-    this.props.changedDeptNumber({deptNumber: event.target.value})
+  handleDeptNumberChange({value}) {
+    this.props.changedDeptNumber({ deptNumber: value });
   }
 
-  handleSelector(which, event) {
-    this.props.setSelection({which: which, selection: event.target.value})
+  handleSelector({value}, which) {
+    this.props.setSelection({ which, selection: value });
   }
 
-  handleLectureSelector(event) {
-    this.props.changedLectureSelection({selection: event.target.value, lectureSections: this.props.lectureSections})
+  handleLectureSelector({value}) {
+    this.props.changedLectureSelection({
+      selection: value,
+      lectureSections: this.props.lectureSections,
+    });
   }
 
-  handleClickedAdd(event) {
+  handleClickedAdd() {
     $('.add-course-confirm').modal('show');
   }
 
-  /*clickedAdd(event) {
-    event.preventDefault();
-    this.props.clickedAdd({
-      ccn: this.props.ccn,
-      selection: this.props.selection,
-    });
-  }*/
-
   render() {
-    let lectureSections = this.props.lectureSections.map((lectureSection, i) => {
-      return (
-        <option value={i} key={i}>
-          {lectureSection.toString()}
-        </option>
-       )
-    })
-    let lectureSelection = (this.props.lectureSections.length === 0 ? "" : this.props.lectureSection);
-    let depts = this.props.deptOptions.map((dept, i) => <option value={dept} key={i}>{ dept }</option>);
-    let deptNumbers = alphanumSort(this.props.deptNumbers, false).map((dn, i) => <option value={dn} key={i}>{ dn }</option>);
+    let lectureSections = this.props.lectureSections.map((lectureSection, i) => (
+      {value: i.toString(), label: lectureSection.toString()}
+    ));
+    let lectureSelection = (this.props.lectureSections.length === 0 ?
+                            '' : this.props.lectureSection);
+    let depts = this.props.deptOptions.map((dept) => (
+      { value: dept, label: dept }
+    ));
+    let deptNumbers = alphanumSort(this.props.deptNumbers, false).map((dn) => (
+      { value: dn, label: dn }
+    ));
     let lectureAvailability = this.props.lectureAvailability;
     if (this.props.isLoadingLectureAvailability) {
-      lectureAvailability = "Loading...";
+      lectureAvailability = 'Loading...';
     }
-    let globalDisable = this.props.isLoadingSections || this.props.isLoadingLectureAvailability || this.props.isAddingCourse
-    let enabled = {
+    let globalDisable = this.props.isLoadingSections
+                        || this.props.isLoadingLectureAvailability
+                        || this.props.isAddingCourse;
+    const enabled = {
       lectureSection: !globalDisable && this.props.lectureSections.length > 1,
       deptNumber: !globalDisable && this.props.deptNumbers.length > 0,
       //section: !globalDisable && this.props.sectionGroups.length > 0,
-    }
-    const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => {
-      return (
-        <option value={i} key={i}>
-          {section.id} | {section.time} | {section.room} | {section.instructor} | {section.availability}
-        </option>
-      )
-    }));
+    };
+    const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => ({
+      value: i.toString(),
+      label: `${section.id} | ${section.time} | ${section.room} | ${section.instructor} | ${section.availability}`
+    })));
+    let resetValue = {value: ""};
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
       <div className="add-class-form-row" key={i}>
-        <select
+        <Select
           className="add-class-discussion"
-          disabled={ globalDisable || sectionGroup.length <= 1 }
+          disabled={globalDisable || sectionGroup.length <= 1}
+          placeholder={this.props.isLoadingSections ? 'Loading sections...' : 'Choose a section'}
           value={this.props.selections[i]}
-          onChange={this.handleSelector.bind(this, i)} >
-          <option value="" disabled>{this.props.isLoadingSections ? "Loading sections..." : "Choose a section"}</option>
-          { sectionsForSectionGroup(sectionGroup) }
-        </select>
+          resetValue={resetValue}
+          options={sectionsForSectionGroup(sectionGroup)}
+          onChange={(val) => this.handleSelector(val, i)}
+          searchable={true}
+        />
       </div>
     ));
     return (
       <div className="add-class-panel">
         <div className="add-class-header">Add Class</div>
-        { this.props.error && <div className="add-class-error-msg">{this.props.error}</div> }
+        {this.props.error && <div className="add-class-error-msg">{this.props.error}</div>}
         <div className="add-class-form">
           <div className="add-class-form-row">
             <input
@@ -85,30 +91,41 @@ class CoursePicker extends React.Component {
               placeholder="CCN"
               type="text"
               value={this.props.ccn}
-              onChange={this.handleCCNChange.bind(this)}
+              onChange={this.handleCCNChange}
             />
-            <select
+            <Select
               className="add-class-section"
-              disabled={ !enabled.lectureSection }
-              value={ lectureSelection }
-              onChange={this.handleLectureSelector.bind(this)} >
-              <option value="" disabled>Section</option>
-              { lectureSections }
-            </select>
+              disabled={!enabled.lectureSection}
+              placeholder="Section"
+              value={lectureSelection}
+              resetValue={resetValue}
+              options={lectureSections}
+              onChange={this.handleLectureSelector}
+            />
           </div>
           <div className="add-class-form-row">
-            <select className="add-class-department outline-blue" disabled={globalDisable} value={this.props.dept} onChange={this.handleDeptChange.bind(this)} >
-                <option value="" disabled>Department</option>
-                { depts }
-            </select>
-            <select className="add-class-course-number" disabled={!enabled.deptNumber} value={this.props.deptNumber} onChange={this.handleDeptNumberChange.bind(this)} >
-                <option value="" disabled>Course Number</option>
-                { deptNumbers }
-            </select>
+            <Select
+              className="add-class-department outline-blue"
+              disabled={globalDisable}
+              placeholder="Department"
+              value={this.props.dept}
+              resetValue={resetValue}
+              onChange={this.handleDeptChange.bind(this)}
+              options={depts}
+            />
+            <Select
+              className="add-class-course-number"
+              disabled={!enabled.deptNumber}
+              placeholder="Course Number"
+              value={this.props.deptNumber}
+              resetValue={resetValue}
+              onChange={this.handleDeptNumberChange.bind(this)}
+              options={deptNumbers}
+            />
           </div>
           <div className="add-class-form-row">
             <select className="add-class-class-name" value="" disabled>
-                <option value="" disabled>{this.props.courseName || "Course Name"}</option>
+              <option value="" disabled>{this.props.courseName || "Course Name"}</option>
             </select>
             <div className="add-class-waitlist-status">Status: <span className="color-blue">{lectureAvailability}</span></div>
           </div>
@@ -120,20 +137,31 @@ class CoursePicker extends React.Component {
           </div>
         </div>
       </div>
-      )
+      );
   }
 }
 
 CoursePicker.propTypes = {
   ccn: React.PropTypes.string.isRequired,
   sectionGroups: React.PropTypes.array.isRequired,
+  isAddingCourse: React.PropTypes.bool.isRequired,
   isLoadingSections: React.PropTypes.bool.isRequired,
+  isLoadingLectureAvailability: React.PropTypes.bool.isRequired,
   dept: React.PropTypes.string.isRequired,
   deptNumber: React.PropTypes.string.isRequired,
   deptOptions: React.PropTypes.array.isRequired,
   deptNumbers: React.PropTypes.array.isRequired,
   courseName: React.PropTypes.string.isRequired,
+  error: React.PropTypes.string.isRequired,
+  lectureSection: React.PropTypes.string.isRequired,
+  lectureAvailability: React.PropTypes.string.isRequired,
+  lectureSections: React.PropTypes.array.isRequired,
   selections: React.PropTypes.array.isRequired,
+  changedCCN: React.PropTypes.func.isRequired,
+  changedDept: React.PropTypes.func.isRequired,
+  changedDeptNumber: React.PropTypes.func.isRequired,
+  changedLectureSelection: React.PropTypes.func.isRequired,
+  setSelection: React.PropTypes.func.isRequired,
 }
 
 // http://web.archive.org/web/20130826203933/http://my.opera.com/GreyWyvern/blog/show.dml/1671288

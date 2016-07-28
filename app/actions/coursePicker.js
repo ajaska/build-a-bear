@@ -15,10 +15,6 @@ export const CLEAR_COURSE = Symbol('CLEAR_COURSE');
 export const SET_SELECTION = Symbol('SET_SELECTION');
 export const CLEAR_SECTIONS = Symbol('CLEAR_SECTIONS');
 
-let ccn_indexed = require('../data/ccn_indexed.json');
-let depts = require('../data/depts.json');
-let dept_indexed = require('../data/dept_indexed.json');
-
 export function changedCCN({ccn}) {
   return (dispatch, getState) => {
     dispatch(setCCN({ccn: ccn}));

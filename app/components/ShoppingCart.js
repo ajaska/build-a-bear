@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 class ShoppingCart extends React.Component {
   onAddClick(ccn, event) {
@@ -14,12 +14,13 @@ class ShoppingCart extends React.Component {
       return (
         <div className="sc-class-item" key={i}>
           <span className="sc-course-info-name semibold">{course.course} <span className="color-blue">({course.units} Units)</span></span>
-          <div className="sc-course-info">
+          <div className="sc-course-info clearfix">
             <div className="sc-course-info-left">
-              <span className="semibold">{course.room}</span><span> | {course.time}</span><br />
+              <span className="semibold">{course.room}</span><br /><span>{course.time}</span><br />
               <span>Instructor: </span><span className="semibold">{course.instructor}</span>
             </div>
             <div className="sc-course-info-right">
+              <button className="sc-course-delete">Delete</button>
               <button className="sc-course-add" onClick={this.onAddClick.bind(this, course.id)}>Add</button>
             </div>
           </div>
@@ -31,7 +32,7 @@ class ShoppingCart extends React.Component {
         <p className="sc-header-text">This app doesn't use shopping cart, but we noticed you already have these classes in it:</p>
         { course_rows }
         <div className="sc-foot clearfix">
-          <span className="sc-clear-text">Add these classes or clear your cart.</span><button className="sc-clear-button">Clear Cart</button>
+          <span className="sc-clear-text">You can either add these classes or clear your cart.</span>
         </div>
       </div>
     )
@@ -39,7 +40,7 @@ class ShoppingCart extends React.Component {
 }
 
 ShoppingCart.propTypes = {
-  courses: PropTypes.array.isRequired
+  courses: React.PropTypes.array.isRequired
 }
 
 export default ShoppingCart;

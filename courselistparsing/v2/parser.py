@@ -6,7 +6,7 @@ import re
 Course = namedtuple('Course', ['ccn', 'dept', 'dept_number', 'section', 'type', 'units', 'title', 'room', 'days', 'start', 'end', 'instructor',])
 
 courses = []
-with open('schedule.json') as json_file:
+with open('schedule_new.json') as json_file:
     json_data = json.load(json_file)
     for course in json_data['data']:
         courses.append(Course(
