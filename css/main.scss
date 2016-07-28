@@ -7,6 +7,8 @@ $primary-gray: #EEEEEE;
 $font-stack: 'Calibre-Regular', sans-serif;
 $font-semibold: 'Calibre-Semibold', sans-serif;
 $font-bold: 'Calibre-Bold', sans-serif;
+$medium-break: 1000px;
+$small-break: 600px;
 
 @font-face {
   font-family: 'Calibre-Regular';
@@ -36,6 +38,7 @@ $font-bold: 'Calibre-Bold', sans-serif;
 
 // CSS for the main containers
 .main-container {
+  position: relative;
   max-width: 100%;
   margin-right: 2rem;
   margin-left: 2rem;
@@ -45,6 +48,15 @@ $font-bold: 'Calibre-Bold', sans-serif;
   width: 72%;
   float: left;
   display: inline-block;
+}
+
+@media (max-width: $medium-break) {
+  .side-panel-container {
+    display: none !important;
+  }
+  .main-data-container {
+    width: 100%;
+  }
 }
 
 .side-panel-container {
@@ -161,56 +173,89 @@ a {
   overflow: visible;
 }
 
+.rm-margin-bottom {
+  margin-bottom: 0px !important;
+}
+
+// Sticky Footer for mobile / tablet
+// @media (max-width: $medium-break) {
+//
+//   .site-footer {
+//     position: absolute;
+//     bottom: 0;
+//   }
+// }
+
+
 // Searchable dropdown overrides
-.ui.fluid.search.selection.dropdown {
-  margin: 0rem;
-  padding: 0rem;
-  border-width: 1px;
-  border-style: solid;
-  border-color: rgb(166, 166, 166);
-  min-height: 0px;
-  border-radius: 0rem;
+.Select {
+  height: 100% !important;
 }
 
-.default.text {
-  margin: 0rem;
-  padding: 0.3rem 0rem 0rem 0.1rem;
-  font-size: 0.8rem;
-  color: black;
-  font-family: $font-stack;
+.Select.is-disabled {
+  border: 1px solid rgb(166, 166, 166) !important;
 }
 
-.dropdown.icon {
-  padding: 0.1rem 0.2rem 0rem 0rem !important;
-  color: $primary-blue !important;
-}
-
-input.search {
+.Select-control {
+  border-radius: 0rem !important;
+  font-size: 13px !important;
   margin: 0rem !important;
-  padding: 0.2rem 0rem 0.05rem 0.1rem !important
+  padding: 0rem !important;
+  border: 0rem !important;
+  height: 13px !important;
 }
 
-.message {
-  font-size: 0.8rem !important;
-  padding: 0.2rem 0rem 0.05rem 0.1rem !important
+.Select-placeholder {
+  height: 13px !important;
+  line-height: 13px !important;
+  padding-top: 0.4rem !important;
+  padding-left: 0.3rem !important;
+  color: black !important;
+  overflow: visible !important;
 }
 
-.ui.search.dropdown > .text {
-  font-size: 0.8rem !important;
-  padding: 0.2rem 0rem 0.05rem 0.1rem !important
+.Select-input {
+  height: 13px !important;
+  padding-left: 0.3rem !important;
+  padding-top: 0.15rem !important;
 }
 
-.ui.selection.dropdown .menu > .item.selected {
-  background-color: $primary-blue;
-  color: white;
+.Select-input > input {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+  height: 13px !important;
+  box-sizing: border-box !important;
+  width: 80% !important;
+  max-width: 100% !important;
 }
 
-.ui.selection.dropdown .menu > .item {
+span.Select-arrow-zone {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+}
+
+.Select-arrow {
+  border-color: $primary-blue transparent transparent !important;
+}
+
+.Select-value, .Select-value-label {
+  line-height: 13px !important;
+}
+
+.Select-value {
+  padding-top: 0.4rem !important;
+  padding-left: 0.3rem !important;
+}
+
+.Select-option {
+  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
   margin: 0rem !important;
-  padding: 0.3rem 0rem 0rem 0.1rem !important;
-  font-size: 0.8rem !important;
-  font-family: $font-stack !important;
+  font-size: 13px !important;
 }
+
+.Select-clear {
+  height: 5px !important;
+  padding-top: 0.2rem !important;
+}
+
 
 // Error page
 
@@ -357,8 +402,13 @@ input.search {
   margin-top: 0rem;
   margin-left: 2rem;
   font-size: 1.2rem;
-  padding-top: 0.75rem;
+  padding-top: 1rem;
   padding-bottom: 0.75rem;
+}
+
+.my-academics-link-wrapper {
+  margin-top: 1.8rem;
+  margin-bottom: 0.7rem;
 }
 
 .my-academics-link {
@@ -649,7 +699,7 @@ input.search {
 
 .sc-class-item {
   padding: 0.75rem;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0rem;
   border-radius: 0.25rem;
   background-color: white;
 }
@@ -745,27 +795,29 @@ input.search {
 
 .add-class-CCN {
   width: 25%;
+  float: left;
 }
 
 .add-class-section {
   width: 71%;
-  // why doesn't this work if the width is 75% and no margin?
-  margin-left: 2%;
+  float: right;
+  // why do I need to translate this down wtf
+  display: inline-block !important;
 }
 
 .add-class-form-row {
+  height: 1.5rem;
   margin-bottom: 0.35rem;
 }
 
 .add-class-department {
-  width: 47% !important;
-  display: inline-block !important;
+  width: 49% !important;
+  float: left;
 }
 
 .add-class-course-number {
-  display: inline-block !important;
-  width: 48% !important;
-  margin-left: 2% !important;
+  float: right;
+  width: 49% !important;
 }
 
 .add-class-class-name {
@@ -780,7 +832,7 @@ input.search {
 .add-class-waitlist-status {
   display: inline-block;
   width: 37%;
-  margin-left: 1%;
+  margin-left: 2%;
   font-size: 0.8rem;
 }
 
@@ -799,7 +851,6 @@ input.search {
 }
 
 .add-class-submit-button {
-  margin-top: 0.8rem;
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem;
 
