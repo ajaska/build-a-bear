@@ -298,11 +298,12 @@ export function addCourse({ccn, selections}) {
     }
     return addedToShoppingCart.then(({formData, courses}) => {
       let selectableCourses = courses.filter(course => course.selectable);
+      let positions = selectableCourses.map(course => courses.indexOf(course));
       let courseToAddPos = courses.map(course => course.id).indexOf(ccn);
 
       return dispatch(addFromShoppingCart({
         formData: formData,
-        positions: selectableCourses,
+        positions,
         positionToEnroll: courseToAddPos,
       }))
     }).then(function({formData, enrolledCourses, shoppingCartCourses}) {
