@@ -1,7 +1,8 @@
 {
   "main": "./index.js",
   "scripts": {
-	  "build": "babel-node --presets es2015 build.js"
+	  "build": "babel-node --presets es2015 build.js",
+	  "lint": "eslint index.js app; exit 0"
   },
   "dependencies": {
     "babel-preset-react": "^6.11.1",

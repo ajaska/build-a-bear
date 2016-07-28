@@ -39,9 +39,6 @@ function initialize() {
   }
 }
 
-initialize();
-goReact();
-
 function goReact() {
   let store = configureStore();
   Promise.all([
@@ -58,3 +55,6 @@ function goReact() {
     );
   });
 }
+
+initialize();
+goReact();
