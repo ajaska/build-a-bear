@@ -41,6 +41,9 @@ rollup({
 }).then(function (bundle) {
   const result = bundle.generate({
     format: 'iife',
+    globals: {
+      jquery: '$',
+    },
   });
 
   fs.writeFileSync( 'meme-app.js', result.code );
