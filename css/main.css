@@ -1,160 +1,158 @@
-.monday {
+.Mo {
   left: 1%; }
 
-.tuesday {
+.Tu {
   left: 21%; }
 
-.wednesday {
+.We {
   left: 41%; }
 
-.thursday {
+.Th {
   left: 61%; }
 
-.friday {
+.Fr {
   left: 81%; }
 
-.am-630 {
-  top: calc(30px + 0 * 50px); }
+.start-630 {
+  top: calc(30px + 0 * 70px); }
 
-.am-7 {
-  top: calc(30px + 1 * 50px); }
+.start-700 {
+  top: calc(30px + 1 * 70px); }
 
-.am-730 {
-  top: calc(30px + 2 * 50px); }
+.start-730 {
+  top: calc(30px + 2 * 70px); }
 
-.am-8 {
-  top: calc(30px + 3 * 50px); }
+.start-800 {
+  top: calc(30px + 3 * 70px); }
 
-.am-830 {
-  top: calc(30px + 4 * 50px); }
+.start-830 {
+  top: calc(30px + 4 * 70px); }
 
-.am-9 {
-  top: calc(30px + 5 * 50px); }
+.start-900 {
+  top: calc(30px + 5 * 70px); }
 
-.am-930 {
-  top: calc(30px + 6 * 50px); }
+.start-930 {
+  top: calc(30px + 6 * 70px); }
 
-.am-10 {
-  top: calc(30px + 7 * 50px); }
+.start-1000 {
+  top: calc(30px + 7 * 70px); }
 
-.am-1030 {
-  top: calc(30px + 8 * 50px); }
+.start-1030 {
+  top: calc(30px + 8 * 70px); }
 
-.am-11 {
-  top: calc(30px + 9 * 50px); }
+.start-1100 {
+  top: calc(30px + 9 * 70px); }
 
-.am-1130 {
-  top: calc(30px + 10 * 50px); }
+.start-1130 {
+  top: calc(30px + 10 * 70px); }
 
-.pm-12 {
-  top: calc(30px + 11 * 50px); }
+.start-1200 {
+  top: calc(30px + 11 * 70px); }
 
-.pm-1230 {
-  top: calc(30px + 12 * 50px); }
+.start-1230 {
+  top: calc(30px + 12 * 70px); }
 
-.pm-1 {
-  top: calc(30px + 13 * 50px); }
+.start-1300 {
+  top: calc(30px + 13 * 70px); }
 
-.pm-130 {
-  top: calc(30px + 14 * 50px); }
+.start-1350 {
+  top: calc(30px + 14 * 70px); }
 
-.pm-2 {
-  top: calc(30px + 15 * 50px); }
+.start-1400 {
+  top: calc(30px + 15 * 70px); }
 
-.pm-230 {
-  top: calc(30px + 16 * 50px); }
+.start-1450 {
+  top: calc(30px + 16 * 70px); }
 
-.pm-3 {
-  top: calc(30px + 17 * 50px); }
+.start-1500 {
+  top: calc(30px + 17 * 70px); }
 
-.pm-330 {
-  top: calc(30px + 18 * 50px); }
+.start-1550 {
+  top: calc(30px + 18 * 70px); }
 
-.pm-4 {
-  top: calc(30px + 19 * 50px); }
+.start-1600 {
+  top: calc(30px + 19 * 70px); }
 
-.pm-430 {
-  top: calc(30px + 20 * 50px); }
+.start-1650 {
+  top: calc(30px + 20 * 70px); }
 
-.pm-5 {
-  top: calc(30px + 21 * 50px); }
+.start-1700 {
+  top: calc(30px + 21 * 70px); }
 
-.pm-530 {
-  top: calc(30px + 22 * 50px); }
+.start-1750 {
+  top: calc(30px + 22 * 70px); }
 
-.pm-6 {
-  top: calc(30px + 23 * 50px); }
+.start-1800 {
+  top: calc(30px + 23 * 70px); }
 
-.pm-630 {
-  top: calc(30px + 24 * 50px); }
+.start-1850 {
+  top: calc(30px + 24 * 70px); }
 
-.pm-7 {
-  top: calc(30px + 25 * 50px); }
+.start-1900 {
+  top: calc(30px + 25 * 70px); }
 
-.pm-730 {
-  top: calc(30px + 26 * 50px); }
+.start-1950 {
+  top: calc(30px + 26 * 70px); }
 
-.pm-8 {
-  top: calc(30px + 27 * 50px); }
+.start-2000 {
+  top: calc(30px + 27 * 70px); }
 
-.pm-830 {
-  top: calc(30px + 28 * 50px); }
+.start-2050 {
+  top: calc(30px + 28 * 70px); }
 
-.pm-9 {
-  top: calc(30px + 29 * 50px); }
+.start-2100 {
+  top: calc(30px + 29 * 70px); }
 
-.pm-930 {
-  top: calc(30px + 30 * 50px); }
+.start-2150 {
+  top: calc(30px + 30 * 70px); }
 
-.pm-10 {
-  top: calc(30px + 31 * 50px); }
+.start-2200 {
+  top: calc(30px + 31 * 70px); }
 
-.cal-body .lecture-entry .block-1 {
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  height: calc(1 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-2 {
-  height: calc(2 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-3 {
-  height: calc(3 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-4 {
-  height: calc(4 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-5 {
-  height: calc(5 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-6 {
-  height: calc(6 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-7 {
-  height: calc(7 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-8 {
-  height: calc(8 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-9 {
-  height: calc(9 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .lecture-entry .block-10 {
-  height: calc(10 * 50px - 10px - 0.5rem - 27px * 2); }
-.cal-body .other-entry-body .block-1 {
-  text-indent: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  height: calc(1 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-2 {
-  height: calc(2 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-3 {
-  height: calc(3 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-4 {
-  height: calc(4 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-5 {
-  height: calc(5 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-6 {
-  height: calc(6 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-7 {
-  height: calc(7 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-8 {
-  height: calc(8 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-9 {
-  height: calc(9 * 50px - 10px - 0.5rem); }
-.cal-body .other-entry-body .block-10 {
-  height: calc(10 * 50px - 10px - 0.5rem); }
+.cal-body .lecture-entry {
+  text-overflow: ellipsis; }
+  .cal-body .lecture-entry .block-30 {
+    height: calc(1 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-100 {
+    height: calc(2 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-130 {
+    height: calc(3 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-200 {
+    height: calc(4 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-230 {
+    height: calc(5 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-300 {
+    height: calc(6 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-330 {
+    height: calc(7 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-400 {
+    height: calc(8 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-430 {
+    height: calc(9 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-500 {
+    height: calc(10 * 70px - 10px - 0.5rem - 27px * 2); }
+.cal-body .other-entry-body {
+  text-overflow: ellipsis; }
+  .cal-body .other-entry-body .block-30 {
+    height: calc(1 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-100 {
+    height: calc(2 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-130 {
+    height: calc(3 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-200 {
+    height: calc(4 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-230 {
+    height: calc(5 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-300 {
+    height: calc(6 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-330 {
+    height: calc(7 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-400 {
+    height: calc(8 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-430 {
+    height: calc(9 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-500 {
+    height: calc(10 * 70px - 10px - 0.5rem); }
 
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
@@ -203,17 +201,17 @@ q:before, q:after {
 
 @font-face {
   font-family: 'Calibre-Regular';
-  src: url("//js.six.ph/fonts/Calibre-Regular.woff"); }
+  src: url("../fonts/Calibre-Regular.woff"); }
 @font-face {
   font-family: 'Calibre-Semibold';
-  src: url("//js.six.ph/fonts/Calibre-Semibold.woff"); }
+  src: url("../fonts/Calibre-Semibold.woff"); }
 @font-face {
   font-family: 'Calibre-Bold';
-  src: url("//js.six.ph/fonts/Calibre-Bold.woff"); }
+  src: url("../fonts/Calibre-Bold.woff"); }
 @font-face {
   font-family: 'Icons';
-  src: url("//js.six.ph/fonts/icons.eot");
-  src: url("//js.six.ph/fonts/icons.eot?#iefix") format("embedded-opentype"), url("//js.six.ph/fonts/icons.woff") format("woff"), url("//js.six.ph/fonts/icons.ttf") format("truetype"), url("//js.six.ph/fonts/icons.svg#icons") format("svg");
+  src: url("../fonts/icons.eot");
+  src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"), url("../fonts/icons.woff") format("woff"), url("../fonts/icons.ttf") format("truetype"), url("../fonts/icons.svg#icons") format("svg");
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

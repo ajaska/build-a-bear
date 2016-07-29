@@ -1,20 +1,25 @@
 import React from 'react';
 
 function Calendar({ courses }) {
-  console.log(courses);
   const sc = courses;
-  console.log(sc[0].lecture);
   const lecture = Object.keys(sc).filter(course => sc[course].lecture);
   const other = Object.keys(sc).filter(course => !sc[course].lecture);
-  const genEntries = (key) => key.map((key, i) => (
-    <div className={sc[key].day + " lecture-entry monday start-" + sc[key].start} key={i}>
+  const genLectures = (key) => key.map((key, i) => (
+    <div className={sc[key].day + " lecture-entry start-" + sc[key].start} key={i}>
       <div className="lecture-entry-header semibold">{sc[key].start}</div>
-      <div className={"lecture-entry-body block-" + (parseInt(sc[key].length) / 30)}>{sc[key].desc} <br />{sc[key].room} </div>
+      <div className={"lecture-entry-body block-" + sc[key].length}>{sc[key].desc} <br />{sc[key].room} </div>
       <div className="lecture-entry-footer"></div>
     </div>
   ));
 
-  const lectures = genEntries(lecture);
+  const genNonLectures = (key) => key.map((key, i) => (
+    <div className={sc[key].day + " other-entry start-" + sc[key].start} key={i}>
+      <div className={"lecture-entry-body block-" + sc[key].length}><span className="semibold">{sc[key].start}</span><br />{sc[key].desc} <br />{sc[key].room} </div>
+    </div>
+  ));
+
+  const lectures = genLectures(lecture);
+  const others = genNonLectures(other);
 
   return (
     <div className="cal-enroll">
@@ -33,10 +38,8 @@ function Calendar({ courses }) {
         <div className="cal-dotw-column friday-column"></div>
 
         { lectures }
+        { others }
 
-        <div className="other-entry monday am-830">
-          <div className="other-entry-body block-4"><span className="semibold">11 - 1PM</span> <br />Math 113 Lec 006 <br /> 420 Cory Hall</div>
-        </div>
 
       </div>
     </div>
