@@ -1,5 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
+import $ from 'jquery'; // eslint-disable-line import/no-unresolved
+
+import { alphanumSort } from '../helpers/sort';
 
 class CoursePicker extends React.Component {
   constructor(props) {
@@ -7,25 +10,27 @@ class CoursePicker extends React.Component {
     this.handleCCNChange = this.handleCCNChange.bind(this);
     this.handleSelector = this.handleSelector.bind(this);
     this.handleLectureSelector = this.handleLectureSelector.bind(this);
+    this.handleDeptChange = this.handleDeptChange.bind(this);
+    this.handleDeptNumberChange = this.handleDeptNumberChange.bind(this);
   }
 
   handleCCNChange(event) {
     this.props.changedCCN({ ccn: event.target.value });
   }
 
-  handleDeptChange({value}) {
+  handleDeptChange({ value }) {
     this.props.changedDept({ dept: value });
   }
 
-  handleDeptNumberChange({value}) {
+  handleDeptNumberChange({ value }) {
     this.props.changedDeptNumber({ deptNumber: value });
   }
 
-  handleSelector({value}, which) {
+  handleSelector({ value }, which) {
     this.props.setSelection({ which, selection: value });
   }
 
-  handleLectureSelector({value}) {
+  handleLectureSelector({ value }) {
     this.props.changedLectureSelection({
       selection: value,
       lectureSections: this.props.lectureSections,
@@ -38,7 +43,7 @@ class CoursePicker extends React.Component {
 
   render() {
     let lectureSections = this.props.lectureSections.map((lectureSection, i) => (
-      {value: i.toString(), label: lectureSection.toString()}
+      { value: i.toString(), label: lectureSection.toString() }
     ));
     let lectureSelection = (this.props.lectureSections.length === 0 ?
                             '' : this.props.lectureSection);
@@ -62,9 +67,9 @@ class CoursePicker extends React.Component {
     };
     const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => ({
       value: i.toString(),
-      label: `${section.id} | ${section.time} | ${section.room} | ${section.instructor} | ${section.availability}`
+      label: `${section.id} | ${section.time} | ${section.room} | ${section.instructor} | ${section.availability}`,
     })));
-    let resetValue = {value: ""};
+    let resetValue = { value: '' };
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
       <div className="add-class-form-row" key={i}>
         <Select
@@ -75,7 +80,7 @@ class CoursePicker extends React.Component {
           resetValue={resetValue}
           options={sectionsForSectionGroup(sectionGroup)}
           onChange={(val) => this.handleSelector(val, i)}
-          searchable={true}
+          searchable
         />
       </div>
     ));
@@ -87,7 +92,7 @@ class CoursePicker extends React.Component {
           <div className="add-class-form-row">
             <input
               className="add-class-CCN outline-blue"
-              disabled={ globalDisable }
+              disabled={globalDisable}
               placeholder="CCN"
               type="text"
               value={this.props.ccn}
@@ -110,7 +115,7 @@ class CoursePicker extends React.Component {
               placeholder="Department"
               value={this.props.dept}
               resetValue={resetValue}
-              onChange={this.handleDeptChange.bind(this)}
+              onChange={this.handleDeptChange}
               options={depts}
             />
             <Select
@@ -119,21 +124,33 @@ class CoursePicker extends React.Component {
               placeholder="Course Number"
               value={this.props.deptNumber}
               resetValue={resetValue}
-              onChange={this.handleDeptNumberChange.bind(this)}
+              onChange={this.handleDeptNumberChange}
               options={deptNumbers}
             />
           </div>
           <div className="add-class-form-row">
             <select className="add-class-class-name" value="" disabled>
-              <option value="" disabled>{this.props.courseName || "Course Name"}</option>
+              <option value="" disabled>{this.props.courseName || 'Course Name'}</option>
             </select>
-            <div className="add-class-waitlist-status">Status: <span className="color-blue">{lectureAvailability}</span></div>
+            <div className="add-class-waitlist-status">
+              Status: <span className="color-blue">{lectureAvailability}</span>
+            </div>
           </div>
 
-          { sectionSelectors }
+          {sectionSelectors}
           <div className="add-class-form-row add-class-waitlist-row">
-            <label className="add-class-waitlist">Waitlist class if full<input className="add-class-waitlist-button" type="checkbox" name="waitlist" id="waitlist"/></label>
-            <button className="add-class-submit-button" onClick={this.handleClickedAdd.bind(this)} disabled={globalDisable} id="add-class">Add</button>
+            <label className="add-class-waitlist">
+              Waitlist class if full
+              <input className="add-class-waitlist-button" type="checkbox" name="waitlist" id="waitlist" />
+            </label>
+            <button
+              className="add-class-submit-button"
+              onClick={this.handleClickedAdd}
+              disabled={globalDisable}
+              id="add-class"
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
@@ -162,44 +179,7 @@ CoursePicker.propTypes = {
   changedDeptNumber: React.PropTypes.func.isRequired,
   changedLectureSelection: React.PropTypes.func.isRequired,
   setSelection: React.PropTypes.func.isRequired,
-}
-
-// http://web.archive.org/web/20130826203933/http://my.opera.com/GreyWyvern/blog/show.dml/1671288
-function alphanumSort (arr, caseInsensitive) {
-  for (var z = 0, t; t = arr[z]; z++) {
-    arr[z] = [];
-    var x = 0, y = -1, n = 0, i, j;
-
-    while (i = (j = t.charAt(x++)).charCodeAt(0)) {
-      var m = (i == 46 || (i >=48 && i <= 57));
-      if (m !== n) {
-        arr[z][++y] = "";
-        n = m;
-      }
-      arr[z][y] += j;
-    }
-  }
-
-  arr.sort(function(a, b) {
-    for (var x = 0, aa, bb; (aa = a[x]) && (bb = b[x]); x++) {
-      if (caseInsensitive) {
-        aa = aa.toLowerCase();
-        bb = bb.toLowerCase();
-      }
-      if (aa !== bb) {
-        var c = Number(aa), d = Number(bb);
-        if (c == aa && d == bb) {
-          return c - d;
-        } else return (aa > bb) ? 1 : -1;
-      }
-    }
-    return a.length - b.length;
-  });
-
-  for (var z = 0; z < arr.length; z++)
-    arr[z] = arr[z].join("");
-  return arr;
-}
+};
 
 
 export default CoursePicker;

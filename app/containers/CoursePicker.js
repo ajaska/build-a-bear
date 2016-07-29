@@ -1,19 +1,20 @@
 import { connect } from 'react-redux';
 import CoursePicker from '../components/CoursePicker';
-import { changedCCN, changedDept, changedDeptNumber, clickedAdd, setSelection, changedLectureSelection } from '../actions/coursePicker';
+import { changedCCN, changedDept, changedDeptNumber,
+         setSelection, changedLectureSelection } from '../actions/coursePicker';
 
 import { allDepts, deptNumbersForDept } from '../helpers/everything';
 
 function ccnInCart(state) {
-  let courses = state.shoppingCart.toJS().courses;
-  let ccn = state.coursePicker.toJS().ccn;
-  return courses.filter(course => course.id === ccn).length > 0
+  const courses = state.shoppingCart.toJS().courses;
+  const ccn = state.coursePicker.toJS().ccn;
+  return courses.filter(course => course.id === ccn).length > 0;
 }
 
-const mapStateToProps = (state, ownProps) => {
-  let cpState = state.coursePicker.toJS();
-  let lectureSection = cpState.lectureSections[cpState.lectureSection];
-  let courseName = "";
+const mapStateToProps = (state) => {
+  const cpState = state.coursePicker.toJS();
+  const lectureSection = cpState.lectureSections[cpState.lectureSection];
+  let courseName = '';
   if (lectureSection) {
     courseName = lectureSection.courseName;
   }
@@ -23,29 +24,27 @@ const mapStateToProps = (state, ownProps) => {
       ccnInCart: ccnInCart(state),
       deptOptions: allDepts().sort(),
       deptNumbers: deptNumbersForDept(cpState.dept),
-      courseName: courseName,
+      courseName,
     }
-  )
-}
+  );
+};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    changedCCN: (ccn) => {
-      dispatch(changedCCN(ccn))
-    },
-    changedDept: (dept) => {
-      dispatch(changedDept(dept))
-    },
-    changedDeptNumber: (deptNumber) => {
-      dispatch(changedDeptNumber(deptNumber))
-    },
-    setSelection: (selection) => {
-      dispatch(setSelection(selection))
-    },
-    changedLectureSelection: (selection) => {
-      dispatch(changedLectureSelection(selection))
-    },
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  changedCCN: (ccn) => {
+    dispatch(changedCCN(ccn));
+  },
+  changedDept: (dept) => {
+    dispatch(changedDept(dept));
+  },
+  changedDeptNumber: (deptNumber) => {
+    dispatch(changedDeptNumber(deptNumber));
+  },
+  setSelection: (selection) => {
+    dispatch(setSelection(selection));
+  },
+  changedLectureSelection: (selection) => {
+    dispatch(changedLectureSelection(selection));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursePicker);

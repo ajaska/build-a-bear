@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from 'jquery';
+import $ from 'jquery'; // eslint-disable-line import/no-unresolved
 
 class AddCourseModal extends React.Component {
   constructor(props) {
