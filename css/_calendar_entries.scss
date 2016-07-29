@@ -2,23 +2,23 @@ $half-hour-block-size: 50px;
 $visual-gap-size: 10px;
 
 // Absolute left positioning
-.monday {
+.Mo {
   left: 1%;
 }
 
-.tuesday {
+.Tu {
   left: 21%;
 }
 
-.wednesday {
+.We {
   left: 41%;
 }
 
-.thursday {
+.Th {
   left: 61%;
 }
 
-.friday {
+.Fr {
   left: 81%;
 }
 
@@ -30,131 +30,131 @@ $visual-gap-size: 10px;
 // subtract 50 * that difference from all class heights
 // 2) Don't use these declarations, add inline-styling on render
 
-.am-630 {
+.start-630 {
   top: calc(30px + 0 * #{$half-hour-block-size});
 }
 
-.am-7 {
+.start-700 {
   top: calc(30px + 1 * #{$half-hour-block-size});
 }
 
-.am-730 {
+.start-730 {
   top: calc(30px + 2 * #{$half-hour-block-size});
 }
 
-.am-8 {
+.start-800 {
   top: calc(30px + 3 * #{$half-hour-block-size});
 }
 
-.am-830 {
+.start-830 {
   top: calc(30px + 4 * #{$half-hour-block-size});
 }
 
-.am-9 {
+.start-900 {
   top: calc(30px + 5 * #{$half-hour-block-size});
 }
 
-.am-930 {
+.start-930 {
   top: calc(30px + 6 * #{$half-hour-block-size});
 }
 
-.am-10 {
+.start-1000 {
   top: calc(30px + 7 * #{$half-hour-block-size});
 }
 
-.am-1030 {
+.start-1030 {
   top: calc(30px + 8 * #{$half-hour-block-size});
 }
 
-.am-11 {
+.start-1100 {
   top: calc(30px + 9 * #{$half-hour-block-size});
 }
 
-.am-1130 {
+.start-1130 {
   top: calc(30px + 10 * #{$half-hour-block-size});
 }
 
-.pm-12 {
+.start-1200 {
   top: calc(30px + 11 * #{$half-hour-block-size});
 }
 
-.pm-1230 {
+.start-1230 {
   top: calc(30px + 12 * #{$half-hour-block-size});
 }
 
-.pm-1 {
+.start-1300 {
   top: calc(30px + 13 * #{$half-hour-block-size});
 }
 
-.pm-130 {
+.start-1350 {
   top: calc(30px + 14 * #{$half-hour-block-size});
 }
 
-.pm-2 {
+.start-1400 {
   top: calc(30px + 15 * #{$half-hour-block-size});
 }
 
-.pm-230 {
+.start-1450 {
   top: calc(30px + 16 * #{$half-hour-block-size});
 }
 
-.pm-3 {
+.start-1500 {
   top: calc(30px + 17 * #{$half-hour-block-size});
 }
 
-.pm-330 {
+.start-1550 {
   top: calc(30px + 18 * #{$half-hour-block-size});
 }
 
-.pm-4 {
+.start-1600 {
   top: calc(30px + 19 * #{$half-hour-block-size});
 }
 
-.pm-430 {
+.start-1650 {
   top: calc(30px + 20 * #{$half-hour-block-size});
 }
 
-.pm-5 {
+.start-1700 {
   top: calc(30px + 21 * #{$half-hour-block-size});
 }
 
-.pm-530 {
+.start-1750 {
   top: calc(30px + 22 * #{$half-hour-block-size});
 }
 
-.pm-6 {
+.start-1800 {
   top: calc(30px + 23 * #{$half-hour-block-size});
 }
 
-.pm-630 {
+.start-1850 {
   top: calc(30px + 24 * #{$half-hour-block-size});
 }
 
-.pm-7 {
+.start-1900 {
   top: calc(30px + 25 * #{$half-hour-block-size});
 }
 
-.pm-730 {
+.start-1950 {
   top: calc(30px + 26 * #{$half-hour-block-size});
 }
 
-.pm-8 {
+.start-2000 {
   top: calc(30px + 27 * #{$half-hour-block-size});
 }
 
-.pm-830 {
+.start-2050 {
   top: calc(30px + 28 * #{$half-hour-block-size});
 }
 
-.pm-9 {
+.start-2100 {
   top: calc(30px + 29 * #{$half-hour-block-size});
 }
 
-.pm-930 {
+.start-2150 {
   top: calc(30px + 30 * #{$half-hour-block-size});
 }
 
-.pm-10 {
+.start-2200 {
   top: calc(30px + 31 * #{$half-hour-block-size});
 }
 
