@@ -582,18 +582,6 @@ span.Select-arrow-zone {
   border-left: 1px solid $primary-gray;
 }
 
-// CSS rules for lecture entries
-
-// the header is 50px "worth of shit"
-
-// Monday = 0, Tuesday = 1, etc...
-// the left attribute is the (day of the week * 20% + 1%);
-// one half hour is worth 45 pixels
-    // we subtract 5 when the class ends to give a space before the next one starts
-    // 2 hour class -> 4 * 80 - 5
-    // for the body of a lecture, the height is half hours * 80 - 5 - 27 * 2
-    // the top value is 30 + 80 * half hours
-
 .lecture-entry {
   width: calc(18% - 4px);
   text-align: left;
