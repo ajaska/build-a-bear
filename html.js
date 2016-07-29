@@ -6,7 +6,7 @@ export const head = `
 <link rel="stylesheet" type="text/css" href="//js.six.ph/css/semantic/transition.min.css">
 <link rel="stylesheet" type="text/css" href="//js.six.ph/css/semantic/icon.min.css">
 <link rel="stylesheet" href="https://npmcdn.com/react-select/dist/react-select.css">
-<title>Build-a-bear</title>
+<title>Build-a-Bear</title>
 `
 
 export const body = `
