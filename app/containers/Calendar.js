@@ -18,7 +18,7 @@ function timeToInt(time, am) {
 function prettyTime(start, startAM, end, endAM) {
   const startHour = (Math.floor(start / 100) - 1) % 12 + 1;
   const startMin = start % 100;
-  const endHour = (Math.floor(end / 100) -1 ) % 12 + 1;
+  const endHour = (Math.floor(end / 100) - 1) % 12 + 1;
   const endMin = end % 100;
 
   let startString;

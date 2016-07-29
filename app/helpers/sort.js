@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // http://web.archive.org/web/20130826203933/http://my.opera.com/GreyWyvern/blog/show.dml/1671288
 export function alphanumSort (arr, caseInsensitive) {
   for (var z = 0, t; t = arr[z]; z++) {

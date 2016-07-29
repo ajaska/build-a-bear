@@ -19,24 +19,20 @@ class CoursePicker extends React.Component {
   }
 
   handleDeptChange({ value }) {
-    if (!value) { value = ''; }
-    this.props.changedDept({ dept: value });
+    this.props.changedDept({ dept: value || '' });
   }
 
   handleDeptNumberChange({ value }) {
-    if (!value) { value = ''; }
-    this.props.changedDeptNumber({ deptNumber: value });
+    this.props.changedDeptNumber({ deptNumber: value || '' });
   }
 
   handleSelector({ value }, which) {
-    if (!value) { value = ''; }
-    this.props.setSelection({ which, selection: value });
+    this.props.setSelection({ which, selection: value || '' });
   }
 
   handleLectureSelector({ value }) {
-    if (!value) { value = ''; }
     this.props.changedLectureSelection({
-      selection: value,
+      selection: value || '',
       lectureSections: this.props.lectureSections,
     });
   }
@@ -83,7 +79,7 @@ class CoursePicker extends React.Component {
           value={this.props.selections[i]}
           resetValue={resetValue}
           options={sectionsForSectionGroup(sectionGroup)}
-          matchPos='start'
+          matchPos="start"
           onChange={(val) => this.handleSelector(val, i)}
           searchable
         />
@@ -121,7 +117,7 @@ class CoursePicker extends React.Component {
               placeholder="Department"
               value={this.props.dept}
               resetValue={resetValue}
-              matchPos='start'
+              matchPos="start"
               onChange={this.handleDeptChange}
               options={depts}
             />
@@ -131,7 +127,7 @@ class CoursePicker extends React.Component {
               placeholder="Course Number"
               value={this.props.deptNumber}
               resetValue={resetValue}
-              matchPos='start'
+              matchPos="start"
               onChange={this.handleDeptNumberChange}
               options={deptNumbers}
             />
@@ -149,7 +145,12 @@ class CoursePicker extends React.Component {
           <div className="add-class-form-row add-class-waitlist-row">
             <label className="add-class-waitlist">
               Waitlist class if full
-              <input className="add-class-waitlist-button" type="checkbox" name="waitlist" id="waitlist" />
+              <input
+                className="add-class-waitlist-button"
+                type="checkbox"
+                name="waitlist"
+                id="waitlist"
+              />
             </label>
             <button
               className="add-class-submit-button"

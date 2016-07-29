@@ -73,7 +73,7 @@ export function parseResponse(doc) {
   info.formData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
 
   const warning = doc.querySelector('.SSSMSGWARNINGTEXT');
-  if (warning && info.pageName != pages.CANCEL_PAGE) {
+  if (warning && info.pageName !== pages.CANCEL_PAGE) {
     throw new Error(warning.innerText);
   }
 

@@ -40,22 +40,12 @@ export default function (state = defaultState, action) {
     case ActionType.SET_DEPT_NUMBER:
       return defaultState.set('deptNumber', action.deptNumber)
                          .set('dept', state.get('dept'));
-    case ActionType.CLEAR_CCN:
-      return state.set('ccn', defaultState.get('ccn'));
-    case ActionType.CLEAR_DEPT:
-      return state.set('dept', defaultState.get('dept'))
-                  .set('deptNumber', defaultState.get('deptNumber'));
-    case ActionType.CLEAR_SECTIONS:
-      return state.set('sectionGroups', defaultState.get('sectionGroups'))
-                  .set('selections', defaultState.get('selections'));
     case ActionType.SET_SELECTION:
       return state.setIn(['selections', action.which], action.selection);
     case APIActionType.REQUEST_COURSE_ADD:
       return state.set('isAddingCourse', true);
     case APIActionType.RECEIVE_COURSE_ADD:
-      return state.set('dept', defaultState.get('dept'))
-                  .set('deptNumber', defaultState.get('deptNumber'))
-                  .set('ccn', defaultState.get('ccn'));
+      return defaultState;
     case APIActionType.REQUEST_SECTIONS:
       return state.set('isLoadingSections', true)
                   .set('isLoadingLectureAvailability', true);
