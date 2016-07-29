@@ -337,7 +337,7 @@ a {
   margin: 0rem !important;
   padding: 0rem !important;
   border: 0rem !important;
-  height: 13px !important; }
+  height: 100% !important; }
 
 .Select-placeholder {
   height: 13px !important;
@@ -632,15 +632,12 @@ span.Select-arrow-zone {
 .cal-dotw-column {
   display: inline-block;
   height: 100%;
-  width: calc(20% - 4px);
+  width: calc(20% - 1.2px);
   border-bottom: 1px solid #EEEEEE;
   border-right: 1px solid #EEEEEE; }
 
 .monday-column {
   border-left: 1px solid #EEEEEE; }
-
-.friday-column {
-  width: calc(20% - 5px); }
 
 .lecture-entry {
   width: calc(18% - 4px);

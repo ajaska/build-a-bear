@@ -202,7 +202,7 @@ a {
   margin: 0rem !important;
   padding: 0rem !important;
   border: 0rem !important;
-  height: 13px !important;
+  height: 100% !important;
 }
 
 .Select-placeholder {
@@ -573,17 +573,13 @@ span.Select-arrow-zone {
 .cal-dotw-column {
   display: inline-block;
   height: 100%;
-  width: calc(20% - 4px);
+  width: calc(20% - 1.2px);
   border-bottom: 1px solid $primary-gray;
   border-right: 1px solid $primary-gray;
 }
 
 .monday-column {
   border-left: 1px solid $primary-gray;
-}
-
-.friday-column {
-  width: calc(20% - 5px);
 }
 
 // CSS rules for lecture entries
