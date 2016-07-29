@@ -177,6 +177,13 @@ function confirmationPageToMainPage(formData, permissionNumber = '', graded = tr
     .then(doc => parseResponse(doc));
 }
 
+function reloadMainPage() {
+  return fetch(CART_URL, { credentials: 'same-origin' })
+    .then(response => response.text())
+    .then(body => docFromBody(body))
+    .then(doc => parseResponse(doc));
+}
+
 export function getSectionsAndAvailabilityForCCN({ ccn }) {
   return (dispatch, getState) => {
     dispatch(requestSections({ ccn }));
@@ -222,31 +229,21 @@ export function getSectionsAndAvailabilityForCCN({ ccn }) {
 }
 
 
-export function cancelShoppingCartAdd({formData}) {
-  return (dispatch, getState) => {
+export function cancelShoppingCartAdd({ formData }) {
+  return (dispatch) => {
     formData.set('ICAction', 'DERIVED_CLS_DTL_CANCEL_PB');
-    return postFormData(CART_URL, formData).then(function(body) {
-      let parser = new DOMParser();
-      let doc = parser.parseFromString(body, "text/html");
-      let newForm = doc.getElementById('SSR_SSENRL_CART');
-      if(!newForm) { throw "Error code 1" }
-      let newFormData = new FormData(newForm);
-      return newFormData
-    }).then(function(formData) {
-      formData.set('ICAJAX', '1');
-      formData.set('ICAction', '#ICCancel');
-      formData.set('ICNAVTYPEDROPDWN', '0');
-      return postFormData(CART_URL, formData)
-    }).then(function(body) { })
-    .then(() => fetch(CART_URL, { credentials: 'same-origin' }))
-    .then(response => response.text())
-    .then(function(body) {
-      let parser = new DOMParser();
-      let doc = parser.parseFromString(body, "text/html");
-      let newForm = doc.getElementById('SSR_SSENRL_CART');
-      let newFormData = new FormData(newForm);
-      return dispatch(setFormData({formData: newFormData}))
-    }).then(() => {dispatch(canceledCartAdd())});
+    return postFormData(CART_URL, formData)
+      .then(body => docFromBody(body))
+      .then(doc => parseResponse(doc))
+      .then(({ formData }) => {
+        formData.set('ICAJAX', '0');
+        formData.set('ICAction', '#ICCancel');
+        formData.set('ICNAVTYPEDROPDWN', '0');
+        return postFormData(CART_URL, formData);
+      }) /* Returns XML, so we can't parse normally. */
+      .then(() => reloadMainPage())
+      .then(({ formData }) => dispatch(setFormData({ formData })))
+      .then(() => dispatch(canceledCartAdd()));
   };
 }
 
@@ -258,14 +255,6 @@ function addToShoppingCart({ ccn, selections, formData }) {
       : { formData: newFormData }
     ))
     .then(({ formData: newFormData }) => confirmationPageToMainPage(newFormData));
-}
-
-
-function reloadMainPage() {
-  return fetch(CART_URL, { credentials: 'same-origin' })
-    .then(response => response.text())
-    .then(body => docFromBody(body))
-    .then(doc => parseResponse(doc));
 }
 
 function addFromShoppingCart({ formData, positions, positionToEnroll }) {

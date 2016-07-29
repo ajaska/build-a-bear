@@ -9,6 +9,7 @@ export const pages = {
   SECTIONS_PAGE: 'SSR_CLS_RELCOMP',
   CONFIRMATION_PAGE: 'SSR_SSENRL_ADD_C',
   ALT_CONFIRMATION_PAGE: 'SSR_CLS_DTLOPT',
+  CANCEL_PAGE: 'SSR_SS_SAVEWARNING',
 };
 
 function doEnrolledTable(doc) {
@@ -58,43 +59,25 @@ function doAvailability(doc) {
   return availability;
 }
 
-function doAltAvailability(doc) {
-  const availabilityDiv = doc.querySelector('[id^="win0divDERIVED_CLS_DTL_STATUS$0"]');
-  if (!availabilityDiv) {
-    throw new Error('No availability div found');
-  }
-
-  let availability = 'Unknown';
-  if (availabilityDiv.innerText.includes('Open')) {
-    availability = 'Open';
-  } else if (availabilityDiv.innerText.includes('Wait List')) {
-    availability = 'Wait List';
-  } else if (availabilityDiv.innerText.includes('Closed')) {
-    availability = 'Closed';
-  }
-  return availability;
-}
-
 export function parseResponse(doc) {
-  const info = {
-    formData: null,
-    pageName: '',
-  };
-
   /* Every page */
-  const warning = doc.querySelector('.SSSMSGWARNINGTEXT');
-  if (warning) {
-    throw new Error(warning.innerText);
-  }
-  info.formData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+  const info = {};
 
   const pageInfo = doc.getElementById('pt_pageinfo_win0');
   if (!pageInfo || !pageInfo.attributes || !pageInfo.attributes.page) {
-    throw new Error('Unknown page');
+    console.error(doc);
+    throw new Error('Couldn\'t find page info!');
+  }
+
+  info.pageName = pageInfo.attributes.page.value;
+  info.formData = new FormData(doc.getElementById('SSR_SSENRL_CART'));
+
+  const warning = doc.querySelector('.SSSMSGWARNINGTEXT');
+  if (warning && info.pageName != pages.CANCEL_PAGE) {
+    throw new Error(warning.innerText);
   }
 
   /* Page specific handlers */
-  info.pageName = pageInfo.attributes.page.value;
   switch (info.pageName) {
     case pages.MAIN_PAGE:
       info.enrolledCourses = doEnrolledTable(doc);
@@ -104,10 +87,10 @@ export function parseResponse(doc) {
       info.sectionGroups = doSectionTables(doc);
       break;
     case pages.CONFIRMATION_PAGE:
+    case pages.ALT_CONFIRMATION_PAGE:
       info.availability = doAvailability(doc);
       break;
-    case pages.ALT_CONFIRMATION_PAGE:
-      info.availability = doAltAvailability(doc);
+    case pages.CANCEL_PAGE:
       break;
     default:
       throw new Error('Dont know how to parse this page!');
