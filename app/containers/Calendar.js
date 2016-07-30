@@ -27,6 +27,8 @@ function prettyTime(start, startAM, end, endAM) {
   let startString;
   if (startMin === 0) {
     startString = `${startHour}`;
+  } else if (startMin === 50) {
+    startString = `${startHour}:30`;
   } else {
     startString = `${startHour}:${startMin}`;
   }
@@ -34,6 +36,8 @@ function prettyTime(start, startAM, end, endAM) {
   let endString;
   if (endMin === 0) {
     endString = `${endHour}`;
+  } else if (endMin === 50) {
+    endString = `${endHour}:30`;
   } else {
     endString = `${endHour}:${endMin}`;
   }
