@@ -56,6 +56,9 @@ function parseTime(timeString) {
   if (end % 10 === 9) {
     end = end + 1;
   }
+  if (end % 100 == 30) {
+    end = end + 20;
+  }
   const length = end - start;
   const formatted = prettyTime(start, startAM, end, endAM);
 

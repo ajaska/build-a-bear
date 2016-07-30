@@ -1,4 +1,4 @@
-$half-hour-block-size: 70px;
+$half-hour-block-size: 60px;
 $visual-gap-size: 10px;
 
 // Absolute left positioning
@@ -26,135 +26,135 @@ $visual-gap-size: 10px;
 // Not sure if we need this ...
 
 // Solutions
-// 1) Parse the start times, add these classes, then calculate the difference between the earliest one and 630 in terms of half-hour blocks,
+// 1) Parse the start times, add these classes, then calculate the difference between the earliest one and 650 in terms of half-hour blocks,
 // subtract 50 * that difference from all class heights
 // 2) Don't use these declarations, add inline-styling on render
 
-.start-630 {
+.rel-start-650 {
   top: calc(30px + 0 * #{$half-hour-block-size});
 }
 
-.start-700 {
+.rel-start-700 {
   top: calc(30px + 1 * #{$half-hour-block-size});
 }
 
-.start-730 {
+.rel-start-750 {
   top: calc(30px + 2 * #{$half-hour-block-size});
 }
 
-.start-800 {
+.rel-start-800 {
   top: calc(30px + 3 * #{$half-hour-block-size});
 }
 
-.start-830 {
+.rel-start-850 {
   top: calc(30px + 4 * #{$half-hour-block-size});
 }
 
-.start-900 {
+.rel-start-900 {
   top: calc(30px + 5 * #{$half-hour-block-size});
 }
 
-.start-930 {
+.rel-start-950 {
   top: calc(30px + 6 * #{$half-hour-block-size});
 }
 
-.start-1000 {
+.rel-start-1000 {
   top: calc(30px + 7 * #{$half-hour-block-size});
 }
 
-.start-1030 {
+.rel-start-1050 {
   top: calc(30px + 8 * #{$half-hour-block-size});
 }
 
-.start-1100 {
+.rel-start-1100 {
   top: calc(30px + 9 * #{$half-hour-block-size});
 }
 
-.start-1130 {
+.rel-start-1150 {
   top: calc(30px + 10 * #{$half-hour-block-size});
 }
 
-.start-1200 {
+.rel-start-1200 {
   top: calc(30px + 11 * #{$half-hour-block-size});
 }
 
-.start-1230 {
+.rel-start-1250 {
   top: calc(30px + 12 * #{$half-hour-block-size});
 }
 
-.start-1300 {
+.rel-start-1300 {
   top: calc(30px + 13 * #{$half-hour-block-size});
 }
 
-.start-1350 {
+.rel-start-1350 {
   top: calc(30px + 14 * #{$half-hour-block-size});
 }
 
-.start-1400 {
+.rel-start-1400 {
   top: calc(30px + 15 * #{$half-hour-block-size});
 }
 
-.start-1450 {
+.rel-start-1450 {
   top: calc(30px + 16 * #{$half-hour-block-size});
 }
 
-.start-1500 {
+.rel-start-1500 {
   top: calc(30px + 17 * #{$half-hour-block-size});
 }
 
-.start-1550 {
+.rel-start-1550 {
   top: calc(30px + 18 * #{$half-hour-block-size});
 }
 
-.start-1600 {
+.rel-start-1600 {
   top: calc(30px + 19 * #{$half-hour-block-size});
 }
 
-.start-1650 {
+.rel-start-1650 {
   top: calc(30px + 20 * #{$half-hour-block-size});
 }
 
-.start-1700 {
+.rel-start-1700 {
   top: calc(30px + 21 * #{$half-hour-block-size});
 }
 
-.start-1750 {
+.rel-start-1750 {
   top: calc(30px + 22 * #{$half-hour-block-size});
 }
 
-.start-1800 {
+.rel-start-1800 {
   top: calc(30px + 23 * #{$half-hour-block-size});
 }
 
-.start-1850 {
+.rel-start-1850 {
   top: calc(30px + 24 * #{$half-hour-block-size});
 }
 
-.start-1900 {
+.rel-start-1900 {
   top: calc(30px + 25 * #{$half-hour-block-size});
 }
 
-.start-1950 {
+.rel-start-1950 {
   top: calc(30px + 26 * #{$half-hour-block-size});
 }
 
-.start-2000 {
+.rel-start-2000 {
   top: calc(30px + 27 * #{$half-hour-block-size});
 }
 
-.start-2050 {
+.rel-start-2050 {
   top: calc(30px + 28 * #{$half-hour-block-size});
 }
 
-.start-2100 {
+.rel-start-2100 {
   top: calc(30px + 29 * #{$half-hour-block-size});
 }
 
-.start-2150 {
-  top: calc(30px + 30 * #{$half-hour-block-size});
+.rel-start-2150 {
+  top: calc(30px + 50 * #{$half-hour-block-size});
 }
 
-.start-2200 {
+.rel-start-2200 {
   top: calc(30px + 31 * #{$half-hour-block-size});
 }
 
@@ -168,31 +168,31 @@ $visual-gap-size: 10px;
 .cal-body {
   .lecture-entry {
     text-overflow: ellipsis;
-    .block-30 {
+    .block-50 {
       height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
     .block-100 {
       height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
-    .block-130 {
+    .block-150 {
       height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
     .block-200 {
       height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
-    .block-230 {
+    .block-250 {
       height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
     .block-300 {
       height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
-    .block-330 {
+    .block-350 {
       height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
     .block-400 {
       height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
-    .block-430 {
+    .block-450 {
       height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
     .block-500 {
@@ -201,31 +201,31 @@ $visual-gap-size: 10px;
   }
   .other-entry-body {
     text-overflow: ellipsis;
-    .block-30 {
+    .block-50 {
       height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
     .block-100 {
       height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
-    .block-130 {
+    .block-150 {
       height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
     .block-200 {
       height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
-    .block-230 {
+    .block-250 {
       height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
     .block-300 {
       height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
-    .block-330 {
+    .block-350 {
       height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
     .block-400 {
       height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
-    .block-430 {
+    .block-450 {
       height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }
     .block-500 {

@@ -13,146 +13,146 @@
 .Fr {
   left: 81%; }
 
-.start-630 {
-  top: calc(30px + 0 * 70px); }
+.rel-start-650 {
+  top: calc(30px + 0 * 60px); }
 
-.start-700 {
-  top: calc(30px + 1 * 70px); }
+.rel-start-700 {
+  top: calc(30px + 1 * 60px); }
 
-.start-730 {
-  top: calc(30px + 2 * 70px); }
+.rel-start-750 {
+  top: calc(30px + 2 * 60px); }
 
-.start-800 {
-  top: calc(30px + 3 * 70px); }
+.rel-start-800 {
+  top: calc(30px + 3 * 60px); }
 
-.start-830 {
-  top: calc(30px + 4 * 70px); }
+.rel-start-850 {
+  top: calc(30px + 4 * 60px); }
 
-.start-900 {
-  top: calc(30px + 5 * 70px); }
+.rel-start-900 {
+  top: calc(30px + 5 * 60px); }
 
-.start-930 {
-  top: calc(30px + 6 * 70px); }
+.rel-start-950 {
+  top: calc(30px + 6 * 60px); }
 
-.start-1000 {
-  top: calc(30px + 7 * 70px); }
+.rel-start-1000 {
+  top: calc(30px + 7 * 60px); }
 
-.start-1030 {
-  top: calc(30px + 8 * 70px); }
+.rel-start-1050 {
+  top: calc(30px + 8 * 60px); }
 
-.start-1100 {
-  top: calc(30px + 9 * 70px); }
+.rel-start-1100 {
+  top: calc(30px + 9 * 60px); }
 
-.start-1130 {
-  top: calc(30px + 10 * 70px); }
+.rel-start-1150 {
+  top: calc(30px + 10 * 60px); }
 
-.start-1200 {
-  top: calc(30px + 11 * 70px); }
+.rel-start-1200 {
+  top: calc(30px + 11 * 60px); }
 
-.start-1230 {
-  top: calc(30px + 12 * 70px); }
+.rel-start-1250 {
+  top: calc(30px + 12 * 60px); }
 
-.start-1300 {
-  top: calc(30px + 13 * 70px); }
+.rel-start-1300 {
+  top: calc(30px + 13 * 60px); }
 
-.start-1350 {
-  top: calc(30px + 14 * 70px); }
+.rel-start-1350 {
+  top: calc(30px + 14 * 60px); }
 
-.start-1400 {
-  top: calc(30px + 15 * 70px); }
+.rel-start-1400 {
+  top: calc(30px + 15 * 60px); }
 
-.start-1450 {
-  top: calc(30px + 16 * 70px); }
+.rel-start-1450 {
+  top: calc(30px + 16 * 60px); }
 
-.start-1500 {
-  top: calc(30px + 17 * 70px); }
+.rel-start-1500 {
+  top: calc(30px + 17 * 60px); }
 
-.start-1550 {
-  top: calc(30px + 18 * 70px); }
+.rel-start-1550 {
+  top: calc(30px + 18 * 60px); }
 
-.start-1600 {
-  top: calc(30px + 19 * 70px); }
+.rel-start-1600 {
+  top: calc(30px + 19 * 60px); }
 
-.start-1650 {
-  top: calc(30px + 20 * 70px); }
+.rel-start-1650 {
+  top: calc(30px + 20 * 60px); }
 
-.start-1700 {
-  top: calc(30px + 21 * 70px); }
+.rel-start-1700 {
+  top: calc(30px + 21 * 60px); }
 
-.start-1750 {
-  top: calc(30px + 22 * 70px); }
+.rel-start-1750 {
+  top: calc(30px + 22 * 60px); }
 
-.start-1800 {
-  top: calc(30px + 23 * 70px); }
+.rel-start-1800 {
+  top: calc(30px + 23 * 60px); }
 
-.start-1850 {
-  top: calc(30px + 24 * 70px); }
+.rel-start-1850 {
+  top: calc(30px + 24 * 60px); }
 
-.start-1900 {
-  top: calc(30px + 25 * 70px); }
+.rel-start-1900 {
+  top: calc(30px + 25 * 60px); }
 
-.start-1950 {
-  top: calc(30px + 26 * 70px); }
+.rel-start-1950 {
+  top: calc(30px + 26 * 60px); }
 
-.start-2000 {
-  top: calc(30px + 27 * 70px); }
+.rel-start-2000 {
+  top: calc(30px + 27 * 60px); }
 
-.start-2050 {
-  top: calc(30px + 28 * 70px); }
+.rel-start-2050 {
+  top: calc(30px + 28 * 60px); }
 
-.start-2100 {
-  top: calc(30px + 29 * 70px); }
+.rel-start-2100 {
+  top: calc(30px + 29 * 60px); }
 
-.start-2150 {
-  top: calc(30px + 30 * 70px); }
+.rel-start-2150 {
+  top: calc(30px + 50 * 60px); }
 
-.start-2200 {
-  top: calc(30px + 31 * 70px); }
+.rel-start-2200 {
+  top: calc(30px + 31 * 60px); }
 
 .cal-body .lecture-entry {
   text-overflow: ellipsis; }
-  .cal-body .lecture-entry .block-30 {
-    height: calc(1 * 70px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-50 {
+    height: calc(1 * 60px - 10px - 0.5rem - 27px * 2); }
   .cal-body .lecture-entry .block-100 {
-    height: calc(2 * 70px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-130 {
-    height: calc(3 * 70px - 10px - 0.5rem - 27px * 2); }
+    height: calc(2 * 60px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-150 {
+    height: calc(3 * 60px - 10px - 0.5rem - 27px * 2); }
   .cal-body .lecture-entry .block-200 {
-    height: calc(4 * 70px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-230 {
-    height: calc(5 * 70px - 10px - 0.5rem - 27px * 2); }
+    height: calc(4 * 60px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-250 {
+    height: calc(5 * 60px - 10px - 0.5rem - 27px * 2); }
   .cal-body .lecture-entry .block-300 {
-    height: calc(6 * 70px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-330 {
-    height: calc(7 * 70px - 10px - 0.5rem - 27px * 2); }
+    height: calc(6 * 60px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-350 {
+    height: calc(7 * 60px - 10px - 0.5rem - 27px * 2); }
   .cal-body .lecture-entry .block-400 {
-    height: calc(8 * 70px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-430 {
-    height: calc(9 * 70px - 10px - 0.5rem - 27px * 2); }
+    height: calc(8 * 60px - 10px - 0.5rem - 27px * 2); }
+  .cal-body .lecture-entry .block-450 {
+    height: calc(9 * 60px - 10px - 0.5rem - 27px * 2); }
   .cal-body .lecture-entry .block-500 {
-    height: calc(10 * 70px - 10px - 0.5rem - 27px * 2); }
+    height: calc(10 * 60px - 10px - 0.5rem - 27px * 2); }
 .cal-body .other-entry-body {
   text-overflow: ellipsis; }
-  .cal-body .other-entry-body .block-30 {
-    height: calc(1 * 70px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-50 {
+    height: calc(1 * 60px - 10px - 0.5rem); }
   .cal-body .other-entry-body .block-100 {
-    height: calc(2 * 70px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-130 {
-    height: calc(3 * 70px - 10px - 0.5rem); }
+    height: calc(2 * 60px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-150 {
+    height: calc(3 * 60px - 10px - 0.5rem); }
   .cal-body .other-entry-body .block-200 {
-    height: calc(4 * 70px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-230 {
-    height: calc(5 * 70px - 10px - 0.5rem); }
+    height: calc(4 * 60px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-250 {
+    height: calc(5 * 60px - 10px - 0.5rem); }
   .cal-body .other-entry-body .block-300 {
-    height: calc(6 * 70px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-330 {
-    height: calc(7 * 70px - 10px - 0.5rem); }
+    height: calc(6 * 60px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-350 {
+    height: calc(7 * 60px - 10px - 0.5rem); }
   .cal-body .other-entry-body .block-400 {
-    height: calc(8 * 70px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-430 {
-    height: calc(9 * 70px - 10px - 0.5rem); }
+    height: calc(8 * 60px - 10px - 0.5rem); }
+  .cal-body .other-entry-body .block-450 {
+    height: calc(9 * 60px - 10px - 0.5rem); }
   .cal-body .other-entry-body .block-500 {
-    height: calc(10 * 70px - 10px - 0.5rem); }
+    height: calc(10 * 60px - 10px - 0.5rem); }
 
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
