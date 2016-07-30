@@ -29,7 +29,6 @@ function EnrolledCourses({ courses }) {
       <td>{joinWithBr(sc[key], 'instructor')}</td>
       <td>{joinWithBr(sc[key], 'units')}</td>
       <td>{joinWithBr(sc[key], 'id')}</td>
-      <td>{joinWithBr(sc[key], 'enrollment_status')}</td>
     </tr>
   ));
   const enrolled = genTable(ec);
@@ -47,7 +46,6 @@ function EnrolledCourses({ courses }) {
           <th>Instructor</th>
           <th>Units</th>
           <th>CCN</th>
-          <th>Waitlist</th>
         </tr>
       </thead>
       <tbody>
@@ -60,7 +58,7 @@ function EnrolledCourses({ courses }) {
             </div>
           </td>
           <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
-          <td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+          <td>&nbsp;</td><td>&nbsp;</td>
         </tr>
         {waitlisted}
       </tbody>

@@ -6,18 +6,17 @@ function Calendar({ courses }) {
   const lecture = Object.keys(sc).filter(course => sc[course].lecture);
   const other = Object.keys(sc).filter(course => !sc[course].lecture);
 
-  let earliestClassTime = Math.min.apply(Math, sc.map( function(a) {return a.start;} ));
-  let latestClassTime = Math.max.apply(Math, sc.map( function(b) {return b.start;} ));
-  let latestClass = sc.find( function (c) { return c.start == latestClassTime; });
+  let earliestClassStartTime = Math.min.apply(Math, sc.map( function(a) {return a.start;} ));
+  let latestClassEndTime = Math.max.apply(Math, sc.map( function(b) {return b.start + b.length;} ));
 
-  let calendarHeight = ((latestClassTime - earliestClassTime + latestClass.length) / 50) * 60 + 30;
+  let calendarHeight = ((latestClassEndTime - earliestClassStartTime) / 50) * 60 + 30;
 
   var heightFix = {
     height: '' + calendarHeight + 'px',
   };
 
   const genLectures = (key) => key.map((key, i) => (
-    <div className={sc[key].day + " lecture-entry rel-start-" + (parseInt(sc[key].start) - earliestClassTime + 650)} key={i}>
+    <div className={sc[key].day + " lecture-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
       <div className="lecture-entry-header semibold">{sc[key].formatted}</div>
       <div className={"lecture-entry-body block-" + sc[key].length}>{sc[key].desc} <br />{sc[key].room} </div>
       <div className="lecture-entry-footer"></div>
@@ -25,7 +24,7 @@ function Calendar({ courses }) {
   ));
 
   const genNonLectures = (key) => key.map((key, i) => (
-    <div className={sc[key].day + " other-entry rel-start-" + (parseInt(sc[key].start) - earliestClassTime + 650)} key={i}>
+    <div className={sc[key].day + " other-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
       <div className={"other-entry-body block-" + sc[key].length}><span className="semibold">{sc[key].formatted}</span><br />{sc[key].desc} <br />{sc[key].room} </div>
     </div>
   ));

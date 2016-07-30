@@ -4,10 +4,12 @@
 $primary-blue: #4279FF;
 $primary-red: #FF8080;
 $primary-gray: #EEEEEE;
+$disabled-background: #E8E8E8;
+$disabled-text: #B2B2B2;
 $font-stack: 'Calibre-Regular', sans-serif;
 $font-semibold: 'Calibre-Semibold', sans-serif;
 $font-bold: 'Calibre-Bold', sans-serif;
-$medium-break: 1000px;
+$medium-break: 1px;
 $small-break: 600px;
 
 @font-face {
@@ -59,6 +61,88 @@ $small-break: 600px;
   }
 }
 
+@media (max-width: $small-break) {
+
+
+  .courses-table-entry td:first-child {
+    display:none;
+  }
+
+  .courses-table-entry td:last-child {
+    border-right: none !important;
+  }
+
+  .cal-enroll {
+    display: none;
+  }
+
+  table, thead, tbody, th, td, tr {
+		display: block;
+	}
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+
+	tr {
+    border: 3px solid $primary-blue !important;
+  }
+
+  .courses-table-waitlisted {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-radius: 0rem !important;
+  }
+
+  .courses-table-waitlisted td {
+    display: none;
+  }
+
+  .courses-table-waitlisted td:nth-child(2) {
+    display: block;
+  }
+
+  .courses-table-waitlisted-text {
+    visibility: hidden;
+  }
+
+  .courses-table-waitlisted td:nth-child(2):before {
+    content: "Waitlisted Courses" !important;
+  }
+
+	td {
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		padding-left: 50%;
+	}
+
+	td:before {
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%;
+		padding-right: 10px;
+		white-space: nowrap;
+	}
+
+  td:nth-of-type(1):before { content: "Drop"; }
+  td:nth-of-type(2):before { content: "Class"; }
+	td:nth-of-type(3):before { content: "Type"; }
+	td:nth-of-type(4):before { content: "Time"; }
+	td:nth-of-type(5):before { content: "Room"; }
+	td:nth-of-type(6):before { content: "Instructor"; }
+	td:nth-of-type(7):before { content: "Units"; }
+	td:nth-of-type(8):before { content: "CCN"; }
+	td:nth-of-type(9):before { content: "Waitlist"; }
+
+}
+
 .side-panel-container {
   margin-left: 1%;
   width: 27%;
@@ -94,37 +178,6 @@ input, select {
   padding-left: 0.15rem;
 }
 
-select {
-  outline: 0;
-  -webkit-appearance: none;
-  -webkit-border-radius: 0px;
-  background-color: white !important;
-  border-radius: 0;
-  margin: 0;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-appearance:none;
-  -moz-appearance:none;
-}
-
-  /* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
-select:not(:disabled) {
-  background:
-    linear-gradient(45deg, transparent 50%, $primary-blue 50%),
-    linear-gradient(135deg, $primary-blue 50%, transparent 50%);
-    // linear-gradient(to right, $primary-blue, $primary-blue);
-  background-position:
-    calc(100% - 12px) calc(0.4rem + 2px),
-    calc(100% - 8px) calc(0.4rem + 2px);
-    // 100% 0;
-  background-size:
-    4px 4px,
-    4px 4px;
-    // 2em 2em;
-  background-repeat: no-repeat;
-}
-
 input {
   outline: 0;
 }
@@ -154,7 +207,8 @@ a {
 }
 
 .outline-blue {
-  border: 1px solid $primary-blue !important;
+  border: 2px solid $primary-blue !important;
+  border-radius: 0.25rem;
 }
 
 .color-blue {
@@ -177,23 +231,86 @@ a {
   margin-bottom: 0px !important;
 }
 
-// Sticky Footer for mobile / tablet
-// @media (max-width: $medium-break) {
-//
-//   .site-footer {
-//     position: absolute;
-//     bottom: 0;
-//   }
-// }
-
-
 // Searchable dropdown overrides
+input:disabled {
+  border: 2px solid $disabled-background !important;
+  border-radius: 0.25rem !important;
+  background-color: $disabled-background !important;
+}
+
+input:disabled::-webkit-input-placeholder {
+  color: $disabled-text !important;
+}
+
+input:disabled:-moz-placeholder { /* Firefox 18- */
+  color: $disabled-text !important;
+}
+
+input:disabled::-moz-placeholder {  /* Firefox 19+ */
+  color: $disabled-text !important;
+}
+
+input:disabled:-ms-input-placeholder {
+  color: $disabled-text !important;
+}
+
+select {
+  outline: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  background-color: white !important;
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+}
+
+select:disabled {
+  border: 2px solid $disabled-background !important;
+  border-radius: 0.25rem !important;
+  color: $disabled-text !important;
+  background-color: $disabled-background !important;
+}
+
+  /* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
+select:not(:disabled) {
+  background:
+    linear-gradient(45deg, transparent 50%, $primary-blue 50%),
+    linear-gradient(135deg, $primary-blue 50%, transparent 50%);
+    // linear-gradient(to right, $primary-blue, $primary-blue);
+  background-position:
+    calc(100% - 12px) calc(0.4rem + 2px),
+    calc(100% - 8px) calc(0.4rem + 2px);
+    // 100% 0;
+  background-size:
+    4px 4px,
+    4px 4px;
+    // 2em 2em;
+  background-repeat: no-repeat;
+}
+
 .Select {
   height: 100% !important;
 }
 
 .Select.is-disabled {
-  border: 1px solid rgb(166, 166, 166) !important;
+  border: 2px solid $disabled-background !important;
+  border-radius: 0.25rem !important;
+
+  .Select-control {
+    background-color: $disabled-background !important;
+  }
+
+  .Select-placeholder {
+    color: $disabled-text !important;
+  }
+
+  .Select-arrow {
+    border-color: $disabled-text transparent transparent !important;
+  }
 }
 
 .Select-control {
@@ -450,6 +567,18 @@ span.Select-arrow-zone {
   text-align: left;
   background-color: $primary-blue;
   color: white;
+}
+
+.courses-table-header-row th:nth-child(2) {
+  width: 25%;
+}
+
+.courses-table-header-row th:nth-child(3) {
+  width: 12%;
+}
+
+.courses-table-header-row th:nth-child(5) {
+  width: 12%;
 }
 
 .courses-table-waitlisted {
@@ -776,39 +905,58 @@ span.Select-arrow-zone {
 }
 
 .add-class-CCN {
-  width: 25%;
   float: left;
-}
-
-.add-class-section {
-  width: 71%;
-  float: right;
-  // why do I need to translate this down wtf
-  display: inline-block !important;
-}
-
-.add-class-form-row {
-  height: 1.5rem;
-  margin-bottom: 0.35rem;
+  width: 15%;
+  padding-top: 0.2rem;
+  padding-bottom: 0.25rem;
+  display: inline-block;
 }
 
 .add-class-department {
-  width: 49% !important;
-  float: left;
+  width: 44% !important;
+  margin-left: 2%;
+  display: inline-block;
 }
 
 .add-class-course-number {
   float: right;
-  width: 49% !important;
+  width: 35% !important;
+  display: inline-block;
+}
+
+.add-class-lecture-section {
+  width: 100%;
+  float: left;
+}
+
+.add-class-lab-section {
+  width: 100%;
+  float: left;
+}
+
+.add-class-discussion-section {
+  width: 100%;
+  float: left;
+}
+
+.add-class-grade-option {
+  width: 48%;
+  float: left;
+}
+
+.add-class-CEC {
+  width: 48%;
+  float: right;
+}
+
+.add-class-form-row {
+  height: 1.5rem;
+  width: 100%;
+  margin-bottom: 0.2rem;
 }
 
 .add-class-class-name {
   width: 60% !important;
-}
-
-.add-class-lab, .add-class-discussion {
-  margin-bottom: 0.05rem;
-  width: 99%;
 }
 
 .add-class-waitlist-status {
@@ -821,6 +969,7 @@ span.Select-arrow-zone {
 .add-class-waitlist-row {
   width: 100%;
   text-align: right;
+  margin-top: 1rem;
 }
 
 .add-class-waitlist {

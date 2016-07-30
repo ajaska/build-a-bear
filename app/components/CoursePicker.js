@@ -100,18 +100,6 @@ class CoursePicker extends React.Component {
               onChange={this.handleCCNChange}
             />
             <Select
-              className="add-class-section"
-              disabled={!enabled.lectureSection}
-              placeholder="Section"
-              value={lectureSelection}
-              resetValue={resetValue}
-              options={lectureSections}
-              searchable={false}
-              onChange={this.handleLectureSelector}
-            />
-          </div>
-          <div className="add-class-form-row">
-            <Select
               className="add-class-department outline-blue"
               disabled={globalDisable}
               placeholder="Department"
@@ -124,7 +112,7 @@ class CoursePicker extends React.Component {
             <Select
               className="add-class-course-number"
               disabled={!enabled.deptNumber}
-              placeholder="Course Number"
+              placeholder="Course No."
               value={this.props.deptNumber}
               resetValue={resetValue}
               matchPos="start"
@@ -133,13 +121,68 @@ class CoursePicker extends React.Component {
             />
           </div>
           <div className="add-class-form-row">
+            <Select
+              className="add-class-lecture-section"
+              disabled={!enabled.lectureSection}
+              placeholder="Section"
+              value={lectureSelection}
+              resetValue={resetValue}
+              options={lectureSections}
+              searchable={false}
+              onChange={this.handleLectureSelector}
+            />
+          </div>
+          <div className="add-class-form-row">
             <select className="add-class-class-name" value="" disabled>
-              <option value="" disabled>{this.props.courseName || 'Course Name'}</option>
+              <option value="" disabled>{this.props.courseName || 'Class Name'}</option>
             </select>
             <div className="add-class-waitlist-status">
               Status: <span className="color-blue">{lectureAvailability}</span>
             </div>
           </div>
+          <div className="add-class-form-row">
+            <Select
+              className="add-class-lab-section"
+              disabled={!enabled.lectureSection}
+              placeholder="Choose a discussion section"
+              value={lectureSelection}
+              resetValue={resetValue}
+              options={lectureSections}
+              searchable={false}
+              onChange={this.handleLectureSelector}
+            />
+          </div>
+          <div className="add-class-form-row">
+            <Select
+              className="add-class-discussion-section"
+              disabled={!enabled.lectureSection}
+              placeholder="Choose a lab section"
+              value={lectureSelection}
+              resetValue={resetValue}
+              options={lectureSections}
+              searchable={false}
+              onChange={this.handleLectureSelector}
+            />
+          </div>
+          <div className="add-class-form-row">
+            <Select
+              className="add-class-grade-option"
+              disabled={!enabled.lectureSection}
+              placeholder="Grade option"
+              value={lectureSelection}
+              resetValue={resetValue}
+              options={lectureSections}
+              searchable={false}
+              onChange={this.handleLectureSelector}
+            />
+            <input
+              className="add-class-CEC"
+              disabled={globalDisable}
+              placeholder="Class Entry Code (optional)"
+              type="text"
+            />
+          </div>
+
 
           {sectionSelectors}
           <div className="add-class-form-row add-class-waitlist-row">
