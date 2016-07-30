@@ -1,6 +1,3 @@
-import fs from 'fs';
-
-import { rollup } from 'rollup';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import inject from 'rollup-plugin-inject';
@@ -9,8 +6,10 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 
 
-rollup({
+export default {
   entry: 'index.js',
+  dest: 'meme-app.js',
+  format: 'iife',
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify('development')
@@ -38,18 +37,7 @@ rollup({
     }),
   ],
   external: ['jquery'],
-}).then(function (bundle) {
-  const result = bundle.generate({
-    format: 'iife',
-    globals: {
-      jquery: '$',
-    },
-  });
-
-  fs.writeFileSync( 'meme-app.js', result.code );
-}).catch((error) => {
-  console.error(error);
-  if (error.codeFrame) {
-    console.error(error.codeFrame);
-  }
-});
+  globals: {
+    jquery: '$',
+  },
+};
