@@ -109,50 +109,46 @@
 .rel-start-2200 {
   top: calc(30px + 31 * 60px); }
 
-.cal-body .lecture-entry {
-  text-overflow: ellipsis; }
-  .cal-body .lecture-entry .block-50 {
-    height: calc(1 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-100 {
-    height: calc(2 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-150 {
-    height: calc(3 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-200 {
-    height: calc(4 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-250 {
-    height: calc(5 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-300 {
-    height: calc(6 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-350 {
-    height: calc(7 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-400 {
-    height: calc(8 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-450 {
-    height: calc(9 * 60px - 10px - 0.5rem - 27px * 2); }
-  .cal-body .lecture-entry .block-500 {
-    height: calc(10 * 60px - 10px - 0.5rem - 27px * 2); }
-.cal-body .other-entry-body {
-  text-overflow: ellipsis; }
-  .cal-body .other-entry-body .block-50 {
-    height: calc(1 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-100 {
-    height: calc(2 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-150 {
-    height: calc(3 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-200 {
-    height: calc(4 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-250 {
-    height: calc(5 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-300 {
-    height: calc(6 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-350 {
-    height: calc(7 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-400 {
-    height: calc(8 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-450 {
-    height: calc(9 * 60px - 10px - 0.5rem); }
-  .cal-body .other-entry-body .block-500 {
-    height: calc(10 * 60px - 10px - 0.5rem); }
+.cal-body .lecture-entry .block-50 {
+  height: calc(1 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-100 {
+  height: calc(2 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-150 {
+  height: calc(3 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-200 {
+  height: calc(4 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-250 {
+  height: calc(5 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-300 {
+  height: calc(6 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-350 {
+  height: calc(7 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-400 {
+  height: calc(8 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-450 {
+  height: calc(9 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .lecture-entry .block-500 {
+  height: calc(10 * 60px - 10px - 0.5rem - 27px * 2); }
+.cal-body .other-entry .block-50 {
+  height: calc(1 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-100 {
+  height: calc(2 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-150 {
+  height: calc(3 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-200 {
+  height: calc(4 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-250 {
+  height: calc(5 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-300 {
+  height: calc(6 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-350 {
+  height: calc(7 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-400 {
+  height: calc(8 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-450 {
+  height: calc(9 * 60px - 10px - 0.5rem); }
+.cal-body .other-entry .block-500 {
+  height: calc(10 * 60px - 10px - 0.5rem); }
 
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126

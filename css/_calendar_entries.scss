@@ -167,7 +167,6 @@ $visual-gap-size: 10px;
 
 .cal-body {
   .lecture-entry {
-    text-overflow: ellipsis;
     .block-50 {
       height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
@@ -199,8 +198,7 @@ $visual-gap-size: 10px;
       height: calc(10 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
     }
   }
-  .other-entry-body {
-    text-overflow: ellipsis;
+  .other-entry {
     .block-50 {
       height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
     }

@@ -10,10 +10,6 @@ function Calendar({ courses }) {
   let latestClassTime = Math.max.apply(Math, sc.map( function(b) {return b.start;} ));
   let latestClass = sc.find( function (c) { return c.start == latestClassTime; });
 
-  console.log(earliestClassTime);
-  console.log(latestClassTime);
-  console.log(latestClass);
-
   let calendarHeight = ((latestClassTime - earliestClassTime + latestClass.length) / 50) * 60 + 30;
 
   var heightFix = {

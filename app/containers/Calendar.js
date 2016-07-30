@@ -9,6 +9,9 @@ function timeToInt(time, am) {
   if (timeInt % 10 === 9) {
     timeInt = timeInt + 1;
   }
+  if (timeInt % 100 === 30) {
+    timeInt = timeInt + 20;
+  }
   if (timeInt % 100 === 60) {
     timeInt = timeInt + 100 - 60;
   }
@@ -55,9 +58,6 @@ function parseTime(timeString) {
   let end = timeToInt(endTime, endAM === 'AM');
   if (end % 10 === 9) {
     end = end + 1;
-  }
-  if (end % 100 == 30) {
-    end = end + 20;
   }
   const length = end - start;
   const formatted = prettyTime(start, startAM, end, endAM);
