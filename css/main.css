@@ -604,8 +604,7 @@ span.Select-arrow-zone {
 
 .cal-body {
   position: relative;
-  height: 1000px;
-  min-height: 250px;
+  height: 250px;
   text-transform: uppercase; }
 
 .cal-header-row-entry {
@@ -671,7 +670,6 @@ span.Select-arrow-zone {
   border-bottom-left-radius: 0.25rem; }
 
 .other-entry-body {
-  height: calc(4 * 50px - 0.5rem - 10px);
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
