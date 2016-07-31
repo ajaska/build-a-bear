@@ -12,7 +12,9 @@ const mapStateToProps = (state) => {
   const lecture = coursePicker.lectureSections[coursePicker.lectureSection];
   const sections = [];
   for (let i = 0; i < coursePicker.sectionGroups.length; ++i) {
-    sections.push(coursePicker.sectionGroups[i][coursePicker.selections[i]]);
+    if (coursePicker.selections[i]) {
+      sections.push(coursePicker.sectionGroups[i][coursePicker.selections[i]]);
+    }
   }
 
   const ccnSelection = {

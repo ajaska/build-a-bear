@@ -70,7 +70,7 @@ class CoursePicker extends React.Component {
       ccn: !this.props.dept,
       dept: !this.props.dept,
       deptNumber: this.props.dept && !this.props.deptNumber,
-      lectureSection: this.props.lectureSections.length > 1,
+      lectureSection: this.props.lectureSections.length > 1 && !this.props.lectureSection,
       section: this.props.sectionGroups.length > 0,
       gradeOption: this.props.lectureSections.length > 0,
     };
@@ -82,8 +82,7 @@ class CoursePicker extends React.Component {
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
       <div className="add-class-form-row" key={i}>
         <Select
-          className="add-class-discussion"
-          className={`add-class-discussion${highlighted.section ? " outline-blue" : ""}`}
+          className={`add-class-discussion${highlighted.section && !this.props.selections[i] ? " outline-blue" : ""}`}
           disabled={globalDisable || sectionGroup.length <= 1}
           placeholder={this.props.isLoadingSections ? 'Loading sections...' : 'Choose a section'}
           value={this.props.selections[i]}
