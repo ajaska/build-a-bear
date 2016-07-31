@@ -64,6 +64,7 @@ class CoursePicker extends React.Component {
       lectureSection: !globalDisable && this.props.lectureSections.length > 1,
       deptNumber: !globalDisable && this.props.deptNumbers.length > 0,
       //section: !globalDisable && this.props.sectionGroups.length > 0,
+      gradeOptions: !globalDisable && this.props.lectureSections.length > 0,
     };
     const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => ({
       value: i.toString(),
@@ -79,12 +80,16 @@ class CoursePicker extends React.Component {
           value={this.props.selections[i]}
           resetValue={resetValue}
           options={sectionsForSectionGroup(sectionGroup)}
-          matchPos="start"
           onChange={(val) => this.handleSelector(val, i)}
           searchable
+          clearable={false}
         />
       </div>
     ));
+    const gradeOptions = [
+      { value: "pnp", label: "P/NP" },
+      { value: "graded", label: "Letter Grade" },
+    ];
     return (
       <div className="add-class-panel">
         <div className="add-class-header">Add Class</div>
@@ -129,6 +134,7 @@ class CoursePicker extends React.Component {
               resetValue={resetValue}
               options={lectureSections}
               searchable={false}
+              clearable={false}
               onChange={this.handleLectureSelector}
             />
           </div>
@@ -140,51 +146,27 @@ class CoursePicker extends React.Component {
               Status: <span className="color-blue">{lectureAvailability}</span>
             </div>
           </div>
-          <div className="add-class-form-row">
-            <Select
-              className="add-class-lab-section"
-              disabled={!enabled.lectureSection}
-              placeholder="Choose a discussion section"
-              value={lectureSelection}
-              resetValue={resetValue}
-              options={lectureSections}
-              searchable={false}
-              onChange={this.handleLectureSelector}
-            />
-          </div>
-          <div className="add-class-form-row">
-            <Select
-              className="add-class-discussion-section"
-              disabled={!enabled.lectureSection}
-              placeholder="Choose a lab section"
-              value={lectureSelection}
-              resetValue={resetValue}
-              options={lectureSections}
-              searchable={false}
-              onChange={this.handleLectureSelector}
-            />
-          </div>
+          {sectionSelectors}
           <div className="add-class-form-row">
             <Select
               className="add-class-grade-option"
-              disabled={!enabled.lectureSection}
+              disabled={!enabled.gradeOptions}
               placeholder="Grade option"
-              value={lectureSelection}
+              value=""
               resetValue={resetValue}
-              options={lectureSections}
+              options={gradeOptions}
               searchable={false}
-              onChange={this.handleLectureSelector}
+              clearable={false}
             />
             <input
               className="add-class-CEC"
-              disabled={globalDisable}
+              disabled={!enabled.gradeOptions}
               placeholder="Class Entry Code (optional)"
               type="text"
             />
           </div>
 
 
-          {sectionSelectors}
           <div className="add-class-form-row add-class-waitlist-row">
             <label className="add-class-waitlist">
               Waitlist class if full
