@@ -64,7 +64,15 @@ class CoursePicker extends React.Component {
       lectureSection: !globalDisable && this.props.lectureSections.length > 1,
       deptNumber: !globalDisable && this.props.deptNumbers.length > 0,
       //section: !globalDisable && this.props.sectionGroups.length > 0,
-      gradeOptions: !globalDisable && this.props.lectureSections.length > 0,
+      gradeOption: !globalDisable && this.props.lectureSections.length > 0,
+    };
+    const highlighted = {
+      ccn: !this.props.dept,
+      dept: !this.props.dept,
+      deptNumber: this.props.dept && !this.props.deptNumber,
+      lectureSection: this.props.lectureSections.length > 1,
+      section: this.props.sectionGroups.length > 0,
+      gradeOption: this.props.lectureSections.length > 0,
     };
     const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => ({
       value: i.toString(),
@@ -75,6 +83,7 @@ class CoursePicker extends React.Component {
       <div className="add-class-form-row" key={i}>
         <Select
           className="add-class-discussion"
+          className={`add-class-discussion${highlighted.section ? " outline-blue" : ""}`}
           disabled={globalDisable || sectionGroup.length <= 1}
           placeholder={this.props.isLoadingSections ? 'Loading sections...' : 'Choose a section'}
           value={this.props.selections[i]}
@@ -86,7 +95,7 @@ class CoursePicker extends React.Component {
         />
       </div>
     ));
-    const gradeOptions = [
+    const gradeOption = [
       { value: "pnp", label: "P/NP" },
       { value: "graded", label: "Letter Grade" },
     ];
@@ -97,7 +106,7 @@ class CoursePicker extends React.Component {
         <div className="add-class-form">
           <div className="add-class-form-row">
             <input
-              className="add-class-CCN outline-blue"
+              className={`add-class-CCN${highlighted.ccn ? " outline-blue" : ""}`}
               disabled={globalDisable}
               placeholder="CCN"
               type="text"
@@ -105,7 +114,7 @@ class CoursePicker extends React.Component {
               onChange={this.handleCCNChange}
             />
             <Select
-              className="add-class-department outline-blue"
+              className={`add-class-department${highlighted.dept ? " outline-blue" : ""}`}
               disabled={globalDisable}
               placeholder="Department"
               value={this.props.dept}
@@ -115,7 +124,7 @@ class CoursePicker extends React.Component {
               options={depts}
             />
             <Select
-              className="add-class-course-number"
+              className={`add-class-course-number${highlighted.deptNumber ? " outline-blue" : ""}`}
               disabled={!enabled.deptNumber}
               placeholder="Course No."
               value={this.props.deptNumber}
@@ -127,7 +136,7 @@ class CoursePicker extends React.Component {
           </div>
           <div className="add-class-form-row">
             <Select
-              className="add-class-lecture-section"
+              className={`add-class-lecture-section${highlighted.lectureSection ? " outline-blue" : ""}`}
               disabled={!enabled.lectureSection}
               placeholder="Section"
               value={lectureSelection}
@@ -149,18 +158,18 @@ class CoursePicker extends React.Component {
           {sectionSelectors}
           <div className="add-class-form-row">
             <Select
-              className="add-class-grade-option"
-              disabled={!enabled.gradeOptions}
+              className={`add-class-grade-option${highlighted.gradeOption ? " outline-blue" : ""}`}
+              disabled={!enabled.gradeOption}
               placeholder="Grade option"
               value=""
               resetValue={resetValue}
-              options={gradeOptions}
+              options={gradeOption}
               searchable={false}
               clearable={false}
             />
             <input
               className="add-class-CEC"
-              disabled={!enabled.gradeOptions}
+              disabled={!enabled.gradeOption}
               placeholder="Class Entry Code (optional)"
               type="text"
             />
