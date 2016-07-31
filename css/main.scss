@@ -9,8 +9,8 @@ $disabled-text: #B2B2B2;
 $font-stack: 'Calibre-Regular', sans-serif;
 $font-semibold: 'Calibre-Semibold', sans-serif;
 $font-bold: 'Calibre-Bold', sans-serif;
-$medium-break: 1px;
-$small-break: 600px;
+$medium-break: 1050px;
+$small-break: 750px;
 
 @font-face {
   font-family: 'Calibre-Regular';
@@ -62,8 +62,6 @@ $small-break: 600px;
 }
 
 @media (max-width: $small-break) {
-
-
   .courses-table-entry td:first-child {
     display:none;
   }
