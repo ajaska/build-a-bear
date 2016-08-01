@@ -230,6 +230,11 @@ a {
 }
 
 // Searchable dropdown overrides
+button:disabled {
+  background-color: $disabled-background !important;
+  color: $disabled-text !important;
+}
+
 input:disabled {
   border: 2px solid $disabled-background !important;
   border-radius: 0.25rem !important;

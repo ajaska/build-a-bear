@@ -382,6 +382,10 @@ a {
 .rm-margin-bottom {
   margin-bottom: 0px !important; }
 
+button:disabled {
+  background-color: #E8E8E8 !important;
+  color: #B2B2B2 !important; }
+
 input:disabled {
   border: 2px solid #E8E8E8 !important;
   border-radius: 0.25rem !important;
