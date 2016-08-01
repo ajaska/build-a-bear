@@ -15,6 +15,7 @@ const defaultState = Immutable.fromJS({
   dept: '',
   deptNumber: '',
   isAddingCourse: false,
+  isDroppingCartCourse: false,
 });
 
 export default function (state = defaultState, action) {
@@ -65,6 +66,10 @@ export default function (state = defaultState, action) {
       return state;
     case APIActionType.RECEIVE_SECTION_AVAILABILITY_ERROR:
       return defaultState.set('error', action.error);
+    case APIActionType.REQUEST_CART_DROP:
+      return state.set('isDroppingCartCourse', true);
+    case APIActionType.RECEIVE_CART_DROP:
+      return defaultState;
     default:
       return state;
   }

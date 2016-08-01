@@ -11,6 +11,7 @@ export default function (state = defaultState, action) {
     case ActionType.SET_SHOPPING_CART:
       return state.set('courses', action.courses);
     case APIActionType.RECEIVE_COURSE_ADD:
+    case APIActionType.RECEIVE_CART_DROP:
       return state.set('courses', action.shoppingCartCourses);
     default:
       return state;

@@ -4,6 +4,11 @@ class ShoppingCart extends React.Component {
   constructor(props) {
     super(props);
     this.onAddClick = this.onAddClick.bind(this);
+    this.onDropClick = this.onDropClick.bind(this);
+  }
+
+  onDropClick({ ccn }) {
+    this.props.dropCartCourse({ ccn });
   }
 
   onAddClick(ccn) {
@@ -12,7 +17,7 @@ class ShoppingCart extends React.Component {
 
   render() {
     if (!this.props.courses || this.props.courses.length === 0) {
-      return (<div>debug info: no courses in shopping cart</div>);
+      return null;
     }
 
     const courseRows = this.props.courses.filter(course => course.selectable).map((course, i) => (
@@ -26,7 +31,7 @@ class ShoppingCart extends React.Component {
             <span>Instructor: </span><span className="semibold">{course.instructor}</span>
           </div>
           <div className="sc-course-info-right">
-            <button className="sc-course-delete">Delete</button>
+            <button className="sc-course-delete" onClick={() => this.onDropClick({ ccn: course.id })}>Delete</button>
             <button className="sc-course-add" onClick={() => this.onAddClick(course.id)}>
               Add
             </button>
@@ -54,6 +59,7 @@ class ShoppingCart extends React.Component {
 ShoppingCart.propTypes = {
   courses: React.PropTypes.array.isRequired,
   setCCN: React.PropTypes.func.isRequired,
+  dropCartCourse: React.PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;

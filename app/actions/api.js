@@ -48,6 +48,24 @@ export function receiveSections({ ccn, sectionGroups }) {
   };
 }
 
+export const REQUEST_CART_DROP = Symbol('REQUEST_CART_DROP');
+function requestCartDrop({ ccn }) {
+  return {
+    type: REQUEST_CART_DROP,
+    ccn,
+  };
+}
+
+export const RECEIVE_CART_DROP = Symbol('RECEIVE_CART_DROP');
+function receiveCartDrop({ ccn, enrolledCourses, shoppingCartCourses }) {
+  return {
+    type: RECEIVE_CART_DROP,
+    ccn,
+    enrolledCourses,
+    shoppingCartCourses,
+  };
+}
+
 export const RECEIVE_SECTION_AVAILABILITY = Symbol('RECEIVE_SECTION_AVAILABILITY');
 export function receiveSectionAvailability({ ccn, availability }) {
   return {
@@ -307,5 +325,37 @@ export function addCourse({ ccn, selections }) {
       dispatch(setFormData({ formData }));
       return dispatch(receiveCourseAdd({ ccn, enrolledCourses, shoppingCartCourses }));
     });
+  };
+}
+
+function dropFromShoppingCart({ formData, positions, positionToDrop }) {
+  formData.set('ICAJAX', '0');
+  formData.set('ICAction', 'DERIVED_REGFRM1_SSR_PB_DELETE');
+  formData.set('DERIVED_REGFRM1_CLASS_NBR', '');
+  formData.set('DERIVED_REGFRM1_SSR_CLS_SRCH_TYPE$249$', '06');
+  for (let i = 0; i < positions.length; ++i) {
+    formData.set(`P_SELECT$chk$${positions[i]}`, 'N');
+  }
+  formData.set(`P_SELECT$chk$${positionToDrop}`, 'Y');
+  formData.set(`P_SELECT$${positionToDrop}`, 'Y');
+
+  return postFormData(CART_URL, formData)
+    .then(body => docFromBody(body))
+    .then(doc => parseResponse(doc));
+}
+
+export function dropCartCourse({ ccn }) {
+  return (dispatch, getState) => {
+    dispatch(requestCartDrop({ ccn }));
+    const formData = getState().api.formData;
+    const courses = getState().shoppingCart.toJS().courses;
+    const selectableCourses = courses.filter(course => course.selectable);
+    const positions = selectableCourses.map(course => courses.indexOf(course));
+    const positionToDrop = courses.map(course => course.id).indexOf(ccn);
+    return dropFromShoppingCart({ formData, positions, positionToDrop })
+      .then(({ formData, enrolledCourses, shoppingCartCourses }) => {
+        dispatch(setFormData({ formData }));
+        return dispatch(receiveCartDrop({ ccn, enrolledCourses, shoppingCartCourses }));
+      });
   };
 }
