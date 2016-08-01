@@ -15,7 +15,12 @@ class AddCourseModal extends React.Component {
 
   handleAddClicked(event) {
     event.preventDefault();
-    this.props.clickedAdd(this.props.ccnSelection);
+    this.props.clickedAdd(Object.assign({},
+      this.props.ccnSelection, {
+        gradingOption: this.props.gradingOption,
+        cec: this.props.cec,
+      }
+    ));
     $('.add-course-confirm').modal('hide');
   }
 
@@ -50,6 +55,18 @@ class AddCourseModal extends React.Component {
         </span>
       );
     }
+    let gradingOption;
+    switch (this.props.gradingOption) {
+      case 'graded':
+        gradingOption = 'Letter Grade';
+        break;
+      case 'pnp':
+        gradingOption = 'P/NP';
+        break;
+      default:
+        gradingOption = 'Unknown grading option';
+        break;
+    }
     return (
       <div className="ui modal add-course-confirm">
         <div className="modal-header headerfix" onClick={this.handleClose}>
@@ -69,7 +86,8 @@ class AddCourseModal extends React.Component {
                   <span className="semibold color-blue">{ lecture.courseName }</span><br />
                   <span className="semibold">{ lecture.room }</span> | { lecture.time }<br />
                   Instructor: <span className="semibold">{ lecture.instructor }</span><br />
-                  Grading Option: <span className="semibold">P/NP</span><br />
+                  Grading Option: <span className="semibold">{ gradingOption }</span><br />
+                  Course Entry Code: <span className="semibold">{ this.props.cec }</span><br />
                   { lectureWaitlist }
                 </span>
               </div>
@@ -121,6 +139,8 @@ AddCourseModal.propTypes = {
     })
   ),
   beforeUnits: React.PropTypes.number,
+  gradingOption: React.PropTypes.string.isRequired,
+  cec: React.PropTypes.string.isRequired,
 };
 
 export default AddCourseModal;

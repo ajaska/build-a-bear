@@ -16,6 +16,8 @@ const defaultState = Immutable.fromJS({
   deptNumber: '',
   isAddingCourse: false,
   isDroppingCartCourse: false,
+  gradingOption: '',
+  cec: '',
 });
 
 export default function (state = defaultState, action) {
@@ -43,6 +45,10 @@ export default function (state = defaultState, action) {
                          .set('dept', state.get('dept'));
     case ActionType.SET_SELECTION:
       return state.setIn(['selections', action.which], action.selection);
+    case ActionType.SET_GRADING_OPTION:
+      return state.set('gradingOption', action.option);
+    case ActionType.SET_CEC:
+      return state.set('cec', action.cec);
     case APIActionType.REQUEST_COURSE_ADD:
       return state.set('isAddingCourse', true);
     case APIActionType.RECEIVE_COURSE_ADD:

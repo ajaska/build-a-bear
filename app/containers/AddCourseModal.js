@@ -9,7 +9,11 @@ const mapStateToProps = (state) => {
   , 0.0);
 
   const coursePicker = state.coursePicker.toJS();
-  const lecture = coursePicker.lectureSections[coursePicker.lectureSection];
+  let lectureSelection = coursePicker.lectureSection;
+  if (coursePicker.lectureSections.length === 1) {
+    lectureSelection = '0';
+  }
+  const lecture = coursePicker.lectureSections[lectureSelection];
   const sections = [];
   for (let i = 0; i < coursePicker.sectionGroups.length; ++i) {
     if (coursePicker.selections[i]) {
@@ -28,6 +32,8 @@ const mapStateToProps = (state) => {
     sections,
     lectureAvailability: coursePicker.lectureAvailability,
     ccnSelection,
+    gradingOption: coursePicker.gradingOption,
+    cec: coursePicker.cec,
   };
 };
 

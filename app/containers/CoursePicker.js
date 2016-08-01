@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import CoursePicker from '../components/CoursePicker';
 import { changedCCN, changedDept, changedDeptNumber,
-         setSelection, changedLectureSelection } from '../actions/coursePicker';
+         setSelection, changedLectureSelection, setGradingOption,
+         setCEC } from '../actions/coursePicker';
 
 import { allDepts, deptNumbersForDept } from '../helpers/everything';
 
@@ -49,6 +50,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   changedLectureSelection: (selection) => {
     dispatch(changedLectureSelection(selection));
+  },
+  setGradingOption: (option) => {
+    dispatch(setGradingOption(option));
+  },
+  setCEC: (cec) => {
+    dispatch(setCEC(cec));
   },
 });
 

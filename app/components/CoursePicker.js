@@ -12,10 +12,16 @@ class CoursePicker extends React.Component {
     this.handleLectureSelector = this.handleLectureSelector.bind(this);
     this.handleDeptChange = this.handleDeptChange.bind(this);
     this.handleDeptNumberChange = this.handleDeptNumberChange.bind(this);
+    this.handleGradingOptionChange = this.handleGradingOptionChange.bind(this);
+    this.handleCECChange = this.handleCECChange.bind(this);
   }
 
   handleCCNChange(event) {
     this.props.changedCCN({ ccn: event.target.value });
+  }
+
+  handleCECChange(event) {
+    this.props.setCEC({ cec: event.target.value });
   }
 
   handleDeptChange({ value }) {
@@ -24,6 +30,10 @@ class CoursePicker extends React.Component {
 
   handleDeptNumberChange({ value }) {
     this.props.changedDeptNumber({ deptNumber: value || '' });
+  }
+
+  handleGradingOptionChange({ value }) {
+    this.props.setGradingOption({ option: value || '' });
   }
 
   handleSelector({ value }, which) {
@@ -73,7 +83,7 @@ class CoursePicker extends React.Component {
       deptNumber: this.props.dept && !this.props.deptNumber,
       lectureSection: this.props.lectureSections.length > 1 && !this.props.lectureSection,
       section: this.props.sectionGroups.length > 0,
-      gradeOption: this.props.lectureSections.length > 0,
+      gradeOption: this.props.lectureSections.length > 0 && !this.props.gradingOption,
     };
     const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => ({
       value: i.toString(),
@@ -161,17 +171,19 @@ class CoursePicker extends React.Component {
               className={`add-class-grade-option${highlighted.gradeOption ? " outline-blue" : ""}`}
               disabled={!enabled.gradeOption}
               placeholder="Grade option"
-              value=""
+              value={this.props.gradingOption}
               resetValue={resetValue}
               options={gradeOption}
               searchable={false}
               clearable={false}
+              onChange={this.handleGradingOptionChange}
             />
             <input
               className="add-class-CEC"
               disabled={!enabled.gradeOption}
               placeholder="Class Entry Code (optional)"
               type="text"
+              onChange={this.handleCECChange}
             />
           </div>
 
@@ -223,6 +235,10 @@ CoursePicker.propTypes = {
   changedDeptNumber: React.PropTypes.func.isRequired,
   changedLectureSelection: React.PropTypes.func.isRequired,
   setSelection: React.PropTypes.func.isRequired,
+  gradingOption: React.PropTypes.string.isRequired,
+  setGradingOption: React.PropTypes.func.isRequired,
+  cec: React.PropTypes.string.isRequired,
+  setCEC: React.PropTypes.func.isRequired,
 };
 
 

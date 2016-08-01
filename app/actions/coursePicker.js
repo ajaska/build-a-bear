@@ -51,6 +51,22 @@ export function setSelection({ selection, which }) {
   };
 }
 
+export const SET_GRADING_OPTION = Symbol('SET_GRADING_OPTION');
+export function setGradingOption({ option }) {
+  return {
+    type: SET_GRADING_OPTION,
+    option,
+  };
+}
+
+export const SET_CEC = Symbol('SET_CEC');
+export function setCEC({ cec }) {
+  return {
+    type: SET_CEC,
+    cec,
+  };
+}
+
 export function changedCCN({ ccn }) {
   return (dispatch) => {
     dispatch(setCCN({ ccn }));
@@ -93,6 +109,6 @@ export function changedLectureSelection({ selection, lectureSections }) {
   };
 }
 
-export function clickedAdd({ ccn, selections }) {
-  return addCourse({ ccn, selections });
+export function clickedAdd(things) {
+  return addCourse(things);
 }

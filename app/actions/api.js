@@ -187,7 +187,7 @@ function confirmationPageToMainPage(formData, permissionNumber = '', graded = tr
   if (graded) {
     formData.set('DERIVED_CLS_DTL_SSR_GRADE_BASIS_SS$30$', 'GRD');
   } else {
-    formData.set('DERIVED_CLS_DTL_SSR_GRADE_BASIS_SS$30$', 'GRD');
+    formData.set('DERIVED_CLS_DTL_SSR_GRADE_BASIS_SS$30$', 'EPN');
   }
 
   return postFormData(CART_URL, formData)
@@ -265,14 +265,16 @@ export function cancelShoppingCartAdd({ formData }) {
   };
 }
 
-function addToShoppingCart({ ccn, selections, formData }) {
+function addToShoppingCart({ ccn, selections, gradingOption, cec, formData }) {
   return mainPageToSectionsOrConfirmation({ ccn, formData })
     .then(({ formData: newFormData, pageName }) => (
       pageName === pages.SECTIONS_PAGE ?
       sectionPageToConfirmation({ formData: newFormData, selections })
       : { formData: newFormData }
     ))
-    .then(({ formData: newFormData }) => confirmationPageToMainPage(newFormData));
+    .then(({ formData: newFormData }) => (
+      confirmationPageToMainPage(newFormData, cec, gradingOption === 'graded')
+    ));
 }
 
 function addFromShoppingCart({ formData, positions, positionToEnroll }) {
@@ -297,7 +299,7 @@ function addFromShoppingCart({ formData, positions, positionToEnroll }) {
     .then(() => reloadMainPage());
 }
 
-export function addCourse({ ccn, selections }) {
+export function addCourse({ ccn, selections, gradingOption, cec }) {
   return (dispatch, getState) => {
     dispatch(requestCourseAdd({ ccn, selections }));
 
@@ -307,7 +309,7 @@ export function addCourse({ ccn, selections }) {
     if (shoppingCartCourses.filter(course => course.id === ccn).length === 1) {
       addedToShoppingCart = Promise.resolve({ formData, shoppingCartCourses });
     } else {
-      addedToShoppingCart = addToShoppingCart({ ccn, selections, formData });
+      addedToShoppingCart = addToShoppingCart({ ccn, selections, formData, gradingOption, cec });
     }
     return addedToShoppingCart.then(({ formData, shoppingCartCourses }) => {
       const courses = shoppingCartCourses;
