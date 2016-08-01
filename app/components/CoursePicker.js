@@ -183,6 +183,7 @@ class CoursePicker extends React.Component {
               disabled={!enabled.gradeOption}
               placeholder="Class Entry Code (optional)"
               type="text"
+              value={this.props.cec}
               onChange={this.handleCECChange}
             />
           </div>
