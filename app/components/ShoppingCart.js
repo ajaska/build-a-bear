@@ -31,8 +31,18 @@ class ShoppingCart extends React.Component {
             <span>Instructor: </span><span className="semibold">{course.instructor}</span>
           </div>
           <div className="sc-course-info-right">
-            <button className="sc-course-delete" onClick={() => this.onDropClick({ ccn: course.id })}>Delete</button>
-            <button className="sc-course-add" onClick={() => this.onAddClick(course.id)}>
+            <button
+              className="sc-course-delete"
+              onClick={() => this.onDropClick({ ccn: course.id })}
+              disabled={this.props.disabled}
+            >
+              Delete
+            </button>
+            <button
+              className="sc-course-add"
+              onClick={() => this.onAddClick(course.id)}
+              disabled={this.props.disabled}
+            >
               Add
             </button>
           </div>
@@ -60,6 +70,7 @@ ShoppingCart.propTypes = {
   courses: React.PropTypes.array.isRequired,
   setCCN: React.PropTypes.func.isRequired,
   dropCartCourse: React.PropTypes.func.isRequired,
+  disabled: React.PropTypes.bool.isRequired,
 };
 
 export default ShoppingCart;
