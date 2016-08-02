@@ -2,6 +2,7 @@
   "main": "./index.js",
   "scripts": {
     "build": "rollup -c",
+    "build-prod": "NODE_ENV=production rollup -c",
     "watch": "rollup -c -w",
     "lint": "eslint index.js app; exit 0"
   },
@@ -35,7 +36,8 @@
     "rollup-plugin-inject": "^1.4.1",
     "rollup-plugin-json": "^2.0.1",
     "rollup-plugin-node-resolve": "^1.7.1",
-    "rollup-plugin-replace": "^1.1.1"
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^1.0.1"
   },
   "license": "BSD-2-Clause"
 }
