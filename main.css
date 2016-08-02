@@ -1,0 +1,1020 @@
+.Mo {
+  left: 1%; }
+
+.Tu {
+  left: 21%; }
+
+.We {
+  left: 41%; }
+
+.Th {
+  left: 61%; }
+
+.Fr {
+  left: 81%; }
+
+.rel-start-650 {
+  top: calc(30px + 0 * 60px); }
+
+.rel-start-700 {
+  top: calc(30px + 1 * 60px); }
+
+.rel-start-750 {
+  top: calc(30px + 2 * 60px); }
+
+.rel-start-800 {
+  top: calc(30px + 3 * 60px); }
+
+.rel-start-850 {
+  top: calc(30px + 4 * 60px); }
+
+.rel-start-900 {
+  top: calc(30px + 5 * 60px); }
+
+.rel-start-950 {
+  top: calc(30px + 6 * 60px); }
+
+.rel-start-1000 {
+  top: calc(30px + 7 * 60px); }
+
+.rel-start-1050 {
+  top: calc(30px + 8 * 60px); }
+
+.rel-start-1100 {
+  top: calc(30px + 9 * 60px); }
+
+.rel-start-1150 {
+  top: calc(30px + 10 * 60px); }
+
+.rel-start-1200 {
+  top: calc(30px + 11 * 60px); }
+
+.rel-start-1250 {
+  top: calc(30px + 12 * 60px); }
+
+.rel-start-1300 {
+  top: calc(30px + 13 * 60px); }
+
+.rel-start-1350 {
+  top: calc(30px + 14 * 60px); }
+
+.rel-start-1400 {
+  top: calc(30px + 15 * 60px); }
+
+.rel-start-1450 {
+  top: calc(30px + 16 * 60px); }
+
+.rel-start-1500 {
+  top: calc(30px + 17 * 60px); }
+
+.rel-start-1550 {
+  top: calc(30px + 18 * 60px); }
+
+.rel-start-1600 {
+  top: calc(30px + 19 * 60px); }
+
+.rel-start-1650 {
+  top: calc(30px + 20 * 60px); }
+
+.rel-start-1700 {
+  top: calc(30px + 21 * 60px); }
+
+.rel-start-1750 {
+  top: calc(30px + 22 * 60px); }
+
+.rel-start-1800 {
+  top: calc(30px + 23 * 60px); }
+
+.rel-start-1850 {
+  top: calc(30px + 24 * 60px); }
+
+.rel-start-1900 {
+  top: calc(30px + 25 * 60px); }
+
+.rel-start-1950 {
+  top: calc(30px + 26 * 60px); }
+
+.rel-start-2000 {
+  top: calc(30px + 27 * 60px); }
+
+.rel-start-2050 {
+  top: calc(30px + 28 * 60px); }
+
+.rel-start-2100 {
+  top: calc(30px + 29 * 60px); }
+
+.rel-start-2150 {
+  top: calc(30px + 50 * 60px); }
+
+.rel-start-2200 {
+  top: calc(30px + 31 * 60px); }
+
+.cal-body .lecture-entry .block-50 {
+  height: calc(1 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-100 {
+  height: calc(2 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-150 {
+  height: calc(3 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-200 {
+  height: calc(4 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-250 {
+  height: calc(5 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-300 {
+  height: calc(6 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-350 {
+  height: calc(7 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-400 {
+  height: calc(8 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-450 {
+  height: calc(9 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .lecture-entry .block-500 {
+  height: calc(10 * 60px - 10px - 0.5rem - 27px * 2); }
+
+.cal-body .other-entry .block-50 {
+  height: calc(1 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-100 {
+  height: calc(2 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-150 {
+  height: calc(3 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-200 {
+  height: calc(4 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-250 {
+  height: calc(5 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-300 {
+  height: calc(6 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-350 {
+  height: calc(7 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-400 {
+  height: calc(8 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-450 {
+  height: calc(9 * 60px - 10px - 0.5rem); }
+
+.cal-body .other-entry .block-500 {
+  height: calc(10 * 60px - 10px - 0.5rem); }
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  vertical-align: baseline; }
+
+html,
+body {
+  height: 100%; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+@font-face {
+  font-family: 'Calibre-Regular';
+  src: url("//bear.plus/fonts/Calibre-Regular.woff"); }
+
+@font-face {
+  font-family: 'Calibre-Semibold';
+  src: url("//bear.plus/fonts/Calibre-Semibold.woff"); }
+
+@font-face {
+  font-family: 'Calibre-Bold';
+  src: url("//bear.plus/fonts/Calibre-Bold.woff"); }
+
+@font-face {
+  font-family: 'Icons';
+  src: url("//bear.plus/fonts/icons.eot");
+  src: url("//bear.plus/fonts/icons.eot?#iefix") format("embedded-opentype"), url("//bear.plus/fonts/icons.woff") format("woff"), url("//bear.plus/fonts/icons.ttf") format("truetype"), url("//bear.plus/fonts/icons.svg#icons") format("svg");
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-decoration: inherit;
+  text-transform: none; }
+
+.main-container {
+  position: relative;
+  max-width: 100%;
+  margin-right: 2rem;
+  margin-left: 2rem; }
+
+.main-data-container {
+  width: 72%;
+  float: left;
+  display: inline-block; }
+
+@media (max-width: 1050px) {
+  .side-panel-container {
+    display: none !important; }
+  .main-data-container {
+    width: 100%; } }
+
+@media (max-width: 750px) {
+  .courses-table-entry td:first-child {
+    display: none; }
+  .courses-table-entry td:last-child {
+    border-right: none !important; }
+  .cal-enroll {
+    display: none; }
+  table, thead, tbody, th, td, tr {
+    display: block; }
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px; }
+  tr {
+    border: 3px solid #4279FF !important; }
+  .courses-table-waitlisted {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-radius: 0rem !important; }
+  .courses-table-waitlisted td {
+    display: none; }
+  .courses-table-waitlisted td:nth-child(2) {
+    display: block; }
+  .courses-table-waitlisted-text {
+    visibility: hidden; }
+  .courses-table-waitlisted td:nth-child(2):before {
+    content: "Waitlisted Courses" !important; }
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%; }
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap; }
+  td:nth-of-type(1):before {
+    content: "Drop"; }
+  td:nth-of-type(2):before {
+    content: "Class"; }
+  td:nth-of-type(3):before {
+    content: "Type"; }
+  td:nth-of-type(4):before {
+    content: "Time"; }
+  td:nth-of-type(5):before {
+    content: "Room"; }
+  td:nth-of-type(6):before {
+    content: "Instructor"; }
+  td:nth-of-type(7):before {
+    content: "Units"; }
+  td:nth-of-type(8):before {
+    content: "CCN"; }
+  td:nth-of-type(9):before {
+    content: "Waitlist"; } }
+
+.side-panel-container {
+  margin-left: 1%;
+  width: 27%;
+  float: right;
+  display: inline-block; }
+
+html {
+  font-family: "Calibre-Regular", sans-serif; }
+
+body {
+  margin: 0px; }
+
+button {
+  cursor: pointer;
+  outline: 0;
+  background-color: #4279FF;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 0.25rem; }
+
+input, select {
+  padding-top: 0.15rem;
+  padding-bottom: 0.3rem;
+  padding-left: 0.15rem; }
+
+input {
+  outline: 0; }
+
+::-webkit-input-placeholder {
+  color: black; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: black; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: black; }
+
+:-ms-input-placeholder {
+  color: black; }
+
+input:focus {
+  outline: 0; }
+
+a {
+  color: black; }
+
+.outline-blue {
+  border: 2px solid #4279FF !important;
+  border-radius: 0.25rem; }
+
+.color-blue {
+  color: #4279FF; }
+
+.semibold {
+  font-family: "Calibre-Semibold", sans-serif; }
+
+.clearfix {
+  overflow: auto; }
+
+.headerfix {
+  overflow: visible; }
+
+.rm-margin-bottom {
+  margin-bottom: 0px !important; }
+
+button:disabled {
+  background-color: #E8E8E8 !important;
+  color: #B2B2B2 !important; }
+
+input:disabled {
+  border: 2px solid #E8E8E8 !important;
+  border-radius: 0.25rem !important;
+  background-color: #E8E8E8 !important; }
+
+input:disabled::-webkit-input-placeholder {
+  color: #B2B2B2 !important; }
+
+input:disabled:-moz-placeholder {
+  /* Firefox 18- */
+  color: #B2B2B2 !important; }
+
+input:disabled::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #B2B2B2 !important; }
+
+input:disabled:-ms-input-placeholder {
+  color: #B2B2B2 !important; }
+
+select {
+  outline: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  background-color: white !important;
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+select:disabled {
+  border: 2px solid #E8E8E8 !important;
+  border-radius: 0.25rem !important;
+  color: #B2B2B2 !important;
+  background-color: #E8E8E8 !important; }
+
+/* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
+select:not(:disabled) {
+  background: linear-gradient(45deg, transparent 50%, #4279FF 50%), linear-gradient(135deg, #4279FF 50%, transparent 50%);
+  background-position: calc(100% - 12px) calc(0.4rem + 2px), calc(100% - 8px) calc(0.4rem + 2px);
+  background-size: 4px 4px, 4px 4px;
+  background-repeat: no-repeat; }
+
+.Select {
+  height: 100% !important; }
+
+.Select.is-disabled {
+  border: 2px solid #E8E8E8 !important;
+  border-radius: 0.25rem !important; }
+  .Select.is-disabled .Select-control {
+    background-color: #E8E8E8 !important; }
+  .Select.is-disabled .Select-placeholder {
+    color: #B2B2B2 !important; }
+  .Select.is-disabled .Select-arrow {
+    border-color: #B2B2B2 transparent transparent !important; }
+
+.Select-control {
+  border-radius: 0rem !important;
+  font-size: 13px !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
+  border: 0rem !important;
+  height: 100% !important; }
+
+.Select-placeholder {
+  height: 13px !important;
+  line-height: 13px !important;
+  padding-top: 0.4rem !important;
+  padding-left: 0.3rem !important;
+  color: black !important;
+  overflow: visible !important; }
+
+.Select-input {
+  height: 13px !important;
+  padding-left: 0.3rem !important;
+  padding-top: 0.15rem !important; }
+
+.Select-input > input {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+  height: 13px !important;
+  box-sizing: border-box !important;
+  width: 80% !important;
+  max-width: 100% !important; }
+
+span.Select-arrow-zone {
+  padding: 0.45rem 0rem 0rem 0rem !important; }
+
+.Select-arrow {
+  border-color: #4279FF transparent transparent !important; }
+
+.Select-value, .Select-value-label {
+  line-height: 13px !important; }
+
+.Select-value {
+  padding-top: 0.5rem !important;
+  padding-left: 0.3rem !important; }
+
+.Select-option, .Select-noresults {
+  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
+  margin: 0rem !important;
+  font-size: 13px !important; }
+
+.Select-clear {
+  height: 5px !important;
+  padding-top: 0.2rem !important; }
+
+.error-dialog {
+  width: auto;
+  margin-bottom: 2rem; }
+
+.error-dialog-icon .icon {
+  color: #FF8080;
+  font-size: 50px !important; }
+
+.error-dialog-icon {
+  position: absolute;
+  text-align: center;
+  display: inline-block;
+  width: 65px;
+  top: 38.5%;
+  left: 31.5%; }
+
+.error-dialog-msg {
+  display: inline-block;
+  width: 400px; }
+
+.add-course-confirm, .drop-course-confirm {
+  left: 0rem !important;
+  top: 40% !important;
+  height: auto !important;
+  width: 34% !important;
+  margin-right: 33% !important;
+  margin-left: 33% !important; }
+
+.modal-header {
+  background-color: #4279FF;
+  color: white;
+  height: 1.7rem;
+  font-size: 1.5rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 0.4rem; }
+
+.modal-header-text {
+  float: left; }
+
+.modal-cancel {
+  cursor: pointer;
+  float: right;
+  margin-right: 1rem; }
+
+.modal-cancel-icon {
+  font-size: 1.5rem;
+  -ms-transform: translate(0px, -0.3rem);
+  /* IE 9 */
+  -webkit-transform: translate(0px, -0.3rem);
+  /* Safari */
+  transform: translate(0px, -0.3rem); }
+
+.modal-confirm-text {
+  padding-left: 1rem;
+  margin-bottom: 0px; }
+
+.modal-class-item {
+  background-color: #EEEEEE;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  margin-bottom: 1rem; }
+
+.modal-body {
+  padding: 0.5rem 1rem 0rem 1rem;
+  height: 100%; }
+
+.modal-course-info {
+  margin-top: 0.2rem; }
+
+.modal-course-info-name {
+  text-transform: uppercase;
+  font-size: 1.2rem; }
+
+.modal-course-info {
+  width: 100%;
+  display: inline-block; }
+
+.modal-footer {
+  text-align: right;
+  margin-bottom: 1rem;
+  margin-right: 1rem; }
+
+.modal-confirm-button {
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  padding: 0.5rem 0.75rem; }
+
+.absolute-center-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.loading {
+  text-align: center; }
+
+.loading-msg-logo-text {
+  color: #4279FF;
+  font-size: 1.2rem;
+  margin-bottom: 2rem; }
+
+.loading-msg {
+  font-size: 1.5rem;
+  font-family: "Calibre-Semibold", sans-serif; }
+
+.banner {
+  width: 100%;
+  background-color: #4279FF; }
+
+.banner-text {
+  color: white;
+  margin-top: 0rem;
+  margin-left: 2rem;
+  font-size: 1.2rem;
+  padding-top: 1rem;
+  padding-bottom: 0.75rem; }
+
+.my-academics-link-wrapper {
+  margin-top: 1.8rem;
+  margin-bottom: 0.7rem; }
+
+.my-academics-link {
+  text-decoration: none; }
+
+.class-enrollment-subtitle {
+  display: inline-block;
+  border-bottom: 0.2rem solid #4279FF;
+  font-size: 1.2rem;
+  line-height: 0.9rem;
+  margin-bottom: 1rem; }
+
+.current-semester-subtitle {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+  font-size: 2.5rem; }
+
+.courses-table-enroll th {
+  font-weight: normal;
+  min-width: 1rem; }
+
+.courses-table-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem;
+  margin-bottom: 2rem; }
+
+.courses-table-header-row th {
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.8rem;
+  text-align: left;
+  background-color: #4279FF;
+  color: white; }
+
+.courses-table-header-row th:nth-child(2) {
+  width: 25%; }
+
+.courses-table-header-row th:nth-child(3) {
+  width: 12%; }
+
+.courses-table-header-row th:nth-child(5) {
+  width: 12%; }
+
+.courses-table-waitlisted {
+  background-color: #EEEEEE;
+  border-spacing: 0rem; }
+
+.courses-table-waitlisted > td > div {
+  padding: 0.5rem 0rem 0.3rem 0rem; }
+
+.courses-drop-course {
+  color: #FF8080; }
+
+.courses-table-waitlisted p {
+  padding-top: 0.3rem; }
+
+.courses-table-waitlisted td {
+  background-color: #EEEEEE; }
+
+.courses-table-header-drop-class {
+  text-align: center;
+  width: 4rem; }
+
+.courses-table-entry {
+  text-align: left;
+  font-size: 1.1rem;
+  border: 1px solid black; }
+
+.courses-table-entry td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
+  line-height: 1.75rem; }
+
+.courses-table-entry .class-drop {
+  text-align: center; }
+
+.courses-table-entry td {
+  border-bottom: 1px solid #EEEEEE; }
+
+.courses-table-entry td:first-child {
+  border-left: 1px solid #EEEEEE;
+  width: 50px; }
+
+.courses-table-entry td:last-child {
+  border-right: 1px solid #EEEEEE;
+  width: 50px; }
+
+.courses-table-entry td:nth-child(2) {
+  font-family: "Calibre-Semibold", sans-serif;
+  text-transform: uppercase; }
+
+.discussion-swap {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.5rem; }
+
+.cal-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem;
+  margin-bottom: 3rem; }
+
+.cal-header-row {
+  position: relative;
+  height: 20px;
+  text-align: center; }
+
+.cal-body {
+  position: relative;
+  height: 250px;
+  text-transform: uppercase; }
+
+.cal-header-row-entry {
+  position: absolute;
+  width: 20%;
+  top: 0px;
+  height: 25px;
+  background-color: #EEEEEE;
+  padding-top: 0.75rem; }
+
+.cal-header-row .cal-header-row-entry:nth-child(1) {
+  left: 0%; }
+
+.cal-header-row .cal-header-row-entry:nth-child(2) {
+  left: 20%; }
+
+.cal-header-row .cal-header-row-entry:nth-child(3) {
+  left: 40%; }
+
+.cal-header-row .cal-header-row-entry:nth-child(4) {
+  left: 60%; }
+
+.cal-header-row .cal-header-row-entry:nth-child(5) {
+  left: 80%; }
+
+.cal-dotw-column {
+  display: inline-block;
+  height: 100%;
+  width: calc(20% - 1.3px);
+  border-bottom: 1px solid #EEEEEE;
+  border-right: 1px solid #EEEEEE; }
+
+.monday-column {
+  border-left: 1px solid #EEEEEE; }
+
+.lecture-entry {
+  width: calc(18%);
+  text-align: left;
+  position: absolute; }
+
+.other-entry {
+  width: calc(18%);
+  text-align: left;
+  position: absolute; }
+
+.lecture-entry-header {
+  background-color: #4279FF;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  color: white; }
+
+.lecture-entry-body {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: white;
+  border-left: 1px solid #EEEEEE;
+  border-right: 1px solid #EEEEEE; }
+
+.lecture-entry-footer {
+  height: 27px;
+  background-color: #EEEEEE;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem; }
+
+.other-entry-body {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: #4279FF;
+  color: white;
+  border-radius: 0.25rem; }
+
+.waitlisted-entry .lecture-entry-header, .waitlisted-entry .lecture-entry-body, .waitlisted-entry .lecture-entry-footer, .waitlisted-entry .other-entry-body {
+  background-color: #EEEEEE !important;
+  color: #B2B2B2 !important; }
+
+.waitlisted-entry .other-entry-body {
+  background-color: #EEEEEE !important;
+  color: #B2B2B2 !important; }
+
+.phase2-signup-panel {
+  background-color: #EEEEEE;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem; }
+
+.phase2-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem; }
+
+.phase2-header-text {
+  font-weight: bold;
+  font-size: 1.3rem; }
+
+.phase2-date, .phase2-time {
+  color: #4279FF; }
+
+.phase2-add-calendar-alert {
+  padding: 0.8rem 1.8rem;
+  font-size: 0.8rem; }
+
+.sc-panel {
+  background-color: #EEEEEE;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem; }
+
+.sc-header-text {
+  margin: 0rem; }
+
+.sc-class-item {
+  padding: 0.75rem;
+  margin: 0.5rem 0rem;
+  border-radius: 0.25rem;
+  background-color: white; }
+
+.sc-clear-button {
+  background-color: #FF8080;
+  margin-left: 0.8rem;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem; }
+
+.sc-foot {
+  margin-top: 1rem; }
+
+.sc-clear-text {
+  font-size: 0.9rem; }
+
+.sc-course-info {
+  position: relative;
+  margin-top: 0.2rem; }
+
+.sc-course-info-name {
+  text-transform: uppercase;
+  font-size: 1.2rem; }
+
+.sc-course-info-left {
+  width: 50%; }
+
+.sc-course-info-right {
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0rem;
+  font-size: 0.8rem;
+  margin-top: 0.5rem; }
+
+.sc-course-add, .sc-course-delete {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem; }
+
+.sc-course-delete {
+  background-color: #FF8080;
+  margin-right: 0.5rem; }
+
+.add-class-panel {
+  background-color: #EEEEEE;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem; }
+
+.add-class-header {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  border-bottom: 0.2rem solid #4279FF;
+  font-family: "Calibre-Semibold", sans-serif;
+  font-size: 1.2rem;
+  line-height: 0.9rem; }
+
+.add-class-error-msg {
+  display: inline-block;
+  float: right;
+  font-size: 0.8rem;
+  line-height: 0.75rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.35rem;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #FF8080;
+  color: white; }
+
+.add-class-form {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; }
+
+.add-class-CCN {
+  float: left;
+  width: 15%;
+  padding-top: 0.2rem;
+  padding-bottom: 0.25rem;
+  display: inline-block; }
+
+.add-class-department {
+  width: 44% !important;
+  margin-left: 2%;
+  display: inline-block; }
+
+.add-class-course-number {
+  float: right;
+  width: 35% !important;
+  display: inline-block; }
+
+.add-class-lecture-section {
+  width: 100%;
+  float: left; }
+
+.add-class-lab-section {
+  width: 100%;
+  float: left; }
+
+.add-class-discussion-section {
+  width: 100%;
+  float: left; }
+
+.add-class-grade-option {
+  width: 48%;
+  float: left; }
+
+.add-class-CEC {
+  width: 48%;
+  float: right; }
+
+.add-class-form-row {
+  height: 1.5rem;
+  width: 100%;
+  margin-bottom: 0.2rem; }
+
+.add-class-class-name {
+  width: 60% !important; }
+
+.add-class-waitlist-status {
+  display: inline-block;
+  width: 37%;
+  margin-left: 2%;
+  font-size: 0.8rem; }
+
+.add-class-waitlist-row {
+  width: 100%;
+  text-align: right;
+  margin-top: 1rem; }
+
+.add-class-waitlist {
+  font-size: 0.9rem; }
+
+.add-class-waitlist-button {
+  margin-left: 0.4rem;
+  margin-right: 1.2rem; }
+
+.add-class-submit-button {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem; }
+
+.units-summary-panel {
+  background-color: #EEEEEE;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem; }
+
+.units-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem;
+  font-family: "Calibre-Semibold", sans-serif; }
+
+.units-header-text {
+  font-weight: bold;
+  font-size: 1.3rem;
+  font-family: "Calibre-Semibold", sans-serif; }
+
+.units-total {
+  color: #4279FF; }
+
+.units-remaining {
+  color: #FF8080; }
