@@ -361,11 +361,11 @@ span.Select-arrow-zone {
 }
 
 .Select-value {
-  padding-top: 0.4rem !important;
+  padding-top: 0.5rem !important;
   padding-left: 0.3rem !important;
 }
 
-.Select-option {
+.Select-option, .Select-noresults {
   padding: 0.4rem 0.3rem 0rem 0.4rem !important;
   margin: 0rem !important;
   font-size: 13px !important;
