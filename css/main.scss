@@ -704,7 +704,7 @@ span.Select-arrow-zone {
 .cal-dotw-column {
   display: inline-block;
   height: 100%;
-  width: calc(20% - 1.2px);
+  width: calc(20% - 1.3px);
   border-bottom: 1px solid $primary-gray;
   border-right: 1px solid $primary-gray;
 }
@@ -714,13 +714,13 @@ span.Select-arrow-zone {
 }
 
 .lecture-entry {
-  width: calc(18% - 4px);
+  width: calc(18%);
   text-align: left;
   position: absolute;
 }
 
 .other-entry {
-  width: calc(18% - 4px);
+  width: calc(18%);
   text-align: left;
   position: absolute;
 }
@@ -763,7 +763,11 @@ span.Select-arrow-zone {
 .waitlisted-entry {
   .lecture-entry-header, .lecture-entry-body, .lecture-entry-footer, .other-entry-body {
     background-color: $primary-gray !important;
-    color: black !important;
+    color: $disabled-text !important;
+  }
+  .other-entry-body {
+    background-color: $primary-gray !important;
+    color: $disabled-text !important;
   }
 }
 
@@ -826,7 +830,7 @@ span.Select-arrow-zone {
 
 }
 
-.sc-footer {
+.sc-foot {
   margin-top: 1rem;
 }
 

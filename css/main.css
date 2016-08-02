@@ -753,7 +753,7 @@ span.Select-arrow-zone {
 .cal-dotw-column {
   display: inline-block;
   height: 100%;
-  width: calc(20% - 1.2px);
+  width: calc(20% - 1.3px);
   border-bottom: 1px solid #EEEEEE;
   border-right: 1px solid #EEEEEE; }
 
@@ -761,12 +761,12 @@ span.Select-arrow-zone {
   border-left: 1px solid #EEEEEE; }
 
 .lecture-entry {
-  width: calc(18% - 4px);
+  width: calc(18%);
   text-align: left;
   position: absolute; }
 
 .other-entry {
-  width: calc(18% - 4px);
+  width: calc(18%);
   text-align: left;
   position: absolute; }
 
@@ -803,7 +803,10 @@ span.Select-arrow-zone {
 
 .waitlisted-entry .lecture-entry-header, .waitlisted-entry .lecture-entry-body, .waitlisted-entry .lecture-entry-footer, .waitlisted-entry .other-entry-body {
   background-color: #EEEEEE !important;
-  color: black !important; }
+  color: #B2B2B2 !important; }
+.waitlisted-entry .other-entry-body {
+  background-color: #EEEEEE !important;
+  color: #B2B2B2 !important; }
 
 .phase2-signup-panel {
   background-color: #EEEEEE;
@@ -849,7 +852,7 @@ span.Select-arrow-zone {
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem; }
 
-.sc-footer {
+.sc-foot {
   margin-top: 1rem; }
 
 .sc-clear-text {

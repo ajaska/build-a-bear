@@ -99,7 +99,7 @@ class AddCourseModal extends React.Component {
         <div className="modal-footer">
           <span className="modal-confirm-text">
             You will have
-            <span className="color-blue">{ (1 * lecture.units) + this.props.beforeUnits }</span>
+            <span className="color-blue"> { (1 * lecture.units) + this.props.beforeUnits } </span>
             total units.
             <button className="modal-confirm-button" onClick={this.handleAddClicked}>
               Confirm
