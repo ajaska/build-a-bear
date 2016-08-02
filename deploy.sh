@@ -9,5 +9,5 @@ npm run-script build-css
 cp ./meme-app.js ./dist/app.js
 cp ./css/main.css ./dist/main.css
 
-git commit -m "Update dist to $(git rev-parse HEAD)" ./dist/
+git commit -m "Update dist to $(git rev-parse --short HEAD)" -- ./dist/
 git subtree push --prefix dist origin gh-pages
