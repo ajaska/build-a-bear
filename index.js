@@ -25,6 +25,12 @@ function initialize() {
     window.clearInterval(i);
   }
 
+  // Remove any existing setTimeout calls
+  let id = window.setTimeout(() => {}, 0);
+  while (id--) {
+    window.clearTimeout(id);
+  }
+
   document.querySelector('head').innerHTML = head;
 
   ({ formData, enrolledCourses, shoppingCartCourses } = parseResponse(document));
