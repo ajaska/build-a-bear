@@ -6,7 +6,7 @@ function UnitSummary({ enrolledUnits, waitlistedUnits, maxUnits }) {
   return (
     <div className="units-summary-panel">
       <p className="units-text">
-        <span className="units-header-text">You are currently enrolled in:</span>
+        <span className="units-header-text">You are currently enrolled in:&nbsp;</span>
         <br />
         <span className="units-total">{total} units</span>
         ({enrolledUnits} + {waitlistedUnits} w/l)
