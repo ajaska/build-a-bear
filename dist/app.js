@@ -28721,7 +28721,7 @@ var require$$9$1 = Object.freeze({
           React.createElement(
             "span",
             { className: "units-header-text" },
-            "You are currently enrolled in:"
+            "You are currently enrolled in: "
           ),
           React.createElement("br", null),
           React.createElement(
