@@ -12,25 +12,27 @@ $font-bold: 'Calibre-Bold', sans-serif;
 $medium-break: 1050px;
 $small-break: 750px;
 
+$root-url: rootURL();
+
 @font-face {
   font-family: 'Calibre-Regular';
-  src: url('../fonts/Calibre-Regular.woff');
+  src: url('#{$root-url}/fonts/Calibre-Regular.woff');
 }
 
 @font-face {
   font-family: 'Calibre-Semibold';
-  src: url('../fonts/Calibre-Semibold.woff');
+  src: url('#{$root-url}/fonts/Calibre-Semibold.woff');
 }
 
 @font-face {
   font-family: 'Calibre-Bold';
-  src: url('../fonts/Calibre-Bold.woff');
+  src: url('#{$root-url}/fonts/Calibre-Bold.woff');
 }
 
 @font-face {
   font-family: 'Icons';
-  src: url("../fonts/icons.eot");
-  src: url("../fonts/icons.eot?#iefix") format('embedded-opentype'), url("../fonts/icons.woff") format('woff'), url("../fonts/icons.ttf") format('truetype'), url("../fonts/icons.svg#icons") format('svg');
+  src: url("#{$root-url}/fonts/icons.eot");
+  src: url("#{$root-url}/fonts/icons.eot?#iefix") format('embedded-opentype'), url("#{$root-url}/fonts/icons.woff") format('woff'), url("#{$root-url}/fonts/icons.ttf") format('truetype'), url("#{$root-url}/fonts/icons.svg#icons") format('svg');
   font-style: normal;
   font-weight: normal;
   font-variant: normal;

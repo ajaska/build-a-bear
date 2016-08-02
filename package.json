@@ -3,7 +3,9 @@
   "scripts": {
     "build": "rollup -c",
     "build-prod": "NODE_ENV=production rollup -c",
+    "build-css": "node-sass --functions css/funcs.js css/main.scss css/main.css",
     "watch": "rollup -c -w",
+    "watch-css": "node-sass --watch --functions css/funcs.js css/main.scss css/main.css",
     "lint": "eslint index.js app; exit 0"
   },
   "dependencies": {
@@ -29,6 +31,7 @@
     "eslint-plugin-import": "^1.12.0",
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
+    "node-sass": "^3.8.0",
     "redux-devtools": "^3.3.1",
     "rollup": "^0.34.1",
     "rollup-plugin-babel": "^2.6.1",
