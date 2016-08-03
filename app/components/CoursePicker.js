@@ -107,6 +107,17 @@ class CoursePicker extends React.Component {
       { value: "pnp", label: "P/NP" },
       { value: "graded", label: "Letter Grade" },
     ];
+    let warning = null;
+    if (this.props.warning) {
+      warning = (
+        <div className="add-class-form-row add-class-warning-msg clearfix">
+          <div className="add-class-warning-msg-icon-wrapper">
+            <i className="add-class-warning-msg-icon warning circle icon"></i>
+          </div>
+          <span className="add-class-warning-msg-text">{this.props.warning}</span>
+        </div>
+      );
+    }
     return (
       <div className="add-class-panel">
         <div className="add-class-header">Add Class</div>
@@ -185,12 +196,7 @@ class CoursePicker extends React.Component {
               onChange={this.handleCECChange}
             />
           </div>
-          <div className="add-class-form-row add-class-warning-msg clearfix">
-            <div className="add-class-warning-msg-icon-wrapper">
-              <i className="add-class-warning-msg-icon warning circle icon"></i>
-            </div>
-            <span className="add-class-warning-msg-text">If you want to enroll in a different section, you must drop the class from your cart and re-add it here.</span>
-          </div>
+          {warning}
 
 
           <div className="add-class-form-row add-class-waitlist-row">
@@ -231,6 +237,7 @@ CoursePicker.propTypes = {
   deptNumbers: React.PropTypes.array.isRequired,
   courseName: React.PropTypes.string.isRequired,
   error: React.PropTypes.string.isRequired,
+  warning: React.PropTypes.string,
   lectureSection: React.PropTypes.string.isRequired,
   lectureAvailability: React.PropTypes.string.isRequired,
   lectureSections: React.PropTypes.array.isRequired,
