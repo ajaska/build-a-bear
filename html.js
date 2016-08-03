@@ -1,10 +1,6 @@
 export const head = `
 <link href='https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="${ROOT_URL}/css/main.css">
-<link rel="stylesheet" type="text/css" href="${ROOT_URL}/css/semantic/modal.min.css">
-<link rel="stylesheet" type="text/css" href="${ROOT_URL}/css/semantic/dimmer.min.css">
-<link rel="stylesheet" type="text/css" href="${ROOT_URL}/css/semantic/transition.min.css">
-<link rel="stylesheet" type="text/css" href="${ROOT_URL}/css/semantic/icon.min.css">
 <link rel="stylesheet" href="https://npmcdn.com/react-select/dist/react-select.css">
 <title>Build-a-Bear</title>
 `
