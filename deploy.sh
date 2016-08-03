@@ -11,4 +11,4 @@ cp ./css/main.css ./dist/css/main.css
 
 git commit -m "Update dist to $(git rev-parse --short HEAD)" -- ./dist/
 git subtree push --prefix dist origin gh-pages
-git push origin
+git push origin master
