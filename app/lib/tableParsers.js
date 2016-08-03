@@ -1,3 +1,5 @@
+import { shortenRoom } from '../helpers/everything';
+
 const schemaTypes = {
   selectable: Symbol('Selectable'), // [x]
   course_id: Symbol('Class'), // COMPSCI 162-00 \n (27170)
@@ -53,7 +55,7 @@ function parseColumn(column, columnType) {
     case schemaTypes.time:
       return { time: column.innerText.trim() };
     case schemaTypes.room:
-      return { room: column.innerText.trim() };
+      return { room: shortenRoom(column.innerText.trim()) };
     case schemaTypes.instructor:
       return { instructor: column.innerText.trim() };
     case schemaTypes.units:

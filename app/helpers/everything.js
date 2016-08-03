@@ -52,6 +52,17 @@ function formatTime(days, start, end) {
   return `${days} ${start}-${end}`;
 }
 
+export function shortenRoom(room) {
+  let newRoom = room;
+  newRoom = newRoom.replace('Valley Life Sciences', 'VLSB');
+  newRoom = newRoom.replace('Genetics Plant Bio', 'GPB');
+  newRoom = newRoom.replace('Goldman School of Public Policy', 'GSPP');
+  newRoom = newRoom.replace('Hearst Memorial Gymnasium', 'Hearst Gym');
+  newRoom = newRoom.replace('Hearst Memorial Mining Building', 'Hearst Mining');
+  newRoom = newRoom.replace('Hewlett-Packard Auditorium', 'HP Auditorium');
+  return newRoom;
+}
+
 export function lectureSectionFromCCN(ccn) {
   const data = ccnIndexed[ccn];
   return new LectureSection(
@@ -61,7 +72,7 @@ export function lectureSectionFromCCN(ccn) {
     data[2], // section
     data[4], // courseName
     data[5], // units
-    data[6], // room
+    shortenRoom(data[6]), // room
     formatTime(data[7], data[8], data[9]),
     data[10] // instructor
   );
