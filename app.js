@@ -28478,6 +28478,23 @@ var require$$9$1 = Object.freeze({
             );
           });
           var gradeOption = [{ value: "pnp", label: "P/NP" }, { value: "graded", label: "Letter Grade" }];
+          var warning = null;
+          if (this.props.warning) {
+            warning = React.createElement(
+              'div',
+              { className: 'add-class-form-row add-class-warning-msg clearfix' },
+              React.createElement(
+                'div',
+                { className: 'add-class-warning-msg-icon-wrapper' },
+                React.createElement('i', { className: 'add-class-warning-msg-icon warning circle icon' })
+              ),
+              React.createElement(
+                'span',
+                { className: 'add-class-warning-msg-text' },
+                this.props.warning
+              )
+            );
+          }
           return React.createElement(
             'div',
             { className: 'add-class-panel' },
@@ -28588,6 +28605,7 @@ var require$$9$1 = Object.freeze({
                   onChange: this.handleCECChange
                 })
               ),
+              warning,
               React.createElement(
                 'div',
                 { className: 'add-class-form-row add-class-waitlist-row' },
@@ -28633,6 +28651,7 @@ var require$$9$1 = Object.freeze({
       deptNumbers: React.PropTypes.array.isRequired,
       courseName: React.PropTypes.string.isRequired,
       error: React.PropTypes.string.isRequired,
+      warning: React.PropTypes.string,
       lectureSection: React.PropTypes.string.isRequired,
       lectureAvailability: React.PropTypes.string.isRequired,
       lectureSections: React.PropTypes.array.isRequired,
@@ -28656,6 +28675,25 @@ var require$$9$1 = Object.freeze({
       }).length > 0;
     }
 
+    function checkWarning(state, lectureSection) {
+      if (ccnInCart(state)) {
+        return 'If you want to enroll in a different section, you must drop the ' + 'class from your cart and re-add it here.';
+      }
+
+      var courses = state.enrolled.toJS().courses;
+      var unitCount = courses.filter(function (course) {
+        return course.units > 0;
+      }).map(function (course) {
+        return course.units;
+      }).reduce(function (prev, units) {
+        return prev + 1 * units;
+      }, 0.0);
+      if (lectureSection && unitCount && 1 * lectureSection.units + unitCount > 16) {
+        return 'Adding this course would put you over the 16 unit cap.';
+      }
+      return '';
+    }
+
     var mapStateToProps$2 = function mapStateToProps(state) {
       var cpState = state.coursePicker.toJS();
       var lectureSection = cpState.lectureSections[cpState.lectureSection];
@@ -28663,11 +28701,15 @@ var require$$9$1 = Object.freeze({
       if (lectureSection) {
         courseName = lectureSection.courseName;
       }
+
+      var warning = checkWarning(state, lectureSection);
+
       return Object.assign({}, state.coursePicker.toJS(), {
         ccnInCart: ccnInCart(state),
         deptOptions: allDepts().sort(),
         deptNumbers: deptNumbersForDept(cpState.dept),
-        courseName: courseName
+        courseName: courseName,
+        warning: warning
       });
     };
 
