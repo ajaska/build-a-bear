@@ -6370,6 +6370,9 @@ span.Select-arrow-zone {
 .courses-table-entry .class-drop {
   text-align: center; }
 
+.courses-table-entry .class-drop a {
+  text-decoration: none; }
+
 .courses-table-entry td {
   border-bottom: 1px solid #EEEEEE; }
 
