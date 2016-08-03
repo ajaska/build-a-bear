@@ -185,6 +185,12 @@ class CoursePicker extends React.Component {
               onChange={this.handleCECChange}
             />
           </div>
+          <div className="add-class-form-row add-class-warning-msg clearfix">
+            <div className="add-class-warning-msg-icon-wrapper">
+              <i className="add-class-warning-msg-icon warning circle icon"></i>
+            </div>
+            <span className="add-class-warning-msg-text">If you want to enroll in a different section, you must drop the class from your cart and re-add it here.</span>
+          </div>
 
 
           <div className="add-class-form-row add-class-waitlist-row">

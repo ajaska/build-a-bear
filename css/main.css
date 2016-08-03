@@ -6595,6 +6595,26 @@ span.Select-arrow-zone {
   background-color: #FF8080;
   color: white; }
 
+.add-class-warning-msg-icon-wrapper {
+  display: inline-block;
+  float: left;
+  width: 5%;
+  padding-top: 4%;
+  padding-left: 4%;
+  text-align: center; }
+
+.add-class-warning-msg-text {
+  display: inline-block;
+  float: right;
+  width: 82%;
+  font-size: 0.9rem;
+  padding: 4%; }
+
+.add-class-warning-msg {
+  background-color: #FFDE80;
+  height: 100% !important;
+  border-radius: 0.25rem; }
+
 .add-class-form {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem; }

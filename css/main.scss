@@ -9,6 +9,7 @@
 $primary-blue: #4279FF;
 $primary-red: #FF8080;
 $primary-gray: #EEEEEE;
+$primary-yellow: #FFDE80;
 $disabled-background: #E8E8E8;
 $disabled-text: #B2B2B2;
 $font-stack: 'Calibre-Regular', sans-serif;
@@ -911,6 +912,29 @@ span.Select-arrow-zone {
   border-radius: 0.25rem;
   background-color: $primary-red;
   color: white;
+}
+
+.add-class-warning-msg-icon-wrapper {
+  display: inline-block;
+  float: left;
+  width: 5%;
+  padding-top: 4%;
+  padding-left: 4%;
+  text-align: center;
+}
+
+.add-class-warning-msg-text {
+  display: inline-block;
+  float: right;
+  width: 82%;
+  font-size: 0.9rem;
+  padding: 4%;
+}
+
+.add-class-warning-msg {
+  background-color: $primary-yellow;
+  height: 100% !important;
+  border-radius: 0.25rem;
 }
 
 .add-class-form {
