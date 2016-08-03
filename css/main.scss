@@ -1,5 +1,10 @@
 @import '_calendar_entries.scss';
 @import '_reset.scss';
+@import 'semantic/dimmer.min.scss';
+@import 'semantic/dropdown.min.scss';
+@import 'semantic/icon.min.scss';
+@import 'semantic/modal.min.scss';
+@import 'semantic/transition.min.scss';
 
 $primary-blue: #4279FF;
 $primary-red: #FF8080;
@@ -762,7 +767,7 @@ span.Select-arrow-zone {
   border-radius: 0.25rem;
 }
 
-.waitlisted-entry {
+.waitlisted-course > {
   .lecture-entry-header, .lecture-entry-body, .lecture-entry-footer, .other-entry-body {
     background-color: $primary-gray !important;
     color: $disabled-text !important;

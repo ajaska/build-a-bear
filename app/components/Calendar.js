@@ -16,7 +16,7 @@ function Calendar({ courses }) {
   };
 
   const genLectures = (key) => key.map((key, i) => (
-    <div className={sc[key].day + " lecture-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
+    <div className={(sc[key].waitlisted ? 'waitlisted-course ' : '') + sc[key].day + " lecture-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
       <div className="lecture-entry-header semibold">{sc[key].formatted}</div>
       <div className={"lecture-entry-body block-" + sc[key].length}>{sc[key].desc} <br />{sc[key].room} </div>
       <div className="lecture-entry-footer"></div>
@@ -24,7 +24,7 @@ function Calendar({ courses }) {
   ));
 
   const genNonLectures = (key) => key.map((key, i) => (
-    <div className={sc[key].day + " other-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
+    <div className={(sc[key].waitlisted ? 'waitlisted-course ' : '') + sc[key].day + " other-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
       <div className={"other-entry-body block-" + sc[key].length}><span className="semibold">{sc[key].formatted}</span><br />{sc[key].desc} <br />{sc[key].room} </div>
     </div>
   ));
