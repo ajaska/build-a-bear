@@ -26319,7 +26319,11 @@ var require$$9$1 = Object.freeze({
             React.createElement(
               'td',
               { className: 'class-drop' },
-              React.createElement('i', { id: 'drop-class', className: 'courses-drop-course remove icon' })
+              React.createElement(
+                'a',
+                { target: '_blank', href: 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_DROP.GBL?ucFrom=CalCentral&ucFromLink=https://bear.plus&ucFromText=Class%20Enrollment' },
+                React.createElement('i', { id: 'drop-class', className: 'courses-drop-course remove icon' })
+              )
             ),
             React.createElement(
               'td',
