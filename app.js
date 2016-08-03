@@ -634,6 +634,7 @@
         // This can be replaced with a WeakMap once they are implemented in
         // commonly used development environments.
         element._store = {};
+        var shadowChildren = Array.isArray(props.children) ? props.children.slice(0) : props.children;
 
         // To make comparing ReactElements easier for testing purposes, we make
         // the validation flag non-enumerable (where possible, which should
@@ -653,6 +654,12 @@
             writable: false,
             value: self
           });
+          Object.defineProperty(element, '_shadowChildren', {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: shadowChildren
+          });
           // Two elements created in two different places should be considered
           // equal for testing purposes and therefore we hide it from enumeration.
           Object.defineProperty(element, '_source', {
@@ -664,6 +671,7 @@
         } else {
           element._store.validated = false;
           element._self = self;
+          element._shadowChildren = shadowChildren;
           element._source = source;
         }
         if (Object.freeze) {
@@ -943,7 +951,7 @@
     var getIteratorFn$1 = interopDefault(getIteratorFn);
 
 
-    var require$$0$2 = Object.freeze({
+    var require$$1$2 = Object.freeze({
       default: getIteratorFn$1
     });
 
@@ -1035,7 +1043,7 @@
     var ReactCurrentOwner = interopDefault(require$$5$1);
     var ReactElement = interopDefault(require$$13);
 
-    var getIteratorFn = interopDefault(require$$0$2);
+    var getIteratorFn = interopDefault(require$$1$2);
     var invariant = interopDefault(require$$1$1);
     var KeyEscapeUtils = interopDefault(require$$3$2);
     var warning = interopDefault(require$$0$1);
@@ -1117,7 +1125,14 @@
             }
           } else {
             if ("development" !== 'production') {
-              warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.');
+              var mapsAsChildrenAddendum = '';
+              if (ReactCurrentOwner.current) {
+                var mapsAsChildrenOwnerName = ReactCurrentOwner.current.getName();
+                if (mapsAsChildrenOwnerName) {
+                  mapsAsChildrenAddendum = ' Check the render method of `' + mapsAsChildrenOwnerName + '`.';
+                }
+              }
+              warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.%s', mapsAsChildrenAddendum);
               didWarnAboutMaps = true;
             }
             // Iterator will provide entry [k,v] tuples rather than values.
@@ -1650,6 +1665,58 @@
       default: ReactComponent$1
     });
 
+    var ReactPureComponent = createCommonjsModule(function (module) {
+    /**
+     * Copyright 2013-present, Facebook, Inc.
+     * All rights reserved.
+     *
+     * This source code is licensed under the BSD-style license found in the
+     * LICENSE file in the root directory of this source tree. An additional grant
+     * of patent rights can be found in the PATENTS file in the same directory.
+     *
+     * @providesModule ReactPureComponent
+     */
+
+    'use strict';
+
+    var _assign = interopDefault(require$$7);
+
+    var ReactComponent = interopDefault(require$$9);
+    var ReactNoopUpdateQueue = interopDefault(require$$5$2);
+
+    var emptyObject = interopDefault(require$$5$3);
+
+    /**
+     * Base class helpers for the updating state of a component.
+     */
+    function ReactPureComponent(props, context, updater) {
+      // Duplicated from ReactComponent.
+      this.props = props;
+      this.context = context;
+      this.refs = emptyObject;
+      // We initialize the default updater but the real one gets injected by the
+      // renderer.
+      this.updater = updater || ReactNoopUpdateQueue;
+    }
+
+    function ComponentDummy() {}
+    ComponentDummy.prototype = ReactComponent.prototype;
+    ReactPureComponent.prototype = new ComponentDummy();
+    ReactPureComponent.prototype.constructor = ReactPureComponent;
+    // Avoid an extra prototype jump for these methods.
+    _assign(ReactPureComponent.prototype, ReactComponent.prototype);
+    ReactPureComponent.prototype.isPureReactComponent = true;
+
+    module.exports = ReactPureComponent;
+    });
+
+    var ReactPureComponent$1 = interopDefault(ReactPureComponent);
+
+
+    var require$$8 = Object.freeze({
+      default: ReactPureComponent$1
+    });
+
     var keyMirror = createCommonjsModule(function (module) {
     /**
      * Copyright (c) 2013-present, Facebook, Inc.
@@ -1703,7 +1770,7 @@
     var keyMirror$1 = interopDefault(keyMirror);
 
 
-    var require$$0$3 = Object.freeze({
+    var require$$0$2 = Object.freeze({
       default: keyMirror$1
     });
 
@@ -1721,7 +1788,7 @@
 
     'use strict';
 
-    var keyMirror = interopDefault(require$$0$3);
+    var keyMirror = interopDefault(require$$0$2);
 
     var ReactPropTypeLocations = keyMirror({
       prop: null,
@@ -1735,7 +1802,7 @@
     var ReactPropTypeLocations$1 = interopDefault(ReactPropTypeLocations);
 
 
-    var require$$6$1 = Object.freeze({
+    var require$$7$1 = Object.freeze({
       default: ReactPropTypeLocations$1
     });
 
@@ -1769,7 +1836,7 @@
     var ReactPropTypeLocationNames$1 = interopDefault(ReactPropTypeLocationNames);
 
 
-    var require$$2$2 = Object.freeze({
+    var require$$4$1 = Object.freeze({
       default: ReactPropTypeLocationNames$1
     });
 
@@ -1813,7 +1880,7 @@
     var keyOf$1 = interopDefault(keyOf);
 
 
-    var require$$0$4 = Object.freeze({
+    var require$$0$3 = Object.freeze({
       default: keyOf$1
     });
 
@@ -1836,14 +1903,14 @@
 
     var ReactComponent = interopDefault(require$$9);
     var ReactElement = interopDefault(require$$13);
-    var ReactPropTypeLocations = interopDefault(require$$6$1);
-    var ReactPropTypeLocationNames = interopDefault(require$$2$2);
+    var ReactPropTypeLocations = interopDefault(require$$7$1);
+    var ReactPropTypeLocationNames = interopDefault(require$$4$1);
     var ReactNoopUpdateQueue = interopDefault(require$$5$2);
 
     var emptyObject = interopDefault(require$$5$3);
     var invariant = interopDefault(require$$1$1);
-    var keyMirror = interopDefault(require$$0$3);
-    var keyOf = interopDefault(require$$0$4);
+    var keyMirror = interopDefault(require$$0$2);
+    var keyOf = interopDefault(require$$0$3);
     var warning = interopDefault(require$$0$1);
 
     var MIXINS_KEY = keyOf({ mixins: null });
@@ -2205,6 +2272,13 @@
      */
     function mixSpecIntoComponent(Constructor, spec) {
       if (!spec) {
+        if ("development" !== 'production') {
+          var typeofSpec = typeof spec;
+          var isMixinValid = typeofSpec === 'object' && spec !== null;
+
+          warning(isMixinValid, '%s: You\'re attempting to include a mixin that is either null ' + 'or not an object. Check the mixins included by the component, ' + 'as well as any mixins they include themselves. ' + 'Expected object but got %s.', Constructor.displayName || 'ReactClass', spec === null ? null : typeofSpec);
+        }
+
         return;
       }
 
@@ -2608,7 +2682,7 @@
     var mapObject$1 = interopDefault(mapObject);
 
 
-    var require$$1$2 = Object.freeze({
+    var require$$1$3 = Object.freeze({
       default: mapObject$1
     });
 
@@ -2836,8 +2910,34 @@
     var ReactComponentTreeDevtool$1 = interopDefault(ReactComponentTreeDevtool);
 
 
-    var require$$0$6 = Object.freeze({
+    var require$$0$5 = Object.freeze({
       default: ReactComponentTreeDevtool$1
+    });
+
+    var ReactPropTypesSecret = createCommonjsModule(function (module) {
+    /**
+     * Copyright 2013-present, Facebook, Inc.
+     * All rights reserved.
+     *
+     * This source code is licensed under the BSD-style license found in the
+     * LICENSE file in the root directory of this source tree. An additional grant
+     * of patent rights can be found in the PATENTS file in the same directory.
+     *
+     * @providesModule ReactPropTypesSecret
+     */
+
+    'use strict';
+
+    var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+
+    module.exports = ReactPropTypesSecret;
+    });
+
+    var ReactPropTypesSecret$1 = interopDefault(ReactPropTypesSecret);
+
+
+    var require$$2$2 = Object.freeze({
+    	default: ReactPropTypesSecret$1
     });
 
     var checkReactTypeSpec = createCommonjsModule(function (module) {
@@ -2856,10 +2956,22 @@
 
     var _prodInvariant = interopDefault(require$$6);
 
-    var ReactPropTypeLocationNames = interopDefault(require$$2$2);
+    var ReactPropTypeLocationNames = interopDefault(require$$4$1);
+    var ReactPropTypesSecret = interopDefault(require$$2$2);
 
     var invariant = interopDefault(require$$1$1);
     var warning = interopDefault(require$$0$1);
+
+    var ReactComponentTreeDevtool;
+
+    if (typeof process !== 'undefined' && process.env && "development" === 'test') {
+      // Temporary hack.
+      // Inline requires don't work well with Jest:
+      // https://github.com/facebook/react/issues/7240
+      // Remove the inline requires when we don't need them anymore:
+      // https://github.com/facebook/react/pull/7178
+      ReactComponentTreeDevtool = interopDefault(require$$0$5);
+    }
 
     var loggedTypeFailures = {};
 
@@ -2886,7 +2998,7 @@
             // This is intentionally an invariant that gets caught. It's the same
             // behavior as without this statement except with a better message.
             !(typeof typeSpecs[typeSpecName] === 'function') ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually from React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], typeSpecName) : void 0;
-            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location);
+            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
           } catch (ex) {
             error = ex;
           }
@@ -2899,7 +3011,9 @@
             var componentStackInfo = '';
 
             if ("development" !== 'production') {
-              var ReactComponentTreeDevtool = interopDefault(require$$0$6);
+              if (!ReactComponentTreeDevtool) {
+                ReactComponentTreeDevtool = interopDefault(require$$0$5);
+              }
               if (debugID !== null) {
                 componentStackInfo = ReactComponentTreeDevtool.getStackAddendumByID(debugID);
               } else if (element !== null) {
@@ -2919,7 +3033,7 @@
     var checkReactTypeSpec$1 = interopDefault(checkReactTypeSpec);
 
 
-    var require$$4$1 = Object.freeze({
+    var require$$5$4 = Object.freeze({
       default: checkReactTypeSpec$1
     });
 
@@ -2945,14 +3059,14 @@
     'use strict';
 
     var ReactCurrentOwner = interopDefault(require$$5$1);
-    var ReactComponentTreeDevtool = interopDefault(require$$0$6);
+    var ReactComponentTreeDevtool = interopDefault(require$$0$5);
     var ReactElement = interopDefault(require$$13);
-    var ReactPropTypeLocations = interopDefault(require$$6$1);
+    var ReactPropTypeLocations = interopDefault(require$$7$1);
 
-    var checkReactTypeSpec = interopDefault(require$$4$1);
+    var checkReactTypeSpec = interopDefault(require$$5$4);
 
     var canDefineProperty = interopDefault(require$$2);
-    var getIteratorFn = interopDefault(require$$0$2);
+    var getIteratorFn = interopDefault(require$$1$2);
     var warning = interopDefault(require$$0$1);
 
     function getDeclarationErrorAddendum() {
@@ -3155,7 +3269,7 @@
     var ReactElementValidator$1 = interopDefault(ReactElementValidator);
 
 
-    var require$$0$5 = Object.freeze({
+    var require$$0$4 = Object.freeze({
       default: ReactElementValidator$1
     });
 
@@ -3175,7 +3289,7 @@
 
     var ReactElement = interopDefault(require$$13);
 
-    var mapObject = interopDefault(require$$1$2);
+    var mapObject = interopDefault(require$$1$3);
 
     /**
      * Create a factory that creates HTML tag elements.
@@ -3185,7 +3299,7 @@
      */
     function createDOMFactory(tag) {
       if ("development" !== 'production') {
-        var ReactElementValidator = interopDefault(require$$0$5);
+        var ReactElementValidator = interopDefault(require$$0$4);
         return ReactElementValidator.createFactory(tag);
       }
       return ReactElement.createFactory(tag);
@@ -3341,7 +3455,7 @@
     var ReactDOMFactories$1 = interopDefault(ReactDOMFactories);
 
 
-    var require$$6$2 = Object.freeze({
+    var require$$6$1 = Object.freeze({
       default: ReactDOMFactories$1
     });
 
@@ -3360,10 +3474,12 @@
     'use strict';
 
     var ReactElement = interopDefault(require$$13);
-    var ReactPropTypeLocationNames = interopDefault(require$$2$2);
+    var ReactPropTypeLocationNames = interopDefault(require$$4$1);
+    var ReactPropTypesSecret = interopDefault(require$$2$2);
 
     var emptyFunction = interopDefault(require$$3$1);
-    var getIteratorFn = interopDefault(require$$0$2);
+    var getIteratorFn = interopDefault(require$$1$2);
+    var warning = interopDefault(require$$0$1);
 
     /**
      * Collection of methods that allow declaration and validation of props that are
@@ -3453,9 +3569,21 @@
     /*eslint-enable no-self-compare*/
 
     function createChainableTypeChecker(validate) {
-      function checkType(isRequired, props, propName, componentName, location, propFullName) {
+      if ("development" !== 'production') {
+        var manualPropTypeCallCache = {};
+      }
+      function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
         componentName = componentName || ANONYMOUS;
         propFullName = propFullName || propName;
+        if ("development" !== 'production') {
+          if (secret !== ReactPropTypesSecret && typeof console !== 'undefined') {
+            var cacheKey = componentName + ':' + propName;
+            if (!manualPropTypeCallCache[cacheKey]) {
+              warning(false, 'You are manually calling a React.PropTypes validation ' + 'function for the `%s` prop on `%s`. This is deprecated ' + 'and will not work in the next major version. You may be ' + 'seeing this warning due to a third-party PropTypes library. ' + 'See https://fb.me/react-warning-dont-call-proptypes for details.', propFullName, componentName);
+              manualPropTypeCallCache[cacheKey] = true;
+            }
+          }
+        }
         if (props[propName] == null) {
           var locationName = ReactPropTypeLocationNames[location];
           if (isRequired) {
@@ -3474,7 +3602,7 @@
     }
 
     function createPrimitiveTypeChecker(expectedType) {
-      function validate(props, propName, componentName, location, propFullName) {
+      function validate(props, propName, componentName, location, propFullName, secret) {
         var propValue = props[propName];
         var propType = getPropType(propValue);
         if (propType !== expectedType) {
@@ -3507,7 +3635,7 @@
           return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
         }
         for (var i = 0; i < propValue.length; i++) {
-          var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']');
+          var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
           if (error instanceof Error) {
             return error;
           }
@@ -3519,9 +3647,11 @@
 
     function createElementTypeChecker() {
       function validate(props, propName, componentName, location, propFullName) {
-        if (!ReactElement.isValidElement(props[propName])) {
+        var propValue = props[propName];
+        if (!ReactElement.isValidElement(propValue)) {
           var locationName = ReactPropTypeLocationNames[location];
-          return new Error('Invalid ' + locationName + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a single ReactElement.'));
+          var propType = getPropType(propValue);
+          return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
         }
         return null;
       }
@@ -3543,9 +3673,8 @@
 
     function createEnumTypeChecker(expectedValues) {
       if (!Array.isArray(expectedValues)) {
-        return createChainableTypeChecker(function () {
-          return new Error('Invalid argument supplied to oneOf, expected an instance of array.');
-        });
+        warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.');
+        return emptyFunction.thatReturnsNull;
       }
 
       function validate(props, propName, componentName, location, propFullName) {
@@ -3576,7 +3705,7 @@
         }
         for (var key in propValue) {
           if (propValue.hasOwnProperty(key)) {
-            var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key);
+            var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
             if (error instanceof Error) {
               return error;
             }
@@ -3589,15 +3718,14 @@
 
     function createUnionTypeChecker(arrayOfTypeCheckers) {
       if (!Array.isArray(arrayOfTypeCheckers)) {
-        return createChainableTypeChecker(function () {
-          return new Error('Invalid argument supplied to oneOfType, expected an instance of array.');
-        });
+        warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.');
+        return emptyFunction.thatReturnsNull;
       }
 
       function validate(props, propName, componentName, location, propFullName) {
         for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
           var checker = arrayOfTypeCheckers[i];
-          if (checker(props, propName, componentName, location, propFullName) == null) {
+          if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
             return null;
           }
         }
@@ -3632,7 +3760,7 @@
           if (!checker) {
             continue;
           }
-          var error = checker(propValue, key, componentName, location, propFullName + '.' + key);
+          var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
           if (error) {
             return error;
           }
@@ -3754,7 +3882,7 @@
     var ReactPropTypes$1 = interopDefault(ReactPropTypes);
 
 
-    var require$$3$3 = Object.freeze({
+    var require$$4$2 = Object.freeze({
       default: ReactPropTypes$1
     });
 
@@ -3772,13 +3900,13 @@
 
     'use strict';
 
-    module.exports = '15.2.1';
+    module.exports = '15.3.0';
     });
 
     var ReactVersion$1 = interopDefault(ReactVersion);
 
 
-    var require$$5$4 = Object.freeze({
+    var require$$5$5 = Object.freeze({
     	default: ReactVersion$1
     });
 
@@ -3848,11 +3976,12 @@
 
     var ReactChildren = interopDefault(require$$3);
     var ReactComponent = interopDefault(require$$9);
+    var ReactPureComponent = interopDefault(require$$8);
     var ReactClass = interopDefault(require$$4);
-    var ReactDOMFactories = interopDefault(require$$6$2);
+    var ReactDOMFactories = interopDefault(require$$6$1);
     var ReactElement = interopDefault(require$$13);
-    var ReactPropTypes = interopDefault(require$$3$3);
-    var ReactVersion = interopDefault(require$$5$4);
+    var ReactPropTypes = interopDefault(require$$4$2);
+    var ReactVersion = interopDefault(require$$5$5);
 
     var onlyChild = interopDefault(require$$2$3);
     var warning = interopDefault(require$$0$1);
@@ -3862,7 +3991,7 @@
     var cloneElement = ReactElement.cloneElement;
 
     if ("development" !== 'production') {
-      var ReactElementValidator = interopDefault(require$$0$5);
+      var ReactElementValidator = interopDefault(require$$0$4);
       createElement = ReactElementValidator.createElement;
       createFactory = ReactElementValidator.createFactory;
       cloneElement = ReactElementValidator.cloneElement;
@@ -3892,6 +4021,7 @@
       },
 
       Component: ReactComponent,
+      PureComponent: ReactPureComponent,
 
       createElement: createElement,
       cloneElement: cloneElement,
@@ -4378,7 +4508,7 @@
     var ReactDOMComponentTree$1 = interopDefault(ReactDOMComponentTree);
 
 
-    var require$$4$2 = Object.freeze({
+    var require$$4$3 = Object.freeze({
       default: ReactDOMComponentTree$1
     });
 
@@ -4396,7 +4526,7 @@
 
     'use strict';
 
-    var keyMirror = interopDefault(require$$0$3);
+    var keyMirror = interopDefault(require$$0$2);
 
     var PropagationPhases = keyMirror({ bubbled: null, captured: null });
 
@@ -4742,7 +4872,7 @@
     var EventPluginRegistry$1 = interopDefault(EventPluginRegistry);
 
 
-    var require$$4$3 = Object.freeze({
+    var require$$4$4 = Object.freeze({
       default: EventPluginRegistry$1
     });
 
@@ -4828,7 +4958,7 @@
     var ReactErrorUtils$1 = interopDefault(ReactErrorUtils);
 
 
-    var require$$10 = Object.freeze({
+    var require$$11 = Object.freeze({
       default: ReactErrorUtils$1
     });
 
@@ -4849,7 +4979,7 @@
     var _prodInvariant = interopDefault(require$$6);
 
     var EventConstants = interopDefault(require$$18);
-    var ReactErrorUtils = interopDefault(require$$10);
+    var ReactErrorUtils = interopDefault(require$$11);
 
     var invariant = interopDefault(require$$1$1);
     var warning = interopDefault(require$$0$1);
@@ -5067,7 +5197,7 @@
     var EventPluginUtils$1 = interopDefault(EventPluginUtils);
 
 
-    var require$$6$3 = Object.freeze({
+    var require$$6$2 = Object.freeze({
       default: EventPluginUtils$1
     });
 
@@ -5176,7 +5306,7 @@
     var forEachAccumulated$1 = interopDefault(forEachAccumulated);
 
 
-    var require$$1$3 = Object.freeze({
+    var require$$1$4 = Object.freeze({
       default: forEachAccumulated$1
     });
 
@@ -5196,12 +5326,12 @@
 
     var _prodInvariant = interopDefault(require$$6);
 
-    var EventPluginRegistry = interopDefault(require$$4$3);
-    var EventPluginUtils = interopDefault(require$$6$3);
-    var ReactErrorUtils = interopDefault(require$$10);
+    var EventPluginRegistry = interopDefault(require$$4$4);
+    var EventPluginUtils = interopDefault(require$$6$2);
+    var ReactErrorUtils = interopDefault(require$$11);
 
     var accumulateInto = interopDefault(require$$2$4);
-    var forEachAccumulated = interopDefault(require$$1$3);
+    var forEachAccumulated = interopDefault(require$$1$4);
     var invariant = interopDefault(require$$1$1);
 
     /**
@@ -5236,6 +5366,10 @@
     };
     var executeDispatchesAndReleaseTopLevel = function (e) {
       return executeDispatchesAndRelease(e, false);
+    };
+
+    var getDictionaryKey = function (inst) {
+      return '.' + inst._rootNodeID;
     };
 
     /**
@@ -5281,7 +5415,7 @@
       },
 
       /**
-       * Stores `listener` at `listenerBank[registrationName][id]`. Is idempotent.
+       * Stores `listener` at `listenerBank[registrationName][key]`. Is idempotent.
        *
        * @param {object} inst The instance, which is the source of events.
        * @param {string} registrationName Name of listener (e.g. `onClick`).
@@ -5290,8 +5424,9 @@
       putListener: function (inst, registrationName, listener) {
         !(typeof listener === 'function') ? invariant(false, 'Expected %s listener to be a function, instead got type %s', registrationName, typeof listener) : void 0;
 
+        var key = getDictionaryKey(inst);
         var bankForRegistrationName = listenerBank[registrationName] || (listenerBank[registrationName] = {});
-        bankForRegistrationName[inst._rootNodeID] = listener;
+        bankForRegistrationName[key] = listener;
 
         var PluginModule = EventPluginRegistry.registrationNameModules[registrationName];
         if (PluginModule && PluginModule.didPutListener) {
@@ -5306,7 +5441,8 @@
        */
       getListener: function (inst, registrationName) {
         var bankForRegistrationName = listenerBank[registrationName];
-        return bankForRegistrationName && bankForRegistrationName[inst._rootNodeID];
+        var key = getDictionaryKey(inst);
+        return bankForRegistrationName && bankForRegistrationName[key];
       },
 
       /**
@@ -5324,7 +5460,8 @@
         var bankForRegistrationName = listenerBank[registrationName];
         // TODO: This should never be null -- when is it?
         if (bankForRegistrationName) {
-          delete bankForRegistrationName[inst._rootNodeID];
+          var key = getDictionaryKey(inst);
+          delete bankForRegistrationName[key];
         }
       },
 
@@ -5334,12 +5471,13 @@
        * @param {object} inst The instance, which is the source of events.
        */
       deleteAllListeners: function (inst) {
+        var key = getDictionaryKey(inst);
         for (var registrationName in listenerBank) {
           if (!listenerBank.hasOwnProperty(registrationName)) {
             continue;
           }
 
-          if (!listenerBank[registrationName][inst._rootNodeID]) {
+          if (!listenerBank[registrationName][key]) {
             continue;
           }
 
@@ -5348,7 +5486,7 @@
             PluginModule.willDeleteListener(inst, registrationName);
           }
 
-          delete listenerBank[registrationName][inst._rootNodeID];
+          delete listenerBank[registrationName][key];
         }
       },
 
@@ -5427,7 +5565,7 @@
     var EventPluginHub$1 = interopDefault(EventPluginHub);
 
 
-    var require$$7$2 = Object.freeze({
+    var require$$7$3 = Object.freeze({
       default: EventPluginHub$1
     });
 
@@ -5446,11 +5584,11 @@
     'use strict';
 
     var EventConstants = interopDefault(require$$18);
-    var EventPluginHub = interopDefault(require$$7$2);
-    var EventPluginUtils = interopDefault(require$$6$3);
+    var EventPluginHub = interopDefault(require$$7$3);
+    var EventPluginUtils = interopDefault(require$$6$2);
 
     var accumulateInto = interopDefault(require$$2$4);
-    var forEachAccumulated = interopDefault(require$$1$3);
+    var forEachAccumulated = interopDefault(require$$1$4);
     var warning = interopDefault(require$$0$1);
 
     var PropagationPhases = EventConstants.PropagationPhases;
@@ -5619,7 +5757,7 @@
     var ExecutionEnvironment$1 = interopDefault(ExecutionEnvironment);
 
 
-    var require$$7$3 = Object.freeze({
+    var require$$7$4 = Object.freeze({
       default: ExecutionEnvironment$1
     });
 
@@ -5637,7 +5775,7 @@
 
     'use strict';
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
     var contentKey = null;
 
@@ -5662,7 +5800,7 @@
     var getTextContentAccessor$1 = interopDefault(getTextContentAccessor);
 
 
-    var require$$0$8 = Object.freeze({
+    var require$$0$7 = Object.freeze({
       default: getTextContentAccessor$1
     });
 
@@ -5684,7 +5822,7 @@
 
     var PooledClass = interopDefault(require$$5);
 
-    var getTextContentAccessor = interopDefault(require$$0$8);
+    var getTextContentAccessor = interopDefault(require$$0$7);
 
     /**
      * This helper class stores information about text content of a target node,
@@ -5767,7 +5905,7 @@
     var FallbackCompositionState$1 = interopDefault(FallbackCompositionState);
 
 
-    var require$$3$4 = Object.freeze({
+    var require$$3$3 = Object.freeze({
       default: FallbackCompositionState$1
     });
 
@@ -6035,7 +6173,7 @@
     var SyntheticEvent$1 = interopDefault(SyntheticEvent);
 
 
-    var require$$0$9 = Object.freeze({
+    var require$$0$8 = Object.freeze({
       default: SyntheticEvent$1
     });
 
@@ -6053,7 +6191,7 @@
 
     'use strict';
 
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
     /**
      * @interface Event
@@ -6099,7 +6237,7 @@
 
     'use strict';
 
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
     /**
      * @interface Event
@@ -6128,7 +6266,7 @@
     var SyntheticInputEvent$1 = interopDefault(SyntheticInputEvent);
 
 
-    var require$$1$4 = Object.freeze({
+    var require$$1$5 = Object.freeze({
       default: SyntheticInputEvent$1
     });
 
@@ -6148,12 +6286,12 @@
 
     var EventConstants = interopDefault(require$$18);
     var EventPropagators = interopDefault(require$$16$1);
-    var ExecutionEnvironment = interopDefault(require$$7$3);
-    var FallbackCompositionState = interopDefault(require$$3$4);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
+    var FallbackCompositionState = interopDefault(require$$3$3);
     var SyntheticCompositionEvent = interopDefault(require$$2$5);
-    var SyntheticInputEvent = interopDefault(require$$1$4);
+    var SyntheticInputEvent = interopDefault(require$$1$5);
 
-    var keyOf = interopDefault(require$$0$4);
+    var keyOf = interopDefault(require$$0$3);
 
     var END_KEYCODES = [9, 13, 27, 32]; // Tab, Return, Esc, Space
     var START_KEYCODE = 229;
@@ -6642,7 +6780,7 @@
     var CallbackQueue$1 = interopDefault(CallbackQueue);
 
 
-    var require$$6$5 = Object.freeze({
+    var require$$6$4 = Object.freeze({
       default: CallbackQueue$1
     });
 
@@ -6778,7 +6916,7 @@
     var ReactOwner$1 = interopDefault(ReactOwner);
 
 
-    var require$$0$10 = Object.freeze({
+    var require$$0$9 = Object.freeze({
       default: ReactOwner$1
     });
 
@@ -6796,7 +6934,7 @@
 
     'use strict';
 
-    var ReactOwner = interopDefault(require$$0$10);
+    var ReactOwner = interopDefault(require$$0$9);
 
     var ReactRef = {};
 
@@ -6846,7 +6984,9 @@
 
       return(
         // This has a few false positives w/r/t empty components.
-        prevEmpty || nextEmpty || nextElement._owner !== prevElement._owner || nextElement.ref !== prevElement.ref
+        prevEmpty || nextEmpty || nextElement.ref !== prevElement.ref ||
+        // If owner changes but we have an unchanged function ref, don't update refs
+        typeof nextElement.ref === 'string' && nextElement._owner !== prevElement._owner
       );
     };
 
@@ -6912,7 +7052,7 @@
     var ReactInvalidSetStateWarningDevTool$1 = interopDefault(ReactInvalidSetStateWarningDevTool);
 
 
-    var require$$5$5 = Object.freeze({
+    var require$$6$5 = Object.freeze({
       default: ReactInvalidSetStateWarningDevTool$1
     });
 
@@ -6959,8 +7099,80 @@
     var ReactHostOperationHistoryDevtool$1 = interopDefault(ReactHostOperationHistoryDevtool);
 
 
-    var require$$4$4 = Object.freeze({
+    var require$$5$6 = Object.freeze({
       default: ReactHostOperationHistoryDevtool$1
+    });
+
+    var ReactChildrenMutationWarningDevtool = createCommonjsModule(function (module) {
+    /**
+     * Copyright 2013-present, Facebook, Inc.
+     * All rights reserved.
+     *
+     * This source code is licensed under the BSD-style license found in the
+     * LICENSE file in the root directory of this source tree. An additional grant
+     * of patent rights can be found in the PATENTS file in the same directory.
+     *
+     * @providesModule ReactChildrenMutationWarningDevtool
+     */
+
+    'use strict';
+
+    var ReactComponentTreeDevtool = interopDefault(require$$0$5);
+
+    var warning = interopDefault(require$$0$1);
+
+    var elements = {};
+
+    function handleElement(debugID, element) {
+      if (element == null) {
+        return;
+      }
+      if (element._shadowChildren === undefined) {
+        return;
+      }
+      if (element._shadowChildren === element.props.children) {
+        return;
+      }
+      var isMutated = false;
+      if (Array.isArray(element._shadowChildren)) {
+        if (element._shadowChildren.length === element.props.children.length) {
+          for (var i = 0; i < element._shadowChildren.length; i++) {
+            if (element._shadowChildren[i] !== element.props.children[i]) {
+              isMutated = true;
+            }
+          }
+        } else {
+          isMutated = true;
+        }
+      }
+      warning(Array.isArray(element._shadowChildren) && !isMutated, 'Component\'s children should not be mutated.%s', ReactComponentTreeDevtool.getStackAddendumByID(debugID));
+    }
+
+    var ReactDOMUnknownPropertyDevtool = {
+      onBeforeMountComponent: function (debugID, element) {
+        elements[debugID] = element;
+      },
+      onBeforeUpdateComponent: function (debugID, element) {
+        elements[debugID] = element;
+      },
+      onComponentHasMounted: function (debugID) {
+        handleElement(debugID, elements[debugID]);
+        delete elements[debugID];
+      },
+      onComponentHasUpdated: function (debugID) {
+        handleElement(debugID, elements[debugID]);
+        delete elements[debugID];
+      }
+    };
+
+    module.exports = ReactDOMUnknownPropertyDevtool;
+    });
+
+    var ReactChildrenMutationWarningDevtool$1 = interopDefault(ReactChildrenMutationWarningDevtool);
+
+
+    var require$$3$4 = Object.freeze({
+      default: ReactChildrenMutationWarningDevtool$1
     });
 
     var performance$1 = createCommonjsModule(function (module) {
@@ -6977,7 +7189,7 @@
 
     'use strict';
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
     var performance;
 
@@ -6991,7 +7203,7 @@
     var performance$2 = interopDefault(performance$1);
 
 
-    var require$$0$11 = Object.freeze({
+    var require$$0$10 = Object.freeze({
       default: performance$2
     });
 
@@ -7009,7 +7221,7 @@
      * @typechecks
      */
 
-    var performance = interopDefault(require$$0$11);
+    var performance = interopDefault(require$$0$10);
 
     var performanceNow;
 
@@ -7034,7 +7246,7 @@
     var performanceNow$1 = interopDefault(performanceNow);
 
 
-    var require$$1$6 = Object.freeze({
+    var require$$1$7 = Object.freeze({
       default: performanceNow$1
     });
 
@@ -7052,12 +7264,13 @@
 
     'use strict';
 
-    var ReactInvalidSetStateWarningDevTool = interopDefault(require$$5$5);
-    var ReactHostOperationHistoryDevtool = interopDefault(require$$4$4);
-    var ReactComponentTreeDevtool = interopDefault(require$$0$6);
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ReactInvalidSetStateWarningDevTool = interopDefault(require$$6$5);
+    var ReactHostOperationHistoryDevtool = interopDefault(require$$5$6);
+    var ReactComponentTreeDevtool = interopDefault(require$$0$5);
+    var ReactChildrenMutationWarningDevtool = interopDefault(require$$3$4);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
-    var performanceNow = interopDefault(require$$1$6);
+    var performanceNow = interopDefault(require$$1$7);
     var warning = interopDefault(require$$0$1);
 
     var eventHandlers = [];
@@ -7086,6 +7299,8 @@
     var currentTimerStartTime = null;
     var currentTimerNestedFlushDuration = null;
     var currentTimerType = null;
+
+    var lifeCycleTimerHasWarned = false;
 
     function clearHistory() {
       ReactComponentTreeDevtool.purgeUnmountedComponents();
@@ -7144,7 +7359,10 @@
       if (currentFlushNesting === 0) {
         return;
       }
-      warning(!currentTimerType, 'There is an internal error in the React performance measurement code. ' + 'Did not expect %s timer to start while %s timer is still in ' + 'progress for %s instance.', timerType, currentTimerType || 'no', debugID === currentTimerDebugID ? 'the same' : 'another');
+      if (currentTimerType && !lifeCycleTimerHasWarned) {
+        warning(false, 'There is an internal error in the React performance measurement code. ' + 'Did not expect %s timer to start while %s timer is still in ' + 'progress for %s instance.', timerType, currentTimerType || 'no', debugID === currentTimerDebugID ? 'the same' : 'another');
+        lifeCycleTimerHasWarned = true;
+      }
       currentTimerStartTime = performanceNow();
       currentTimerNestedFlushDuration = 0;
       currentTimerDebugID = debugID;
@@ -7155,7 +7373,10 @@
       if (currentFlushNesting === 0) {
         return;
       }
-      warning(currentTimerType === timerType, 'There is an internal error in the React performance measurement code. ' + 'We did not expect %s timer to stop while %s timer is still in ' + 'progress for %s instance. Please report this as a bug in React.', timerType, currentTimerType || 'no', debugID === currentTimerDebugID ? 'the same' : 'another');
+      if (currentTimerType !== timerType && !lifeCycleTimerHasWarned) {
+        warning(false, 'There is an internal error in the React performance measurement code. ' + 'We did not expect %s timer to stop while %s timer is still in ' + 'progress for %s instance. Please report this as a bug in React.', timerType, currentTimerType || 'no', debugID === currentTimerDebugID ? 'the same' : 'another');
+        lifeCycleTimerHasWarned = true;
+      }
       if (isProfiling) {
         currentFlushMeasurements.push({
           timerType: timerType,
@@ -7281,6 +7502,14 @@
         checkDebugID(debugID);
         emitEvent('onHostOperation', debugID, type, payload);
       },
+      onComponentHasMounted: function (debugID) {
+        checkDebugID(debugID);
+        emitEvent('onComponentHasMounted', debugID);
+      },
+      onComponentHasUpdated: function (debugID) {
+        checkDebugID(debugID);
+        emitEvent('onComponentHasUpdated', debugID);
+      },
       onSetState: function () {
         emitEvent('onSetState');
       },
@@ -7336,6 +7565,7 @@
 
     ReactDebugTool.addDevtool(ReactInvalidSetStateWarningDevTool);
     ReactDebugTool.addDevtool(ReactComponentTreeDevtool);
+    ReactDebugTool.addDevtool(ReactChildrenMutationWarningDevtool);
     var url = ExecutionEnvironment.canUseDOM && window.location.href || '';
     if (/[?&]react_perf\b/.test(url)) {
       ReactDebugTool.beginProfiling();
@@ -7347,7 +7577,7 @@
     var ReactDebugTool$1 = interopDefault(ReactDebugTool);
 
 
-    var require$$1$5 = Object.freeze({
+    var require$$1$6 = Object.freeze({
       default: ReactDebugTool$1
     });
 
@@ -7368,7 +7598,7 @@
     var debugTool = null;
 
     if ("development" !== 'production') {
-      var ReactDebugTool = interopDefault(require$$1$5);
+      var ReactDebugTool = interopDefault(require$$1$6);
       debugTool = ReactDebugTool;
     }
 
@@ -7378,7 +7608,7 @@
     var ReactInstrumentation$1 = interopDefault(ReactInstrumentation);
     var debugTool = ReactInstrumentation.debugTool;
 
-var require$$10$1 = Object.freeze({
+var require$$10 = Object.freeze({
       default: ReactInstrumentation$1,
       debugTool: debugTool
     });
@@ -7397,12 +7627,10 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var _prodInvariant = interopDefault(require$$6);
-
     var ReactRef = interopDefault(require$$2$6);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactInstrumentation = interopDefault(require$$10);
 
-    var invariant = interopDefault(require$$1$1);
+    var warning = interopDefault(require$$0$1);
 
     /**
      * Helper to call ReactRef.attachRefs with this composite component, split out
@@ -7539,7 +7767,7 @@ var require$$10$1 = Object.freeze({
         if (internalInstance._updateBatchNumber !== updateBatchNumber) {
           // The component's enqueued batch number should always be the current
           // batch or the following one.
-          !(internalInstance._updateBatchNumber == null || internalInstance._updateBatchNumber === updateBatchNumber + 1) ? invariant(false, 'performUpdateIfNecessary: Unexpected batch number (current %s, pending %s)', updateBatchNumber, internalInstance._updateBatchNumber) : void 0;
+          warning(internalInstance._updateBatchNumber == null || internalInstance._updateBatchNumber === updateBatchNumber + 1, 'performUpdateIfNecessary: Unexpected batch number (current %s, ' + 'pending %s)', updateBatchNumber, internalInstance._updateBatchNumber);
           return;
         }
         if ("development" !== 'production') {
@@ -7565,7 +7793,7 @@ var require$$10$1 = Object.freeze({
     var ReactReconciler$1 = interopDefault(ReactReconciler);
 
 
-    var require$$8 = Object.freeze({
+    var require$$8$1 = Object.freeze({
       default: ReactReconciler$1
     });
 
@@ -7808,7 +8036,7 @@ var require$$10$1 = Object.freeze({
     var Transaction$1 = interopDefault(Transaction);
 
 
-    var require$$1$7 = Object.freeze({
+    var require$$1$8 = Object.freeze({
       default: Transaction$1
     });
 
@@ -7829,11 +8057,11 @@ var require$$10$1 = Object.freeze({
     var _prodInvariant = interopDefault(require$$6),
         _assign = interopDefault(require$$7);
 
-    var CallbackQueue = interopDefault(require$$6$5);
+    var CallbackQueue = interopDefault(require$$6$4);
     var PooledClass = interopDefault(require$$5);
     var ReactFeatureFlags = interopDefault(require$$12);
-    var ReactReconciler = interopDefault(require$$8);
-    var Transaction = interopDefault(require$$1$7);
+    var ReactReconciler = interopDefault(require$$8$1);
+    var Transaction = interopDefault(require$$1$8);
 
     var invariant = interopDefault(require$$1$1);
 
@@ -8069,7 +8297,7 @@ var require$$10$1 = Object.freeze({
     var ReactUpdates$1 = interopDefault(ReactUpdates);
 
 
-    var require$$6$4 = Object.freeze({
+    var require$$6$3 = Object.freeze({
       default: ReactUpdates$1
     });
 
@@ -8114,7 +8342,7 @@ var require$$10$1 = Object.freeze({
     var getEventTarget$1 = interopDefault(getEventTarget);
 
 
-    var require$$1$8 = Object.freeze({
+    var require$$1$9 = Object.freeze({
       default: getEventTarget$1
     });
 
@@ -8132,7 +8360,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
     var useHasFeature;
     if (ExecutionEnvironment.canUseDOM) {
@@ -8184,7 +8412,7 @@ var require$$10$1 = Object.freeze({
     var isEventSupported$1 = interopDefault(isEventSupported);
 
 
-    var require$$0$12 = Object.freeze({
+    var require$$0$11 = Object.freeze({
       default: isEventSupported$1
     });
 
@@ -8264,17 +8492,17 @@ var require$$10$1 = Object.freeze({
     'use strict';
 
     var EventConstants = interopDefault(require$$18);
-    var EventPluginHub = interopDefault(require$$7$2);
+    var EventPluginHub = interopDefault(require$$7$3);
     var EventPropagators = interopDefault(require$$16$1);
-    var ExecutionEnvironment = interopDefault(require$$7$3);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactUpdates = interopDefault(require$$6$4);
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactUpdates = interopDefault(require$$6$3);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
-    var getEventTarget = interopDefault(require$$1$8);
-    var isEventSupported = interopDefault(require$$0$12);
+    var getEventTarget = interopDefault(require$$1$9);
+    var isEventSupported = interopDefault(require$$0$11);
     var isTextInputElement = interopDefault(require$$2$7);
-    var keyOf = interopDefault(require$$0$4);
+    var keyOf = interopDefault(require$$0$3);
 
     var topLevelTypes = EventConstants.topLevelTypes;
 
@@ -8598,7 +8826,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var keyOf = interopDefault(require$$0$4);
+    var keyOf = interopDefault(require$$0$3);
 
     /**
      * Module that is injectable into `EventPluginHub`, that specifies a
@@ -8635,9 +8863,9 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
-    var getEventTarget = interopDefault(require$$1$8);
+    var getEventTarget = interopDefault(require$$1$9);
 
     /**
      * @interface UIEvent
@@ -8686,7 +8914,7 @@ var require$$10$1 = Object.freeze({
     var SyntheticUIEvent$1 = interopDefault(SyntheticUIEvent);
 
 
-    var require$$1$9 = Object.freeze({
+    var require$$1$10 = Object.freeze({
       default: SyntheticUIEvent$1
     });
 
@@ -8776,7 +9004,7 @@ var require$$10$1 = Object.freeze({
     var getEventModifierState$1 = interopDefault(getEventModifierState);
 
 
-    var require$$0$14 = Object.freeze({
+    var require$$0$13 = Object.freeze({
       default: getEventModifierState$1
     });
 
@@ -8794,10 +9022,10 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var SyntheticUIEvent = interopDefault(require$$1$9);
+    var SyntheticUIEvent = interopDefault(require$$1$10);
     var ViewportMetrics = interopDefault(require$$2$8);
 
-    var getEventModifierState = interopDefault(require$$0$14);
+    var getEventModifierState = interopDefault(require$$0$13);
 
     /**
      * @interface MouseEvent
@@ -8858,7 +9086,7 @@ var require$$10$1 = Object.freeze({
     var SyntheticMouseEvent$1 = interopDefault(SyntheticMouseEvent);
 
 
-    var require$$0$13 = Object.freeze({
+    var require$$0$12 = Object.freeze({
       default: SyntheticMouseEvent$1
     });
 
@@ -8878,10 +9106,10 @@ var require$$10$1 = Object.freeze({
 
     var EventConstants = interopDefault(require$$18);
     var EventPropagators = interopDefault(require$$16$1);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var SyntheticMouseEvent = interopDefault(require$$0$13);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var SyntheticMouseEvent = interopDefault(require$$0$12);
 
-    var keyOf = interopDefault(require$$0$4);
+    var keyOf = interopDefault(require$$0$3);
 
     var topLevelTypes = EventConstants.topLevelTypes;
 
@@ -9097,6 +9325,7 @@ var require$$10$1 = Object.freeze({
         profile: 0,
         radioGroup: 0,
         readOnly: HAS_BOOLEAN_VALUE,
+        referrerPolicy: 0,
         rel: 0,
         required: HAS_BOOLEAN_VALUE,
         reversed: HAS_BOOLEAN_VALUE,
@@ -9263,7 +9492,7 @@ var require$$10$1 = Object.freeze({
     var createMicrosoftUnsafeLocalFunction$1 = interopDefault(createMicrosoftUnsafeLocalFunction);
 
 
-    var require$$0$15 = Object.freeze({
+    var require$$0$14 = Object.freeze({
       default: createMicrosoftUnsafeLocalFunction$1
     });
 
@@ -9281,13 +9510,13 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
     var DOMNamespaces = interopDefault(require$$25);
 
     var WHITESPACE_TEST = /^[ \r\n\t\f]/;
     var NONVISIBLE_TEST = /<(!--|link|noscript|meta|script|style)[ \r\n\t\f\/>]/;
 
-    var createMicrosoftUnsafeLocalFunction = interopDefault(require$$0$15);
+    var createMicrosoftUnsafeLocalFunction = interopDefault(require$$0$14);
 
     // SVG temp container for IE lacking innerHTML
     var reusableSVGContainer;
@@ -9521,7 +9750,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
     var escapeTextContentForBrowser = interopDefault(require$$2$10);
     var setInnerHTML = interopDefault(require$$2$9);
 
@@ -9561,7 +9790,7 @@ var require$$10$1 = Object.freeze({
     var setTextContent$1 = interopDefault(setTextContent);
 
 
-    var require$$0$16 = Object.freeze({
+    var require$$0$15 = Object.freeze({
       default: setTextContent$1
     });
 
@@ -9582,8 +9811,8 @@ var require$$10$1 = Object.freeze({
     var DOMNamespaces = interopDefault(require$$25);
     var setInnerHTML = interopDefault(require$$2$9);
 
-    var createMicrosoftUnsafeLocalFunction = interopDefault(require$$0$15);
-    var setTextContent = interopDefault(require$$0$16);
+    var createMicrosoftUnsafeLocalFunction = interopDefault(require$$0$14);
+    var setTextContent = interopDefault(require$$0$15);
 
     var ELEMENT_NODE_TYPE = 1;
     var DOCUMENT_FRAGMENT_NODE_TYPE = 11;
@@ -9844,7 +10073,7 @@ var require$$10$1 = Object.freeze({
 
     /*eslint-disable fb-www/unsafe-html */
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
     var invariant = interopDefault(require$$1$1);
 
@@ -9929,7 +10158,7 @@ var require$$10$1 = Object.freeze({
     var getMarkupWrap$1 = interopDefault(getMarkupWrap);
 
 
-    var require$$1$10 = Object.freeze({
+    var require$$1$11 = Object.freeze({
       default: getMarkupWrap$1
     });
 
@@ -9949,10 +10178,10 @@ var require$$10$1 = Object.freeze({
 
     /*eslint-disable fb-www/unsafe-html*/
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
     var createArrayFromMixed = interopDefault(require$$2$12);
-    var getMarkupWrap = interopDefault(require$$1$10);
+    var getMarkupWrap = interopDefault(require$$1$11);
     var invariant = interopDefault(require$$1$1);
 
     /**
@@ -10043,7 +10272,7 @@ var require$$10$1 = Object.freeze({
     var _prodInvariant = interopDefault(require$$6);
 
     var DOMLazyTree = interopDefault(require$$20);
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
     var createNodesFromMarkup = interopDefault(require$$2$11);
     var emptyFunction = interopDefault(require$$3$1);
@@ -10098,7 +10327,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var keyMirror = interopDefault(require$$0$3);
+    var keyMirror = interopDefault(require$$0$2);
 
     /**
      * When a component's children are updated, a series of update configuration
@@ -10143,12 +10372,12 @@ var require$$10$1 = Object.freeze({
     var DOMLazyTree = interopDefault(require$$20);
     var Danger = interopDefault(require$$6$7);
     var ReactMultiChildUpdateTypes = interopDefault(require$$6$8);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactInstrumentation = interopDefault(require$$10);
 
-    var createMicrosoftUnsafeLocalFunction = interopDefault(require$$0$15);
+    var createMicrosoftUnsafeLocalFunction = interopDefault(require$$0$14);
     var setInnerHTML = interopDefault(require$$2$9);
-    var setTextContent = interopDefault(require$$0$16);
+    var setTextContent = interopDefault(require$$0$15);
 
     function getNodeAfter(parentNode, node) {
       // Special case for text components, which return [open, close] comments
@@ -10345,7 +10574,7 @@ var require$$10$1 = Object.freeze({
     'use strict';
 
     var DOMChildrenOperations = interopDefault(require$$6$6);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
 
     /**
      * Operations used to process updates to DOM nodes.
@@ -10370,7 +10599,7 @@ var require$$10$1 = Object.freeze({
     var ReactDOMIDOperations$1 = interopDefault(ReactDOMIDOperations);
 
 
-    var require$$0$17 = Object.freeze({
+    var require$$0$16 = Object.freeze({
       default: ReactDOMIDOperations$1
     });
 
@@ -10389,7 +10618,7 @@ var require$$10$1 = Object.freeze({
     'use strict';
 
     var DOMChildrenOperations = interopDefault(require$$6$6);
-    var ReactDOMIDOperations = interopDefault(require$$0$17);
+    var ReactDOMIDOperations = interopDefault(require$$0$16);
 
     /**
      * Abstracts away all functionality of the reconciler that requires knowledge of
@@ -10455,7 +10684,7 @@ var require$$10$1 = Object.freeze({
     var focusNode$1 = interopDefault(focusNode);
 
 
-    var require$$1$11 = Object.freeze({
+    var require$$1$12 = Object.freeze({
       default: focusNode$1
     });
 
@@ -10473,9 +10702,9 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
 
-    var focusNode = interopDefault(require$$1$11);
+    var focusNode = interopDefault(require$$1$12);
 
     var AutoFocusUtils = {
       focusDOMComponent: function () {
@@ -10647,7 +10876,7 @@ var require$$10$1 = Object.freeze({
     var CSSProperty$1 = interopDefault(CSSProperty);
 
 
-    var require$$1$12 = Object.freeze({
+    var require$$1$13 = Object.freeze({
       default: CSSProperty$1
     });
 
@@ -10688,7 +10917,7 @@ var require$$10$1 = Object.freeze({
     var camelize$1 = interopDefault(camelize);
 
 
-    var require$$0$18 = Object.freeze({
+    var require$$0$17 = Object.freeze({
       default: camelize$1
     });
 
@@ -10706,7 +10935,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var camelize = interopDefault(require$$0$18);
+    var camelize = interopDefault(require$$0$17);
 
     var msPattern = /^-ms-/;
 
@@ -10755,7 +10984,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var CSSProperty = interopDefault(require$$1$12);
+    var CSSProperty = interopDefault(require$$1$13);
     var warning = interopDefault(require$$0$1);
 
     var isUnitlessNumber = CSSProperty.isUnitlessNumber;
@@ -10868,7 +11097,7 @@ var require$$10$1 = Object.freeze({
     var hyphenate$1 = interopDefault(hyphenate);
 
 
-    var require$$0$19 = Object.freeze({
+    var require$$0$18 = Object.freeze({
       default: hyphenate$1
     });
 
@@ -10886,7 +11115,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var hyphenate = interopDefault(require$$0$19);
+    var hyphenate = interopDefault(require$$0$18);
 
     var msPattern = /^ms-/;
 
@@ -10955,7 +11184,7 @@ var require$$10$1 = Object.freeze({
     var memoizeStringOnly$1 = interopDefault(memoizeStringOnly);
 
 
-    var require$$1$13 = Object.freeze({
+    var require$$1$14 = Object.freeze({
       default: memoizeStringOnly$1
     });
 
@@ -10973,14 +11202,14 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var CSSProperty = interopDefault(require$$1$12);
-    var ExecutionEnvironment = interopDefault(require$$7$3);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var CSSProperty = interopDefault(require$$1$13);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
+    var ReactInstrumentation = interopDefault(require$$10);
 
     var camelizeStyleName = interopDefault(require$$4$5);
     var dangerousStyleValue = interopDefault(require$$3$5);
     var hyphenateStyleName = interopDefault(require$$2$13);
-    var memoizeStringOnly = interopDefault(require$$1$13);
+    var memoizeStringOnly = interopDefault(require$$1$14);
     var warning = interopDefault(require$$0$1);
 
     var processStyleName = memoizeStringOnly(function (styleName) {
@@ -11188,7 +11417,7 @@ var require$$10$1 = Object.freeze({
 
     'use strict';
 
-    var ReactComponentTreeDevtool = interopDefault(require$$0$6);
+    var ReactComponentTreeDevtool = interopDefault(require$$0$5);
 
     var warning = interopDefault(require$$0$1);
 
@@ -11242,8 +11471,8 @@ var require$$10$1 = Object.freeze({
     'use strict';
 
     var DOMProperty = interopDefault(require$$19);
-    var EventPluginRegistry = interopDefault(require$$4$3);
-    var ReactComponentTreeDevtool = interopDefault(require$$0$6);
+    var EventPluginRegistry = interopDefault(require$$4$4);
+    var ReactComponentTreeDevtool = interopDefault(require$$0$5);
 
     var warning = interopDefault(require$$0$1);
 
@@ -11365,7 +11594,7 @@ var require$$10$1 = Object.freeze({
 
     var ReactDOMNullInputValuePropDevtool = interopDefault(require$$3$7);
     var ReactDOMUnknownPropertyDevtool = interopDefault(require$$2$14);
-    var ReactDebugTool = interopDefault(require$$1$5);
+    var ReactDebugTool = interopDefault(require$$1$6);
 
     var warning = interopDefault(require$$0$1);
 
@@ -11422,7 +11651,7 @@ var require$$10$1 = Object.freeze({
     var ReactDOMDebugTool$1 = interopDefault(ReactDOMDebugTool);
 
 
-    var require$$0$20 = Object.freeze({
+    var require$$0$19 = Object.freeze({
       default: ReactDOMDebugTool$1
     });
 
@@ -11443,7 +11672,7 @@ var require$$10$1 = Object.freeze({
     var debugTool = null;
 
     if ("development" !== 'production') {
-      var ReactDOMDebugTool = interopDefault(require$$0$20);
+      var ReactDOMDebugTool = interopDefault(require$$0$19);
       debugTool = ReactDOMDebugTool;
     }
 
@@ -11490,7 +11719,7 @@ var require$$3$6 = Object.freeze({
     var quoteAttributeValueForBrowser$1 = interopDefault(quoteAttributeValueForBrowser);
 
 
-    var require$$1$14 = Object.freeze({
+    var require$$1$15 = Object.freeze({
       default: quoteAttributeValueForBrowser$1
     });
 
@@ -11509,11 +11738,11 @@ var require$$3$6 = Object.freeze({
     'use strict';
 
     var DOMProperty = interopDefault(require$$19);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
     var ReactDOMInstrumentation = interopDefault(require$$3$6);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactInstrumentation = interopDefault(require$$10);
 
-    var quoteAttributeValueForBrowser = interopDefault(require$$1$14);
+    var quoteAttributeValueForBrowser = interopDefault(require$$1$15);
     var warning = interopDefault(require$$0$1);
 
     var VALID_ATTRIBUTE_NAME_REGEX = new RegExp('^[' + DOMProperty.ATTRIBUTE_NAME_START_CHAR + '][' + DOMProperty.ATTRIBUTE_NAME_CHAR + ']*$');
@@ -11728,7 +11957,7 @@ var require$$3$6 = Object.freeze({
     var DOMPropertyOperations$1 = interopDefault(DOMPropertyOperations);
 
 
-    var require$$5$6 = Object.freeze({
+    var require$$5$7 = Object.freeze({
       default: DOMPropertyOperations$1
     });
 
@@ -11746,7 +11975,7 @@ var require$$3$6 = Object.freeze({
 
     'use strict';
 
-    var EventPluginHub = interopDefault(require$$7$2);
+    var EventPluginHub = interopDefault(require$$7$3);
 
     function runEventQueueInBatch(events) {
       EventPluginHub.enqueueEvents(events);
@@ -11789,7 +12018,7 @@ var require$$3$6 = Object.freeze({
 
     'use strict';
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
     /**
      * Generate a mapping of standard vendor prefixes using the defined style property and event name.
@@ -11882,7 +12111,7 @@ var require$$3$6 = Object.freeze({
     var getVendorPrefixedEventName$1 = interopDefault(getVendorPrefixedEventName);
 
 
-    var require$$1$15 = Object.freeze({
+    var require$$1$16 = Object.freeze({
       default: getVendorPrefixedEventName$1
     });
 
@@ -11903,12 +12132,12 @@ var require$$3$6 = Object.freeze({
     var _assign = interopDefault(require$$7);
 
     var EventConstants = interopDefault(require$$18);
-    var EventPluginRegistry = interopDefault(require$$4$3);
+    var EventPluginRegistry = interopDefault(require$$4$4);
     var ReactEventEmitterMixin = interopDefault(require$$3$8);
     var ViewportMetrics = interopDefault(require$$2$8);
 
-    var getVendorPrefixedEventName = interopDefault(require$$1$15);
-    var isEventSupported = interopDefault(require$$0$12);
+    var getVendorPrefixedEventName = interopDefault(require$$1$16);
+    var isEventSupported = interopDefault(require$$0$11);
 
     /**
      * Summary of `ReactBrowserEventEmitter` event handling:
@@ -12269,7 +12498,7 @@ var require$$3$6 = Object.freeze({
     var DisabledInputUtils$1 = interopDefault(DisabledInputUtils);
 
 
-    var require$$5$7 = Object.freeze({
+    var require$$5$8 = Object.freeze({
       default: DisabledInputUtils$1
     });
 
@@ -12287,7 +12516,7 @@ var require$$3$6 = Object.freeze({
 
     'use strict';
 
-    var DisabledInputUtils = interopDefault(require$$5$7);
+    var DisabledInputUtils = interopDefault(require$$5$8);
 
     /**
      * Implements a <button> host component that does not receive mouse events
@@ -12323,8 +12552,9 @@ var require$$3$6 = Object.freeze({
 
     var _prodInvariant = interopDefault(require$$6);
 
-    var ReactPropTypes = interopDefault(require$$3$3);
-    var ReactPropTypeLocations = interopDefault(require$$6$1);
+    var ReactPropTypes = interopDefault(require$$4$2);
+    var ReactPropTypeLocations = interopDefault(require$$7$1);
+    var ReactPropTypesSecret = interopDefault(require$$2$2);
 
     var invariant = interopDefault(require$$1$1);
     var warning = interopDefault(require$$0$1);
@@ -12387,7 +12617,7 @@ var require$$3$6 = Object.freeze({
       checkPropTypes: function (tagName, props, owner) {
         for (var propName in propTypes) {
           if (propTypes.hasOwnProperty(propName)) {
-            var error = propTypes[propName](props, propName, tagName, ReactPropTypeLocations.prop);
+            var error = propTypes[propName](props, propName, tagName, ReactPropTypeLocations.prop, null, ReactPropTypesSecret);
           }
           if (error instanceof Error && !(error.message in loggedTypeFailures)) {
             // Only monitor this failure once because there tends to be a lot of the
@@ -12469,11 +12699,11 @@ var require$$3$6 = Object.freeze({
     var _prodInvariant = interopDefault(require$$6),
         _assign = interopDefault(require$$7);
 
-    var DisabledInputUtils = interopDefault(require$$5$7);
-    var DOMPropertyOperations = interopDefault(require$$5$6);
+    var DisabledInputUtils = interopDefault(require$$5$8);
+    var DOMPropertyOperations = interopDefault(require$$5$7);
     var LinkedValueUtils = interopDefault(require$$4$6);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactUpdates = interopDefault(require$$6$4);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactUpdates = interopDefault(require$$6$3);
 
     var invariant = interopDefault(require$$1$1);
     var warning = interopDefault(require$$0$1);
@@ -12521,7 +12751,10 @@ var require$$3$6 = Object.freeze({
         var hostProps = _assign({
           // Make sure we set .type before any other properties (setting .value
           // before .type means .value is lost in IE11 and below)
-          type: undefined
+          type: undefined,
+          // Make sure we set .step before .value (setting .value before .step
+          // means .value is rounded on mount, based upon step precision)
+          step: undefined
         }, DisabledInputUtils.getHostProps(inst, props), {
           defaultChecked: undefined,
           defaultValue: undefined,
@@ -12722,10 +12955,10 @@ var require$$3$6 = Object.freeze({
 
     var _assign = interopDefault(require$$7);
 
-    var DisabledInputUtils = interopDefault(require$$5$7);
+    var DisabledInputUtils = interopDefault(require$$5$8);
     var LinkedValueUtils = interopDefault(require$$4$6);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactUpdates = interopDefault(require$$6$4);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactUpdates = interopDefault(require$$6$3);
 
     var warning = interopDefault(require$$0$1);
 
@@ -12912,7 +13145,7 @@ var require$$3$6 = Object.freeze({
     var ReactDOMSelect$1 = interopDefault(ReactDOMSelect);
 
 
-    var require$$1$16 = Object.freeze({
+    var require$$1$17 = Object.freeze({
       default: ReactDOMSelect$1
     });
 
@@ -12933,8 +13166,8 @@ var require$$3$6 = Object.freeze({
     var _assign = interopDefault(require$$7);
 
     var ReactChildren = interopDefault(require$$3);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactDOMSelect = interopDefault(require$$1$16);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactDOMSelect = interopDefault(require$$1$17);
 
     var warning = interopDefault(require$$0$1);
     var didWarnInvalidOptionChildren = false;
@@ -13066,10 +13299,10 @@ var require$$3$6 = Object.freeze({
     var _prodInvariant = interopDefault(require$$6),
         _assign = interopDefault(require$$7);
 
-    var DisabledInputUtils = interopDefault(require$$5$7);
+    var DisabledInputUtils = interopDefault(require$$5$8);
     var LinkedValueUtils = interopDefault(require$$4$6);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactUpdates = interopDefault(require$$6$4);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactUpdates = interopDefault(require$$6$3);
 
     var invariant = interopDefault(require$$1$1);
     var warning = interopDefault(require$$0$1);
@@ -13210,7 +13443,7 @@ var require$$3$6 = Object.freeze({
     var ReactDOMTextarea$1 = interopDefault(ReactDOMTextarea);
 
 
-    var require$$11$1 = Object.freeze({
+    var require$$11$2 = Object.freeze({
       default: ReactDOMTextarea$1
     });
 
@@ -13273,7 +13506,7 @@ var require$$3$6 = Object.freeze({
     var ReactComponentEnvironment$1 = interopDefault(ReactComponentEnvironment);
 
 
-    var require$$5$8 = Object.freeze({
+    var require$$5$9 = Object.freeze({
       default: ReactComponentEnvironment$1
     });
 
@@ -13381,8 +13614,84 @@ var require$$3$6 = Object.freeze({
     var ReactNodeTypes$1 = interopDefault(ReactNodeTypes);
 
 
-    var require$$0$21 = Object.freeze({
+    var require$$0$20 = Object.freeze({
       default: ReactNodeTypes$1
+    });
+
+    var shallowEqual = createCommonjsModule(function (module) {
+    /**
+     * Copyright (c) 2013-present, Facebook, Inc.
+     * All rights reserved.
+     *
+     * This source code is licensed under the BSD-style license found in the
+     * LICENSE file in the root directory of this source tree. An additional grant
+     * of patent rights can be found in the PATENTS file in the same directory.
+     *
+     * @typechecks
+     * 
+     */
+
+    /*eslint-disable no-self-compare */
+
+    'use strict';
+
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+    /**
+     * inlined Object.is polyfill to avoid requiring consumers ship their own
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+     */
+    function is(x, y) {
+      // SameValue algorithm
+      if (x === y) {
+        // Steps 1-5, 7-10
+        // Steps 6.b-6.e: +0 != -0
+        return x !== 0 || 1 / x === 1 / y;
+      } else {
+        // Step 6.a: NaN == NaN
+        return x !== x && y !== y;
+      }
+    }
+
+    /**
+     * Performs equality by iterating through keys on an object and returning false
+     * when any key has values which are not strictly equal between the arguments.
+     * Returns true when the values of all keys are strictly equal.
+     */
+    function shallowEqual(objA, objB) {
+      if (is(objA, objB)) {
+        return true;
+      }
+
+      if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+        return false;
+      }
+
+      var keysA = Object.keys(objA);
+      var keysB = Object.keys(objB);
+
+      if (keysA.length !== keysB.length) {
+        return false;
+      }
+
+      // Test for A's keys different from B.
+      for (var i = 0; i < keysA.length; i++) {
+        if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+
+    module.exports = shallowEqual;
+    });
+
+    var shallowEqual$1 = interopDefault(shallowEqual);
+
+
+    var require$$0$21 = Object.freeze({
+      default: shallowEqual$1
     });
 
     var shouldUpdateReactComponent = createCommonjsModule(function (module) {
@@ -13433,7 +13742,7 @@ var require$$3$6 = Object.freeze({
     var shouldUpdateReactComponent$1 = interopDefault(shouldUpdateReactComponent);
 
 
-    var require$$1$17 = Object.freeze({
+    var require$$1$18 = Object.freeze({
       default: shouldUpdateReactComponent$1
     });
 
@@ -13454,22 +13763,28 @@ var require$$3$6 = Object.freeze({
     var _prodInvariant = interopDefault(require$$6),
         _assign = interopDefault(require$$7);
 
-    var ReactComponentEnvironment = interopDefault(require$$5$8);
+    var ReactComponentEnvironment = interopDefault(require$$5$9);
     var ReactCurrentOwner = interopDefault(require$$5$1);
     var ReactElement = interopDefault(require$$13);
-    var ReactErrorUtils = interopDefault(require$$10);
+    var ReactErrorUtils = interopDefault(require$$11);
     var ReactInstanceMap = interopDefault(require$$3$9);
-    var ReactInstrumentation = interopDefault(require$$10$1);
-    var ReactNodeTypes = interopDefault(require$$0$21);
-    var ReactPropTypeLocations = interopDefault(require$$6$1);
-    var ReactReconciler = interopDefault(require$$8);
+    var ReactInstrumentation = interopDefault(require$$10);
+    var ReactNodeTypes = interopDefault(require$$0$20);
+    var ReactPropTypeLocations = interopDefault(require$$7$1);
+    var ReactReconciler = interopDefault(require$$8$1);
 
-    var checkReactTypeSpec = interopDefault(require$$4$1);
-
+    var checkReactTypeSpec = interopDefault(require$$5$4);
     var emptyObject = interopDefault(require$$5$3);
     var invariant = interopDefault(require$$1$1);
-    var shouldUpdateReactComponent = interopDefault(require$$1$17);
+    var shallowEqual = interopDefault(require$$0$21);
+    var shouldUpdateReactComponent = interopDefault(require$$1$18);
     var warning = interopDefault(require$$0$1);
+
+    var CompositeTypes = {
+      ImpureClass: 0,
+      PureClass: 1,
+      StatelessFunctional: 2
+    };
 
     function StatelessComponent(Component) {}
     StatelessComponent.prototype.render = function () {
@@ -13509,7 +13824,11 @@ var require$$3$6 = Object.freeze({
     }
 
     function shouldConstruct(Component) {
-      return Component.prototype && Component.prototype.isReactComponent;
+      return !!(Component.prototype && Component.prototype.isReactComponent);
+    }
+
+    function isPureComponent(Component) {
+      return !!(Component.prototype && Component.prototype.isPureReactComponent);
     }
 
     /**
@@ -13562,6 +13881,7 @@ var require$$3$6 = Object.freeze({
       construct: function (element) {
         this._currentElement = element;
         this._rootNodeID = null;
+        this._compositeType = null;
         this._instance = null;
         this._hostParent = null;
         this._hostContainerInfo = null;
@@ -13602,6 +13922,8 @@ var require$$3$6 = Object.freeze({
        * @internal
        */
       mountComponent: function (transaction, hostParent, hostContainerInfo, context) {
+        var _this = this;
+
         this._context = context;
         this._mountOrder = nextMountID++;
         this._hostParent = hostParent;
@@ -13615,15 +13937,23 @@ var require$$3$6 = Object.freeze({
         var updateQueue = transaction.getUpdateQueue();
 
         // Initialize the public class
-        var inst = this._constructComponent(publicProps, publicContext, updateQueue);
+        var doConstruct = shouldConstruct(Component);
+        var inst = this._constructComponent(doConstruct, publicProps, publicContext, updateQueue);
         var renderedElement;
 
         // Support functional components
-        if (!shouldConstruct(Component) && (inst == null || inst.render == null)) {
+        if (!doConstruct && (inst == null || inst.render == null)) {
           renderedElement = inst;
           warnIfInvalidElement(Component, renderedElement);
           !(inst === null || inst === false || ReactElement.isValidElement(inst)) ? invariant(false, '%s(...): A valid React element (or null) must be returned. You may have returned undefined, an array or some other invalid object.', Component.displayName || Component.name || 'Component') : void 0;
           inst = new StatelessComponent(Component);
+          this._compositeType = CompositeTypes.StatelessFunctional;
+        } else {
+          if (isPureComponent(Component)) {
+            this._compositeType = CompositeTypes.PureClass;
+          } else {
+            this._compositeType = CompositeTypes.ImpureClass;
+          }
         }
 
         if ("development" !== 'production') {
@@ -13687,24 +14017,33 @@ var require$$3$6 = Object.freeze({
           } else {}
         }
 
+        if ("development" !== 'production') {
+          if (this._debugID) {
+            var callback = function (component) {
+              return ReactInstrumentation.debugTool.onComponentHasMounted(_this._debugID);
+            };
+            transaction.getReactMountReady().enqueue(callback, this);
+          }
+        }
+
         return markup;
       },
 
-      _constructComponent: function (publicProps, publicContext, updateQueue) {
+      _constructComponent: function (doConstruct, publicProps, publicContext, updateQueue) {
         if ("development" !== 'production') {
           ReactCurrentOwner.current = this;
           try {
-            return this._constructComponentWithoutOwner(publicProps, publicContext, updateQueue);
+            return this._constructComponentWithoutOwner(doConstruct, publicProps, publicContext, updateQueue);
           } finally {
             ReactCurrentOwner.current = null;
           }
         } else {}
       },
 
-      _constructComponentWithoutOwner: function (publicProps, publicContext, updateQueue) {
+      _constructComponentWithoutOwner: function (doConstruct, publicProps, publicContext, updateQueue) {
         var Component = this._currentElement.type;
         var instanceOrElement;
-        if (shouldConstruct(Component)) {
+        if (doConstruct) {
           if ("development" !== 'production') {
             if (this._debugID !== 0) {
               ReactInstrumentation.debugTool.onBeginLifeCycleTimer(this._debugID, 'ctor');
@@ -14008,7 +14347,6 @@ var require$$3$6 = Object.freeze({
 
         var willReceive = false;
         var nextContext;
-        var nextProps;
 
         // Determine if the context has changed or not
         if (this._context === nextUnmaskedContext) {
@@ -14018,7 +14356,8 @@ var require$$3$6 = Object.freeze({
           willReceive = true;
         }
 
-        nextProps = nextParentElement.props;
+        var prevProps = prevParentElement.props;
+        var nextProps = nextParentElement.props;
 
         // Not a simple state update but a props update
         if (prevParentElement !== nextParentElement) {
@@ -14045,16 +14384,22 @@ var require$$3$6 = Object.freeze({
         var nextState = this._processPendingState(nextProps, nextContext);
         var shouldUpdate = true;
 
-        if (!this._pendingForceUpdate && inst.shouldComponentUpdate) {
-          if ("development" !== 'production') {
-            if (this._debugID !== 0) {
-              ReactInstrumentation.debugTool.onBeginLifeCycleTimer(this._debugID, 'shouldComponentUpdate');
+        if (!this._pendingForceUpdate) {
+          if (inst.shouldComponentUpdate) {
+            if ("development" !== 'production') {
+              if (this._debugID !== 0) {
+                ReactInstrumentation.debugTool.onBeginLifeCycleTimer(this._debugID, 'shouldComponentUpdate');
+              }
             }
-          }
-          shouldUpdate = inst.shouldComponentUpdate(nextProps, nextState, nextContext);
-          if ("development" !== 'production') {
-            if (this._debugID !== 0) {
-              ReactInstrumentation.debugTool.onEndLifeCycleTimer(this._debugID, 'shouldComponentUpdate');
+            shouldUpdate = inst.shouldComponentUpdate(nextProps, nextState, nextContext);
+            if ("development" !== 'production') {
+              if (this._debugID !== 0) {
+                ReactInstrumentation.debugTool.onEndLifeCycleTimer(this._debugID, 'shouldComponentUpdate');
+              }
+            }
+          } else {
+            if (this._compositeType === CompositeTypes.PureClass) {
+              shouldUpdate = !shallowEqual(prevProps, nextProps) || !shallowEqual(inst.state, nextState);
             }
           }
         }
@@ -14116,6 +14461,8 @@ var require$$3$6 = Object.freeze({
        * @private
        */
       _performComponentUpdate: function (nextElement, nextProps, nextState, nextContext, transaction, unmaskedContext) {
+        var _this2 = this;
+
         var inst = this._instance;
 
         var hasComponentDidUpdate = Boolean(inst.componentDidUpdate);
@@ -14154,6 +14501,15 @@ var require$$3$6 = Object.freeze({
           if ("development" !== 'production') {
             transaction.getReactMountReady().enqueue(invokeComponentDidUpdateWithTimer.bind(this, prevProps, prevState, prevContext), this);
           } else {}
+        }
+
+        if ("development" !== 'production') {
+          if (this._debugID) {
+            var callback = function () {
+              return ReactInstrumentation.debugTool.onComponentHasUpdated(_this2._debugID);
+            };
+            transaction.getReactMountReady().enqueue(callback, this);
+          }
         }
       },
 
@@ -14240,12 +14596,14 @@ var require$$3$6 = Object.freeze({
        */
       _renderValidatedComponent: function () {
         var renderedComponent;
-        ReactCurrentOwner.current = this;
-        try {
-          renderedComponent = this._renderValidatedComponentWithoutOwnerOrContext();
-        } finally {
-          ReactCurrentOwner.current = null;
-        }
+        if ("development" !== 'production' || this._compositeType !== CompositeTypes.StatelessFunctional) {
+          ReactCurrentOwner.current = this;
+          try {
+            renderedComponent = this._renderValidatedComponentWithoutOwnerOrContext();
+          } finally {
+            ReactCurrentOwner.current = null;
+          }
+        } else {}
         !(
         // TODO: An `isValidNode` function would probably be more appropriate
         renderedComponent === null || renderedComponent === false || ReactElement.isValidElement(renderedComponent)) ? invariant(false, '%s.render(): A valid React element (or null) must be returned. You may have returned undefined, an array or some other invalid object.', this.getName() || 'ReactCompositeComponent') : void 0;
@@ -14307,7 +14665,7 @@ var require$$3$6 = Object.freeze({
        */
       getPublicInstance: function () {
         var inst = this._instance;
-        if (inst instanceof StatelessComponent) {
+        if (this._compositeType === CompositeTypes.StatelessFunctional) {
           return null;
         }
         return inst;
@@ -14330,7 +14688,7 @@ var require$$3$6 = Object.freeze({
     var ReactCompositeComponent$1 = interopDefault(ReactCompositeComponent);
 
 
-    var require$$5$9 = Object.freeze({
+    var require$$5$10 = Object.freeze({
       default: ReactCompositeComponent$1
     });
 
@@ -14456,7 +14814,7 @@ var require$$3$6 = Object.freeze({
     var ReactHostComponent$1 = interopDefault(ReactHostComponent);
 
 
-    var require$$1$18 = Object.freeze({
+    var require$$1$19 = Object.freeze({
       default: ReactHostComponent$1
     });
 
@@ -14477,10 +14835,10 @@ var require$$3$6 = Object.freeze({
     var _prodInvariant = interopDefault(require$$6),
         _assign = interopDefault(require$$7);
 
-    var ReactCompositeComponent = interopDefault(require$$5$9);
+    var ReactCompositeComponent = interopDefault(require$$5$10);
     var ReactEmptyComponent = interopDefault(require$$3$11);
-    var ReactHostComponent = interopDefault(require$$1$18);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactHostComponent = interopDefault(require$$1$19);
+    var ReactInstrumentation = interopDefault(require$$10);
 
     var invariant = interopDefault(require$$1$1);
     var warning = interopDefault(require$$0$1);
@@ -14630,19 +14988,32 @@ var require$$3$6 = Object.freeze({
 
     'use strict';
 
-    var ReactReconciler = interopDefault(require$$8);
+    var ReactReconciler = interopDefault(require$$8$1);
 
     var instantiateReactComponent = interopDefault(require$$4$7);
     var KeyEscapeUtils = interopDefault(require$$3$2);
-    var shouldUpdateReactComponent = interopDefault(require$$1$17);
+    var shouldUpdateReactComponent = interopDefault(require$$1$18);
     var traverseAllChildren = interopDefault(require$$2$1);
     var warning = interopDefault(require$$0$1);
+
+    var ReactComponentTreeDevtool;
+
+    if (typeof process !== 'undefined' && process.env && "development" === 'test') {
+      // Temporary hack.
+      // Inline requires don't work well with Jest:
+      // https://github.com/facebook/react/issues/7240
+      // Remove the inline requires when we don't need them anymore:
+      // https://github.com/facebook/react/pull/7178
+      ReactComponentTreeDevtool = interopDefault(require$$0$5);
+    }
 
     function instantiateChild(childInstances, child, name, selfDebugID) {
       // We found a component instance.
       var keyUnique = childInstances[name] === undefined;
       if ("development" !== 'production') {
-        var ReactComponentTreeDevtool = interopDefault(require$$0$6);
+        if (!ReactComponentTreeDevtool) {
+          ReactComponentTreeDevtool = interopDefault(require$$0$5);
+        }
         warning(keyUnique, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeDevtool.getStackAddendumByID(selfDebugID));
       }
       if (child != null && keyUnique) {
@@ -14689,7 +15060,7 @@ var require$$3$6 = Object.freeze({
        * @return {?object} A new set of child instances.
        * @internal
        */
-      updateChildren: function (prevChildren, nextChildren, removedNodes, transaction, context) {
+      updateChildren: function (prevChildren, nextChildren, mountImages, removedNodes, transaction, hostParent, hostContainerInfo, context) {
         // We currently don't have a way to track moves here but if we use iterators
         // instead of for..in we can zip the iterators and check if an item has
         // moved.
@@ -14718,6 +15089,10 @@ var require$$3$6 = Object.freeze({
             // The child must be instantiated before it's mounted.
             var nextChildInstance = instantiateReactComponent(nextElement, true);
             nextChildren[name] = nextChildInstance;
+            // Creating mount image now ensures refs are resolved in right order
+            // (see https://github.com/facebook/react/pull/7101 for explanation).
+            var nextChildMountImage = ReactReconciler.mountComponent(nextChildInstance, transaction, hostParent, hostContainerInfo, context);
+            mountImages.push(nextChildMountImage);
           }
         }
         // Unmount children that are no longer present.
@@ -14777,6 +15152,17 @@ var require$$3$6 = Object.freeze({
     var traverseAllChildren = interopDefault(require$$2$1);
     var warning = interopDefault(require$$0$1);
 
+    var ReactComponentTreeDevtool;
+
+    if (typeof process !== 'undefined' && process.env && "development" === 'test') {
+      // Temporary hack.
+      // Inline requires don't work well with Jest:
+      // https://github.com/facebook/react/issues/7240
+      // Remove the inline requires when we don't need them anymore:
+      // https://github.com/facebook/react/pull/7178
+      ReactComponentTreeDevtool = interopDefault(require$$0$5);
+    }
+
     /**
      * @param {function} traverseContext Context passed through traversal.
      * @param {?ReactComponent} child React child component.
@@ -14789,7 +15175,9 @@ var require$$3$6 = Object.freeze({
         var result = traverseContext;
         var keyUnique = result[name] === undefined;
         if ("development" !== 'production') {
-          var ReactComponentTreeDevtool = interopDefault(require$$0$6);
+          if (!ReactComponentTreeDevtool) {
+            ReactComponentTreeDevtool = interopDefault(require$$0$5);
+          }
           warning(keyUnique, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeDevtool.getStackAddendumByID(selfDebugID));
         }
         if (keyUnique && child != null) {
@@ -14823,7 +15211,7 @@ var require$$3$6 = Object.freeze({
     var flattenChildren$1 = interopDefault(flattenChildren);
 
 
-    var require$$1$19 = Object.freeze({
+    var require$$1$20 = Object.freeze({
       default: flattenChildren$1
     });
 
@@ -14843,17 +15231,17 @@ var require$$3$6 = Object.freeze({
 
     var _prodInvariant = interopDefault(require$$6);
 
-    var ReactComponentEnvironment = interopDefault(require$$5$8);
+    var ReactComponentEnvironment = interopDefault(require$$5$9);
     var ReactInstanceMap = interopDefault(require$$3$9);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactInstrumentation = interopDefault(require$$10);
     var ReactMultiChildUpdateTypes = interopDefault(require$$6$8);
 
     var ReactCurrentOwner = interopDefault(require$$5$1);
-    var ReactReconciler = interopDefault(require$$8);
+    var ReactReconciler = interopDefault(require$$8$1);
     var ReactChildReconciler = interopDefault(require$$3$10);
 
     var emptyFunction = interopDefault(require$$3$1);
-    var flattenChildren = interopDefault(require$$1$19);
+    var flattenChildren = interopDefault(require$$1$20);
     var invariant = interopDefault(require$$1$1);
 
     /**
@@ -15030,7 +15418,7 @@ var require$$3$6 = Object.freeze({
           return ReactChildReconciler.instantiateChildren(nestedChildren, transaction, context);
         },
 
-        _reconcilerUpdateChildren: function (prevChildren, nextNestedChildrenElements, removedNodes, transaction, context) {
+        _reconcilerUpdateChildren: function (prevChildren, nextNestedChildrenElements, mountImages, removedNodes, transaction, context) {
           var nextChildren;
           if ("development" !== 'production') {
             if (this._currentElement) {
@@ -15040,12 +15428,12 @@ var require$$3$6 = Object.freeze({
               } finally {
                 ReactCurrentOwner.current = null;
               }
-              ReactChildReconciler.updateChildren(prevChildren, nextChildren, removedNodes, transaction, context);
+              ReactChildReconciler.updateChildren(prevChildren, nextChildren, mountImages, removedNodes, transaction, this, this._hostContainerInfo, context);
               return nextChildren;
             }
           }
           nextChildren = flattenChildren(nextNestedChildrenElements);
-          ReactChildReconciler.updateChildren(prevChildren, nextChildren, removedNodes, transaction, context);
+          ReactChildReconciler.updateChildren(prevChildren, nextChildren, mountImages, removedNodes, transaction, this, this._hostContainerInfo, context);
           return nextChildren;
         },
 
@@ -15142,7 +15530,8 @@ var require$$3$6 = Object.freeze({
         _updateChildren: function (nextNestedChildrenElements, transaction, context) {
           var prevChildren = this._renderedChildren;
           var removedNodes = {};
-          var nextChildren = this._reconcilerUpdateChildren(prevChildren, nextNestedChildrenElements, removedNodes, transaction, context);
+          var mountImages = [];
+          var nextChildren = this._reconcilerUpdateChildren(prevChildren, nextNestedChildrenElements, mountImages, removedNodes, transaction, context);
           if (!nextChildren && !prevChildren) {
             return;
           }
@@ -15150,8 +15539,10 @@ var require$$3$6 = Object.freeze({
           var name;
           // `nextIndex` will increment for each child in `nextChildren`, but
           // `lastIndex` will be the last index visited in `prevChildren`.
-          var lastIndex = 0;
           var nextIndex = 0;
+          var lastIndex = 0;
+          // `nextMountIndex` will increment for each newly mounted child.
+          var nextMountIndex = 0;
           var lastPlacedNode = null;
           for (name in nextChildren) {
             if (!nextChildren.hasOwnProperty(name)) {
@@ -15170,7 +15561,8 @@ var require$$3$6 = Object.freeze({
                 // The `removedNodes` loop below will actually remove the child.
               }
               // The child must be instantiated before it's mounted.
-              updates = enqueue(updates, this._mountChildAtIndex(nextChild, lastPlacedNode, nextIndex, transaction, context));
+              updates = enqueue(updates, this._mountChildAtIndex(nextChild, mountImages[nextMountIndex], lastPlacedNode, nextIndex, transaction, context));
+              nextMountIndex++;
             }
             nextIndex++;
             lastPlacedNode = ReactReconciler.getHostNode(nextChild);
@@ -15253,8 +15645,7 @@ var require$$3$6 = Object.freeze({
          * @param {ReactReconcileTransaction} transaction
          * @private
          */
-        _mountChildAtIndex: function (child, afterNode, index, transaction, context) {
-          var mountImage = ReactReconciler.mountComponent(child, transaction, this, this._hostContainerInfo, context);
+        _mountChildAtIndex: function (child, mountImage, afterNode, index, transaction, context) {
           child._mountIndex = index;
           return this.createChild(child, afterNode, mountImage);
         },
@@ -15305,8 +15696,8 @@ var require$$3$6 = Object.freeze({
 
     var ReactCurrentOwner = interopDefault(require$$5$1);
     var ReactInstanceMap = interopDefault(require$$3$9);
-    var ReactInstrumentation = interopDefault(require$$10$1);
-    var ReactUpdates = interopDefault(require$$6$4);
+    var ReactInstrumentation = interopDefault(require$$10);
+    var ReactUpdates = interopDefault(require$$6$3);
 
     var invariant = interopDefault(require$$1$1);
     var warning = interopDefault(require$$0$1);
@@ -15332,10 +15723,11 @@ var require$$3$6 = Object.freeze({
       var internalInstance = ReactInstanceMap.get(publicInstance);
       if (!internalInstance) {
         if ("development" !== 'production') {
+          var ctor = publicInstance.constructor;
           // Only warn when we have a callerName. Otherwise we should be silent.
           // We're probably calling from enqueueCallback. We don't want to warn
           // there because we already warned for the corresponding lifecycle method.
-          warning(!callerName, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor.displayName);
+          warning(!callerName, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, ctor && (ctor.displayName || ctor.name) || 'ReactClass');
         }
         return null;
       }
@@ -15518,7 +15910,7 @@ var require$$3$6 = Object.freeze({
     var ReactUpdateQueue$1 = interopDefault(ReactUpdateQueue);
 
 
-    var require$$7$4 = Object.freeze({
+    var require$$7$5 = Object.freeze({
       default: ReactUpdateQueue$1
     });
 
@@ -15539,8 +15931,8 @@ var require$$3$6 = Object.freeze({
 
     function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-    var ReactUpdateQueue = interopDefault(require$$7$4);
-    var Transaction = interopDefault(require$$1$7);
+    var ReactUpdateQueue = interopDefault(require$$7$5);
+    var Transaction = interopDefault(require$$1$8);
     var warning = interopDefault(require$$0$1);
 
     function warnNoop(publicInstance, callerName) {
@@ -15690,8 +16082,8 @@ var require$$3$6 = Object.freeze({
     var _assign = interopDefault(require$$7);
 
     var PooledClass = interopDefault(require$$5);
-    var Transaction = interopDefault(require$$1$7);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var Transaction = interopDefault(require$$1$8);
+    var ReactInstrumentation = interopDefault(require$$10);
     var ReactServerUpdateQueue = interopDefault(require$$0$22);
 
     /**
@@ -15769,84 +16161,8 @@ var require$$3$6 = Object.freeze({
     var ReactServerRenderingTransaction$1 = interopDefault(ReactServerRenderingTransaction);
 
 
-    var require$$8$1 = Object.freeze({
+    var require$$8$2 = Object.freeze({
       default: ReactServerRenderingTransaction$1
-    });
-
-    var shallowEqual = createCommonjsModule(function (module) {
-    /**
-     * Copyright (c) 2013-present, Facebook, Inc.
-     * All rights reserved.
-     *
-     * This source code is licensed under the BSD-style license found in the
-     * LICENSE file in the root directory of this source tree. An additional grant
-     * of patent rights can be found in the PATENTS file in the same directory.
-     *
-     * @typechecks
-     * 
-     */
-
-    /*eslint-disable no-self-compare */
-
-    'use strict';
-
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-    /**
-     * inlined Object.is polyfill to avoid requiring consumers ship their own
-     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-     */
-    function is(x, y) {
-      // SameValue algorithm
-      if (x === y) {
-        // Steps 1-5, 7-10
-        // Steps 6.b-6.e: +0 != -0
-        return x !== 0 || 1 / x === 1 / y;
-      } else {
-        // Step 6.a: NaN == NaN
-        return x !== x && y !== y;
-      }
-    }
-
-    /**
-     * Performs equality by iterating through keys on an object and returning false
-     * when any key has values which are not strictly equal between the arguments.
-     * Returns true when the values of all keys are strictly equal.
-     */
-    function shallowEqual(objA, objB) {
-      if (is(objA, objB)) {
-        return true;
-      }
-
-      if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
-        return false;
-      }
-
-      var keysA = Object.keys(objA);
-      var keysB = Object.keys(objB);
-
-      if (keysA.length !== keysB.length) {
-        return false;
-      }
-
-      // Test for A's keys different from B.
-      for (var i = 0; i < keysA.length; i++) {
-        if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
-          return false;
-        }
-      }
-
-      return true;
-    }
-
-    module.exports = shallowEqual;
-    });
-
-    var shallowEqual$1 = interopDefault(shallowEqual);
-
-
-    var require$$0$23 = Object.freeze({
-      default: shallowEqual$1
     });
 
     var validateDOMNesting = createCommonjsModule(function (module) {
@@ -16224,7 +16540,7 @@ var require$$3$6 = Object.freeze({
     var validateDOMNesting$1 = interopDefault(validateDOMNesting);
 
 
-    var require$$0$24 = Object.freeze({
+    var require$$0$23 = Object.freeze({
       default: validateDOMNesting$1
     });
 
@@ -16252,30 +16568,30 @@ var require$$3$6 = Object.freeze({
     var DOMLazyTree = interopDefault(require$$20);
     var DOMNamespaces = interopDefault(require$$25);
     var DOMProperty = interopDefault(require$$19);
-    var DOMPropertyOperations = interopDefault(require$$5$6);
+    var DOMPropertyOperations = interopDefault(require$$5$7);
     var EventConstants = interopDefault(require$$18);
-    var EventPluginHub = interopDefault(require$$7$2);
-    var EventPluginRegistry = interopDefault(require$$4$3);
+    var EventPluginHub = interopDefault(require$$7$3);
+    var EventPluginRegistry = interopDefault(require$$4$4);
     var ReactBrowserEventEmitter = interopDefault(require$$18$2);
     var ReactComponentBrowserEnvironment = interopDefault(require$$18$1);
     var ReactDOMButton = interopDefault(require$$17$1);
     var ReactDOMComponentFlags = interopDefault(require$$16);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
     var ReactDOMInput = interopDefault(require$$14$1);
     var ReactDOMOption = interopDefault(require$$13$2);
-    var ReactDOMSelect = interopDefault(require$$1$16);
-    var ReactDOMTextarea = interopDefault(require$$11$1);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactDOMSelect = interopDefault(require$$1$17);
+    var ReactDOMTextarea = interopDefault(require$$11$2);
+    var ReactInstrumentation = interopDefault(require$$10);
     var ReactMultiChild = interopDefault(require$$9$2);
-    var ReactServerRenderingTransaction = interopDefault(require$$8$1);
+    var ReactServerRenderingTransaction = interopDefault(require$$8$2);
 
     var emptyFunction = interopDefault(require$$3$1);
     var escapeTextContentForBrowser = interopDefault(require$$2$10);
     var invariant = interopDefault(require$$1$1);
-    var isEventSupported = interopDefault(require$$0$12);
-    var keyOf = interopDefault(require$$0$4);
-    var shallowEqual = interopDefault(require$$0$23);
-    var validateDOMNesting = interopDefault(require$$0$24);
+    var isEventSupported = interopDefault(require$$0$11);
+    var keyOf = interopDefault(require$$0$3);
+    var shallowEqual = interopDefault(require$$0$21);
+    var validateDOMNesting = interopDefault(require$$0$23);
     var warning = interopDefault(require$$0$1);
 
     var Flags = ReactDOMComponentFlags;
@@ -16642,6 +16958,8 @@ var require$$3$6 = Object.freeze({
        * @return {string} The computed markup.
        */
       mountComponent: function (transaction, hostParent, hostContainerInfo, context) {
+        var _this = this;
+
         this._rootNodeID = globalIdCounter++;
         this._domID = hostContainerInfo._idCounter++;
         this._hostParent = hostParent;
@@ -16795,6 +17113,15 @@ var require$$3$6 = Object.freeze({
           case 'option':
             transaction.getReactMountReady().enqueue(optionPostMount, this);
             break;
+        }
+
+        if ("development" !== 'production') {
+          if (this._debugID) {
+            var callback = function () {
+              return ReactInstrumentation.debugTool.onComponentHasMounted(_this._debugID);
+            };
+            transaction.getReactMountReady().enqueue(callback, this);
+          }
         }
 
         return mountImage;
@@ -16965,6 +17292,8 @@ var require$$3$6 = Object.freeze({
        * @overridable
        */
       updateComponent: function (transaction, prevElement, nextElement, context) {
+        var _this2 = this;
+
         var lastProps = prevElement.props;
         var nextProps = this._currentElement.props;
 
@@ -17001,6 +17330,15 @@ var require$$3$6 = Object.freeze({
           // <select> value update needs to occur after <option> children
           // reconciliation
           transaction.getReactMountReady().enqueue(postUpdateSelectWrapper, this);
+        }
+
+        if ("development" !== 'production') {
+          if (this._debugID) {
+            var callback = function () {
+              return ReactInstrumentation.debugTool.onComponentHasUpdated(_this2._debugID);
+            };
+            transaction.getReactMountReady().enqueue(callback, this);
+          }
         }
       },
 
@@ -17237,7 +17575,7 @@ var require$$3$6 = Object.freeze({
     var ReactDOMComponent$1 = interopDefault(ReactDOMComponent);
 
 
-    var require$$11 = Object.freeze({
+    var require$$11$1 = Object.freeze({
       default: ReactDOMComponent$1
     });
 
@@ -17258,7 +17596,7 @@ var require$$3$6 = Object.freeze({
     var _assign = interopDefault(require$$7);
 
     var DOMLazyTree = interopDefault(require$$20);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
 
     var ReactDOMEmptyComponent = function (instantiate) {
       // ReactCompositeComponent uses this:
@@ -17457,7 +17795,7 @@ var require$$3$6 = Object.freeze({
     var traverseTwoPhase = ReactDOMTreeTraversal.traverseTwoPhase;
     var traverseEnterLeave = ReactDOMTreeTraversal.traverseEnterLeave;
 
-var require$$8$2 = Object.freeze({
+var require$$8$3 = Object.freeze({
       default: ReactDOMTreeTraversal$1,
       isAncestor: isAncestor,
       getLowestCommonAncestor: getLowestCommonAncestor,
@@ -17485,12 +17823,12 @@ var require$$8$2 = Object.freeze({
 
     var DOMChildrenOperations = interopDefault(require$$6$6);
     var DOMLazyTree = interopDefault(require$$20);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactInstrumentation = interopDefault(require$$10);
 
     var escapeTextContentForBrowser = interopDefault(require$$2$10);
     var invariant = interopDefault(require$$1$1);
-    var validateDOMNesting = interopDefault(require$$0$24);
+    var validateDOMNesting = interopDefault(require$$0$23);
 
     /**
      * Text nodes violate a couple assumptions that React makes about components:
@@ -17643,7 +17981,7 @@ var require$$8$2 = Object.freeze({
     var ReactDOMTextComponent$1 = interopDefault(ReactDOMTextComponent);
 
 
-    var require$$7$5 = Object.freeze({
+    var require$$7$6 = Object.freeze({
       default: ReactDOMTextComponent$1
     });
 
@@ -17663,8 +18001,8 @@ var require$$8$2 = Object.freeze({
 
     var _assign = interopDefault(require$$7);
 
-    var ReactUpdates = interopDefault(require$$6$4);
-    var Transaction = interopDefault(require$$1$7);
+    var ReactUpdates = interopDefault(require$$6$3);
+    var Transaction = interopDefault(require$$1$8);
 
     var emptyFunction = interopDefault(require$$3$1);
 
@@ -17862,7 +18200,7 @@ var require$$8$2 = Object.freeze({
     var getUnboundedScrollPosition$1 = interopDefault(getUnboundedScrollPosition);
 
 
-    var require$$0$25 = Object.freeze({
+    var require$$0$24 = Object.freeze({
       default: getUnboundedScrollPosition$1
     });
 
@@ -17883,13 +18221,13 @@ var require$$8$2 = Object.freeze({
     var _assign = interopDefault(require$$7);
 
     var EventListener = interopDefault(require$$17$2);
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
     var PooledClass = interopDefault(require$$5);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactUpdates = interopDefault(require$$6$4);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactUpdates = interopDefault(require$$6$3);
 
-    var getEventTarget = interopDefault(require$$1$8);
-    var getUnboundedScrollPosition = interopDefault(require$$0$25);
+    var getEventTarget = interopDefault(require$$1$9);
+    var getUnboundedScrollPosition = interopDefault(require$$0$24);
 
     /**
      * Find the deepest React component completely containing the root of the
@@ -18029,7 +18367,7 @@ var require$$8$2 = Object.freeze({
     var ReactEventListener$1 = interopDefault(ReactEventListener);
 
 
-    var require$$5$10 = Object.freeze({
+    var require$$5$11 = Object.freeze({
       default: ReactEventListener$1
     });
 
@@ -18048,14 +18386,14 @@ var require$$8$2 = Object.freeze({
     'use strict';
 
     var DOMProperty = interopDefault(require$$19);
-    var EventPluginHub = interopDefault(require$$7$2);
-    var EventPluginUtils = interopDefault(require$$6$3);
-    var ReactComponentEnvironment = interopDefault(require$$5$8);
+    var EventPluginHub = interopDefault(require$$7$3);
+    var EventPluginUtils = interopDefault(require$$6$2);
+    var ReactComponentEnvironment = interopDefault(require$$5$9);
     var ReactClass = interopDefault(require$$4);
     var ReactEmptyComponent = interopDefault(require$$3$11);
     var ReactBrowserEventEmitter = interopDefault(require$$18$2);
-    var ReactHostComponent = interopDefault(require$$1$18);
-    var ReactUpdates = interopDefault(require$$6$4);
+    var ReactHostComponent = interopDefault(require$$1$19);
+    var ReactUpdates = interopDefault(require$$6$3);
 
     var ReactInjection = {
       Component: ReactComponentEnvironment.injection,
@@ -18159,7 +18497,7 @@ var require$$8$2 = Object.freeze({
     var getNodeForCharacterOffset$1 = interopDefault(getNodeForCharacterOffset);
 
 
-    var require$$1$20 = Object.freeze({
+    var require$$1$21 = Object.freeze({
       default: getNodeForCharacterOffset$1
     });
 
@@ -18177,10 +18515,10 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var ExecutionEnvironment = interopDefault(require$$7$3);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
 
-    var getNodeForCharacterOffset = interopDefault(require$$1$20);
-    var getTextContentAccessor = interopDefault(require$$0$8);
+    var getNodeForCharacterOffset = interopDefault(require$$1$21);
+    var getTextContentAccessor = interopDefault(require$$0$7);
 
     /**
      * While `isCollapsed` is available on the Selection object and `collapsed`
@@ -18413,7 +18751,7 @@ var require$$8$2 = Object.freeze({
     var isNode$1 = interopDefault(isNode);
 
 
-    var require$$0$27 = Object.freeze({
+    var require$$0$26 = Object.freeze({
       default: isNode$1
     });
 
@@ -18431,7 +18769,7 @@ var require$$8$2 = Object.freeze({
      * @typechecks
      */
 
-    var isNode = interopDefault(require$$0$27);
+    var isNode = interopDefault(require$$0$26);
 
     /**
      * @param {*} object The object to check.
@@ -18447,7 +18785,7 @@ var require$$8$2 = Object.freeze({
     var isTextNode$1 = interopDefault(isTextNode);
 
 
-    var require$$0$26 = Object.freeze({
+    var require$$0$25 = Object.freeze({
       default: isTextNode$1
     });
 
@@ -18465,7 +18803,7 @@ var require$$8$2 = Object.freeze({
      * 
      */
 
-    var isTextNode = interopDefault(require$$0$26);
+    var isTextNode = interopDefault(require$$0$25);
 
     /*eslint-disable no-bitwise */
 
@@ -18561,7 +18899,7 @@ var require$$8$2 = Object.freeze({
     var ReactDOMSelection = interopDefault(require$$3$13);
 
     var containsNode = interopDefault(require$$2$15);
-    var focusNode = interopDefault(require$$1$11);
+    var focusNode = interopDefault(require$$1$12);
     var getActiveElement = interopDefault(require$$3$14);
 
     function isInDocument(node) {
@@ -18674,7 +19012,7 @@ var require$$8$2 = Object.freeze({
     var ReactInputSelection$1 = interopDefault(ReactInputSelection);
 
 
-    var require$$5$11 = Object.freeze({
+    var require$$5$12 = Object.freeze({
       default: ReactInputSelection$1
     });
 
@@ -18694,13 +19032,13 @@ var require$$8$2 = Object.freeze({
 
     var _assign = interopDefault(require$$7);
 
-    var CallbackQueue = interopDefault(require$$6$5);
+    var CallbackQueue = interopDefault(require$$6$4);
     var PooledClass = interopDefault(require$$5);
     var ReactBrowserEventEmitter = interopDefault(require$$18$2);
-    var ReactInputSelection = interopDefault(require$$5$11);
-    var ReactInstrumentation = interopDefault(require$$10$1);
-    var Transaction = interopDefault(require$$1$7);
-    var ReactUpdateQueue = interopDefault(require$$7$4);
+    var ReactInputSelection = interopDefault(require$$5$12);
+    var ReactInstrumentation = interopDefault(require$$10);
+    var Transaction = interopDefault(require$$1$8);
+    var ReactUpdateQueue = interopDefault(require$$7$5);
 
     /**
      * Ensures that, when possible, the selection range (currently selected text
@@ -19132,6 +19470,8 @@ var require$$8$2 = Object.freeze({
       xlinkTitle: 'xlink:title',
       xlinkType: 'xlink:type',
       xmlBase: 'xml:base',
+      xmlns: 0,
+      xmlnsXlink: 'xmlns:xlink',
       xmlLang: 'xml:lang',
       xmlSpace: 'xml:space',
       y: 0,
@@ -19192,15 +19532,15 @@ var require$$8$2 = Object.freeze({
 
     var EventConstants = interopDefault(require$$18);
     var EventPropagators = interopDefault(require$$16$1);
-    var ExecutionEnvironment = interopDefault(require$$7$3);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
-    var ReactInputSelection = interopDefault(require$$5$11);
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var ExecutionEnvironment = interopDefault(require$$7$4);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
+    var ReactInputSelection = interopDefault(require$$5$12);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
     var getActiveElement = interopDefault(require$$3$14);
     var isTextInputElement = interopDefault(require$$2$7);
-    var keyOf = interopDefault(require$$0$4);
-    var shallowEqual = interopDefault(require$$0$23);
+    var keyOf = interopDefault(require$$0$3);
+    var shallowEqual = interopDefault(require$$0$21);
 
     var topLevelTypes = EventConstants.topLevelTypes;
 
@@ -19378,7 +19718,7 @@ var require$$8$2 = Object.freeze({
     var SelectEventPlugin$1 = interopDefault(SelectEventPlugin);
 
 
-    var require$$1$21 = Object.freeze({
+    var require$$1$22 = Object.freeze({
       default: SelectEventPlugin$1
     });
 
@@ -19396,7 +19736,7 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
     /**
      * @interface Event
@@ -19445,7 +19785,7 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
     /**
      * @interface Event
@@ -19493,7 +19833,7 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticUIEvent = interopDefault(require$$1$9);
+    var SyntheticUIEvent = interopDefault(require$$1$10);
 
     /**
      * @interface FocusEvent
@@ -19521,7 +19861,7 @@ var require$$8$2 = Object.freeze({
     var SyntheticFocusEvent$1 = interopDefault(SyntheticFocusEvent);
 
 
-    var require$$11$2 = Object.freeze({
+    var require$$11$3 = Object.freeze({
       default: SyntheticFocusEvent$1
     });
 
@@ -19581,7 +19921,7 @@ var require$$8$2 = Object.freeze({
     var getEventCharCode$1 = interopDefault(getEventCharCode);
 
 
-    var require$$0$29 = Object.freeze({
+    var require$$0$28 = Object.freeze({
       default: getEventCharCode$1
     });
 
@@ -19599,7 +19939,7 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var getEventCharCode = interopDefault(require$$0$29);
+    var getEventCharCode = interopDefault(require$$0$28);
 
     /**
      * Normalization of deprecated HTML5 `key` values
@@ -19693,7 +20033,7 @@ var require$$8$2 = Object.freeze({
     var getEventKey$1 = interopDefault(getEventKey);
 
 
-    var require$$1$22 = Object.freeze({
+    var require$$1$23 = Object.freeze({
       default: getEventKey$1
     });
 
@@ -19711,11 +20051,11 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticUIEvent = interopDefault(require$$1$9);
+    var SyntheticUIEvent = interopDefault(require$$1$10);
 
-    var getEventCharCode = interopDefault(require$$0$29);
-    var getEventKey = interopDefault(require$$1$22);
-    var getEventModifierState = interopDefault(require$$0$14);
+    var getEventCharCode = interopDefault(require$$0$28);
+    var getEventKey = interopDefault(require$$1$23);
+    var getEventModifierState = interopDefault(require$$0$13);
 
     /**
      * @interface KeyboardEvent
@@ -19787,7 +20127,7 @@ var require$$8$2 = Object.freeze({
     var SyntheticKeyboardEvent$1 = interopDefault(SyntheticKeyboardEvent);
 
 
-    var require$$10$2 = Object.freeze({
+    var require$$10$1 = Object.freeze({
       default: SyntheticKeyboardEvent$1
     });
 
@@ -19805,7 +20145,7 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticMouseEvent = interopDefault(require$$0$13);
+    var SyntheticMouseEvent = interopDefault(require$$0$12);
 
     /**
      * @interface DragEvent
@@ -19833,7 +20173,7 @@ var require$$8$2 = Object.freeze({
     var SyntheticDragEvent$1 = interopDefault(SyntheticDragEvent);
 
 
-    var require$$8$3 = Object.freeze({
+    var require$$8$4 = Object.freeze({
       default: SyntheticDragEvent$1
     });
 
@@ -19851,9 +20191,9 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticUIEvent = interopDefault(require$$1$9);
+    var SyntheticUIEvent = interopDefault(require$$1$10);
 
-    var getEventModifierState = interopDefault(require$$0$14);
+    var getEventModifierState = interopDefault(require$$0$13);
 
     /**
      * @interface TouchEvent
@@ -19888,7 +20228,7 @@ var require$$8$2 = Object.freeze({
     var SyntheticTouchEvent$1 = interopDefault(SyntheticTouchEvent);
 
 
-    var require$$7$6 = Object.freeze({
+    var require$$7$7 = Object.freeze({
       default: SyntheticTouchEvent$1
     });
 
@@ -19906,7 +20246,7 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticEvent = interopDefault(require$$0$9);
+    var SyntheticEvent = interopDefault(require$$0$8);
 
     /**
      * @interface Event
@@ -19955,7 +20295,7 @@ var require$$8$2 = Object.freeze({
 
     'use strict';
 
-    var SyntheticMouseEvent = interopDefault(require$$0$13);
+    var SyntheticMouseEvent = interopDefault(require$$0$12);
 
     /**
      * @interface WheelEvent
@@ -20024,23 +20364,23 @@ var require$$8$2 = Object.freeze({
     var EventConstants = interopDefault(require$$18);
     var EventListener = interopDefault(require$$17$2);
     var EventPropagators = interopDefault(require$$16$1);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
     var SyntheticAnimationEvent = interopDefault(require$$14$2);
     var SyntheticClipboardEvent = interopDefault(require$$13$3);
-    var SyntheticEvent = interopDefault(require$$0$9);
-    var SyntheticFocusEvent = interopDefault(require$$11$2);
-    var SyntheticKeyboardEvent = interopDefault(require$$10$2);
-    var SyntheticMouseEvent = interopDefault(require$$0$13);
-    var SyntheticDragEvent = interopDefault(require$$8$3);
-    var SyntheticTouchEvent = interopDefault(require$$7$6);
+    var SyntheticEvent = interopDefault(require$$0$8);
+    var SyntheticFocusEvent = interopDefault(require$$11$3);
+    var SyntheticKeyboardEvent = interopDefault(require$$10$1);
+    var SyntheticMouseEvent = interopDefault(require$$0$12);
+    var SyntheticDragEvent = interopDefault(require$$8$4);
+    var SyntheticTouchEvent = interopDefault(require$$7$7);
     var SyntheticTransitionEvent = interopDefault(require$$6$10);
-    var SyntheticUIEvent = interopDefault(require$$1$9);
+    var SyntheticUIEvent = interopDefault(require$$1$10);
     var SyntheticWheelEvent = interopDefault(require$$4$9);
 
     var emptyFunction = interopDefault(require$$3$1);
-    var getEventCharCode = interopDefault(require$$0$29);
+    var getEventCharCode = interopDefault(require$$0$28);
     var invariant = interopDefault(require$$1$1);
-    var keyOf = interopDefault(require$$0$4);
+    var keyOf = interopDefault(require$$0$3);
 
     var topLevelTypes = EventConstants.topLevelTypes;
 
@@ -20493,6 +20833,10 @@ var require$$8$2 = Object.freeze({
     var ON_CLICK_KEY = keyOf({ onClick: null });
     var onClickListeners = {};
 
+    function getDictionaryKey(inst) {
+      return '.' + inst._rootNodeID;
+    }
+
     var SimpleEventPlugin = {
 
       eventTypes: eventTypes,
@@ -20616,19 +20960,19 @@ var require$$8$2 = Object.freeze({
         // fire. The workaround for this bug involves attaching an empty click
         // listener on the target node.
         if (registrationName === ON_CLICK_KEY) {
-          var id = inst._rootNodeID;
+          var key = getDictionaryKey(inst);
           var node = ReactDOMComponentTree.getNodeFromInstance(inst);
-          if (!onClickListeners[id]) {
-            onClickListeners[id] = EventListener.listen(node, 'click', emptyFunction);
+          if (!onClickListeners[key]) {
+            onClickListeners[key] = EventListener.listen(node, 'click', emptyFunction);
           }
         }
       },
 
       willDeleteListener: function (inst, registrationName) {
         if (registrationName === ON_CLICK_KEY) {
-          var id = inst._rootNodeID;
-          onClickListeners[id].remove();
-          delete onClickListeners[id];
+          var key = getDictionaryKey(inst);
+          onClickListeners[key].remove();
+          delete onClickListeners[key];
         }
       }
 
@@ -20640,7 +20984,7 @@ var require$$8$2 = Object.freeze({
     var SimpleEventPlugin$1 = interopDefault(SimpleEventPlugin);
 
 
-    var require$$0$28 = Object.freeze({
+    var require$$0$27 = Object.freeze({
       default: SimpleEventPlugin$1
     });
 
@@ -20664,18 +21008,18 @@ var require$$8$2 = Object.freeze({
     var EnterLeaveEventPlugin = interopDefault(require$$14);
     var HTMLDOMPropertyConfig = interopDefault(require$$13$1);
     var ReactComponentBrowserEnvironment = interopDefault(require$$18$1);
-    var ReactDOMComponent = interopDefault(require$$11);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponent = interopDefault(require$$11$1);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
     var ReactDOMEmptyComponent = interopDefault(require$$9$3);
-    var ReactDOMTreeTraversal = interopDefault(require$$8$2);
-    var ReactDOMTextComponent = interopDefault(require$$7$5);
+    var ReactDOMTreeTraversal = interopDefault(require$$8$3);
+    var ReactDOMTextComponent = interopDefault(require$$7$6);
     var ReactDefaultBatchingStrategy = interopDefault(require$$6$9);
-    var ReactEventListener = interopDefault(require$$5$10);
+    var ReactEventListener = interopDefault(require$$5$11);
     var ReactInjection = interopDefault(require$$4$8);
     var ReactReconcileTransaction = interopDefault(require$$3$12);
     var SVGDOMPropertyConfig = interopDefault(require$$2$16);
-    var SelectEventPlugin = interopDefault(require$$1$21);
-    var SimpleEventPlugin = interopDefault(require$$0$28);
+    var SelectEventPlugin = interopDefault(require$$1$22);
+    var SimpleEventPlugin = interopDefault(require$$0$27);
 
     var alreadyInjected = false;
 
@@ -20753,7 +21097,7 @@ var require$$9$1 = Object.freeze({
 
     'use strict';
 
-    var validateDOMNesting = interopDefault(require$$0$24);
+    var validateDOMNesting = interopDefault(require$$0$23);
 
     var DOC_NODE_TYPE = 9;
 
@@ -20860,7 +21204,7 @@ var require$$9$1 = Object.freeze({
     var adler32$1 = interopDefault(adler32);
 
 
-    var require$$0$31 = Object.freeze({
+    var require$$0$30 = Object.freeze({
       default: adler32$1
     });
 
@@ -20878,7 +21222,7 @@ var require$$9$1 = Object.freeze({
 
     'use strict';
 
-    var adler32 = interopDefault(require$$0$31);
+    var adler32 = interopDefault(require$$0$30);
 
     var TAG_END = /\/?>/;
     var COMMENT_START = /^<\!\-\-/;
@@ -20944,23 +21288,23 @@ var require$$9$1 = Object.freeze({
     var DOMProperty = interopDefault(require$$19);
     var ReactBrowserEventEmitter = interopDefault(require$$18$2);
     var ReactCurrentOwner = interopDefault(require$$5$1);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
     var ReactDOMContainerInfo = interopDefault(require$$15$1);
     var ReactDOMFeatureFlags = interopDefault(require$$14$3);
     var ReactElement = interopDefault(require$$13);
     var ReactFeatureFlags = interopDefault(require$$12);
     var ReactInstanceMap = interopDefault(require$$3$9);
-    var ReactInstrumentation = interopDefault(require$$10$1);
+    var ReactInstrumentation = interopDefault(require$$10);
     var ReactMarkupChecksum = interopDefault(require$$9$4);
-    var ReactReconciler = interopDefault(require$$8);
-    var ReactUpdateQueue = interopDefault(require$$7$4);
-    var ReactUpdates = interopDefault(require$$6$4);
+    var ReactReconciler = interopDefault(require$$8$1);
+    var ReactUpdateQueue = interopDefault(require$$7$5);
+    var ReactUpdates = interopDefault(require$$6$3);
 
     var emptyObject = interopDefault(require$$5$3);
     var instantiateReactComponent = interopDefault(require$$4$7);
     var invariant = interopDefault(require$$1$1);
     var setInnerHTML = interopDefault(require$$2$9);
-    var shouldUpdateReactComponent = interopDefault(require$$1$17);
+    var shouldUpdateReactComponent = interopDefault(require$$1$18);
     var warning = interopDefault(require$$0$1);
 
     var ATTR_NAME = DOMProperty.ID_ATTRIBUTE_NAME;
@@ -21429,7 +21773,7 @@ var require$$9$1 = Object.freeze({
     var ReactMount$1 = interopDefault(ReactMount);
 
 
-    var require$$0$30 = Object.freeze({
+    var require$$0$29 = Object.freeze({
       default: ReactMount$1
     });
 
@@ -21447,7 +21791,7 @@ var require$$9$1 = Object.freeze({
 
     'use strict';
 
-    var ReactNodeTypes = interopDefault(require$$0$21);
+    var ReactNodeTypes = interopDefault(require$$0$20);
 
     function getHostComponentFromComposite(inst) {
       var type;
@@ -21490,7 +21834,7 @@ var require$$9$1 = Object.freeze({
     var _prodInvariant = interopDefault(require$$6);
 
     var ReactCurrentOwner = interopDefault(require$$5$1);
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
     var ReactInstanceMap = interopDefault(require$$3$9);
 
     var getHostComponentFromComposite = interopDefault(require$$2$17);
@@ -21557,7 +21901,7 @@ var require$$9$1 = Object.freeze({
 
     'use strict';
 
-    var ReactMount = interopDefault(require$$0$30);
+    var ReactMount = interopDefault(require$$0$29);
 
     module.exports = ReactMount.renderSubtreeIntoContainer;
     });
@@ -21585,12 +21929,12 @@ var require$$9$1 = Object.freeze({
 
     'use strict';
 
-    var ReactDOMComponentTree = interopDefault(require$$4$2);
+    var ReactDOMComponentTree = interopDefault(require$$4$3);
     var ReactDefaultInjection = interopDefault(require$$9$1);
-    var ReactMount = interopDefault(require$$0$30);
-    var ReactReconciler = interopDefault(require$$8);
-    var ReactUpdates = interopDefault(require$$6$4);
-    var ReactVersion = interopDefault(require$$5$4);
+    var ReactMount = interopDefault(require$$0$29);
+    var ReactReconciler = interopDefault(require$$8$1);
+    var ReactUpdates = interopDefault(require$$6$3);
+    var ReactVersion = interopDefault(require$$5$5);
 
     var findDOMNode = interopDefault(require$$4$10);
     var getHostComponentFromComposite = interopDefault(require$$2$17);
@@ -21599,7 +21943,7 @@ var require$$9$1 = Object.freeze({
 
     ReactDefaultInjection.inject();
 
-    var React = {
+    var ReactDOM = {
       findDOMNode: findDOMNode,
       render: ReactMount.render,
       unmountComponentAtNode: ReactMount.unmountComponentAtNode,
@@ -21635,7 +21979,7 @@ var require$$9$1 = Object.freeze({
     }
 
     if ("development" !== 'production') {
-      var ExecutionEnvironment = interopDefault(require$$7$3);
+      var ExecutionEnvironment = interopDefault(require$$7$4);
       if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
 
         // First check if devtools is not installed
@@ -21670,26 +22014,26 @@ var require$$9$1 = Object.freeze({
       }
     }
 
-    module.exports = React;
+    module.exports = ReactDOM;
     });
 
     var ReactDOM$2 = interopDefault(ReactDOM$1);
 
 
-    var require$$0$7 = Object.freeze({
+    var require$$0$6 = Object.freeze({
       default: ReactDOM$2
     });
 
     var index$2 = createCommonjsModule(function (module) {
     'use strict';
 
-    module.exports = interopDefault(require$$0$7);
+    module.exports = interopDefault(require$$0$6);
     });
 
     var ReactDOM = interopDefault(index$2);
 
 
-    var require$$7$1 = Object.freeze({
+    var require$$7$2 = Object.freeze({
     	default: ReactDOM
     });
 
@@ -21832,7 +22176,7 @@ var require$$9$1 = Object.freeze({
     var Provider$2 = interopDefault(Provider$1);
 
 
-    var require$$1$23 = Object.freeze({
+    var require$$1$24 = Object.freeze({
       default: Provider$2
     });
 
@@ -21868,7 +22212,7 @@ var require$$9$1 = Object.freeze({
     var shallowEqual$3 = interopDefault(shallowEqual$2);
 
 
-    var require$$5$12 = Object.freeze({
+    var require$$5$13 = Object.freeze({
       default: shallowEqual$3
     });
 
@@ -22035,7 +22379,7 @@ var require$$9$1 = Object.freeze({
     var ponyfill$1 = interopDefault(ponyfill);
 
 
-    var require$$0$34 = Object.freeze({
+    var require$$0$33 = Object.freeze({
     	default: ponyfill$1
     });
 
@@ -22043,7 +22387,7 @@ var require$$9$1 = Object.freeze({
     /* global window */
     'use strict';
 
-    module.exports = interopDefault(require$$0$34)(commonjsGlobal || window || commonjsGlobal);
+    module.exports = interopDefault(require$$0$33)(commonjsGlobal || window || commonjsGlobal);
     });
 
     var $$observable = interopDefault(index$5);
@@ -22572,7 +22916,7 @@ var require$$9$1 = Object.freeze({
 
 
 
-    var require$$0$33 = Object.freeze({
+    var require$$0$32 = Object.freeze({
       createStore: createStore,
       combineReducers: combineReducers,
       bindActionCreators: bindActionCreators,
@@ -22586,7 +22930,7 @@ var require$$9$1 = Object.freeze({
     exports.__esModule = true;
     exports["default"] = wrapActionCreators;
 
-    var _redux = interopDefault(require$$0$33);
+    var _redux = interopDefault(require$$0$32);
 
     function wrapActionCreators(actionCreators) {
       return function (dispatch) {
@@ -22623,12 +22967,12 @@ var require$$9$1 = Object.freeze({
     var _overArg$1 = interopDefault(_overArg);
 
 
-    var require$$0$35 = Object.freeze({
+    var require$$0$34 = Object.freeze({
       default: _overArg$1
     });
 
     var _getPrototype = createCommonjsModule(function (module) {
-    var overArg = interopDefault(require$$0$35);
+    var overArg = interopDefault(require$$0$34);
 
     /* Built-in method references for those with the same name as other `lodash` methods. */
     var nativeGetPrototype = Object.getPrototypeOf;
@@ -22678,7 +23022,7 @@ var require$$9$1 = Object.freeze({
     var _isHostObject$1 = interopDefault(_isHostObject);
 
 
-    var require$$1$24 = Object.freeze({
+    var require$$1$25 = Object.freeze({
       default: _isHostObject$1
     });
 
@@ -22717,14 +23061,14 @@ var require$$9$1 = Object.freeze({
     var isObjectLike$2 = interopDefault(isObjectLike$1);
 
 
-    var require$$0$36 = Object.freeze({
+    var require$$0$35 = Object.freeze({
       default: isObjectLike$2
     });
 
     var isPlainObject$1 = createCommonjsModule(function (module) {
     var getPrototype = interopDefault(require$$2$20),
-        isHostObject = interopDefault(require$$1$24),
-        isObjectLike = interopDefault(require$$0$36);
+        isHostObject = interopDefault(require$$1$25),
+        isObjectLike = interopDefault(require$$0$35);
 
     /** `Object#toString` result references. */
     var objectTag = '[object Object]';
@@ -22857,7 +23201,7 @@ var require$$9$1 = Object.freeze({
     var index$7 = interopDefault(index$6);
 
 
-    var require$$1$25 = Object.freeze({
+    var require$$1$26 = Object.freeze({
         default: index$7
     });
 
@@ -22918,7 +23262,7 @@ var require$$9$1 = Object.freeze({
     var browser$1 = interopDefault(browser);
 
 
-    var require$$0$37 = Object.freeze({
+    var require$$0$36 = Object.freeze({
       default: browser$1
     });
 
@@ -22936,7 +23280,7 @@ var require$$9$1 = Object.freeze({
 
     var _storeShape2 = _interopRequireDefault(_storeShape);
 
-    var _shallowEqual = interopDefault(require$$5$12);
+    var _shallowEqual = interopDefault(require$$5$13);
 
     var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
 
@@ -22952,11 +23296,11 @@ var require$$9$1 = Object.freeze({
 
     var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-    var _hoistNonReactStatics = interopDefault(require$$1$25);
+    var _hoistNonReactStatics = interopDefault(require$$1$26);
 
     var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-    var _invariant = interopDefault(require$$0$37);
+    var _invariant = interopDefault(require$$0$36);
 
     var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -23321,7 +23665,7 @@ var require$$9$1 = Object.freeze({
     var connect$2 = interopDefault(connect$1);
 
 
-    var require$$0$32 = Object.freeze({
+    var require$$0$31 = Object.freeze({
       default: connect$2
     });
 
@@ -23331,11 +23675,11 @@ var require$$9$1 = Object.freeze({
     exports.__esModule = true;
     exports.connect = exports.Provider = undefined;
 
-    var _Provider = interopDefault(require$$1$23);
+    var _Provider = interopDefault(require$$1$24);
 
     var _Provider2 = _interopRequireDefault(_Provider);
 
-    var _connect = interopDefault(require$$0$32);
+    var _connect = interopDefault(require$$0$31);
 
     var _connect2 = _interopRequireDefault(_connect);
 
@@ -26340,7 +26684,7 @@ var require$$9$1 = Object.freeze({
     var index$9 = interopDefault(index$8);
 
 
-    var require$$0$38 = Object.freeze({
+    var require$$0$37 = Object.freeze({
     	default: index$9
     });
 
@@ -26390,7 +26734,7 @@ var require$$9$1 = Object.freeze({
     var stripDiacritics$1 = interopDefault(stripDiacritics);
 
 
-    var require$$0$39 = Object.freeze({
+    var require$$0$38 = Object.freeze({
     	default: stripDiacritics$1
     });
 
@@ -26405,11 +26749,11 @@ var require$$9$1 = Object.freeze({
 
     var _react2 = _interopRequireDefault(_react);
 
-    var _Select = interopDefault(require$$1$26);
+    var _Select = interopDefault(require$$1$27);
 
     var _Select2 = _interopRequireDefault(_Select);
 
-    var _utilsStripDiacritics = interopDefault(require$$0$39);
+    var _utilsStripDiacritics = interopDefault(require$$0$38);
 
     var _utilsStripDiacritics2 = _interopRequireDefault(_utilsStripDiacritics);
 
@@ -26594,7 +26938,7 @@ var require$$9$1 = Object.freeze({
 
     var _react2 = _interopRequireDefault(_react);
 
-    var _classnames = interopDefault(require$$0$38);
+    var _classnames = interopDefault(require$$0$37);
 
     var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -26702,7 +27046,7 @@ var require$$9$1 = Object.freeze({
     var Option$1 = interopDefault(Option);
 
 
-    var require$$1$27 = Object.freeze({
+    var require$$1$28 = Object.freeze({
     	default: Option$1
     });
 
@@ -26715,7 +27059,7 @@ var require$$9$1 = Object.freeze({
 
     var _react2 = _interopRequireDefault(_react);
 
-    var _classnames = interopDefault(require$$0$38);
+    var _classnames = interopDefault(require$$0$37);
 
     var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -26818,7 +27162,7 @@ var require$$9$1 = Object.freeze({
     var Value$1 = interopDefault(Value);
 
 
-    var require$$0$40 = Object.freeze({
+    var require$$0$39 = Object.freeze({
     	default: Value$1
     });
 
@@ -26839,7 +27183,7 @@ var require$$9$1 = Object.freeze({
 
     var _react2 = _interopRequireDefault(_react);
 
-    var _reactDom = interopDefault(require$$7$1);
+    var _reactDom = interopDefault(require$$7$2);
 
     var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -26847,7 +27191,7 @@ var require$$9$1 = Object.freeze({
 
     var _reactInputAutosize2 = _interopRequireDefault(_reactInputAutosize);
 
-    var _classnames = interopDefault(require$$0$38);
+    var _classnames = interopDefault(require$$0$37);
 
     var _classnames2 = _interopRequireDefault(_classnames);
 
@@ -26855,7 +27199,7 @@ var require$$9$1 = Object.freeze({
 
     var _blacklist2 = _interopRequireDefault(_blacklist);
 
-    var _utilsStripDiacritics = interopDefault(require$$0$39);
+    var _utilsStripDiacritics = interopDefault(require$$0$38);
 
     var _utilsStripDiacritics2 = _interopRequireDefault(_utilsStripDiacritics);
 
@@ -26863,11 +27207,11 @@ var require$$9$1 = Object.freeze({
 
     var _Async2 = _interopRequireDefault(_Async);
 
-    var _Option = interopDefault(require$$1$27);
+    var _Option = interopDefault(require$$1$28);
 
     var _Option2 = _interopRequireDefault(_Option);
 
-    var _Value = interopDefault(require$$0$40);
+    var _Value = interopDefault(require$$0$39);
 
     var _Value2 = _interopRequireDefault(_Value);
 
@@ -27953,7 +28297,7 @@ var require$$9$1 = Object.freeze({
     var Select$1 = interopDefault(Select);
 
 
-    var require$$1$26 = Object.freeze({
+    var require$$1$27 = Object.freeze({
     	default: Select$1
     });
 
@@ -28080,7 +28424,6 @@ var require$$9$1 = Object.freeze({
           var lectureSections = this.props.lectureSections.map(function (lectureSection, i) {
             return { value: i.toString(), label: lectureSection.toString() };
           });
-          var lectureSelection = this.props.lectureSections.length === 0 ? '' : this.props.lectureSection;
           var depts = this.props.deptOptions.map(function (dept) {
             return { value: dept, label: dept };
           });
@@ -28190,7 +28533,7 @@ var require$$9$1 = Object.freeze({
                   className: 'add-class-lecture-section' + (highlighted.lectureSection ? " outline-blue" : ""),
                   disabled: !enabled.lectureSection,
                   placeholder: 'Section',
-                  value: lectureSelection,
+                  value: this.props.lectureSection,
                   resetValue: resetValue,
                   options: lectureSections,
                   searchable: false,
@@ -28315,11 +28658,7 @@ var require$$9$1 = Object.freeze({
 
     var mapStateToProps$2 = function mapStateToProps(state) {
       var cpState = state.coursePicker.toJS();
-      var lectureSelection = cpState.lectureSection;
-      if (cpState.lectureSections.length === 1) {
-        lectureSelection = '0';
-      }
-      var lectureSection = cpState.lectureSections[lectureSelection];
+      var lectureSection = cpState.lectureSections[cpState.lectureSection];
       var courseName = '';
       if (lectureSection) {
         courseName = lectureSection.courseName;
@@ -28328,8 +28667,7 @@ var require$$9$1 = Object.freeze({
         ccnInCart: ccnInCart(state),
         deptOptions: allDepts().sort(),
         deptNumbers: deptNumbersForDept(cpState.dept),
-        courseName: courseName,
-        lectureSection: lectureSelection
+        courseName: courseName
       });
     };
 
@@ -28710,11 +29048,7 @@ var require$$9$1 = Object.freeze({
       }, 0.0);
 
       var coursePicker = state.coursePicker.toJS();
-      var lectureSelection = coursePicker.lectureSection;
-      if (coursePicker.lectureSections.length === 1) {
-        lectureSelection = '0';
-      }
-      var lecture = coursePicker.lectureSections[lectureSelection];
+      var lecture = coursePicker.lectureSections[coursePicker.lectureSection];
       var sections = [];
       for (var i = 0; i < coursePicker.sectionGroups.length; ++i) {
         if (coursePicker.selections[i]) {
@@ -29011,7 +29345,7 @@ var require$$9$1 = Object.freeze({
       );
     }
 
-    var head = "\n<link href='https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"" + "//bear.plus" + "/css/main.css\">\n<link rel=\"stylesheet\" type=\"text/css\" href=\"" + "//bear.plus" + "/css/semantic/modal.min.css\">\n<link rel=\"stylesheet\" type=\"text/css\" href=\"" + "//bear.plus" + "/css/semantic/dimmer.min.css\">\n<link rel=\"stylesheet\" type=\"text/css\" href=\"" + "//bear.plus" + "/css/semantic/transition.min.css\">\n<link rel=\"stylesheet\" type=\"text/css\" href=\"" + "//bear.plus" + "/css/semantic/icon.min.css\">\n<link rel=\"stylesheet\" href=\"https://npmcdn.com/react-select/dist/react-select.css\">\n<title>Build-a-Bear</title>\n";
+    var head = "\n<link href='https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic' rel='stylesheet' type='text/css'>\n<link rel=\"stylesheet\" type=\"text/css\" href=\"" + "//bear.plus" + "/css/main.css\">\n<link rel=\"stylesheet\" href=\"https://npmcdn.com/react-select/dist/react-select.css\">\n<title>Build-a-Bear</title>\n";
 
     var body = "\n<div class=\"banner\">\n  <p class=\"banner-text\">Build-a-Bear</p>\n</div>\n<div class=\"main-container\">\n  <div class=\"my-academics-link-wrapper\">\n    <a class=\"my-academics-link\" href=\"https://calcentral.berkeley.edu/academics\">&lt; Return to My Academics</a>\n  </div>\n  <div>\n    <p class=\"class-enrollment-subtitle semibold\">Class Enrollment</p>\n  </div>\n  <h1 class=\"current-semester-subtitle\">Fall 2016 - Undergraduate</h1>\n  <div id=\"root\"></div>\n</div>\n";
 
@@ -34322,7 +34656,7 @@ var require$$9$1 = Object.freeze({
             return state.set('lectureSection', acl).set('ccn', state.get('lectureSections')[acl].ccn).set('sectionGroups', defaultState$1.get('sectionGroups')).set('isLoadingSections', true);
           }
         case SET_LECTURE_SECTIONS:
-          return state.set('dept', action.lectureSections[0].dept).set('deptNumber', action.lectureSections[0].deptNumber).set('lectureSections', action.lectureSections).set('lectureSection', '').set('ccn', action.lectureSections[0].ccn).set('isLoadingSections', true);
+          return state.set('dept', action.lectureSections[0].dept).set('deptNumber', action.lectureSections[0].deptNumber).set('lectureSections', action.lectureSections).set('lectureSection', action.lectureSections.length === 1 ? '0' : '').set('ccn', action.lectureSections[0].ccn).set('isLoadingSections', true);
         case SET_DEPT:
           return defaultState$1.set('dept', action.dept);
         case SET_DEPT_NUMBER:
@@ -34342,6 +34676,11 @@ var require$$9$1 = Object.freeze({
         case RECEIVE_SECTIONS:
           if (state.get('ccn') === action.ccn) {
             var selectionsArray = Immutable.fromJS(Array(action.sectionGroups.length).fill(''));
+            for (var i = 0; i < action.sectionGroups.length; i++) {
+              if (action.sectionGroups[i].length === 1) {
+                selectionsArray = selectionsArray.set(i, '0');
+              }
+            }
             return state.set('sectionGroups', Immutable.fromJS(action.sectionGroups)).set('selections', selectionsArray).set('isLoadingSections', false);
           }
           return state;
