@@ -20,7 +20,9 @@ function EnrolledCourses({ courses }) {
   const genTable = (keys) => keys.map((key, i) => (
     <tr className="courses-table-entry" key={i}>
       <td className="class-drop">
-        <i id="drop-class" className="courses-drop-course remove icon"></i>
+        <a target="_blank" href="https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_DROP.GBL?ucFrom=CalCentral&ucFromLink=https://bear.plus&ucFromText=Class%20Enrollment">
+          <i id="drop-class" className="courses-drop-course remove icon"></i>
+        </a>
       </td>
       <td>{joinWithBr(sc[key], 'course')}</td>
       <td>{joinWithBr(sc[key], 'type')}</td>

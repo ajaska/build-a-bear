@@ -2,3 +2,4 @@ meme-app.js
 meme-app.min.js
 node_modules/
 css/.sass-cache
+css/main.css
