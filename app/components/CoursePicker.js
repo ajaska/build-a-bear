@@ -55,8 +55,6 @@ class CoursePicker extends React.Component {
     let lectureSections = this.props.lectureSections.map((lectureSection, i) => (
       { value: i.toString(), label: lectureSection.toString() }
     ));
-    let lectureSelection = (this.props.lectureSections.length === 0 ?
-                            '' : this.props.lectureSection);
     let depts = this.props.deptOptions.map((dept) => (
       { value: dept, label: dept }
     ));
@@ -149,7 +147,7 @@ class CoursePicker extends React.Component {
               className={`add-class-lecture-section${highlighted.lectureSection ? " outline-blue" : ""}`}
               disabled={!enabled.lectureSection}
               placeholder="Section"
-              value={lectureSelection}
+              value={this.props.lectureSection}
               resetValue={resetValue}
               options={lectureSections}
               searchable={false}

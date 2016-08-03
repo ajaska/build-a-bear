@@ -35,7 +35,7 @@ export default function (state = defaultState, action) {
       return state.set('dept', action.lectureSections[0].dept)
                   .set('deptNumber', action.lectureSections[0].deptNumber)
                   .set('lectureSections', action.lectureSections)
-                  .set('lectureSection', '')
+                  .set('lectureSection', action.lectureSections.length === 1 ? '0' : '')
                   .set('ccn', action.lectureSections[0].ccn)
                   .set('isLoadingSections', true);
     case ActionType.SET_DEPT:
@@ -58,7 +58,12 @@ export default function (state = defaultState, action) {
                   .set('isLoadingLectureAvailability', true);
     case APIActionType.RECEIVE_SECTIONS:
       if (state.get('ccn') === action.ccn) {
-        const selectionsArray = Immutable.fromJS(Array(action.sectionGroups.length).fill(''));
+        let selectionsArray = Immutable.fromJS(Array(action.sectionGroups.length).fill(''));
+        for (let i = 0; i < action.sectionGroups.length; i++) {
+          if (action.sectionGroups[i].length === 1) {
+            selectionsArray = selectionsArray.set(i, '0');
+          }
+        }
         return state.set('sectionGroups', Immutable.fromJS(action.sectionGroups))
                     .set('selections', selectionsArray)
                     .set('isLoadingSections', false);

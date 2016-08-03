@@ -14,11 +14,7 @@ function ccnInCart(state) {
 
 const mapStateToProps = (state) => {
   const cpState = state.coursePicker.toJS();
-  let lectureSelection = cpState.lectureSection;
-  if (cpState.lectureSections.length === 1) {
-    lectureSelection = '0';
-  }
-  const lectureSection = cpState.lectureSections[lectureSelection];
+  const lectureSection = cpState.lectureSections[cpState.lectureSection];
   let courseName = '';
   if (lectureSection) {
     courseName = lectureSection.courseName;
@@ -30,7 +26,6 @@ const mapStateToProps = (state) => {
       deptOptions: allDepts().sort(),
       deptNumbers: deptNumbersForDept(cpState.dept),
       courseName,
-      lectureSection: lectureSelection,
     }
   );
 };
