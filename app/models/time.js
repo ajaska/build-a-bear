@@ -49,14 +49,14 @@ function prettyTime(start, end) {
 
 function normalizeTime(timeString) {
   const re = /((?:Mo|Tu|We|Th|Fr|Sa|Su)+) (\d?\d:\d\d)(AM|PM) - (\d?\d:\d\d)(AM|PM)/;
-  const re2 = /((?:M|T|W|R|F|S|U)+) (\d?\d:\d\d)(AM|PM) - (\d?\d:\d\d)(AM|PM)/;
+  const re2 = /((?:M|T|W|R|F|S|U)+) (\d?\d:\d\d)((?:AM|PM)?) - (\d?\d:\d\d)((?:AM|PM)?)/;
   const matches = timeString.match(re) || timeString.match(re2);
   if (!matches || matches.length !== 6) {
     return timeString;
   }
   const [days, startTime, startAM, endTime, endAM] = matches.slice(1);
-  const start = timeToInt(startTime, startAM === 'AM');
-  const end = timeToInt(endTime, endAM === 'AM');
+  const start = timeToInt(startTime, startAM !== 'PM');
+  const end = timeToInt(endTime, endAM !== 'PM');
   let normalizedDays = days;
   if (timeString.match(re2)) {
     normalizedDays = days.replace('M', 'Mo')
@@ -80,10 +80,13 @@ export class Time {
   }
 
   get daysArray() {
-    return this.days.match(/\w\w/g);
+    return this.days && this.days.match(/\w\w/g) || [];
   }
 
   toString() {
+    if (!this.days || !this.start || !this.end) {
+      return '';
+    }
     const formattedTime = prettyTime(this.start, this.end);
     return `${this.days} ${formattedTime}`;
   }

@@ -32,7 +32,7 @@ function combineTime(days, start, end) {
   if (!days || !start || !end) {
     return '';
   }
-  return `${days} ${start}-${end}`;
+  return `${days} ${start} - ${end}`;
 }
 
 export function shortenRoom(room) {
