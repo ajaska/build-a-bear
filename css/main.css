@@ -1,19 +1,19 @@
 @font-face {
   font-family: 'Calibre-Regular';
-  src: url("../fonts/Calibre-Regular.woff"); }
+  src: url("//bear.plus/fonts/Calibre-Regular.woff"); }
 
 @font-face {
   font-family: 'Calibre-Semibold';
-  src: url("../fonts/Calibre-Semibold.woff"); }
+  src: url("//bear.plus/fonts/Calibre-Semibold.woff"); }
 
 @font-face {
   font-family: 'Calibre-Bold';
-  src: url("../fonts/Calibre-Bold.woff"); }
+  src: url("//bear.plus/fonts/Calibre-Bold.woff"); }
 
 @font-face {
   font-family: 'Icons';
-  src: url("../fonts/icons.eot");
-  src: url("../fonts/icons.eot?#iefix") format("embedded-opentype"), url("../fonts/icons.woff") format("woff"), url("../fonts/icons.ttf") format("truetype"), url("../fonts/icons.svg#icons") format("svg");
+  src: url("//bear.plus/fonts/icons.eot");
+  src: url("//bear.plus/fonts/icons.eot?#iefix") format("embedded-opentype"), url("//bear.plus/fonts/icons.woff") format("woff"), url("//bear.plus/fonts/icons.ttf") format("truetype"), url("//bear.plus/fonts/icons.svg#icons") format("svg");
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -5923,13 +5923,6 @@ i.icon.fa:before {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
-<<<<<<< HEAD:dist/css/main.css
-.courses-table-entry .class-drop a {
-  text-decoration: none; }
-
-.courses-table-entry td {
-  border-bottom: 1px solid #EEEEEE; }
-=======
 @keyframes flyInUp {
   0% {
     opacity: 0;
@@ -5948,7 +5941,6 @@ i.icon.fa:before {
   100% {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
->>>>>>> Restructure css files, simplified main.scss:css/main.css
 
 @-webkit-keyframes flyInDown {
   0% {
