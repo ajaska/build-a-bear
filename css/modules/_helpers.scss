@@ -1,3 +1,5 @@
+// These should be used more frequently than they actually are :(
+
 .outline-blue {
   border: 2px solid $primary-blue !important;
   border-radius: 0.25rem;
@@ -5,6 +7,10 @@
 
 .color-blue {
   color: $primary-blue;
+}
+
+.color-red {
+  color: $primary-red;
 }
 
 .semibold {

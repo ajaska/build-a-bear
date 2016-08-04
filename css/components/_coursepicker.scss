@@ -1,94 +1,3 @@
-.Select {
-  height: 100% !important;
-}
-
-.Select.is-disabled {
-  border: 2px solid $disabled-background !important;
-  border-radius: 0.25rem !important;
-
-  .Select-control {
-    background-color: $disabled-background !important;
-  }
-
-  .Select-placeholder {
-    color: $disabled-text !important;
-  }
-
-  .Select-arrow {
-    border-color: $disabled-text transparent transparent !important;
-  }
-}
-
-.Select-control {
-  border-radius: 0rem !important;
-  font-size: 13px !important;
-  margin: 0rem !important;
-  padding: 0rem !important;
-  border: 0rem !important;
-  height: 100% !important;
-}
-
-.Select-placeholder {
-  height: 13px !important;
-  line-height: 13px !important;
-  padding-top: 0.4rem !important;
-  padding-left: 0.3rem !important;
-  color: black !important;
-  overflow: visible !important;
-}
-
-.Select-input {
-  height: 13px !important;
-  padding-left: 0.3rem !important;
-  padding-top: 0.15rem !important;
-}
-
-.Select-input > input {
-  padding: 0.45rem 0rem 0rem 0rem !important;
-  height: 13px !important;
-  box-sizing: border-box !important;
-  width: 80% !important;
-  max-width: 100% !important;
-}
-
-span.Select-arrow-zone {
-  padding: 0.45rem 0rem 0rem 0rem !important;
-}
-
-.Select-arrow {
-  border-color: $primary-blue transparent transparent !important;
-}
-
-.Select-value, .Select-value-label {
-  line-height: 13px !important;
-}
-
-.Select-value {
-  padding-top: 0.5rem !important;
-  padding-left: 0.3rem !important;
-}
-
-.Select-option, .Select-noresults {
-  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
-  margin: 0rem !important;
-  font-size: 13px !important;
-}
-
-.Select-clear {
-  height: 5px !important;
-  padding-top: 0.2rem !important;
-}
-
-.error-dialog {
-  width: auto;
-  margin-bottom: 2rem;
-}
-
-.error-dialog-icon .icon {
-  color: $primary-red;
-  font-size: 50px !important;
-}
-
 .error-dialog-icon {
   position: absolute;
   text-align: center;
@@ -121,16 +30,11 @@ span.Select-arrow-zone {
 }
 
 .add-class-error-msg {
-  display:inline-block;
   float: right;
   font-size: 0.8rem;
   line-height: 0.75rem;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-bottom: 0.35rem;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.5rem 0.35rem 0.5rem;
+  margin: 0.5rem 0rem;
   border-radius: 0.25rem;
   background-color: $primary-red;
   color: white;
@@ -140,8 +44,8 @@ span.Select-arrow-zone {
   display: inline-block;
   float: left;
   width: 5%;
-  padding-top: 4%;
-  padding-left: 4%;
+  padding-top: 2.5%;
+  padding-left: 2.5%;
   text-align: center;
 }
 
@@ -150,7 +54,7 @@ span.Select-arrow-zone {
   float: right;
   width: 82%;
   font-size: 0.9rem;
-  padding: 4%;
+  padding: 2.5%;
 }
 
 .add-class-warning-msg {
@@ -244,5 +148,95 @@ span.Select-arrow-zone {
 .add-class-submit-button {
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem;
+}
 
+// The searchable dropdowns are imported from an open-source project,
+// !important tags to override CSS properties, some might not be necessary.
+
+.Select {
+  height: 100% !important;
+}
+
+.Select.is-disabled {
+  border: 2px solid $disabled-background !important;
+  border-radius: 0.25rem !important;
+  .Select-control {
+    background-color: $disabled-background !important;
+  }
+  .Select-placeholder {
+    color: $disabled-text !important;
+  }
+  .Select-arrow {
+    border-color: $disabled-text transparent transparent !important;
+  }
+}
+
+.Select-control {
+  border-radius: 0rem !important;
+  font-size: 13px !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
+  border: 0rem !important;
+  height: 100% !important;
+}
+
+.Select-placeholder {
+  height: 13px !important;
+  line-height: 13px !important;
+  padding-top: 0.4rem !important;
+  padding-left: 0.3rem !important;
+  color: black !important;
+  overflow: visible !important;
+}
+
+.Select-input {
+  height: 13px !important;
+  padding-left: 0.3rem !important;
+  padding-top: 0.15rem !important;
+}
+
+.Select-input > input {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+  height: 13px !important;
+  box-sizing: border-box !important;
+  width: 80% !important;
+  max-width: 100% !important;
+}
+
+span.Select-arrow-zone {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+}
+
+.Select-arrow {
+  border-color: $primary-blue transparent transparent !important;
+}
+
+.Select-value, .Select-value-label {
+  line-height: 13px !important;
+}
+
+.Select-value {
+  padding-top: 0.5rem !important;
+  padding-left: 0.3rem !important;
+}
+
+.Select-option, .Select-noresults {
+  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
+  margin: 0rem !important;
+  font-size: 13px !important;
+}
+
+.Select-clear {
+  height: 5px !important;
+  padding-top: 0.2rem !important;
+}
+
+.error-dialog {
+  width: auto;
+  margin-bottom: 2rem;
+}
+
+.error-dialog-icon .icon {
+  color: $primary-red;
+  font-size: 50px !important;
 }

@@ -15,11 +15,12 @@ $root-url: rootURL();
 @import 'components/phase2signup';
 @import 'components/shoppingcart';
 @import 'components/unitsummary';
+@import 'components/footer';
 
 @import 'layouts/grid';
 @import 'layouts/header';
 @import 'layouts/loading';
-@import 'layouts/responsive';
+@import 'layouts/table';
 
 @import 'vendors/_dimmer.min.scss';
 @import 'vendors/_dropdown.min.scss';

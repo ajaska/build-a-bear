@@ -1,0 +1,36 @@
+.footer {
+  visibility: hidden;
+}
+
+@media (max-width: $small-break) {
+  .courses-table-enroll {
+    margin-bottom: 4rem;
+  }
+}
+
+@media (max-width: $medium-break) {
+  .footer {
+    visibility: visible;
+    background-color: $primary-gray;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 10;
+    padding: 1rem;
+    margin-top: 3rem;
+  }
+
+  .cal-enroll {
+    margin-bottom: 3.5rem;
+  }
+
+  .footer button {
+    float: right;
+    margin-right: 2rem;
+  }
+
+  .footer div > span {
+    float: left;
+  }
+}

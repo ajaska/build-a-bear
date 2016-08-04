@@ -5,9 +5,11 @@ import CoursePicker from '../containers/CoursePicker';
 import UnitSummary from '../containers/UnitSummary';
 import AddCourseModal from '../containers/AddCourseModal';
 import Calendar from '../containers/Calendar';
+import Footer from '../containers/Footer';
 
 function App() {
   return (
+  <div>
     <div>
       <AddCourseModal />
       <div className="main-data-container">
@@ -20,6 +22,8 @@ function App() {
         <ShoppingCart />
       </div>
     </div>
+    <Footer />
+  </div>
   );
 }
 

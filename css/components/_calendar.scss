@@ -1,8 +1,5 @@
 .cal-enroll {
-  width: 100%;
-  border-radius: 5rem;
   border-spacing: 0rem;
-  margin-bottom: 3rem;
 }
 
 .cal-header-row {
@@ -13,7 +10,7 @@
 
 .cal-body {
   position: relative;
-  height: 250px;
+  min-height: 250px;
   text-transform: uppercase;
 }
 
@@ -58,31 +55,30 @@
 
 .lecture-entry {
   width: calc(18%);
-  text-align: left;
   position: absolute;
 }
 
 .other-entry {
   width: calc(18%);
-  text-align: left;
   position: absolute;
 }
 
 .lecture-entry-header {
   background-color: $primary-blue;
+  color: white;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
   border-top-right-radius: 0.25rem;
   border-top-left-radius: 0.25rem;
-  color: white;
+
 }
 
 .lecture-entry-body {
+  background-color: white;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
-  background-color: white;
   border-left: 1px solid $primary-gray;
   border-right: 1px solid $primary-gray;
 }
@@ -95,11 +91,11 @@
 }
 
 .other-entry-body {
+  background-color: $primary-blue;
+  color: white;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
-  background-color: $primary-blue;
-  color: white;
   border-radius: 0.25rem;
 }
 
