@@ -99,7 +99,7 @@ function sectionsFromLecture({ ccn, state }) {
     return { alreadyInCart: false, availability: false };
   }
   const availability = matchingCourses[0].lecture.availability;
-  return { availability, alreadyInCart: [ matchingCourses[0].sections ] };
+  return { availability, alreadyInCart: [matchingCourses[0].sections] };
 }
 
 function docFromBody(body) {

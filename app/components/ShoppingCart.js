@@ -27,7 +27,7 @@ class ShoppingCart extends React.Component {
         </span>
         <div className="sc-course-info clearfix">
           <div className="sc-course-info-left">
-            <span className="semibold">{course.room}</span><br /><span>{course.time}</span><br />
+            <span className="semibold">{course.room}</span><br /><span>{course.time.toString()}</span><br />
             <span>Instructor: </span><span className="semibold">{course.instructor}</span>
           </div>
           <div className="sc-course-info-right">

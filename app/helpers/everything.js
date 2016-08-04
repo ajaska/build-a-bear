@@ -28,7 +28,7 @@ export function allDepts() {
   return Object.keys(depts);
 }
 
-function formatTime(days, start, end) {
+function combineTime(days, start, end) {
   if (!days || !start || !end) {
     return '';
   }
@@ -57,7 +57,7 @@ export function lectureSectionFromCCN(ccn) {
     desc: data[4],
     units: data[5],
     room: data[6],
-    time: formatTime(data[7], data[8], data[9]),
+    time: combineTime(data[7], data[8], data[9]),
     instructor: data[10],
   });
 }

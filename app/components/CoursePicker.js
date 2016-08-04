@@ -85,7 +85,7 @@ class CoursePicker extends React.Component {
     };
     const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => ({
       value: i.toString(),
-      label: `${section.ccn} | ${section.time} | ${section.room} | ${section.instructor} | ${section.availability}`,
+      label: `${section.ccn} | ${section.time.toString()} | ${section.room} | ${section.instructor} | ${section.availability}`,
     })));
     let resetValue = { value: '' };
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (

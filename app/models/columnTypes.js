@@ -1,5 +1,3 @@
-import { shortenRoom } from '../helpers/everything';
-
 class Column {
   constructor() {
     if (this.parse === undefined) {
@@ -22,6 +20,7 @@ export const Instructor = simpleColumn('instructor');
 export const Units = simpleColumn('units');
 export const ClassNbr = simpleColumn('ccn');
 export const Section = simpleColumn('section');
+export const Room = simpleColumn('room');
 
 export class Selectable extends Column {
   parse(td) {
@@ -37,13 +36,6 @@ export class Class extends Column {
     const re = /([\w]+)\W+([\d\w]+)-([\d\w]+)\W*\((\d+)\)/;
     const [, dept, deptNumber, section, ccn] = text.match(re);
     return { selectable, dept, deptNumber, section, ccn };
-  }
-}
-
-export class Room extends Column {
-  parse(td) {
-    const text = td.innerText.trim();
-    return { room: shortenRoom(text) }
   }
 }
 

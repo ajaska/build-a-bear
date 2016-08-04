@@ -39,7 +39,7 @@ class AddCourseModal extends React.Component {
         <div className="modal-course-info">
           <div className="modal-course-info">
             <span>
-              <span className="semibold">{ section.room }</span> | { section.time }<br />
+              <span className="semibold">{ section.room }</span> | { section.time.toString() }<br />
               Instructor: <span className="semibold">{ section.instructor }</span><br />
             </span>
           </div>
@@ -84,7 +84,7 @@ class AddCourseModal extends React.Component {
               <div className="modal-course-info">
                 <span>
                   <span className="semibold color-blue">{ lecture.courseName }</span><br />
-                  <span className="semibold">{ lecture.room }</span> | { lecture.time }<br />
+                  <span className="semibold">{ lecture.room }</span> | { lecture.time.toString() }<br />
                   Instructor: <span className="semibold">{ lecture.instructor }</span><br />
                   Grading Option: <span className="semibold">{ gradingOption }</span><br />
                   Course Entry Code: <span className="semibold">{ this.props.cec }</span><br />
@@ -124,7 +124,7 @@ AddCourseModal.propTypes = {
     desc: React.PropTypes.string.isRequired,
     units: React.PropTypes.string.isRequired,
     room: React.PropTypes.string.isRequired,
-    time: React.PropTypes.string.isRequired,
+    time: React.PropTypes.object.isRequired,
     instructor: React.PropTypes.string.isRequired,
   }),
   lectureAvailability: React.PropTypes.string,
@@ -132,7 +132,7 @@ AddCourseModal.propTypes = {
     React.PropTypes.shape({
       ccn: React.PropTypes.string.isRequired,
       section: React.PropTypes.string.isRequired,
-      time: React.PropTypes.string.isRequired,
+      time: React.PropTypes.object.isRequired,
       room: React.PropTypes.string.isRequired,
       instructor: React.PropTypes.string.isRequired,
       availability: React.PropTypes.string.isRequired,

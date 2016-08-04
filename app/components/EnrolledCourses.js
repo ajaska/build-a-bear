@@ -1,15 +1,14 @@
 import React from 'react';
-import { flatten } from '../helpers/flatten';
 
 function joinWithBr(arr, property) {
   const items = [];
   if (arr.length === 0) {
     return items;
   }
-  items.push(<span key={0}>{arr[0][property]}</span>);
+  items.push(<span key={0}>{`${arr[0][property] || ''}`}</span>);
   for (let i = 1; i < arr.length; ++i) {
     items.push(<br key={2 * i} />);
-    items.push(<span key={2 * i + 1}>{arr[i][property]}</span>);
+    items.push(<span key={2 * i + 1}>{`${arr[i][property] || ''}`}</span>);
   }
   return items;
 }

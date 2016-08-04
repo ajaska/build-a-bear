@@ -1,3 +1,6 @@
+import { Time } from './time';
+import { shortenRoom } from '../helpers/everything';
+
 class Base {
   constructor(params = {}) {
     this.ccn = params.ccn;
@@ -6,15 +9,15 @@ class Base {
     this.section = params.section;
     this.type = params.type;
     this.desc = params.desc;
-    this.room = params.room;
-    this.time = params.time;
+    this.room = shortenRoom(params.room);
+    this.time = new Time(params.time);
     this.instructor = params.instructor;
     this.enrollmentStatus = params.enrollmentStatus;
     this.availability = params.availability;
   }
 
   get courseName() {
-    return `${this.dept} ${this.deptNumber}-${this.section}`
+    return `${this.dept} ${this.deptNumber}-${this.section}`;
   }
 }
 
