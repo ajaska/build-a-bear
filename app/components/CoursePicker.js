@@ -85,7 +85,7 @@ class CoursePicker extends React.Component {
     };
     const sectionsForSectionGroup = (sectionGroup) => (sectionGroup.map((section, i) => ({
       value: i.toString(),
-      label: `${section.id} | ${section.time} | ${section.room} | ${section.instructor} | ${section.availability}`,
+      label: `${section.ccn} | ${section.time} | ${section.room} | ${section.instructor} | ${section.availability}`,
     })));
     let resetValue = { value: '' };
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
@@ -168,7 +168,7 @@ class CoursePicker extends React.Component {
           </div>
           <div className="add-class-form-row">
             <select className="add-class-class-name" value="" disabled>
-              <option value="" disabled>{this.props.courseName || 'Class Name'}</option>
+              <option value="" disabled>{this.props.desc || 'Class Name'}</option>
             </select>
             <div className="add-class-waitlist-status">
               Status: <span className="color-blue">{lectureAvailability}</span>
@@ -235,7 +235,7 @@ CoursePicker.propTypes = {
   deptNumber: React.PropTypes.string.isRequired,
   deptOptions: React.PropTypes.array.isRequired,
   deptNumbers: React.PropTypes.array.isRequired,
-  courseName: React.PropTypes.string.isRequired,
+  desc: React.PropTypes.string.isRequired,
   error: React.PropTypes.string.isRequired,
   warning: React.PropTypes.string,
   lectureSection: React.PropTypes.string.isRequired,

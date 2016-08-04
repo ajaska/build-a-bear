@@ -121,7 +121,7 @@ AddCourseModal.propTypes = {
     dept: React.PropTypes.string.isRequired,
     deptNumber: React.PropTypes.string.isRequired,
     section: React.PropTypes.string.isRequired,
-    courseName: React.PropTypes.string.isRequired,
+    desc: React.PropTypes.string.isRequired,
     units: React.PropTypes.string.isRequired,
     room: React.PropTypes.string.isRequired,
     time: React.PropTypes.string.isRequired,
@@ -130,7 +130,7 @@ AddCourseModal.propTypes = {
   lectureAvailability: React.PropTypes.string,
   sections: React.PropTypes.arrayOf(
     React.PropTypes.shape({
-      id: React.PropTypes.string.isRequired,
+      ccn: React.PropTypes.string.isRequired,
       section: React.PropTypes.string.isRequired,
       time: React.PropTypes.string.isRequired,
       room: React.PropTypes.string.isRequired,

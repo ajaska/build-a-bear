@@ -1,4 +1,5 @@
 import React from 'react';
+import { flatten } from '../helpers/flatten';
 
 function joinWithBr(arr, property) {
   const items = [];
@@ -15,22 +16,24 @@ function joinWithBr(arr, property) {
 
 function EnrolledCourses({ courses }) {
   const sc = courses;
-  const ec = Object.keys(sc).filter(course => sc[course][0].enrollment_status === 'Enrolled');
-  const wc = Object.keys(sc).filter(course => sc[course][0].enrollment_status === 'Wait Listed');
-  const genTable = (keys) => keys.map((key, i) => (
+  const ec = sc.filter(course => course.lecture.enrollmentStatus === 'Enrolled')
+               .map(course => course.flatten());
+  const wc = sc.filter(course => course.lecture.enrollmentStatus === 'Wait Listed')
+               .map(course => course.flatten());
+  const genTable = (courseGroups) => courseGroups.map((courseGroup, i) => (
     <tr className="courses-table-entry" key={i}>
       <td className="class-drop">
         <a target="_blank" href="https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES.SSR_SSENRL_DROP.GBL?ucFrom=CalCentral&ucFromLink=https://bear.plus&ucFromText=Class%20Enrollment">
           <i id="drop-class" className="courses-drop-course remove icon"></i>
         </a>
       </td>
-      <td>{joinWithBr(sc[key], 'course')}</td>
-      <td>{joinWithBr(sc[key], 'type')}</td>
-      <td>{joinWithBr(sc[key], 'time')}</td>
-      <td>{joinWithBr(sc[key], 'room')}</td>
-      <td>{joinWithBr(sc[key], 'instructor')}</td>
-      <td>{joinWithBr(sc[key], 'units')}</td>
-      <td>{joinWithBr(sc[key], 'id')}</td>
+      <td>{joinWithBr(courseGroup, 'courseName')}</td>
+      <td>{joinWithBr(courseGroup, 'type')}</td>
+      <td>{joinWithBr(courseGroup, 'time')}</td>
+      <td>{joinWithBr(courseGroup, 'room')}</td>
+      <td>{joinWithBr(courseGroup, 'instructor')}</td>
+      <td>{joinWithBr(courseGroup, 'units')}</td>
+      <td>{joinWithBr(courseGroup, 'ccn')}</td>
     </tr>
   ));
   const enrolled = genTable(ec);
@@ -69,7 +72,12 @@ function EnrolledCourses({ courses }) {
 }
 
 EnrolledCourses.propTypes = {
-  courses: React.PropTypes.object.isRequired,
+  courses: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      lecture: React.PropTypes.object.isRequired,
+      sections: React.PropTypes.array.isRequired,
+    })
+   ).isRequired,
 };
 
 export default EnrolledCourses;

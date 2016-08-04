@@ -4,9 +4,8 @@ import { clickedAdd } from '../actions/coursePicker';
 
 const mapStateToProps = (state) => {
   const courses = state.enrolled.toJS().courses;
-  const units = courses.reduce((prev, course) => (
-    course.units ? prev + (1 * course.units) : prev)
-  , 0.0);
+  const units = courses.map(course => (course.lecture))
+                       .reduce((prev, course) => (prev + (1 * course.units)), 0.0);
 
   const coursePicker = state.coursePicker.toJS();
   const lecture = coursePicker.lectureSections[coursePicker.lectureSection];

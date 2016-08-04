@@ -3,24 +3,16 @@ import UnitSummary from '../components/UnitSummary';
 
 const mapStateToProps = (state) => {
   const courses = state.enrolled.toJS().courses;
-  const groupedCourses = {};
-  for (let i = 0; i < courses.length; i++) {
-    const deptNumber = courses[i].course.split('-')[0];
-    groupedCourses[deptNumber] = groupedCourses[deptNumber] || [];
-    groupedCourses[deptNumber].push(courses[i]);
-  }
 
-  let ec = Object.keys(groupedCourses)
-    .map(key => groupedCourses[key])
-    .filter(course => course[0].enrollment_status === 'Enrolled')
-    .map(course => course[0].units)
-    .reduce((prev, units) => prev + (1 * units), 0.0);
+  let ec = courses.map(course => course.lecture)
+                  .filter(lecture => lecture.enrollmentStatus === 'Enrolled')
+                  .map(lecture => lecture.units)
+                  .reduce((prev, units) => prev + (1 * units), 0.0);
 
-  let wc = Object.keys(groupedCourses)
-    .map(key => groupedCourses[key])
-    .filter(course => course[0].enrollment_status === 'Wait Listed')
-    .map(course => course[0].units)
-    .reduce((prev, units) => prev + (1 * units), 0.0);
+  let wc = courses.map(course => course.lecture)
+                  .filter(lecture => lecture.enrollmentStatus === 'Wait Listed')
+                  .map(lecture => lecture.units)
+                  .reduce((prev, units) => prev + (1 * units), 0.0);
 
   ec = ec || 0;
   wc = wc || 0;

@@ -2,6 +2,7 @@ import ccnIndexed from '../data/ccn_indexed.json';
 import depts from '../data/depts.json';
 import deptIndexed from '../data/dept_indexed.json';
 
+import { Lecture } from '../models/models';
 
 export function isValidCCN(ccn) {
   return ccnIndexed.hasOwnProperty(ccn);
@@ -27,24 +28,6 @@ export function allDepts() {
   return Object.keys(depts);
 }
 
-export class LectureSection {
-  constructor(ccn, dept, deptNumber, section, courseName, units, room, time, instructor) {
-    this.ccn = ccn.toString();  // 26397
-    this.dept = dept; // BIOENG
-    this.deptNumber = deptNumber; // 100
-    this.courseName = courseName;
-    this.units = units;
-    this.section = section; // 001
-    this.room = room; // Stanley 106
-    this.time = time; // TuTh 12:30PM - 1:59PM
-    this.instructor = instructor; // H. Lam
-  }
-
-  toString() {
-    return `LEC ${this.section} - ${this.room} - ${this.time} - ${this.instructor}`;
-  }
-}
-
 function formatTime(days, start, end) {
   if (!days || !start || !end) {
     return '';
@@ -65,17 +48,18 @@ export function shortenRoom(room) {
 
 export function lectureSectionFromCCN(ccn) {
   const data = ccnIndexed[ccn];
-  return new LectureSection(
-    ccn.toString(),
-    data[0], // dept
-    data[1], // deptNumber
-    data[2], // section
-    data[4], // courseName
-    data[5], // units
-    shortenRoom(data[6]), // room
-    formatTime(data[7], data[8], data[9]),
-    data[10] // instructor
-  );
+  return new Lecture({
+    ccn: ccn.toString(),
+    dept: data[0],
+    deptNumber: data[1],
+    section: data[2],
+    type: data[3],
+    desc: data[4],
+    units: data[5],
+    room: data[6],
+    time: formatTime(data[7], data[8], data[9]),
+    instructor: data[10],
+  });
 }
 
 export function lectureSectionsFromDept(dept, deptNumber) {

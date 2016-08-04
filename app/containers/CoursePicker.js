@@ -9,7 +9,7 @@ import { allDepts, deptNumbersForDept } from '../helpers/everything';
 function ccnInCart(state) {
   const courses = state.shoppingCart.toJS().courses;
   const ccn = state.coursePicker.toJS().ccn;
-  return courses.filter(course => course.id === ccn).length > 0;
+  return courses.filter(course => course.lecture.ccn === ccn).length > 0;
 }
 
 function checkWarning(state, lectureSection) {
@@ -19,10 +19,8 @@ function checkWarning(state, lectureSection) {
   }
 
   const courses = state.enrolled.toJS().courses;
-  const unitCount = courses
-    .filter(course => course.units > 0)
-    .map(course => course.units)
-    .reduce((prev, units) => prev + (1 * units), 0.0);
+  const unitCount = courses.map(course => course.lecture.units)
+                           .reduce((prev, units) => prev + (1 * units), 0.0);
   if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 16)) {
     return 'Adding this course would put you over the 16 unit cap.';
   }
@@ -32,9 +30,9 @@ function checkWarning(state, lectureSection) {
 const mapStateToProps = (state) => {
   const cpState = state.coursePicker.toJS();
   const lectureSection = cpState.lectureSections[cpState.lectureSection];
-  let courseName = '';
+  let desc = '';
   if (lectureSection) {
-    courseName = lectureSection.courseName;
+    desc = lectureSection.desc;
   }
 
   const warning = checkWarning(state, lectureSection);
@@ -45,7 +43,7 @@ const mapStateToProps = (state) => {
       ccnInCart: ccnInCart(state),
       deptOptions: allDepts().sort(),
       deptNumbers: deptNumbersForDept(cpState.dept),
-      courseName,
+      desc,
       warning,
     }
   );

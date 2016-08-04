@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Calendar from '../components/Calendar';
+import { flatten } from '../helpers/flatten';
 
 function timeToInt(time, am) {
   let timeInt = parseInt(time.replace(':', ''), 10);
@@ -80,14 +81,15 @@ function parseTime(timeString) {
 }
 
 const mapStateToProps = (state) => {
-  const courses = state.enrolled.toJS().courses;
+  const courses = flatten(state.enrolled.toJS().courses
+                          .map(course => course.flatten()));
   let normalizedCourses = [];
   for (let i = 0; i < courses.length; i++) {
     const times = parseTime(courses[i].time);
-    const waitlisted = courses[i].enrollment_status === 'Wait Listed';
+    const waitlisted = courses[i].enrollmentStatus === 'Wait Listed';
     const lecture = courses[i].type === 'Lecture';
     normalizedCourses = normalizedCourses.concat(times.map(time => ({
-      desc: courses[i].course,
+      desc: courses[i].courseName,
       room: courses[i].room,
       day: time.day,
       start: time.start,

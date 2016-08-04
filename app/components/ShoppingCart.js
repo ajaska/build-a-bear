@@ -20,9 +20,9 @@ class ShoppingCart extends React.Component {
       return null;
     }
 
-    const courseRows = this.props.courses.filter(course => course.selectable).map((course, i) => (
+    const courseRows = this.props.courses.map(course => course.lecture).map((course, i) => (
       <div className="sc-class-item" key={i}>
-        <span className="sc-course-info-name semibold">{course.course}
+        <span className="sc-course-info-name semibold">{course.courseName}
           <span className="color-blue">&nbsp;({course.units} Units)</span>
         </span>
         <div className="sc-course-info clearfix">
@@ -33,14 +33,14 @@ class ShoppingCart extends React.Component {
           <div className="sc-course-info-right">
             <button
               className="sc-course-delete"
-              onClick={() => this.onDropClick({ ccn: course.id })}
+              onClick={() => this.onDropClick({ ccn: course.ccn })}
               disabled={this.props.disabled}
             >
               Delete
             </button>
             <button
               className="sc-course-add"
-              onClick={() => this.onAddClick(course.id)}
+              onClick={() => this.onAddClick(course.ccn)}
               disabled={this.props.disabled}
             >
               Add

@@ -1,5 +1,6 @@
 import { postFormData } from '../lib/forms';
 import { pages, parseResponse } from '../lib/responseParser';
+import { flatten } from '../helpers/flatten';
 
 
 export const REQUEST_COURSE_ADD = Symbol('REQUEST_COURSE_ADD');
@@ -92,17 +93,13 @@ const CART_URL = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_L
 const ADD_URL = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_ADD.GBL';
 
 function sectionsFromLecture({ ccn, state }) {
-  const sections = state.shoppingCart.toJS().courses;
-  const matchingSections = sections.filter(section => section.id === ccn);
-  if (!(matchingSections.length === 1)) {
+  const courses = state.shoppingCart.toJS().courses;
+  const matchingCourses = courses.filter(course => course.lecture.ccn === ccn);
+  if (!(matchingCourses.length === 1)) {
     return { alreadyInCart: false, availability: false };
   }
-  const availability = matchingSections[0].availability;
-  const courseDesc = matchingSections[0].course.split('-')[0];
-  const alreadyInCart = sections.filter(section => (
-    section.course.split('-')[0] === courseDesc && (!section.selectable)
-  )).map(section => [section]);
-  return { availability, alreadyInCart };
+  const availability = matchingCourses[0].lecture.availability;
+  return { availability, alreadyInCart: [ matchingCourses[0].sections ] };
 }
 
 function docFromBody(body) {
@@ -306,16 +303,17 @@ export function addCourse({ ccn, selections, gradingOption, cec }) {
     let addedToShoppingCart;
     const formData = getState().api.formData;
     const shoppingCartCourses = getState().shoppingCart.toJS().courses;
-    if (shoppingCartCourses.filter(course => course.id === ccn).length === 1) {
+    if (shoppingCartCourses.filter(course => course.lecture.ccn === ccn).length === 1) {
       addedToShoppingCart = Promise.resolve({ formData, shoppingCartCourses });
     } else {
       addedToShoppingCart = addToShoppingCart({ ccn, selections, formData, gradingOption, cec });
     }
     return addedToShoppingCart.then(({ formData, shoppingCartCourses }) => {
       const courses = shoppingCartCourses;
-      const selectableCourses = courses.filter(course => course.selectable);
-      const positions = selectableCourses.map(course => courses.indexOf(course));
-      const courseToAddPos = courses.map(course => course.id).indexOf(ccn);
+      const selectableCourses = courses.map(course => course.lecture);
+      const flattened = flatten(courses.map(course => course.flatten()));
+      const positions = selectableCourses.map(course => flattened.indexOf(course));
+      const courseToAddPos = flattened.map(course => course.ccn).indexOf(ccn);
 
       return addFromShoppingCart({
         formData,
@@ -351,9 +349,10 @@ export function dropCartCourse({ ccn }) {
     dispatch(requestCartDrop({ ccn }));
     const formData = getState().api.formData;
     const courses = getState().shoppingCart.toJS().courses;
-    const selectableCourses = courses.filter(course => course.selectable);
-    const positions = selectableCourses.map(course => courses.indexOf(course));
-    const positionToDrop = courses.map(course => course.id).indexOf(ccn);
+    const selectableCourses = courses.map(course => course.lecture);
+    const flattened = flatten(courses.map(course => course.flatten()));
+    const positions = selectableCourses.map(course => flattened.indexOf(course));
+    const positionToDrop = flattened.map(course => course.ccn).indexOf(ccn);
     return dropFromShoppingCart({ formData, positions, positionToDrop })
       .then(({ formData, enrolledCourses, shoppingCartCourses }) => {
         dispatch(setFormData({ formData }));
