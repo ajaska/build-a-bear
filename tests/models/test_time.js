@@ -29,5 +29,11 @@ describe('Time', function() {
     it('Can handle multiple days', function() {
       assert.equal(new Time('MWF 9:00 - 9:59').toString(), 'MoWeFr 9-10 AM');
     });
+
+    it('Only uses the first time present', function() {
+      assert.equal(new Time('Th 8:59AM - 11:59AM\n' +
+                            'Th 6:00PM - 9:00PM\n' +
+                            'We 7:00PM - 11:00PM').toString(), 'Th 9 AM - 12 PM');
+    });
   });;
 });
