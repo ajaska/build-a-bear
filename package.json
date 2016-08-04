@@ -6,7 +6,8 @@
     "build-css": "node-sass --functions css/funcs.js css/main.scss css/main.css",
     "watch": "rollup -c -w",
     "watch-css": "node-sass --watch --functions css/funcs.js css/main.scss css/main.css",
-    "lint": "eslint index.js app; exit 0"
+    "lint": "eslint index.js app; exit 0",
+    "test": "mocha --recursive --compilers js:babel-register tests/; exit 0"
   },
   "dependencies": {
     "es6-promise": "^3.2.1",
@@ -26,11 +27,13 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-es2015-rollup": "^1.1.1",
     "babel-preset-react": "^6.11.1",
+    "babel-register": "^6.11.6",
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.12.0",
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
+    "mocha": "^3.0.0",
     "node-sass": "^3.8.0",
     "redux-devtools": "^3.3.1",
     "rollup": "^0.34.1",
@@ -40,7 +43,8 @@
     "rollup-plugin-json": "^2.0.1",
     "rollup-plugin-node-resolve": "^1.7.1",
     "rollup-plugin-replace": "^1.1.1",
-    "rollup-plugin-uglify": "^1.0.1"
+    "rollup-plugin-uglify": "^1.0.1",
+    "xmldom": "^0.1.22"
   },
   "license": "BSD-2-Clause"
 }
