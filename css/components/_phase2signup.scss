@@ -1,0 +1,28 @@
+.phase2-signup-panel {
+  background-color: $primary-gray;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.phase2-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem;
+}
+
+.phase2-header-text {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+.phase2-date, .phase2-time {
+  color: $primary-blue;
+}
+
+.phase2-add-calendar-alert {
+  padding: 0.8rem 1.8rem;
+  font-size: 0.8rem;
+
+}

@@ -1,0 +1,105 @@
+.courses-table-enroll th {
+  font-weight: normal;
+  min-width: 1rem;
+}
+
+.courses-table-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem;
+  margin-bottom: 2rem;
+}
+
+.courses-table-header-row th {
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.8rem;
+  text-align: left;
+  background-color: $primary-blue;
+  color: white;
+}
+
+.courses-table-header-row th:nth-child(2) {
+  width: 25%;
+}
+
+.courses-table-header-row th:nth-child(3) {
+  width: 12%;
+}
+
+.courses-table-header-row th:nth-child(5) {
+  width: 12%;
+}
+
+.courses-table-waitlisted {
+  background-color: $primary-gray;
+  border-spacing: 0rem;
+}
+
+.courses-table-waitlisted > td > div {
+  padding: 0.5rem 0rem 0.3rem 0rem;
+}
+
+.courses-drop-course {
+  color: $primary-red;
+}
+
+.courses-table-waitlisted p {
+  padding-top: 0.3rem;
+}
+
+.courses-table-waitlisted td {
+  background-color: $primary-gray;
+}
+
+.courses-table-header-drop-class {
+  text-align: center;
+  width: 4rem;
+}
+
+.courses-table-entry {
+  text-align: left;
+  font-size: 1.1rem;
+  border: 1px solid black;
+}
+
+.courses-table-entry td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
+  line-height: 1.75rem;
+}
+
+.courses-table-entry .class-drop {
+  text-align: center;
+}
+
+.courses-table-entry .class-drop a {
+  text-decoration: none;
+}
+
+.courses-table-entry td {
+  border-bottom: 1px solid $primary-gray;
+}
+
+.courses-table-entry td:first-child {
+  border-left: 1px solid $primary-gray;
+  width: 50px;
+}
+
+.courses-table-entry td:last-child {
+  border-right: 1px solid $primary-gray;
+  width: 50px;
+}
+
+.courses-table-entry td:nth-child(2) {
+  font-family: $font-semibold;
+  text-transform: uppercase;
+}
+
+.discussion-swap {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.5rem;
+}

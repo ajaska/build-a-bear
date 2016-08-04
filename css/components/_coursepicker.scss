@@ -1,0 +1,248 @@
+.Select {
+  height: 100% !important;
+}
+
+.Select.is-disabled {
+  border: 2px solid $disabled-background !important;
+  border-radius: 0.25rem !important;
+
+  .Select-control {
+    background-color: $disabled-background !important;
+  }
+
+  .Select-placeholder {
+    color: $disabled-text !important;
+  }
+
+  .Select-arrow {
+    border-color: $disabled-text transparent transparent !important;
+  }
+}
+
+.Select-control {
+  border-radius: 0rem !important;
+  font-size: 13px !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
+  border: 0rem !important;
+  height: 100% !important;
+}
+
+.Select-placeholder {
+  height: 13px !important;
+  line-height: 13px !important;
+  padding-top: 0.4rem !important;
+  padding-left: 0.3rem !important;
+  color: black !important;
+  overflow: visible !important;
+}
+
+.Select-input {
+  height: 13px !important;
+  padding-left: 0.3rem !important;
+  padding-top: 0.15rem !important;
+}
+
+.Select-input > input {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+  height: 13px !important;
+  box-sizing: border-box !important;
+  width: 80% !important;
+  max-width: 100% !important;
+}
+
+span.Select-arrow-zone {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+}
+
+.Select-arrow {
+  border-color: $primary-blue transparent transparent !important;
+}
+
+.Select-value, .Select-value-label {
+  line-height: 13px !important;
+}
+
+.Select-value {
+  padding-top: 0.5rem !important;
+  padding-left: 0.3rem !important;
+}
+
+.Select-option, .Select-noresults {
+  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
+  margin: 0rem !important;
+  font-size: 13px !important;
+}
+
+.Select-clear {
+  height: 5px !important;
+  padding-top: 0.2rem !important;
+}
+
+.error-dialog {
+  width: auto;
+  margin-bottom: 2rem;
+}
+
+.error-dialog-icon .icon {
+  color: $primary-red;
+  font-size: 50px !important;
+}
+
+.error-dialog-icon {
+  position: absolute;
+  text-align: center;
+  display: inline-block;
+  width: 65px;
+  top: 38.5%;
+  left: 31.5%;
+}
+
+.error-dialog-msg {
+  display: inline-block;
+  width: 400px;
+}
+
+.add-class-panel {
+  background-color: $primary-gray;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.add-class-header {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  border-bottom: 0.2rem solid $primary-blue;
+  font-family: $font-semibold;
+  font-size: 1.2rem;
+  line-height: 0.9rem;
+}
+
+.add-class-error-msg {
+  display:inline-block;
+  float: right;
+  font-size: 0.8rem;
+  line-height: 0.75rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.35rem;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: $primary-red;
+  color: white;
+}
+
+.add-class-warning-msg-icon-wrapper {
+  display: inline-block;
+  float: left;
+  width: 5%;
+  padding-top: 4%;
+  padding-left: 4%;
+  text-align: center;
+}
+
+.add-class-warning-msg-text {
+  display: inline-block;
+  float: right;
+  width: 82%;
+  font-size: 0.9rem;
+  padding: 4%;
+}
+
+.add-class-warning-msg {
+  background-color: $primary-yellow;
+  height: 100% !important;
+  border-radius: 0.25rem;
+}
+
+.add-class-form {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.add-class-CCN {
+  float: left;
+  width: 15%;
+  padding-top: 0.2rem;
+  padding-bottom: 0.25rem;
+  display: inline-block;
+}
+
+.add-class-department {
+  width: 44% !important;
+  margin-left: 2%;
+  display: inline-block;
+}
+
+.add-class-course-number {
+  float: right;
+  width: 35% !important;
+  display: inline-block;
+}
+
+.add-class-lecture-section {
+  width: 100%;
+  float: left;
+}
+
+.add-class-lab-section {
+  width: 100%;
+  float: left;
+}
+
+.add-class-discussion-section {
+  width: 100%;
+  float: left;
+}
+
+.add-class-grade-option {
+  width: 48%;
+  float: left;
+}
+
+.add-class-CEC {
+  width: 48%;
+  float: right;
+}
+
+.add-class-form-row {
+  height: 1.5rem;
+  width: 100%;
+  margin-bottom: 0.2rem;
+}
+
+.add-class-class-name {
+  width: 60% !important;
+}
+
+.add-class-waitlist-status {
+  display: inline-block;
+  width: 37%;
+  margin-left: 2%;
+  font-size: 0.8rem;
+}
+
+.add-class-waitlist-row {
+  width: 100%;
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.add-class-waitlist {
+  font-size: 0.9rem;
+}
+
+.add-class-waitlist-button {
+  margin-left: 0.4rem;
+  margin-right: 1.2rem;
+}
+
+.add-class-submit-button {
+  padding: 0.5rem 0.8rem;
+  font-size: 0.8rem;
+
+}

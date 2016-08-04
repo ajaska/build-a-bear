@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Calibre-Regular';
+  src: url('#{$root-url}/fonts/Calibre-Regular.woff');
+}
+
+@font-face {
+  font-family: 'Calibre-Semibold';
+  src: url('#{$root-url}/fonts/Calibre-Semibold.woff');
+}
+
+@font-face {
+  font-family: 'Calibre-Bold';
+  src: url('#{$root-url}/fonts/Calibre-Bold.woff');
+}
+
+@font-face {
+  font-family: 'Icons';
+  src: url("#{$root-url}/fonts/icons.eot");
+  src: url("#{$root-url}/fonts/icons.eot?#iefix") format('embedded-opentype'), url("#{$root-url}/fonts/icons.woff") format('woff'), url("#{$root-url}/fonts/icons.ttf") format('truetype'), url("#{$root-url}/fonts/icons.svg#icons") format('svg');
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-decoration: inherit;
+  text-transform: none;
+}

@@ -1,0 +1,19 @@
+.main-container {
+  position: relative;
+  max-width: 100%;
+  margin-right: 2rem;
+  margin-left: 2rem;
+}
+
+.main-data-container {
+  width: 72%;
+  float: left;
+  display: inline-block;
+}
+
+.side-panel-container {
+  margin-left: 1%;
+  width: 27%;
+  float: right;
+  display: inline-block;
+}

@@ -1,0 +1,30 @@
+.units-summary-panel {
+  background-color: $primary-gray;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+.units-text {
+  margin-top: 0rem;
+  margin-bottom: 0.2rem;
+  font-size: 2rem;
+  line-height: 1.9rem;
+  font-family: $font-semibold;
+}
+
+.units-header-text {
+  font-weight: bold;
+  font-size: 1.3rem;
+  font-family: $font-semibold;
+}
+
+.units-total {
+  color: $primary-blue;
+}
+
+.units-remaining {
+  color: $primary-red;
+}

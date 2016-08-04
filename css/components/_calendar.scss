@@ -1,0 +1,115 @@
+.cal-enroll {
+  width: 100%;
+  border-radius: 5rem;
+  border-spacing: 0rem;
+  margin-bottom: 3rem;
+}
+
+.cal-header-row {
+  position: relative;
+  height: 20px;
+  text-align: center;
+}
+
+.cal-body {
+  position: relative;
+  height: 250px;
+  text-transform: uppercase;
+}
+
+.cal-header-row-entry {
+  position: absolute;
+  width: 20%;
+  top: 0px;
+  height: 25px;
+  background-color: $primary-gray;
+  padding-top: 0.75rem;
+}
+
+.cal-header-row {
+  .cal-header-row-entry:nth-child(1) {
+    left: 0%;
+  }
+  .cal-header-row-entry:nth-child(2) {
+    left: 20%;
+  }
+  .cal-header-row-entry:nth-child(3) {
+    left: 40%;
+  }
+  .cal-header-row-entry:nth-child(4) {
+    left: 60%;
+  }
+  .cal-header-row-entry:nth-child(5) {
+    left: 80%;
+  }
+}
+
+.cal-dotw-column {
+  display: inline-block;
+  height: 100%;
+  width: calc(20% - 1.3px);
+  border-bottom: 1px solid $primary-gray;
+  border-right: 1px solid $primary-gray;
+}
+
+.monday-column {
+  border-left: 1px solid $primary-gray;
+}
+
+.lecture-entry {
+  width: calc(18%);
+  text-align: left;
+  position: absolute;
+}
+
+.other-entry {
+  width: calc(18%);
+  text-align: left;
+  position: absolute;
+}
+
+.lecture-entry-header {
+  background-color: $primary-blue;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+  color: white;
+}
+
+.lecture-entry-body {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: white;
+  border-left: 1px solid $primary-gray;
+  border-right: 1px solid $primary-gray;
+}
+
+.lecture-entry-footer {
+  height: 27px;
+  background-color: $primary-gray;
+  border-bottom-right-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+}
+
+.other-entry-body {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-top: 0.5rem;
+  background-color: $primary-blue;
+  color: white;
+  border-radius: 0.25rem;
+}
+
+.waitlisted-course > {
+  .lecture-entry-header, .lecture-entry-body, .lecture-entry-footer, .other-entry-body {
+    background-color: $primary-gray !important;
+    color: $disabled-text !important;
+  }
+  .other-entry-body {
+    background-color: $primary-gray !important;
+    color: $disabled-text !important;
+  }
+}

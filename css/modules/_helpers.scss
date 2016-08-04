@@ -1,0 +1,33 @@
+.outline-blue {
+  border: 2px solid $primary-blue !important;
+  border-radius: 0.25rem;
+}
+
+.color-blue {
+  color: $primary-blue;
+}
+
+.semibold {
+  font-family: $font-semibold;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.headerfix {
+  overflow: visible;
+}
+
+.rm-margin-bottom {
+  margin-bottom: 0px !important;
+}
+
+.absolute-center-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

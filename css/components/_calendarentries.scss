@@ -1,7 +1,6 @@
 $half-hour-block-size: 60px;
 $visual-gap-size: 10px;
 
-// Absolute left positioning
 .Mo {
   left: 1%;
 }
@@ -21,14 +20,6 @@ $visual-gap-size: 10px;
 .Fr {
   left: 81%;
 }
-
-// Absolute top positioning
-// Not sure if we need this ...
-
-// Solutions
-// 1) Parse the start times, add these classes, then calculate the difference between the earliest one and 650 in terms of half-hour blocks,
-// subtract 50 * that difference from all class heights
-// 2) Don't use these declarations, add inline-styling on render
 
 .rel-start-650 {
   top: calc(30px + 0 * #{$half-hour-block-size});
