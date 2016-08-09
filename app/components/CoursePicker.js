@@ -72,8 +72,9 @@ class CoursePicker extends React.Component {
     const enabled = {
       lectureSection: !globalDisable && this.props.lectureSections.length > 1,
       deptNumber: !globalDisable && this.props.deptNumbers.length > 0,
-      //section: !globalDisable && this.props.sectionGroups.length > 0,
-      gradeOption: !globalDisable && this.props.lectureSections.length > 0,
+      section: !globalDisable && !this.props.isClosed,
+      gradeOption: !globalDisable && this.props.lectureSections.length > 0 && !this.props.isClosed,
+      addButton: !globalDisable && !this.props.error && !this.props.isClosed,
     };
     const highlighted = {
       ccn: !this.props.dept,
@@ -92,7 +93,7 @@ class CoursePicker extends React.Component {
       <div className="add-class-form-row" key={i}>
         <Select
           className={`add-class-discussion${highlighted.section && !this.props.selections[i] ? " outline-blue" : ""}`}
-          disabled={globalDisable || sectionGroup.length <= 1}
+          disabled={!enabled.section || sectionGroup.length <= 1}
           placeholder={this.props.isLoadingSections ? 'Loading sections...' : 'Choose a section'}
           value={this.props.selections[i]}
           resetValue={resetValue}
@@ -212,7 +213,7 @@ class CoursePicker extends React.Component {
             <button
               className="add-class-submit-button"
               onClick={this.handleClickedAdd}
-              disabled={globalDisable}
+              disabled={!enabled.addButton}
               id="add-class"
             >
               Add
@@ -237,6 +238,7 @@ CoursePicker.propTypes = {
   deptNumbers: React.PropTypes.array.isRequired,
   desc: React.PropTypes.string.isRequired,
   error: React.PropTypes.string.isRequired,
+  isClosed: React.PropTypes.bool.isRequired,
   warning: React.PropTypes.string,
   lectureSection: React.PropTypes.string.isRequired,
   lectureAvailability: React.PropTypes.string.isRequired,

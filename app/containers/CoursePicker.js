@@ -12,18 +12,33 @@ function ccnInCart(state) {
   return courses.filter(course => course.lecture.ccn === ccn).length > 0;
 }
 
-function checkWarning(state, lectureSection) {
+function checkError(state, lectureSection) {
+  const courses = state.enrolled.toJS().courses;
+  const unitCount = courses.map(course => course.lecture.units)
+                           .reduce((prev, units) => prev + (1 * units), 0.0);
+
+  if (courses.length === 4 || unitCount >= 16) {
+    return 'You are already at the unit cap';
+  }
+
+  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 16)) {
+    return 'Adding this course would put you over the 16 unit cap.';
+  }
+
+  const cpState = state.coursePicker.toJS();
+  if (cpState.ccn.length === 5 && !cpState.lectureSections) {
+    return 'Unknown CCN';
+  }
+
+  return '';
+}
+
+function checkWarning(state) {
   if (ccnInCart(state)) {
     return 'If you want to enroll in a different section, you must drop the ' +
            'class from your cart and re-add it here.';
   }
 
-  const courses = state.enrolled.toJS().courses;
-  const unitCount = courses.map(course => course.lecture.units)
-                           .reduce((prev, units) => prev + (1 * units), 0.0);
-  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 16)) {
-    return 'Adding this course would put you over the 16 unit cap.';
-  }
   return '';
 }
 
@@ -36,6 +51,8 @@ const mapStateToProps = (state) => {
   }
 
   const warning = checkWarning(state, lectureSection);
+  const error = cpState.error || checkError(state, lectureSection);
+  const isClosed = cpState.lectureAvailability === 'Closed';
 
   return Object.assign({},
     state.coursePicker.toJS(),
@@ -44,6 +61,8 @@ const mapStateToProps = (state) => {
       deptOptions: allDepts().sort(),
       deptNumbers: deptNumbersForDept(cpState.dept),
       desc,
+      error,
+      isClosed,
       warning,
     }
   );
