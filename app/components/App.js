@@ -5,7 +5,7 @@ import CoursePicker from '../containers/CoursePicker';
 import UnitSummary from '../containers/UnitSummary';
 import AddCourseModal from '../containers/AddCourseModal';
 import Calendar from '../containers/Calendar';
-import Footer from '../containers/Footer';
+import Footer from '../components/Footer';
 
 function App() {
   return (
