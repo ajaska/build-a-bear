@@ -982,64 +982,6 @@ span.Select-arrow-zone {
   .main-data-container {
     width: 100%; } }
 
-@media (max-width: 750px) {
-  .courses-table-entry td:first-child {
-    display: none; }
-  .courses-table-entry td:last-child {
-    border-right: none !important; }
-  .cal-enroll {
-    display: none; }
-  table, thead, tbody, th, td, tr {
-    display: block; }
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px; }
-  tr {
-    border: 3px solid #4279FF !important; }
-  .courses-table-waitlisted {
-    border-top: none !important;
-    border-bottom: none !important;
-    border-radius: 0rem !important; }
-  .courses-table-waitlisted td {
-    display: none; }
-  .courses-table-waitlisted td:nth-child(2) {
-    display: block; }
-  .courses-table-waitlisted-text {
-    visibility: hidden; }
-  .courses-table-waitlisted td:nth-child(2):before {
-    content: "Waitlisted Courses" !important; }
-  td {
-    border: none;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding-left: 50% !important; }
-  td:before {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 45%;
-    padding-right: 10px;
-    white-space: nowrap; }
-  td:nth-of-type(1):before {
-    content: "Drop"; }
-  td:nth-of-type(2):before {
-    content: "Class"; }
-  td:nth-of-type(3):before {
-    content: "Type"; }
-  td:nth-of-type(4):before {
-    content: "Time"; }
-  td:nth-of-type(5):before {
-    content: "Room"; }
-  td:nth-of-type(6):before {
-    content: "Instructor"; }
-  td:nth-of-type(7):before {
-    content: "Units"; }
-  td:nth-of-type(8):before {
-    content: "CCN"; }
-  td:nth-of-type(9):before {
-    content: "Waitlist"; } }
-
 /*!
  * # Semantic UI 2.2.2 - Dimmer
  * http://github.com/semantic-org/semantic-ui/
