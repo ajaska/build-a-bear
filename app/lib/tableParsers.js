@@ -4,6 +4,10 @@ import { ShoppingCartTable, EnrolledCoursesTable, DiscussionTable } from '../mod
 function groupRawRows(rawRows) {
   const courses = [];
   for (let i = 0; i < rawRows.length; ++i) {
+    if (rawRows[i].enrollmentStatus === 'Dropped') {
+      continue;
+    }
+
     if (rawRows[i].selectable) {
       const lecture = new Lecture(rawRows[i]);
       courses.push(new Course({ lecture, sections: [] }));
