@@ -21,8 +21,8 @@ function checkError(state, lectureSection) {
     return 'You are already at the unit cap';
   }
 
-  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 16)) {
-    return 'Adding this course would put you over the 16 unit cap.';
+  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 20.5)) {
+    return 'Adding this course would put you over the unit cap.';
   }
 
   const cpState = state.coursePicker.toJS();
