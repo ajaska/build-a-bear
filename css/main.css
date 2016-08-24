@@ -615,7 +615,9 @@ q:before, q:after {
 
 .add-class-CEC {
   width: 48%;
-  float: right; }
+  float: right;
+  padding-bottom: 0rem;
+  padding-top: 0.25rem; }
 
 .add-class-form-row {
   height: 1.5rem;
@@ -623,7 +625,9 @@ q:before, q:after {
   margin-bottom: 0.2rem; }
 
 .add-class-class-name {
-  width: 60% !important; }
+  width: 60% !important;
+  padding-bottom: 0rem;
+  padding-top: 0.25rem; }
 
 .add-class-waitlist-status {
   display: inline-block;
