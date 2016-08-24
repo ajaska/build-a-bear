@@ -1,15 +1,6 @@
 import React from 'react';
 
 class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClickedAdd = this.handleClickedAdd.bind(this);
-  }
-
-  handleClickedAdd() {
-    $('.course-picker-modal').modal('show');
-  }
-
   render() {
     return (
       <div className="footer">
