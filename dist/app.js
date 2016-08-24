@@ -29556,45 +29556,13 @@ var mapStateToProps$5 = function mapStateToProps(state) {
 
 var Calendar = connect(mapStateToProps$5)(Calendar$1);
 
-// eslint-disable-line import/no-unresolved
-
-var Footer = function (_React$Component) {
-  inherits(Footer, _React$Component);
-
-  function Footer() {
-    classCallCheck(this, Footer);
-    return possibleConstructorReturn(this, Object.getPrototypeOf(Footer).apply(this, arguments));
-  }
-
-  createClass(Footer, [{
-    key: 'handleFooterClick',
-    value: function handleFooterClick() {
-      $('.add-course-mobile').modal('show');
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return React.createElement(
-        'div',
-        { className: 'footer' },
-        React.createElement(
-          'button',
-          {
-            className: 'add-class-mobile-button',
-            onClick: this.handleFooterClick
-          },
-          'Add Classes'
-        ),
-        React.createElement(
-          'div',
-          { className: 'ui modal add-course-mobile' },
-          React.createElement(CoursePicker, null)
-        )
-      );
-    }
-  }]);
-  return Footer;
-}(React.Component);
+function Footer() {
+  return React.createElement(
+    "div",
+    { className: "footer" },
+    "Adding classes on mobile is not yet supported. Please visit bear.plus on a desktop browser."
+  );
+}
 
 function App() {
   return React.createElement(
