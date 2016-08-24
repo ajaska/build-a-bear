@@ -19,20 +19,22 @@
     z-index: 10;
     padding: 1rem;
     margin-top: 4rem;
+
+    & button {
+      float: right;
+      margin-right: 2rem;
+      font-size: 5vh;
+      padding-top: 1.5vh !important;
+      padding-bottom: 0vh !important;
+    }
+
+    & div > span {
+      float: left;
+      font-size: 3.5vh;
+    }
   }
 
   .cal-enroll {
-    margin-bottom: 3.5rem;
-  }
-
-  .footer button {
-    float: right;
-    margin-right: 2rem;
-    font-size: 1.5rem;
-  }
-
-  .footer div > span {
-    float: left;
-    font-size: 1.25rem;
+    margin-bottom: 10vh;
   }
 }

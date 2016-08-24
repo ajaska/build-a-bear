@@ -17,6 +17,10 @@
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
+
+  & button {
+    padding-bottom: 0.15rem !important;
+  }
 }
 
 .add-class-header {
