@@ -2,7 +2,7 @@
   visibility: hidden;
 }
 
-@media (max-width: $small-break) {
+@media (max-width:  $small-break) {
   .courses-table-enroll {
     margin-bottom: 4rem;
   }
@@ -18,7 +18,7 @@
     width: 100%;
     z-index: 10;
     padding: 1rem;
-    margin-top: 3rem;
+    margin-top: 4rem;
   }
 
   .cal-enroll {
@@ -28,9 +28,11 @@
   .footer button {
     float: right;
     margin-right: 2rem;
+    font-size: 1.5rem;
   }
 
   .footer div > span {
     float: left;
+    font-size: 1.25rem;
   }
 }

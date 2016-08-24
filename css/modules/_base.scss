@@ -16,16 +16,21 @@ button {
   text-decoration: none;
   display: inline-block;
   border-radius: 0.25rem;
+  padding-bottom: 0.15rem !important;
+  font-family: 'Calibre-Regular', sans-serif !important;
 }
 
 input, select {
   padding-top: 0.15rem;
   padding-bottom: 0.3rem;
   padding-left: 0.15rem;
-}
-
-input {
   outline: 0;
+  font-family: 'Calibre-Regular', sans-serif !important;
+  font-size: 13px !important;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 ::-webkit-input-placeholder {
@@ -42,10 +47,6 @@ input {
 
 :-ms-input-placeholder {
    color: black;
-}
-
-input:focus {
-  outline: 0;
 }
 
 a {

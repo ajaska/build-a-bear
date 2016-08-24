@@ -4,6 +4,7 @@ import EnrolledCourses from '../containers/EnrolledCourses';
 import CoursePicker from '../containers/CoursePicker';
 import UnitSummary from '../containers/UnitSummary';
 import AddCourseModal from '../containers/AddCourseModal';
+import CoursePickerModal from '../containers/CoursePickerModal';
 import Calendar from '../containers/Calendar';
 import Footer from '../containers/Footer';
 
