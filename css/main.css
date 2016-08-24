@@ -35,15 +35,19 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  border-radius: 0.25rem; }
+  border-radius: 0.25rem;
+  padding-bottom: 0.15rem !important;
+  font-family: 'Calibre-Regular', sans-serif !important; }
 
 input, select {
   padding-top: 0.15rem;
   padding-bottom: 0.3rem;
-  padding-left: 0.15rem; }
-
-input {
-  outline: 0; }
+  padding-left: 0.15rem;
+  outline: 0;
+  font-family: 'Calibre-Regular', sans-serif !important;
+  font-size: 13px !important; }
+  input:focus, select:focus {
+    outline: 0; }
 
 ::-webkit-input-placeholder {
   color: black; }
@@ -56,9 +60,6 @@ input {
 
 :-ms-input-placeholder {
   color: black; }
-
-input:focus {
-  outline: 0; }
 
 a {
   color: black; }
@@ -582,8 +583,8 @@ q:before, q:after {
 .add-class-CCN {
   float: left;
   width: 15%;
-  padding-top: 0.2rem;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0rem;
+  padding-top: 0.25rem;
   display: inline-block; }
 
 .add-class-department {
@@ -793,26 +794,26 @@ span.Select-arrow-zone {
 .discussion-swap {
   padding-right: 0.4rem 0.5rem 0.5rem 0.5rem; }
 
-.phase2-signup-panel {
+.google-signup-panel {
   background-color: #EEEEEE;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.25rem; }
 
-.phase2-text {
+.google-text {
   margin-top: 0rem;
   margin-bottom: 0.2rem;
   font-size: 2rem;
   line-height: 1.9rem; }
 
-.phase2-header-text {
+.google-header-text {
   font-weight: bold;
   font-size: 1.3rem; }
 
-.phase2-date, .phase2-time {
+.google-date, .google-time {
   color: #4279FF; }
 
-.phase2-add-calendar-alert {
+.google-add-calendar-alert {
   padding: 0.8rem 1.8rem;
   font-size: 0.8rem; }
 
@@ -906,14 +907,16 @@ span.Select-arrow-zone {
     width: 100%;
     z-index: 10;
     padding: 1rem;
-    margin-top: 3rem; }
+    margin-top: 4rem; }
   .cal-enroll {
     margin-bottom: 3.5rem; }
   .footer button {
     float: right;
-    margin-right: 2rem; }
+    margin-right: 2rem;
+    font-size: 1.5rem; }
   .footer div > span {
-    float: left; } }
+    float: left;
+    font-size: 1.25rem; } }
 
 .main-container {
   margin-right: 2rem;
