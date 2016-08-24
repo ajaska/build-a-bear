@@ -28952,8 +28952,8 @@ function checkError(state, lectureSection) {
     return 'You are already at the unit cap';
   }
 
-  if (lectureSection && unitCount && 1 * lectureSection.units + unitCount > 16) {
-    return 'Adding this course would put you over the 16 unit cap.';
+  if (lectureSection && unitCount && 1 * lectureSection.units + unitCount > 20.5) {
+    return 'Adding this course would put you over the unit cap.';
   }
 
   var cpState = state.coursePicker.toJS();
@@ -29099,7 +29099,7 @@ var mapStateToProps$3 = function mapStateToProps(state) {
                 return {
                                 enrolledUnits: ec,
                                 waitlistedUnits: wc,
-                                maxUnits: 16
+                                maxUnits: 20.5
                 };
 };
 
