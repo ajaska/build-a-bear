@@ -163,6 +163,9 @@ q:before, q:after {
 .color-blue {
   color: #4279FF; }
 
+.color-red {
+  color: #FF8080; }
+
 .semibold {
   font-family: "Calibre-Semibold", sans-serif; }
 
@@ -423,10 +426,7 @@ q:before, q:after {
   height: calc(10 * 60px - 10px - 0.5rem); }
 
 .cal-enroll {
-  width: 100%;
-  border-radius: 5rem;
-  border-spacing: 0rem;
-  margin-bottom: 3rem; }
+  border-spacing: 0rem; }
 
 .cal-header-row {
   position: relative;
@@ -435,7 +435,7 @@ q:before, q:after {
 
 .cal-body {
   position: relative;
-  height: 250px;
+  min-height: 250px;
   text-transform: uppercase; }
 
 .cal-header-row-entry {
@@ -473,28 +473,26 @@ q:before, q:after {
 
 .lecture-entry {
   width: calc(18%);
-  text-align: left;
   position: absolute; }
 
 .other-entry {
   width: calc(18%);
-  text-align: left;
   position: absolute; }
 
 .lecture-entry-header {
   background-color: #4279FF;
+  color: white;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
   border-top-right-radius: 0.25rem;
-  border-top-left-radius: 0.25rem;
-  color: white; }
+  border-top-left-radius: 0.25rem; }
 
 .lecture-entry-body {
+  background-color: white;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
-  background-color: white;
   border-left: 1px solid #EEEEEE;
   border-right: 1px solid #EEEEEE; }
 
@@ -505,11 +503,11 @@ q:before, q:after {
   border-bottom-left-radius: 0.25rem; }
 
 .other-entry-body {
+  background-color: #4279FF;
+  color: white;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   padding-top: 0.5rem;
-  background-color: #4279FF;
-  color: white;
   border-radius: 0.25rem; }
 
 .waitlisted-course > .lecture-entry-header, .waitlisted-course > .lecture-entry-body, .waitlisted-course > .lecture-entry-footer, .waitlisted-course > .other-entry-body {
@@ -519,77 +517,6 @@ q:before, q:after {
 .waitlisted-course > .other-entry-body {
   background-color: #EEEEEE !important;
   color: #B2B2B2 !important; }
-
-.Select {
-  height: 100% !important; }
-
-.Select.is-disabled {
-  border: 2px solid #E8E8E8 !important;
-  border-radius: 0.25rem !important; }
-  .Select.is-disabled .Select-control {
-    background-color: #E8E8E8 !important; }
-  .Select.is-disabled .Select-placeholder {
-    color: #B2B2B2 !important; }
-  .Select.is-disabled .Select-arrow {
-    border-color: #B2B2B2 transparent transparent !important; }
-
-.Select-control {
-  border-radius: 0rem !important;
-  font-size: 13px !important;
-  margin: 0rem !important;
-  padding: 0rem !important;
-  border: 0rem !important;
-  height: 100% !important; }
-
-.Select-placeholder {
-  height: 13px !important;
-  line-height: 13px !important;
-  padding-top: 0.4rem !important;
-  padding-left: 0.3rem !important;
-  color: black !important;
-  overflow: visible !important; }
-
-.Select-input {
-  height: 13px !important;
-  padding-left: 0.3rem !important;
-  padding-top: 0.15rem !important; }
-
-.Select-input > input {
-  padding: 0.45rem 0rem 0rem 0rem !important;
-  height: 13px !important;
-  box-sizing: border-box !important;
-  width: 80% !important;
-  max-width: 100% !important; }
-
-span.Select-arrow-zone {
-  padding: 0.45rem 0rem 0rem 0rem !important; }
-
-.Select-arrow {
-  border-color: #4279FF transparent transparent !important; }
-
-.Select-value, .Select-value-label {
-  line-height: 13px !important; }
-
-.Select-value {
-  padding-top: 0.5rem !important;
-  padding-left: 0.3rem !important; }
-
-.Select-option, .Select-noresults {
-  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
-  margin: 0rem !important;
-  font-size: 13px !important; }
-
-.Select-clear {
-  height: 5px !important;
-  padding-top: 0.2rem !important; }
-
-.error-dialog {
-  width: auto;
-  margin-bottom: 2rem; }
-
-.error-dialog-icon .icon {
-  color: #FF8080;
-  font-size: 50px !important; }
 
 .error-dialog-icon {
   position: absolute;
@@ -619,16 +546,11 @@ span.Select-arrow-zone {
   line-height: 0.9rem; }
 
 .add-class-error-msg {
-  display: inline-block;
   float: right;
   font-size: 0.8rem;
   line-height: 0.75rem;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-bottom: 0.35rem;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.5rem 0.35rem 0.5rem;
+  margin: 0.5rem 0rem;
   border-radius: 0.25rem;
   background-color: #FF8080;
   color: white; }
@@ -637,8 +559,8 @@ span.Select-arrow-zone {
   display: inline-block;
   float: left;
   width: 5%;
-  padding-top: 4%;
-  padding-left: 4%;
+  padding-top: 2.5%;
+  padding-left: 2.5%;
   text-align: center; }
 
 .add-class-warning-msg-text {
@@ -646,7 +568,7 @@ span.Select-arrow-zone {
   float: right;
   width: 82%;
   font-size: 0.9rem;
-  padding: 4%; }
+  padding: 2.5%; }
 
 .add-class-warning-msg {
   background-color: #FFDE80;
@@ -724,23 +646,92 @@ span.Select-arrow-zone {
   padding: 0.5rem 0.8rem;
   font-size: 0.8rem; }
 
+.Select {
+  height: 100% !important; }
+
+.Select.is-disabled {
+  border: 2px solid #E8E8E8 !important;
+  border-radius: 0.25rem !important; }
+  .Select.is-disabled .Select-control {
+    background-color: #E8E8E8 !important; }
+  .Select.is-disabled .Select-placeholder {
+    color: #B2B2B2 !important; }
+  .Select.is-disabled .Select-arrow {
+    border-color: #B2B2B2 transparent transparent !important; }
+
+.Select-control {
+  border-radius: 0rem !important;
+  font-size: 13px !important;
+  margin: 0rem !important;
+  padding: 0rem !important;
+  border: 0rem !important;
+  height: 100% !important; }
+
+.Select-placeholder {
+  height: 13px !important;
+  line-height: 13px !important;
+  padding-top: 0.4rem !important;
+  padding-left: 0.3rem !important;
+  color: black !important;
+  overflow: visible !important; }
+
+.Select-input {
+  height: 13px !important;
+  padding-left: 0.3rem !important;
+  padding-top: 0.15rem !important; }
+
+.Select-input > input {
+  padding: 0.45rem 0rem 0rem 0rem !important;
+  height: 13px !important;
+  box-sizing: border-box !important;
+  width: 80% !important;
+  max-width: 100% !important; }
+
+span.Select-arrow-zone {
+  padding: 0.45rem 0rem 0rem 0rem !important; }
+
+.Select-arrow {
+  border-color: #4279FF transparent transparent !important; }
+
+.Select-value, .Select-value-label {
+  line-height: 13px !important; }
+
+.Select-value {
+  padding-top: 0.5rem !important;
+  padding-left: 0.3rem !important; }
+
+.Select-option, .Select-noresults {
+  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
+  margin: 0rem !important;
+  font-size: 13px !important; }
+
+.Select-clear {
+  height: 5px !important;
+  padding-top: 0.2rem !important; }
+
+.error-dialog {
+  width: auto;
+  margin-bottom: 2rem; }
+
+.error-dialog-icon .icon {
+  color: #FF8080;
+  font-size: 50px !important; }
+
 .courses-table-enroll th {
-  font-weight: normal;
-  min-width: 1rem; }
+  font-weight: normal; }
 
 .courses-table-enroll {
   width: 100%;
-  border-radius: 5rem;
   border-spacing: 0rem;
   margin-bottom: 2rem; }
 
 .courses-table-header-row th {
+  background-color: #4279FF;
+  color: white;
   padding-top: 0.5rem;
   padding-bottom: 0.25rem;
-  font-size: 0.8rem;
-  text-align: left;
-  background-color: #4279FF;
-  color: white; }
+  font-size: 0.9rem;
+  text-align: left; }
 
 .courses-table-header-row th:nth-child(2) {
   width: 25%; }
@@ -777,9 +768,7 @@ span.Select-arrow-zone {
   border: 1px solid black; }
 
 .courses-table-entry td {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-right: 0.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
   line-height: 1.75rem; }
 
 .courses-table-entry .class-drop {
@@ -792,22 +781,17 @@ span.Select-arrow-zone {
   border-bottom: 1px solid #EEEEEE; }
 
 .courses-table-entry td:first-child {
-  border-left: 1px solid #EEEEEE;
-  width: 50px; }
+  border-left: 1px solid #EEEEEE; }
 
 .courses-table-entry td:last-child {
-  border-right: 1px solid #EEEEEE;
-  width: 50px; }
+  border-right: 1px solid #EEEEEE; }
 
 .courses-table-entry td:nth-child(2) {
   font-family: "Calibre-Semibold", sans-serif;
   text-transform: uppercase; }
 
 .discussion-swap {
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-top: 0.4rem;
-  padding-bottom: 0.5rem; }
+  padding-right: 0.4rem 0.5rem 0.5rem 0.5rem; }
 
 .phase2-signup-panel {
   background-color: #EEEEEE;
@@ -905,25 +889,43 @@ span.Select-arrow-zone {
   font-size: 1.3rem;
   font-family: "Calibre-Semibold", sans-serif; }
 
-.units-total {
-  color: #4279FF; }
+.footer {
+  visibility: hidden; }
 
-.units-remaining {
-  color: #FF8080; }
+@media (max-width: 750px) {
+  .courses-table-enroll {
+    margin-bottom: 4rem; } }
+
+@media (max-width: 1050px) {
+  .footer {
+    visibility: visible;
+    background-color: #EEEEEE;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 10;
+    padding: 1rem;
+    margin-top: 3rem; }
+  .cal-enroll {
+    margin-bottom: 3.5rem; }
+  .footer button {
+    float: right;
+    margin-right: 2rem; }
+  .footer div > span {
+    float: left; } }
 
 .main-container {
-  position: relative;
-  max-width: 100%;
   margin-right: 2rem;
   margin-left: 2rem; }
 
 .main-data-container {
   width: 72%;
   float: left;
-  display: inline-block; }
+  display: inline-block;
+  margin-bottom: 2rem; }
 
 .side-panel-container {
-  margin-left: 1%;
   width: 27%;
   float: right;
   display: inline-block; }
@@ -1008,7 +1010,7 @@ span.Select-arrow-zone {
     border: none;
     border-bottom: 1px solid #eee;
     position: relative;
-    padding-left: 50%; }
+    padding-left: 50% !important; }
   td:before {
     position: absolute;
     top: 6px;
