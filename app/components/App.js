@@ -6,6 +6,7 @@ import UnitSummary from '../containers/UnitSummary';
 import AddCourseModal from '../containers/AddCourseModal';
 import Calendar from '../containers/Calendar';
 import Footer from '../components/Footer';
+import ToGoogleCalendar from '../components/ToGoogleCalendar';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Calendar />
       </div>
       <div className="side-panel-container">
+        <ToGoogleCalendar />
         <CoursePicker />
         <UnitSummary />
         <ShoppingCart />
