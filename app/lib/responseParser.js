@@ -69,6 +69,23 @@ function doSemesterSelection(doc) {
   return parseSemesterSelectionTable(semesterRows);
 }
 
+function doCurrentSemester(doc) {
+  const semesterInfo = doc.querySelector('span[id^="DERIVED_REGFRM1_SSR_STDNTKEY_DESCR"]');
+  if (!semesterInfo) {
+    throw new Error('No semester info found');
+  }
+
+  const splitSemesterInfo = semesterInfo.textContent.trim().split(' | ');
+  if (splitSemesterInfo.length !== 3) {
+    throw new Error('Semester info unparseable');
+  }
+
+  return {
+    term: splitSemesterInfo[0],
+    career: splitSemesterInfo[1],
+  };
+}
+
 export function parseResponse(doc) {
   /* Every page */
   const info = {};
@@ -95,6 +112,7 @@ export function parseResponse(doc) {
     case pages.MAIN_PAGE:
       info.enrolledCourses = doEnrolledTable(doc);
       info.shoppingCartCourses = doShoppingCartTable(doc);
+      Object.assign(info, doCurrentSemester(doc));
       break;
     case pages.SECTIONS_PAGE:
       info.sectionGroups = doSectionTables(doc);
