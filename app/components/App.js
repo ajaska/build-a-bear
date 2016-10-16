@@ -6,6 +6,7 @@ import UnitSummary from '../containers/UnitSummary';
 import AddCourseModal from '../containers/AddCourseModal';
 import Calendar from '../containers/Calendar';
 import Footer from '../components/Footer';
+import ChooseSemester from '../components/ChooseSemester';
 import ToGoogleCalendar from '../components/ToGoogleCalendar';
 
 function App() {
