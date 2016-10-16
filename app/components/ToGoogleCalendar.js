@@ -10,7 +10,7 @@ class ToGoogleCalendar extends React.Component {
   handleClickedAdd() {
     const download = document.createElement('a');
     download.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.props.calendarFileBody));
-    download.setAttribute('download', 'CourseScheduleFa2016.ics');
+    download.setAttribute('download', 'CourseScheduleSp2017.ics');
     if (document.createEvent) {
       const event = document.createEvent('MouseEvents');
       event.initEvent('click', true, true);
@@ -52,6 +52,10 @@ class ToGoogleCalendar extends React.Component {
       </div>
     )
   }
+}
+
+ToGoogleCalendar.propTypes = {
+  calendarFileBody: React.PropTypes.string.isRequired,
 }
 
 export default ToGoogleCalendar;

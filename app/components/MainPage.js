@@ -7,7 +7,7 @@ import AddCourseModal from '../containers/AddCourseModal';
 import Calendar from '../containers/Calendar';
 import Footer from '../components/Footer';
 import SemesterHeader from '../containers/SemesterHeader';
-import ToGoogleCalendar from '../components/ToGoogleCalendar';
+import ToGoogleCalendar from '../containers/ToGoogleCalendar';
 import Banner from '../components/html/Banner';
 import MyAcademics from '../components/html/MyAcademics';
 

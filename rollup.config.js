@@ -29,11 +29,12 @@ const options = {
       ],
     }),
     nodeResolve({
-      jsnext: true,
+      jsnext: true, // https://github.com/blesh/symbol-observable/issues/21
       main: true,
       browser: true,
     }),
     commonjs({
+      exclude: ['node_modules/symbol-observable/**'],
       include: 'node_modules/**',
     }),
     inject({
