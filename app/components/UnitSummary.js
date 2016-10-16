@@ -8,7 +8,7 @@ function UnitSummary({ enrolledUnits, waitlistedUnits, maxUnits }) {
       <p className="units-text">
         <span className="units-header-text">You are currently enrolled in:&nbsp;</span>
         <br />
-        <span className="color-blue">{total} units</span>
+        <span className="color-blue">{total} units </span>
         ({enrolledUnits} + {waitlistedUnits} w/l)
         <br />
         <span className="color-red">{remaining}</span> units remaining

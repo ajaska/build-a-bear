@@ -7,7 +7,7 @@ export const head = `
 
 export const body = `
 <div class="banner">
-  <p class="banner-text">Build-a-Bear</p>
+  <img class="banner-image" src="/assets/whitebear.svg" /><span class="banner-text">Build-a-Bear</span>
 </div>
 <div class="main-container">
   <div class="my-academics-link-wrapper">
