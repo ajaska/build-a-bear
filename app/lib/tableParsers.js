@@ -1,5 +1,10 @@
 import { Course, Lecture, Section } from '../models/models';
-import { ShoppingCartTable, EnrolledCoursesTable, DiscussionTable } from '../models/tableTypes';
+import {
+  ShoppingCartTable,
+  EnrolledCoursesTable,
+  DiscussionTable,
+  SemesterTable,
+} from '../models/tableTypes';
 
 function groupRawRows(rawRows) {
   const courses = [];
@@ -32,4 +37,8 @@ export function parseShoppingCartTable(rows) {
 
 export function parseDiscussionTable(rows) {
   return DiscussionTable.parse([...rows]);
+}
+
+export function parseSemesterSelectionTable(rows) {
+  return SemesterTable.parse([...rows]);
 }

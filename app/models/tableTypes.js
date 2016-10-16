@@ -45,3 +45,10 @@ export const DiscussionTable = new Table(
   new ColumnType.Instructor,
   new ColumnType.AvailabilityStatus
 );
+
+export const SemesterTable = new Table(
+  new ColumnType.Noop,
+  new ColumnType.Term,
+  new ColumnType.Career,
+  new ColumnType.Noop
+);

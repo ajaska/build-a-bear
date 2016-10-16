@@ -52,3 +52,10 @@ export class Course {
     return [].concat(this.lecture, this.sections);
   }
 }
+
+export class Semester {
+  constructor(params = {}) {
+    this.term = params.term; // 2016 Fall
+    this.career = params.career; // ugrad vs grad
+  }
+}

@@ -2,6 +2,7 @@ import {
   parseEnrolledCoursesTable,
   parseShoppingCartTable,
   parseDiscussionTable,
+  parseSemesterSelectionTable,
 } from './tableParsers';
 
 export const pages = {
@@ -10,6 +11,7 @@ export const pages = {
   CONFIRMATION_PAGE: 'SSR_SSENRL_ADD_C',
   ALT_CONFIRMATION_PAGE: 'SSR_CLS_DTLOPT',
   CANCEL_PAGE: 'SSR_SS_SAVEWARNING',
+  SEMESTER_SELECTION_PAGE: 'SSR_SSENRL_TERM',
 };
 
 function doEnrolledTable(doc) {
@@ -59,6 +61,14 @@ function doAvailability(doc) {
   return availability;
 }
 
+function doSemesterSelection(doc) {
+  const semesterRows = doc.querySelectorAll("tr [id^='trSSR_DUMMY_RECV']");
+  if (!semesterRows) {
+    throw new Error('No semester selection div found');
+  }
+  return parseSemesterSelectionTable(semesterRows);
+}
+
 export function parseResponse(doc) {
   /* Every page */
   const info = {};
@@ -79,6 +89,9 @@ export function parseResponse(doc) {
 
   /* Page specific handlers */
   switch (info.pageName) {
+    case pages.SEMESTER_SELECTION_PAGE:
+      info.semester = doSemesterSelection(doc);
+      break;
     case pages.MAIN_PAGE:
       info.enrolledCourses = doEnrolledTable(doc);
       info.shoppingCartCourses = doShoppingCartTable(doc);

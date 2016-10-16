@@ -21,6 +21,8 @@ export const Units = simpleColumn('units');
 export const ClassNbr = simpleColumn('ccn');
 export const Section = simpleColumn('section');
 export const Room = simpleColumn('room');
+export const Term = simpleColumn('term');
+export const Career = simpleColumn('career');
 
 export class Selectable extends Column {
   parse(td) {
