@@ -16,7 +16,6 @@ export const body = `
   <div>
     <p class="class-enrollment-subtitle semibold">Class Enrollment</p>
   </div>
-  <h1 class="current-semester-subtitle">Fall 2016 - Undergraduate</h1>
   <div id="root"></div>
 </div>
 `

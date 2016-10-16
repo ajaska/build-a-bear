@@ -6,7 +6,7 @@ import UnitSummary from '../containers/UnitSummary';
 import AddCourseModal from '../containers/AddCourseModal';
 import Calendar from '../containers/Calendar';
 import Footer from '../components/Footer';
-import ChooseSemester from '../components/ChooseSemester';
+import SemesterHeader from '../components/SemesterHeader';
 import ToGoogleCalendar from '../components/ToGoogleCalendar';
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
   <div>
     <div>
       <AddCourseModal />
+      <SemesterHeader />
       <div className="main-data-container">
         <EnrolledCourses />
         <Calendar />

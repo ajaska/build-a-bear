@@ -214,86 +214,88 @@ select:not(:disabled) {
   background-repeat: no-repeat;
 }
 
-// The searchable dropdowns are imported from an open-source project,
-// !important tags to override CSS properties, some might not be necessary, oh well.
+.course-picker {
+  // The searchable dropdowns are imported from an open-source project,
+  // !important tags to override CSS properties, some might not be necessary, oh well.
 
-.Select {
-  height: 1.5rem !important;
-  outline: 0 !important;
-  background-color: white;
-}
+  .Select {
+    height: 1.5rem !important;
+    outline: 0 !important;
+    background-color: white;
+  }
 
-.Select.is-disabled {
-  background-color: $disabled-background !important;
-  border: 2px solid $disabled-background !important;
-  border-radius: 0.25rem !important;
-  .Select-control {
+  .Select.is-disabled {
     background-color: $disabled-background !important;
+    border: 2px solid $disabled-background !important;
+    border-radius: 0.25rem !important;
+    .Select-control {
+      background-color: $disabled-background !important;
+    }
+    .Select-placeholder {
+      color: $disabled-text !important;
+    }
+    .Select-arrow {
+      border-color: $disabled-text transparent transparent !important;
+    }
   }
+
+  .Select-control {
+    border-radius: 0rem !important;
+    font-size: 13px !important;
+    margin: 0rem !important;
+    padding: 0rem !important;
+    border: 0rem !important;
+    height: 100% !important;
+  }
+
   .Select-placeholder {
-    color: $disabled-text !important;
+    height: 13px !important;
+    line-height: 14px !important;
+    padding-top: 0.4rem !important;
+    padding-left: 0.3rem !important;
+    color: black !important;
+    overflow: visible !important;
   }
+
+  .Select-input {
+    height: 13px !important;
+    padding-left: 0.3rem !important;
+    padding-top: 0.15rem !important;
+  }
+
+  .Select-input > input {
+    padding: 0.45rem 0rem 0rem 0rem !important;
+    height: 13px !important;
+    box-sizing: border-box !important;
+    width: 80% !important;
+    max-width: 100% !important;
+  }
+
+  span.Select-arrow-zone {
+    padding: 0.45rem 0rem 0rem 0rem !important;
+  }
+
   .Select-arrow {
-    border-color: $disabled-text transparent transparent !important;
+    border-color: $primary-blue transparent transparent !important;
   }
-}
 
-.Select-control {
-  border-radius: 0rem !important;
-  font-size: 13px !important;
-  margin: 0rem !important;
-  padding: 0rem !important;
-  border: 0rem !important;
-  height: 100% !important;
-}
+  .Select-value, .Select-value-label {
+    line-height: 13px !important;
+  }
 
-.Select-placeholder {
-  height: 13px !important;
-  line-height: 14px !important;
-  padding-top: 0.4rem !important;
-  padding-left: 0.3rem !important;
-  color: black !important;
-  overflow: visible !important;
-}
+  .Select-value {
+    padding-top: 0.5rem !important;
+    padding-left: 0.3rem !important;
+  }
 
-.Select-input {
-  height: 13px !important;
-  padding-left: 0.3rem !important;
-  padding-top: 0.15rem !important;
-}
+  .Select-option, .Select-noresults {
+    padding: 0.4rem 0.3rem 0rem 0.4rem !important;
+    margin: 0rem !important;
+    font-size: 13px !important;
+  }
 
-.Select-input > input {
-  padding: 0.45rem 0rem 0rem 0rem !important;
-  height: 13px !important;
-  box-sizing: border-box !important;
-  width: 80% !important;
-  max-width: 100% !important;
-}
-
-span.Select-arrow-zone {
-  padding: 0.45rem 0rem 0rem 0rem !important;
-}
-
-.Select-arrow {
-  border-color: $primary-blue transparent transparent !important;
-}
-
-.Select-value, .Select-value-label {
-  line-height: 13px !important;
-}
-
-.Select-value {
-  padding-top: 0.5rem !important;
-  padding-left: 0.3rem !important;
-}
-
-.Select-option, .Select-noresults {
-  padding: 0.4rem 0.3rem 0rem 0.4rem !important;
-  margin: 0rem !important;
-  font-size: 13px !important;
-}
-
-.Select-clear {
-  height: 5px !important;
-  padding-top: 0.2rem !important;
+  .Select-clear {
+    height: 5px !important;
+    padding-top: 0.2rem !important;
+  }
 }

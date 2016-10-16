@@ -1,0 +1,110 @@
+.choose-semester-section {
+
+  .prefix {
+    display: inline-block;
+  }
+
+  .Select {
+    display: inline-block !important;
+    width: 175px !important;
+    height: 1.5rem !important;
+    outline: 0 !important;
+    background-color: white;
+    overflow: visible !important;
+  }
+
+  .Select-control {
+    border-radius: 0rem !important;
+    font-size: 2rem !important;
+    margin: 0rem !important;
+    padding: 0rem !important;
+    border: 0rem;
+    border-bottom: 1.5px solid $primary-blue !important;
+    height: 100% !important;
+  }
+
+  .Select-placeholder {
+    height: 2rem !important;
+    line-height: 33px !important;
+    padding-top: 0.4rem !important;
+    padding-left: 0.3rem !important;
+    color: black !important;
+    overflow: visible !important;
+  }
+
+  .Select-input {
+    height: 2rem !important;
+    padding-left: 0.3rem !important;
+    padding-top: 0.15rem !important;
+  }
+
+  .Select-input > input {
+    padding: 0.45rem 0rem 0rem 0rem !important;
+    height: 2rem !important;
+    box-sizing: border-box !important;
+    width: 80% !important;
+    max-width: 100% !important;
+  }
+
+  .Select-arrow {
+    border-color: $primary-blue transparent transparent !important;
+  }
+
+  .Select-value, .Select-value-label {
+    line-height: 2rem !important;
+  }
+
+  .Select-value {
+    padding-top: 0.25rem !important;
+    padding-left: 0.5rem !important;
+    font-weight: bold !important;
+  }
+
+  .Select-option, .Select-noresults {
+    padding: 0.4rem 0.3rem 0rem 0.4rem !important;
+    margin: 0rem !important;
+    font-size: 2rem !important;
+  }
+
+  .Select-clear {
+    height: 5px !important;
+    padding-top: 0.2rem !important;
+  }
+}
+
+
+.choose-semester-page {
+  height: 100vh;
+  background-color: $primary-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon-wrapper {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .semester-fall, .semester-spring {
+    background-color: $primary-blue;
+    width: 150px;
+    color: white;
+    font-size: 1rem;
+    border: 2px solid white;
+    border-radius: 0px;
+    padding: 1.2rem 2rem 0.8rem 2rem;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+
+    &:hover {
+      background-color: white;
+      color: $primary-blue;
+    }
+  }
+
+  .semester-spring {
+    margin-left: 2rem;
+  }
+}
