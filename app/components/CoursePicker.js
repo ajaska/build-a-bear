@@ -90,9 +90,9 @@ class CoursePicker extends React.Component {
     })));
     let resetValue = { value: '' };
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
-      <div className="add-class-form-row" key={i}>
+      <div className="row" key={i}>
         <Select
-          className={`add-class-discussion${highlighted.section && !this.props.selections[i] ? " outline-blue" : ""}`}
+          className={`cp-discussion-section${highlighted.section && !this.props.selections[i] ? " outline-blue" : ""}`}
           disabled={!enabled.section || sectionGroup.length <= 1}
           placeholder={this.props.isLoadingSections ? 'Loading sections...' : 'Choose a section'}
           value={this.props.selections[i]}
@@ -111,22 +111,19 @@ class CoursePicker extends React.Component {
     let warning = null;
     if (this.props.warning) {
       warning = (
-        <div className="add-class-form-row add-class-warning-msg clearfix">
-          <div className="add-class-warning-msg-icon-wrapper">
-            <i className="add-class-warning-msg-icon warning circle icon"></i>
-          </div>
-          <span className="add-class-warning-msg-text">{this.props.warning}</span>
+        <div className="cp-warning-msg">
+          <span className="warning-text">{this.props.warning}</span>
         </div>
       );
     }
     return (
-      <div className="add-class-panel">
-        <div className="add-class-header">Add Class</div>
-        {this.props.error && <div className="add-class-error-msg">{this.props.error}</div>}
-        <div className="add-class-form">
-          <div className="add-class-form-row">
+      <div className="course-picker">
+        <div className="header">Add Class</div>
+        {this.props.error && <div className="cp-error-dialog">{this.props.error}</div>}
+        <div className="form">
+          <div className="row">
             <input
-              className={`add-class-CCN${highlighted.ccn ? " outline-blue" : ""}`}
+              className={`cp-CCN${highlighted.ccn ? " outline-blue" : ""}`}
               disabled={globalDisable}
               placeholder="CCN"
               type="text"
@@ -134,7 +131,7 @@ class CoursePicker extends React.Component {
               onChange={this.handleCCNChange}
             />
             <Select
-              className={`add-class-department${highlighted.dept ? " outline-blue" : ""}`}
+              className={`cp-department${highlighted.dept ? " outline-blue" : ""}`}
               disabled={globalDisable}
               placeholder="Department"
               value={this.props.dept}
@@ -144,7 +141,7 @@ class CoursePicker extends React.Component {
               options={depts}
             />
             <Select
-              className={`add-class-course-number${highlighted.deptNumber ? " outline-blue" : ""}`}
+              className={`cp-course-number${highlighted.deptNumber ? " outline-blue" : ""}`}
               disabled={!enabled.deptNumber}
               placeholder="Course No."
               value={this.props.deptNumber}
@@ -154,9 +151,9 @@ class CoursePicker extends React.Component {
               options={deptNumbers}
             />
           </div>
-          <div className="add-class-form-row">
+          <div className="row">
             <Select
-              className={`add-class-lecture-section${highlighted.lectureSection ? " outline-blue" : ""}`}
+              className={`cp-lecture-section${highlighted.lectureSection ? " outline-blue" : ""}`}
               disabled={!enabled.lectureSection}
               placeholder="Section"
               value={this.props.lectureSection}
@@ -167,51 +164,49 @@ class CoursePicker extends React.Component {
               onChange={this.handleLectureSelector}
             />
           </div>
-          <div className="add-class-form-row">
-            <select className="add-class-class-name" value="" disabled>
+          <div className="row">
+            <select className="cp-class-name" value="" disabled>
               <option value="" disabled>{this.props.desc || 'Class Name'}</option>
             </select>
-            <div className="add-class-waitlist-status">
+            <div className="cp-waitlist-status">
               Status: <span className="color-blue">{lectureAvailability}</span>
             </div>
           </div>
           {sectionSelectors}
-          <div className="add-class-form-row">
-            <Select
-              className={`add-class-grade-option${highlighted.gradeOption ? " outline-blue" : ""}`}
-              disabled={!enabled.gradeOption}
-              placeholder="Grade option"
-              value={this.props.gradingOption}
-              resetValue={resetValue}
-              options={gradeOption}
-              searchable={false}
-              clearable={false}
-              onChange={this.handleGradingOptionChange}
-            />
-            <input
-              className="add-class-CEC"
-              disabled={!enabled.gradeOption}
-              placeholder="Class Entry Code (optional)"
-              type="text"
-              value={this.props.cec}
-              onChange={this.handleCECChange}
-            />
-          </div>
+           <div className="row">
+             <input
+               className="cp-CEC"
+               disabled={!enabled.gradeOption}
+               placeholder="Class Entry Code (optional)"
+               type="text"
+               value={this.props.cec}
+               onChange={this.handleCECChange}
+             />
+             <Select
+               className={`cp-grade-option${highlighted.gradeOption ? " outline-blue" : ""}`}
+               disabled={!enabled.gradeOption}
+               placeholder="Grade option"
+               value={this.props.gradingOption}
+               resetValue={resetValue}
+               options={gradeOption}
+               searchable={false}
+               clearable={false}
+               onChange={this.handleGradingOptionChange}
+             />
+           </div>
           {warning}
-
-
-          <div className="add-class-form-row add-class-waitlist-row">
-            <label className="add-class-waitlist">
+          <div className="row">
+            <label className="cp-waitlist">
               Waitlist class if full
               <input
-                className="add-class-waitlist-button"
+                className="cp-waitlist-button"
                 type="checkbox"
                 name="waitlist"
                 id="waitlist"
               />
             </label>
             <button
-              className="add-class-submit-button"
+              className="cp-submit"
               onClick={this.handleClickedAdd}
               disabled={!enabled.addButton}
               id="add-class"
@@ -221,7 +216,7 @@ class CoursePicker extends React.Component {
           </div>
         </div>
       </div>
-      );
+    );
   }
 }
 

@@ -1,171 +1,230 @@
-.error-dialog-icon {
-  position: absolute;
-  text-align: center;
-  display: inline-block;
-  width: 65px;
-  top: 38.5%;
-  left: 31.5%;
-}
-
-.error-dialog-msg {
-  display: inline-block;
-  width: 400px;
-}
-
-.add-class-panel {
+.course-picker {
   background-color: $primary-gray;
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 0rem 0rem 1rem;
   border-radius: 0.25rem;
   margin-bottom: 1rem;
 
-  & button {
-    padding-bottom: 0.15rem !important;
+  .header {
+    margin-bottom: 1rem;
+    display: inline-block;
+    border-bottom: 0.2rem solid $primary-blue;
+    font-family: $font-semibold;
+    font-size: 1.2rem;
+    line-height: 0.9rem;
+  }
+
+  .form {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .row {
+    height: 1.75rem;
+    overflow: visible;
+    width: 100%;
+    margin-bottom: 0.2rem;
+    vertical-align: baseline;
+  }
+
+  input {
+    outline: 0;
+    border: 2px solid white;
+    font-family: 'Calibre-Regular', sans-serif;
+    font-size: 13px;
+
+    &:focus {
+      outline: 0;
+    }
   }
 }
 
-.add-class-header {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  display: inline-block;
-  border-bottom: 0.2rem solid $primary-blue;
-  font-family: $font-semibold;
-  font-size: 1.2rem;
-  line-height: 0.9rem;
-}
-
-.add-class-error-msg {
-  float: right;
-  font-size: 0.8rem;
-  line-height: 0.75rem;
-  padding: 0.5rem 0.5rem 0.35rem 0.5rem;
-  margin: 0.5rem 0rem;
-  border-radius: 0.25rem;
-  background-color: $primary-red;
-  color: white;
-}
-
-.add-class-warning-msg-icon-wrapper {
-  display: inline-block;
-  float: left;
-  width: 5%;
-  padding-top: 2.5%;
-  padding-left: 2.5%;
-  text-align: center;
-}
-
-.add-class-warning-msg-text {
-  display: inline-block;
-  float: right;
-  width: 82%;
-  font-size: 0.9rem;
-  padding: 2.5%;
-}
-
-.add-class-warning-msg {
-  background-color: $primary-yellow;
-  height: 100% !important;
-  border-radius: 0.25rem;
-}
-
-.add-class-form {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.add-class-CCN {
+.cp-CCN {
+  height: 0.89rem;
+  padding: 0.25rem 0.25rem 0.1rem 0.25rem;
   float: left;
   width: 15%;
-  padding-bottom: 0rem;
-  padding-top: 0.25rem;
-  display: inline-block;
 }
 
-.add-class-department {
-  width: 44% !important;
+.cp-department {
+  display: inline-block;
   margin-left: 2%;
+  width: 40%;
+  .Select-value {
+    width: 75% !important;
+  }
+}
+
+.cp-course-number {
   display: inline-block;
+  margin-left: 2%;
+  width: 30%;
 }
 
-.add-class-course-number {
-  float: right;
-  width: 35% !important;
+.cp-lecture-section {
   display: inline-block;
+  width: 75%;
+  .Select-value {
+    width: 90% !important;
+  }
 }
 
-.add-class-lecture-section {
-  width: 100%;
-  float: left;
+.cp-class-name {
+  padding: 0.2rem 0.25rem 0.2rem 0.25rem;
+  display: inline-block;
+  width: 45%;
 }
 
-.add-class-lab-section {
-  width: 100%;
-  float: left;
-}
-
-.add-class-discussion-section {
-  width: 100%;
-  float: left;
-}
-
-.add-class-grade-option {
-  width: 48%;
-  float: left;
-}
-
-.add-class-CEC {
-  width: 48%;
-  float: right;
-  padding-bottom: 0rem;
-  padding-top: 0.25rem;
-}
-
-.add-class-form-row {
-  height: 1.5rem;
-  width: 100%;
-  margin-bottom: 0.2rem;
-}
-
-.add-class-class-name {
-  width: 60% !important;
-  padding-bottom: 0rem;
-  padding-top: 0.25rem;
-}
-
-.add-class-waitlist-status {
+.cp-waitlist-status {
   display: inline-block;
   width: 37%;
-  margin-left: 2%;
+  margin-left: 15px;
+  font-size: 13px;
+}
+
+.cp-lecture-section, .cp-discussion-section, .cp-lab-section {
+  width: 86%;
+  .Select-value {
+    width: 90% !important;
+  }
+}
+
+.cp-grade-option {
+  display: inline-block;
+  width: 43%;
+  margin-left: 15px;
+}
+
+.cp-CEC {
+  height: 0.89rem;
+  padding: 0.25rem 0.25rem 0.1rem 0.25rem;
+  float: left;
+  width: 43%;
+}
+
+.cp-waitlist {
+  font-size: 0.8rem;
+  .cp-waitlist-button {
+    margin-left: 5px;
+    margin-right: 15px;
+  }
+}
+
+.cp-submit {
+  padding: 0.5rem 0.8rem 0.25rem 0.8rem;
   font-size: 0.8rem;
 }
 
-.add-class-waitlist-row {
-  width: 100%;
-  text-align: right;
-  margin-top: 1rem;
-}
-
-.add-class-waitlist {
-  font-size: 0.9rem;
-}
-
-.add-class-waitlist-button {
-  margin-left: 0.4rem;
-  margin-right: 1.2rem;
-}
-
-.add-class-submit-button {
-  padding: 0.5rem 0.8rem;
+.cp-warning-msg {
+  background-color: $primary-yellow;
   font-size: 0.8rem;
+  border-radius: 0.25rem;
+  width: 86%;
+  height: 100%;
+  padding: 0.5rem 0.8rem 0.25rem 0.8rem;
+  overflow: visible;
+  margin-bottom: 1rem;
+  vertical-align: baseline;
+}
+
+.cp-error-dialog {
+  background-color: $primary-red;
+  font-size: 0.8rem;
+  border-radius: 0.25rem;
+  width: 86%;
+  height: 100%;
+  padding: 0.5rem 0.8rem 0.25rem 0.8rem;
+  overflow: visible;
+  margin-bottom: 0.2rem;
+  vertical-align: baseline;
+}
+
+::-webkit-input-placeholder {
+  color: black;
+}
+
+:-moz-placeholder {
+  color: black;
+}
+
+::-moz-placeholder {
+  color: black;
+}
+
+:-ms-input-placeholder {
+  color: black;
+}
+
+input:disabled {
+  border: 2px solid $disabled-background !important;
+  border-radius: 0.25rem !important;
+  background-color: $disabled-background !important;
+}
+
+input:disabled::-webkit-input-placeholder {
+  color: $disabled-text !important;
+}
+
+input:disabled:-moz-placeholder { /* Firefox 18- */
+  color: $disabled-text !important;
+}
+
+input:disabled::-moz-placeholder {  /* Firefox 19+ */
+  color: $disabled-text !important;
+}
+
+input:disabled:-ms-input-placeholder {
+  color: $disabled-text !important;
+}
+
+select {
+  outline: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  background-color: white !important;
+  border-radius: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+}
+
+select:disabled {
+  border: 2px solid $disabled-background !important;
+  border-radius: 0.25rem !important;
+  color: $disabled-text !important;
+  background-color: $disabled-background !important;
+}
+
+/* Select Arrow styling CSS from http://stackoverflow.com/questions/22153080/how-do-i-change-the-select-box-arrow */
+select:not(:disabled) {
+  background:
+    linear-gradient(45deg, transparent 50%, $primary-blue 50%),
+    linear-gradient(135deg, $primary-blue 50%, transparent 50%);
+    // linear-gradient(to right, $primary-blue, $primary-blue);
+  background-position:
+    calc(100% - 12px) calc(0.4rem + 2px),
+    calc(100% - 8px) calc(0.4rem + 2px);
+    // 100% 0;
+  background-size:
+    4px 4px,
+    4px 4px;
+    // 2em 2em;
+  background-repeat: no-repeat;
 }
 
 // The searchable dropdowns are imported from an open-source project,
-// !important tags to override CSS properties, some might not be necessary.
+// !important tags to override CSS properties, some might not be necessary, oh well.
 
 .Select {
-  height: 100% !important;
+  height: 1.5rem !important;
+  outline: 0 !important;
+  background-color: white;
 }
 
 .Select.is-disabled {
+  background-color: $disabled-background !important;
   border: 2px solid $disabled-background !important;
   border-radius: 0.25rem !important;
   .Select-control {
@@ -190,7 +249,7 @@
 
 .Select-placeholder {
   height: 13px !important;
-  line-height: 13px !important;
+  line-height: 14px !important;
   padding-top: 0.4rem !important;
   padding-left: 0.3rem !important;
   color: black !important;
@@ -237,14 +296,4 @@ span.Select-arrow-zone {
 .Select-clear {
   height: 5px !important;
   padding-top: 0.2rem !important;
-}
-
-.error-dialog {
-  width: auto;
-  margin-bottom: 2rem;
-}
-
-.error-dialog-icon .icon {
-  color: $primary-red;
-  font-size: 50px !important;
 }

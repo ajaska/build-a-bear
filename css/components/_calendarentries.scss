@@ -156,69 +156,67 @@ $visual-gap-size: 10px;
 // - 27px * 2, the header and footer for lecture entries
 // - 0.5rem, handle the padding-top for the body of the entries
 
-.cal-body {
-  .lecture-entry {
-    .block-50 {
-      height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-100 {
-      height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-150 {
-      height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-200 {
-      height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-250 {
-      height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-300 {
-      height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-350 {
-      height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-400 {
-      height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-450 {
-      height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
-    .block-500 {
-      height: calc(10 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
-    }
+.lecture-entry {
+  .block-50 {
+    height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
   }
-  .other-entry {
-    .block-50 {
-      height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-100 {
-      height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-150 {
-      height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-200 {
-      height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-250 {
-      height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-300 {
-      height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-350 {
-      height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-400 {
-      height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-450 {
-      height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
-    .block-500 {
-      height: calc(10 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
-    }
+  .block-100 {
+    height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-150 {
+    height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-200 {
+    height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-250 {
+    height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-300 {
+    height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-350 {
+    height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-400 {
+    height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-450 {
+    height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+  .block-500 {
+    height: calc(10 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem - 27px * 2);
+  }
+}
+.other-entry {
+  .block-50 {
+    height: calc(1 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-100 {
+    height: calc(2 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-150 {
+    height: calc(3 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-200 {
+    height: calc(4 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-250 {
+    height: calc(5 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-300 {
+    height: calc(6 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-350 {
+    height: calc(7 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-400 {
+    height: calc(8 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-450 {
+    height: calc(9 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
+  }
+  .block-500 {
+    height: calc(10 * #{$half-hour-block-size} - #{$visual-gap-size} - 0.5rem);
   }
 }

@@ -15,36 +15,17 @@
 }
 
 .cal-header-row-entry {
-  position: absolute;
-  width: 20%;
-  top: 0px;
+  display: inline-block;
+  width: calc(20% - 0.2px);
   height: 25px;
   background-color: $primary-gray;
   padding-top: 0.75rem;
 }
 
-.cal-header-row {
-  .cal-header-row-entry:nth-child(1) {
-    left: 0%;
-  }
-  .cal-header-row-entry:nth-child(2) {
-    left: 20%;
-  }
-  .cal-header-row-entry:nth-child(3) {
-    left: 40%;
-  }
-  .cal-header-row-entry:nth-child(4) {
-    left: 60%;
-  }
-  .cal-header-row-entry:nth-child(5) {
-    left: 80%;
-  }
-}
-
 .cal-dotw-column {
   display: inline-block;
   height: 100%;
-  width: calc(20% - 1.3px);
+  width: calc(20% - 1.2px);
   border-bottom: 1px solid $primary-gray;
   border-right: 1px solid $primary-gray;
 }
@@ -66,19 +47,14 @@
 .lecture-entry-header {
   background-color: $primary-blue;
   color: white;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
   border-top-right-radius: 0.25rem;
   border-top-left-radius: 0.25rem;
-
 }
 
 .lecture-entry-body {
   background-color: white;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
   border-left: 1px solid $primary-gray;
   border-right: 1px solid $primary-gray;
 }
@@ -93,13 +69,11 @@
 .other-entry-body {
   background-color: $primary-blue;
   color: white;
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-top: 0.5rem;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
   border-radius: 0.25rem;
 }
 
-.waitlisted-course > {
+.waitlisted-course {
   .lecture-entry-header, .lecture-entry-body, .lecture-entry-footer, .other-entry-body {
     background-color: $primary-gray !important;
     color: $disabled-text !important;
