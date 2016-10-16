@@ -7,14 +7,11 @@ export const head = `
 
 export const body = `
 <div class="banner">
-  <img class="banner-image" src="/assets/whitebear.svg" /><span class="banner-text">Build-a-Bear</span>
+  <img class="banner-image" src="${ROOT_URL}/assets/whitebear.svg" /><span class="banner-text">Build-a-Bear</span>
 </div>
 <div class="main-container">
   <div class="my-academics-link-wrapper">
     <a class="my-academics-link" href="https://calcentral.berkeley.edu/academics">&lt; Return to My Academics</a>
-  </div>
-  <div>
-    <p class="class-enrollment-subtitle semibold">Class Enrollment</p>
   </div>
   <div id="root"></div>
 </div>

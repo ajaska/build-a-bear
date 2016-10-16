@@ -9,6 +9,7 @@ import App from './app/components/App';
 import { head, body } from './html';
 
 import { parseResponse } from './app/lib/responseParser';
+import { setSemester } from './app/actions/semester';
 import { setShoppingCart } from './app/actions/shoppingCart';
 import { setEnrolledCourses } from './app/actions/enrolled';
 import { setFormData } from './app/actions/api';
@@ -18,6 +19,7 @@ import configureStore from './app/store';
 let formData = new FormData();
 let enrolledCourses = [];
 let shoppingCartCourses = [];
+let term, course;
 
 function initialize() {
   // Remove any existing setInterval calls
@@ -33,7 +35,7 @@ function initialize() {
 
   document.querySelector('head').innerHTML = head;
 
-  ({ formData, enrolledCourses, shoppingCartCourses } = parseResponse(document));
+  ({ formData, enrolledCourses, shoppingCartCourses, term, course } = parseResponse(document));
 }
 
 function goReact() {
@@ -42,6 +44,7 @@ function goReact() {
     store.dispatch(setShoppingCart({ courses: shoppingCartCourses })),
     store.dispatch(setEnrolledCourses({ courses: enrolledCourses })),
     store.dispatch(setFormData({ formData })),
+    store.dispatch(setSemester({ term, course })),
   ]).then(() => {
     document.querySelector('body').innerHTML = body;
     ReactDOM.render(
@@ -53,5 +56,10 @@ function goReact() {
   });
 }
 
-initialize();
+try {
+  initialize();
+} catch (e) {
+  alert("Failed to initialize?");
+  throw e;
+}
 goReact();
