@@ -35,18 +35,18 @@ function Calendar({ courses }) {
   return (
     <div className="cal-enroll">
       <div className="cal-header-row">
-        <div className="cal-header-row-entry monday-column">Monday</div>
+        <div className="cal-header-row-entry monday-column border-radius-top-left">Monday</div>
         <div className="cal-header-row-entry">Tuesday</div>
         <div className="cal-header-row-entry">Wednesday</div>
         <div className="cal-header-row-entry">Thursday</div>
-        <div className="cal-header-row-entry">Friday</div>
+        <div className="cal-header-row-entry border-radius-top-right">Friday</div>
       </div>
       <div style={heightFix} className="cal-body">
-        <div className="cal-dotw-column monday-column"></div>
+        <div className="cal-dotw-column monday-column border-radius-bot-left"></div>
         <div className="cal-dotw-column"></div>
         <div className="cal-dotw-column"></div>
         <div className="cal-dotw-column"></div>
-        <div className="cal-dotw-column friday-column"></div>
+        <div className="cal-dotw-column friday-column border-radius-bot-right"></div>
 
         { lectures }
         { others }

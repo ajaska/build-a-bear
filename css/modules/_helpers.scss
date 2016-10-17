@@ -25,6 +25,22 @@
   overflow: visible;
 }
 
+.border-radius-top-right {
+  border-top-right-radius: 0.25rem;
+}
+
+.border-radius-bot-right {
+  border-bottom-right-radius: 0.25rem;
+}
+
+.border-radius-bot-left {
+  border-bottom-left-radius: 0.25rem;
+}
+
+.border-radius-top-left {
+  border-top-left-radius: 0.25rem;
+}
+
 .absolute-center-wrapper {
   position: relative;
   height: 100%;

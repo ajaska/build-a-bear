@@ -42,14 +42,14 @@ function EnrolledCourses({ courses }) {
     <table className="courses-table-enroll">
       <thead>
         <tr className="courses-table-header-row">
-          <th className="courses-table-header-drop-class">&nbsp;</th>
+          <th className="courses-table-header-drop-class border-radius-top-left">&nbsp;</th>
           <th>Class</th>
           <th>Type</th>
           <th>Time</th>
           <th>Room</th>
           <th>Instructor</th>
           <th>Units</th>
-          <th>CCN</th>
+          <th className="border-radius-top-right">CCN</th>
         </tr>
       </thead>
       <tbody>
