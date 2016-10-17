@@ -3,29 +3,29 @@
   background-color: $primary-blue;
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.banner-image {
-  display: inline-block;
-  margin-left: 2rem;
-  font-size: 1.2rem;
-  height: 1.2rem;
-}
-
-.banner-text {
-  display: inline-block;
-  color: white;
-  margin-left: 1rem;
-  font-size: 1.2rem;
+  .icon {
+    display: inline-block;
+    margin-left: 2rem;
+    font-size: 1.2rem;
+    height: 1.2rem;
+  }
+  .text {
+    display: inline-block;
+    color: white;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+  }
 }
 
 .my-academics-link-wrapper {
   margin-top: 1.8rem;
   margin-bottom: 0.7rem;
-}
-
-.my-academics-link {
-  text-decoration: none;
+  .link {
+    text-decoration: none;
+  }
+  .icon {
+    width: 6.5px;
+  }
 }
 
 .class-enrollment-subtitle {

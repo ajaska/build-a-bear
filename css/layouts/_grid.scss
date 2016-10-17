@@ -15,3 +15,12 @@
   float: right;
   display: inline-block;
 }
+
+@media (max-width: $medium-break) {
+  .side-panel-container {
+    display: none !important;
+  }
+  .main-data-container {
+    width: 100%;
+  }
+}

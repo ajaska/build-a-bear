@@ -20,8 +20,6 @@ $root-url: rootURL();
 
 @import 'layouts/grid';
 @import 'layouts/header';
-@import 'layouts/loading';
-@import 'layouts/table';
 
 @import 'vendors/_dimmer.min.scss';
 @import 'vendors/_dropdown.min.scss';
