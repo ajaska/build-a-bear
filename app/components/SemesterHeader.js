@@ -37,7 +37,7 @@ class SemesterHeader extends React.Component {
           resetValue={resetValue}
           onChange={this.handleSemesterChange}
           onOpen={this.updateSemesterOptions}
-          noResultsText={false}
+          noResultsText="Loading..."
           searchable={false}
           clearable={false}
         />
