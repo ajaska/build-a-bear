@@ -89,6 +89,25 @@ export function canceledCartAdd() {
   return { type: CANCELED_CART_ADD };
 }
 
+export const RECEIVE_SEMESTER_CHANGE = Symbol('RECEIVE_SEMESTER_CHANGE');
+export function receiveSemesterChange({ career, enrolledCourses, shoppingCartCourses, term }) {
+  return {
+    type: RECEIVE_SEMESTER_CHANGE,
+    career,
+    enrolledCourses,
+    term,
+    shoppingCartCourses,
+  }
+}
+
+export const RECEIVE_SEMESTER_CHOICES = Symbol('RECEIVE_SEMESTER_CHOICES');
+export function receiveSemesterChoices({ choices }) {
+  return {
+    type: RECEIVE_SEMESTER_CHOICES,
+    choices,
+  }
+}
+
 const CART_URL = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
 const ADD_URL = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_ADD.GBL';
 
@@ -358,5 +377,62 @@ export function dropCartCourse({ ccn }) {
         dispatch(setFormData({ formData }));
         return dispatch(receiveCartDrop({ ccn, enrolledCourses, shoppingCartCourses }));
       });
+  };
+}
+
+function mainPageToChooseTerm({ formData }) {
+  formData.set('ICAJAX', '0');
+  formData.set('ICAction', 'DERIVED_SSS_SCT_SSS_TERM_LINK');
+  return postFormData(CART_URL, formData)
+    .then(body => docFromBody(body))
+    .then(doc => parseResponse(doc));
+}
+
+function chooseTerm({ formData, choice }) {
+  formData.set('ICAJAX', '0');
+  formData.set('ICAction', 'DERIVED_SSS_SCT_SSR_PB_GO');
+  formData.set(`SSR_DUMMY_RECV1$sels$${choice}$$0`, choice);
+  formData.delete('SSR_DUMMY_RECV1$sels$0');
+
+  return postFormData(CART_URL, formData)
+    .then(body => docFromBody(body))
+    .then(doc => parseResponse(doc));
+}
+
+export function setSemester({ term }) {
+  return (dispatch, getState) => {
+    const formData = getState().api.formData;
+    const choices = getState().semester.toJS().choices;
+    const choice = choices.map(choice => choice.term).indexOf(term);
+    return chooseTerm({ formData, choice })
+      .then(({ formData, career, term, enrolledCourses, shoppingCartCourses }) => {
+        dispatch(setFormData({ formData }));
+        return dispatch(receiveSemesterChange({ career, enrolledCourses, term, shoppingCartCourses }));
+      });
+  };
+}
+
+export function setSemesterFromMainPage({ term }) {
+  return (dispatch, getState) => {
+    const formData = getState().api.formData;
+    const choices = getState().semester.toJS().choices;
+    const choice = choices.map(choice => choice.term).indexOf(term);
+    return mainPageToChooseTerm({ formData })
+      .then(({ formData }) => chooseTerm({ formData, choice }))
+      .then(({ formData, career, term, enrolledCourses, shoppingCartCourses }) => {
+        dispatch(setFormData({ formData }));
+        return dispatch(receiveSemesterChange({ career, enrolledCourses, term, shoppingCartCourses }));
+      });
+  };
+}
+
+export function updateSemesterOptions() {
+  return (dispatch, getState) => {
+    const formData = getState().api.formData;
+    mainPageToChooseTerm({ formData })
+      .then(({ semesters }) => {
+        dispatch(receiveSemesterChoices({ choices: semesters }));
+      })
+      .then(() => reloadMainPage()); /* No cancel button, just abort */
   };
 }

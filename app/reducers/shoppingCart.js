@@ -12,6 +12,7 @@ export default function (state = defaultState, action) {
       return state.set('courses', action.courses);
     case APIActionType.RECEIVE_COURSE_ADD:
     case APIActionType.RECEIVE_CART_DROP:
+    case APIActionType.RECEIVE_SEMESTER_CHANGE:
       return state.set('courses', action.shoppingCartCourses);
     default:
       return state;

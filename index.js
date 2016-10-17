@@ -8,18 +8,15 @@ import App from './app/components/App';
 
 import { head, body } from './html';
 
-import { parseResponse } from './app/lib/responseParser';
-import { setSemester } from './app/actions/semester';
+import { pages, parseResponse } from './app/lib/responseParser';
+import { setSemester, setSemesterChoices } from './app/actions/semester';
 import { setShoppingCart } from './app/actions/shoppingCart';
 import { setEnrolledCourses } from './app/actions/enrolled';
 import { setFormData } from './app/actions/api';
 
 import configureStore from './app/store';
 
-let formData = new FormData();
-let enrolledCourses = [];
-let shoppingCartCourses = [];
-let term, course;
+let info;
 
 function initialize() {
   // Remove any existing setInterval calls
@@ -35,17 +32,28 @@ function initialize() {
 
   document.querySelector('head').innerHTML = head;
 
-  ({ formData, enrolledCourses, shoppingCartCourses, term, course } = parseResponse(document));
+  info = parseResponse(document);
 }
 
 function goReact() {
   let store = configureStore();
-  Promise.all([
-    store.dispatch(setShoppingCart({ courses: shoppingCartCourses })),
-    store.dispatch(setEnrolledCourses({ courses: enrolledCourses })),
-    store.dispatch(setFormData({ formData })),
-    store.dispatch(setSemester({ term, course })),
-  ]).then(() => {
+  let promise;
+  if (info.pageName === pages.MAIN_PAGE) {
+    promise = Promise.all([
+      store.dispatch(setShoppingCart({ courses: info.shoppingCartCourses })),
+      store.dispatch(setEnrolledCourses({ courses: info.enrolledCourses })),
+      store.dispatch(setFormData({ formData: info.formData })),
+      store.dispatch(setSemester({ term: info.term, career: info.career })),
+    ]);
+  } else {
+    console.log(info);
+    promise = Promise.all([
+      store.dispatch(setSemesterChoices({ choices: info.semesters })),
+      store.dispatch(setFormData({ formData: info.formData })),
+    ]);
+  }
+
+  promise.then(() => {
     document.querySelector('body').innerHTML = body;
     ReactDOM.render(
       <Provider store={store}>
@@ -59,7 +67,7 @@ function goReact() {
 try {
   initialize();
 } catch (e) {
-  alert("Failed to initialize?");
+  alert('Failed to initialize?');
   throw e;
 }
 goReact();

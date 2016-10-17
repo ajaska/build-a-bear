@@ -107,7 +107,7 @@ export function parseResponse(doc) {
   /* Page specific handlers */
   switch (info.pageName) {
     case pages.SEMESTER_SELECTION_PAGE:
-      info.semester = doSemesterSelection(doc);
+      info.semesters = doSemesterSelection(doc);
       break;
     case pages.MAIN_PAGE:
       info.enrolledCourses = doEnrolledTable(doc);

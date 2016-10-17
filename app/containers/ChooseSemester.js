@@ -1,13 +1,20 @@
 import { connect } from 'react-redux';
 import ChooseSemester from '../components/ChooseSemester';
+import { setSemester } from '../actions/api';
 
 const mapStateToProps = (state) => {
   const semester = state.semester.toJS();
-  console.log(semester);
 
   return {
+    choices: semester.choices,
     term: semester.term,
   };
 };
 
-export default connect(mapStateToProps)(ChooseSemester);
+const mapDispatchToProps = (dispatch) => ({
+  selectedSemester: (term) => {
+    dispatch(setSemester(term));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChooseSemester);
