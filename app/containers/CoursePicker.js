@@ -21,7 +21,13 @@ function checkError(state, lectureSection) {
     return 'You are already at the unit cap';
   }
 
-  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 10.5)) {
+  const term = state.semester.toJS().term;
+  let maxUnits = 10.5;
+  if (term.includes("Fall")) {
+    maxUnits = 20.5;
+  }
+
+  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > maxUnits)) {
     return 'Adding this course would put you over the unit cap.';
   }
 

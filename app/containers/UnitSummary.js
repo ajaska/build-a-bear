@@ -17,10 +17,16 @@ const mapStateToProps = (state) => {
   ec = ec || 0;
   wc = wc || 0;
 
+  const term = state.semester.toJS().term;
+  let maxUnits = 10.5;
+  if (term.includes("Fall")) {
+    maxUnits = 20.5;
+  }
+
   return {
     enrolledUnits: ec,
     waitlistedUnits: wc,
-    maxUnits: 10.5,
+    maxUnits,
   };
 };
 
