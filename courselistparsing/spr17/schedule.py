@@ -86,7 +86,9 @@ for dept in depts.keys():
                 ccn_indexed[str(CCN)] = entry
                 break
 
+dept_indexed = dict((k, v) for k, v in dept_indexed.iteritems() if v)
 dept_indexed = json.dumps(dept_indexed)
+
 ccn_indexed = json.dumps(ccn_indexed)
 depts_manifest = json.dumps(depts_manifest)
 
