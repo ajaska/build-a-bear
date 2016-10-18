@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "Build a Bear",
+  "version": "1.0",
+  "description": "Builds a better bear",
+  "browser_action": {
+    "default_icon": "128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://bcsweb.is.berkeley.edu/*"],
+      "js": ["meme.js"]
+    }
+  ]
+}
