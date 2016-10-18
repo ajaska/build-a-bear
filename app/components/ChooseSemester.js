@@ -4,7 +4,7 @@ function ChooseSemester(props) {
   const buttons = props.choices.map((choice, i) => (
     <button
       key={i}
-      className="semester-fall semibold"
+      className="semester semibold"
       onClick={(() => props.selectedSemester({term: choice.term}))}
     >
       {choice.term}

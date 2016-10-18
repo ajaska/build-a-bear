@@ -86,7 +86,7 @@
     text-align: center;
   }
 
-  .semester-fall, .semester-spring {
+  .semester {
     background-color: $primary-blue;
     width: 150px;
     color: white;
@@ -98,14 +98,15 @@
     -moz-transition: .5s;
     -webkit-transition: .5s;
     transition: .5s;
+    margin-left: 2rem;
 
     &:hover {
       background-color: white;
       color: $primary-blue;
     }
-  }
 
-  .semester-spring {
-    margin-left: 2rem;
+    &:first-child {
+      margin-left: 0rem !important;
+    }
   }
 }
