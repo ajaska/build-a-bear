@@ -26119,7 +26119,7 @@ var require$$9$1 = Object.freeze({
       disabled: React.PropTypes.bool.isRequired
     };
 
-    var mapStateToProps = function mapStateToProps(state) {
+    var mapStateToProps$1 = function mapStateToProps(state) {
       return {
         courses: state.shoppingCart.get('courses'),
         disabled: state.coursePicker.get('isDroppingCartCourse')
@@ -26139,7 +26139,7 @@ var require$$9$1 = Object.freeze({
       };
     };
 
-    var ShoppingCart = connect(mapStateToProps, mapDispatchToProps)(ShoppingCart$1);
+    var ShoppingCart = connect(mapStateToProps$1, mapDispatchToProps)(ShoppingCart$1);
 
     function joinWithBr(arr, property) {
       var items = [];
@@ -26350,12 +26350,12 @@ var require$$9$1 = Object.freeze({
       })).isRequired
     };
 
-    var mapStateToProps$1 = function mapStateToProps(state) {
+    var mapStateToProps$2 = function mapStateToProps(state) {
       var courses = state.enrolled.toJS().courses;
       return { courses: courses };
     };
 
-    var EnrolledCourses = connect(mapStateToProps$1)(EnrolledCourses$1);
+    var EnrolledCourses = connect(mapStateToProps$2)(EnrolledCourses$1);
 
     var AutosizeInput = createCommonjsModule(function (module) {
     'use strict';
@@ -28570,7 +28570,7 @@ var require$$9$1 = Object.freeze({
       return '';
     }
 
-    var mapStateToProps$2 = function mapStateToProps(state) {
+    var mapStateToProps$3 = function mapStateToProps(state) {
       var cpState = state.coursePicker.toJS();
       var lectureSection = cpState.lectureSections[cpState.lectureSection];
       var desc = '';
@@ -28619,7 +28619,7 @@ var require$$9$1 = Object.freeze({
       };
     };
 
-    var CoursePicker = connect(mapStateToProps$2, mapDispatchToProps$1)(CoursePicker$1);
+    var CoursePicker = connect(mapStateToProps$3, mapDispatchToProps$1)(CoursePicker$1);
 
     function UnitSummary$1(_ref) {
       var enrolledUnits = _ref.enrolledUnits;
@@ -28668,7 +28668,7 @@ var require$$9$1 = Object.freeze({
       waitlistedUnits: React.PropTypes.number.isRequired
     };
 
-    var mapStateToProps$3 = function mapStateToProps(state) {
+    var mapStateToProps$4 = function mapStateToProps(state) {
                     var courses = state.enrolled.toJS().courses;
 
                     var ec = courses.map(function (course) {
@@ -28701,7 +28701,7 @@ var require$$9$1 = Object.freeze({
                     };
     };
 
-    var UnitSummary = connect(mapStateToProps$3)(UnitSummary$1);
+    var UnitSummary = connect(mapStateToProps$4)(UnitSummary$1);
 
     // eslint-disable-line import/no-unresolved
 
@@ -28957,7 +28957,7 @@ var require$$9$1 = Object.freeze({
       cec: React.PropTypes.string.isRequired
     };
 
-    var mapStateToProps$4 = function mapStateToProps(state) {
+    var mapStateToProps$5 = function mapStateToProps(state) {
       var courses = state.enrolled.toJS().courses;
       var units = courses.map(function (course) {
         return course.lecture;
@@ -28998,7 +28998,7 @@ var require$$9$1 = Object.freeze({
       };
     };
 
-    var AddCourseModal = connect(mapStateToProps$4, mapDispatchToProps$2)(AddCourseModal$1);
+    var AddCourseModal = connect(mapStateToProps$5, mapDispatchToProps$2)(AddCourseModal$1);
 
     function Calendar$1(_ref) {
       var courses = _ref.courses;
@@ -29122,7 +29122,7 @@ var require$$9$1 = Object.freeze({
       );
     }
 
-    var mapStateToProps$5 = function mapStateToProps(state) {
+    var mapStateToProps$6 = function mapStateToProps(state) {
       var courses = flatten(state.enrolled.toJS().courses.map(function (course) {
         return course.flatten();
       }));
@@ -29152,7 +29152,7 @@ var require$$9$1 = Object.freeze({
       return { courses: normalizedCourses };
     };
 
-    var Calendar = connect(mapStateToProps$5)(Calendar$1);
+    var Calendar = connect(mapStateToProps$6)(Calendar$1);
 
     function Footer() {
       return React.createElement(
@@ -29264,7 +29264,7 @@ var require$$9$1 = Object.freeze({
       };
     }
 
-    var mapStateToProps$6 = function mapStateToProps(state) {
+    var mapStateToProps$7 = function mapStateToProps(state) {
       var semesterState = state.semester.toJS();
       var choices = [];
       if (semesterState.choices.length > 0) {
@@ -29289,7 +29289,7 @@ var require$$9$1 = Object.freeze({
       };
     };
 
-    var SemesterHeader = connect(mapStateToProps$6, mapDispatchToProps$3)(SemesterHeader$1);
+    var SemesterHeader = connect(mapStateToProps$7, mapDispatchToProps$3)(SemesterHeader$1);
 
     var ToGoogleCalendar = function (_React$Component) {
       inherits(ToGoogleCalendar, _React$Component);
@@ -29407,7 +29407,16 @@ var require$$9$1 = Object.freeze({
       );
     }
 
-    function MainPage() {
+    function MainPage$1(props) {
+
+      var genAddCourse = function genAddCourse(term) {
+        if (term.includes("Fall")) {
+          return React.createElement('div', null);
+        } else {
+          return React.createElement(CoursePicker, null);
+        }
+      };
+
       return React.createElement(
         'div',
         null,
@@ -29443,7 +29452,7 @@ var require$$9$1 = Object.freeze({
                 'div',
                 { className: 'side-panel-container' },
                 React.createElement(ToGoogleCalendar, null),
-                React.createElement(CoursePicker, null),
+                genAddCourse(props.term),
                 React.createElement(UnitSummary, null),
                 React.createElement(ShoppingCart, null)
               )
@@ -29453,6 +29462,19 @@ var require$$9$1 = Object.freeze({
         )
       );
     }
+
+    MainPage$1.propTypes = {
+      term: React.PropTypes.string.isRequired
+    };
+
+    var mapStateToProps = function mapStateToProps(state) {
+      var semester = state.semester.toJS();
+      return {
+        term: semester.term
+      };
+    };
+
+    var MainPage = connect(mapStateToProps)(MainPage$1);
 
     function ChooseSemester$1(props) {
       var buttons = props.choices.map(function (choice, i) {
@@ -29498,7 +29520,7 @@ var require$$9$1 = Object.freeze({
       term: React.PropTypes.string.isRequired
     };
 
-    var mapStateToProps$7 = function mapStateToProps(state) {
+    var mapStateToProps$8 = function mapStateToProps(state) {
       var semester = state.semester.toJS();
 
       return {
@@ -29515,7 +29537,7 @@ var require$$9$1 = Object.freeze({
       };
     };
 
-    var ChooseSemester = connect(mapStateToProps$7, mapDispatchToProps$4)(ChooseSemester$1);
+    var ChooseSemester = connect(mapStateToProps$8, mapDispatchToProps$4)(ChooseSemester$1);
 
     function App() {
       return React.createElement(
