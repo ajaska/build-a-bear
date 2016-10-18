@@ -98,15 +98,12 @@
     -moz-transition: .5s;
     -webkit-transition: .5s;
     transition: .5s;
-    margin-left: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 
     &:hover {
       background-color: white;
       color: $primary-blue;
-    }
-
-    &:first-child {
-      margin-left: 0rem !important;
     }
   }
 }
