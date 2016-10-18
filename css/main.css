@@ -946,7 +946,7 @@ select:not(:disabled) {
     text-align: center; }
   .choose-semester-page .semester {
     background-color: #4279FF;
-    width: 150px;
+    width: 200px;
     color: white;
     font-size: 1rem;
     border: 2px solid white;
