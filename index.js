@@ -1,6 +1,8 @@
 if (window.buildabearloaded) { throw new Error('Already running'); }
 window.buildabearloaded = true;
 
+import './app/helpers/formdata'; // FormData polyfill
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';

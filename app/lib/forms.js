@@ -16,7 +16,7 @@ export function postFormData(url, formData) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Content-Length': urlEncodedData.length,
+      // 'Content-Length': urlEncodedData.length,
       'cache-control': 'no-cache',
     },
     body: urlEncodedData,
