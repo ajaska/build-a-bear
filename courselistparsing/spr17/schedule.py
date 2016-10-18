@@ -46,19 +46,45 @@ for dept in depts.keys():
         except:
             units = ""
         sections = course_data["sections"]
+
+        has_lecture = False
+        # All lectures and discussions that don't have a lecture
         for section in sections:
             class_type = section["type"]
-            CCN = section["id"]
-            section_number = section["number"]
-            dept_indexed[dept][course_num].append(str(section_number))
-            # If there's no information on the section days, location, instructors, start_time, end_time whatsoever
-            if len(section["meetings"]) == 0:
-                continue
-            days, location, instructors, start_time, end_time = get_section_info(section["meetings"][0])
-            entry = [dept, course_num, section_number, class_type, title, units, location, days, start_time, end_time, instructors]
-            # Remove unicode
-            entry = map((lambda x: str(x)), entry)
-            cnn_indexed[str(CCN)] = entry
+            if str(class_type) == "LEC":
+                has_lecture = True
+
+        for section in sections:
+            class_type = section["type"]
+            if has_lecture:
+                if class_type == "LEC":
+                    CCN = section["id"]
+                    section_number = section["number"]
+                    dept_indexed[dept][course_num].append(str(section_number))
+                    # If there's no information on the section days, location, instructors, start_time, end_time whatsoever
+                    if len(section["meetings"]) == 0:
+                        continue
+                    days, location, instructors, start_time, end_time = get_section_info(section["meetings"][0])
+                    entry = [dept, course_num, section_number, class_type, title, units, location, days, start_time, end_time, instructors]
+                    # Remove unicode
+                    entry = map((lambda x: str(x)), entry)
+                    cnn_indexed[str(CCN)] = entry
+                    break
+                else:
+                    continue
+            else:
+                CCN = section["id"]
+                section_number = section["number"]
+                dept_indexed[dept][course_num].append(str(section_number))
+                # If there's no information on the section days, location, instructors, start_time, end_time whatsoever
+                if len(section["meetings"]) == 0:
+                    continue
+                days, location, instructors, start_time, end_time = get_section_info(section["meetings"][0])
+                entry = [dept, course_num, section_number, class_type, title, units, location, days, start_time, end_time, instructors]
+                # Remove unicode
+                entry = map((lambda x: str(x)), entry)
+                cnn_indexed[str(CCN)] = entry
+                break
 
 target = open("./dept_indexed.json", 'w')
 target.write(str(dept_indexed))

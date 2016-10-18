@@ -32,6 +32,12 @@ def get_section_info(section):
     start_time = section["startTime"]
     end_time = section["endTime"]
 
+    if len(start_time.split(":")) == 3:
+        start_time = start_time[:-3]
+
+    if len(end_time.split(":")) == 3:
+        end_time = end_time[:-3]
+
     try:
         location = section["location"]["description"]
     except:
