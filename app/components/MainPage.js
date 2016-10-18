@@ -11,7 +11,20 @@ import ToGoogleCalendar from '../components/ToGoogleCalendar';
 import Banner from '../components/html/Banner';
 import MyAcademics from '../components/html/MyAcademics';
 
-function MainPage() {
+function MainPage(props) {
+
+  const genAddCourse = (term) => {
+    if (term.includes("Fall")) {
+      return (
+        <div />
+      );
+    } else {
+      return (
+        <CoursePicker />
+      );
+    }
+  }
+
   return (
     <div>
       <Banner />
@@ -30,7 +43,7 @@ function MainPage() {
             </div>
             <div className="side-panel-container">
               <ToGoogleCalendar />
-              <CoursePicker />
+              {genAddCourse(props.term)}
               <UnitSummary />
               <ShoppingCart />
             </div>
@@ -40,6 +53,10 @@ function MainPage() {
       </div>
     </div>
   );
+}
+
+MainPage.propTypes = {
+  term: React.PropTypes.string.isRequired,
 }
 
 export default MainPage;
