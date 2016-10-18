@@ -4,3 +4,4 @@ node_modules/
 css/.sass-cache
 css/main.css
 courselistparsing/spr17/*.pyc
+*.zip
