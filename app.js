@@ -28550,7 +28550,13 @@ var require$$9$1 = Object.freeze({
         return 'You are already at the unit cap';
       }
 
-      if (lectureSection && unitCount && 1 * lectureSection.units + unitCount > 10.5) {
+      var term = state.semester.toJS().term;
+      var maxUnits = 10.5;
+      if (term.includes("Fall")) {
+        maxUnits = 20.5;
+      }
+
+      if (lectureSection && unitCount && 1 * lectureSection.units + unitCount > maxUnits) {
         return 'Adding this course would put you over the unit cap.';
       }
 
@@ -28669,36 +28675,42 @@ var require$$9$1 = Object.freeze({
     };
 
     var mapStateToProps$4 = function mapStateToProps(state) {
-                    var courses = state.enrolled.toJS().courses;
+      var courses = state.enrolled.toJS().courses;
 
-                    var ec = courses.map(function (course) {
-                                    return course.lecture;
-                    }).filter(function (lecture) {
-                                    return lecture.enrollmentStatus === 'Enrolled';
-                    }).map(function (lecture) {
-                                    return lecture.units;
-                    }).reduce(function (prev, units) {
-                                    return prev + 1 * units;
-                    }, 0.0);
+      var ec = courses.map(function (course) {
+        return course.lecture;
+      }).filter(function (lecture) {
+        return lecture.enrollmentStatus === 'Enrolled';
+      }).map(function (lecture) {
+        return lecture.units;
+      }).reduce(function (prev, units) {
+        return prev + 1 * units;
+      }, 0.0);
 
-                    var wc = courses.map(function (course) {
-                                    return course.lecture;
-                    }).filter(function (lecture) {
-                                    return lecture.enrollmentStatus === 'Wait Listed';
-                    }).map(function (lecture) {
-                                    return lecture.units;
-                    }).reduce(function (prev, units) {
-                                    return prev + 1 * units;
-                    }, 0.0);
+      var wc = courses.map(function (course) {
+        return course.lecture;
+      }).filter(function (lecture) {
+        return lecture.enrollmentStatus === 'Wait Listed';
+      }).map(function (lecture) {
+        return lecture.units;
+      }).reduce(function (prev, units) {
+        return prev + 1 * units;
+      }, 0.0);
 
-                    ec = ec || 0;
-                    wc = wc || 0;
+      ec = ec || 0;
+      wc = wc || 0;
 
-                    return {
-                                    enrolledUnits: ec,
-                                    waitlistedUnits: wc,
-                                    maxUnits: 10.5
-                    };
+      var term = state.semester.toJS().term;
+      var maxUnits = 10.5;
+      if (term.includes("Fall")) {
+        maxUnits = 20.5;
+      }
+
+      return {
+        enrolledUnits: ec,
+        waitlistedUnits: wc,
+        maxUnits: maxUnits
+      };
     };
 
     var UnitSummary = connect(mapStateToProps$4)(UnitSummary$1);
