@@ -21,7 +21,7 @@ function checkError(state, lectureSection) {
     return 'You are already at the unit cap';
   }
 
-  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 20.5)) {
+  if (lectureSection && unitCount && ((1 * lectureSection.units) + unitCount > 10.5)) {
     return 'Adding this course would put you over the unit cap.';
   }
 

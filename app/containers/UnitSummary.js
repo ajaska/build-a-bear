@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
   return {
     enrolledUnits: ec,
     waitlistedUnits: wc,
-    maxUnits: 20.5,
+    maxUnits: 10.5,
   };
 };
 
