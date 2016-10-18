@@ -87,7 +87,7 @@ for dept in depts.keys():
                 break
 
 dept_indexed = json.dumps(dept_indexed)
-ccn_indexed = json.dumps(dept_indexed)
+ccn_indexed = json.dumps(ccn_indexed)
 depts_manifest = json.dumps(depts_manifest)
 
 target = open("../../app/data/dept_indexed.json", 'w')

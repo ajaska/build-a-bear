@@ -41,7 +41,7 @@ def get_section_info(section):
     try:
         location = section["location"]["description"]
     except:
-        location = ""
+        location = "TBA"
 
     return (str(days), str(location), str(instructors), str(start_time), str(end_time))
 
