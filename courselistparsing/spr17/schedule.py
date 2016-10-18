@@ -4,7 +4,7 @@ import json
 from departments import depts
 from helpers import get_section_info, filter_dept, find_id
 
-cnn_indexed = {}
+ccn_indexed = {}
 dept_indexed = {}
 dept_mapping = []
 depts_manifest = {}
@@ -68,7 +68,7 @@ for dept in depts.keys():
                     entry = [dept, course_num, section_number, class_type, title, units, location, days, start_time, end_time, instructors]
                     # Remove unicode
                     entry = map((lambda x: str(x)), entry)
-                    cnn_indexed[str(CCN)] = entry
+                    ccn_indexed[str(CCN)] = entry
                     break
                 else:
                     continue
@@ -83,17 +83,21 @@ for dept in depts.keys():
                 entry = [dept, course_num, section_number, class_type, title, units, location, days, start_time, end_time, instructors]
                 # Remove unicode
                 entry = map((lambda x: str(x)), entry)
-                cnn_indexed[str(CCN)] = entry
+                ccn_indexed[str(CCN)] = entry
                 break
 
-target = open("./dept_indexed.json", 'w')
+dept_indexed = json.dumps(dept_indexed)
+ccn_indexed = json.dumps(dept_indexed)
+depts_manifest = json.dumps(depts_manifest)
+
+target = open("../../app/data/dept_indexed.json", 'w')
 target.write(str(dept_indexed))
 
-target = open("./cnn_indexed.json", 'w')
-target.write(str(cnn_indexed))
+target = open("../../app/data/ccn_indexed.json", 'w')
+target.write(str(ccn_indexed))
 
-target = open("./dept_mappings.json", 'w')
-target.write(str(dept_mapping))
+# target = open("../../app/data/dept_mappings.json", 'w')
+# target.write(str(dept_mapping))
 
-target = open("./depts.json", 'w')
+target = open("../../app/data/depts.json", 'w')
 target.write(str(depts_manifest))
