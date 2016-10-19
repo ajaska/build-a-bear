@@ -2,6 +2,7 @@ if (window.buildabearloaded) { throw new Error('Already running'); }
 window.buildabearloaded = true;
 
 import './app/helpers/formdata'; // FormData polyfill
+import './app/helpers/analytics'; // Google Analytics
 
 import React from 'react';
 import ReactDOM from 'react-dom';
