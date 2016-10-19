@@ -9,6 +9,8 @@ dept_indexed = {}
 dept_mapping = []
 depts_manifest = {}
 
+depts_manifest["CS"] = "COMPSCI";
+
 for dept in depts.keys():
     dept = str(dept)
     dept_indexed[dept] = {}
