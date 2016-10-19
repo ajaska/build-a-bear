@@ -17,10 +17,12 @@ for dept in depts.keys():
     dept_entry["name"] = depts[dept]
     dept_entry["code"] = dept
     dept_entry["id"] = find_id(dept)
+
     if (dept_entry["id"] != ""):
         dept_mapping.append(dept_entry)
 
     depts_manifest[depts[dept]] = dept
+    depts_manifest[dept] = dept
 
     temp = filter_dept(dept)
     print temp
