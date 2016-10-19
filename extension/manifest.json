@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Build a Bear",
-  "version": "1.0.0.4",
+  "version": "1.0.0.5",
   "description": "Builds a better bear",
   "browser_action": {
     "default_icon": "icon128.png"
