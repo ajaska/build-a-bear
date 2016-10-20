@@ -79,7 +79,7 @@ for dept in depts.keys():
             else:
                 CCN = section["id"]
                 section_number = section["number"]
-                dept_indexed[dept][course_num].append(str(section_number))
+                dept_indexed[dept][course_num].append(str(CCN))
                 # If there's no information on the section days, location, instructors, start_time, end_time whatsoever
                 if len(section["meetings"]) == 0:
                     continue

@@ -48,6 +48,7 @@ def get_section_info(section):
 def filter_dept(dept):
     if dept == "L & S":
         return "LS"
+    dept = dept.replace(" ", "")
     return dept
 
 def find_id(dept):
