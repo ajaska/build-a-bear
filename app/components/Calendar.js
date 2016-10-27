@@ -2,34 +2,51 @@ import React from 'react';
 
 function Calendar({ courses }) {
   const sc = courses;
-  const lecture = Object.keys(sc).filter(course => sc[course].lecture);
-  const other = Object.keys(sc).filter(course => !sc[course].lecture);
+  const rawLectures = Object.keys(sc).filter(course => sc[course].lecture);
+  const rawSections = Object.keys(sc).filter(course => !sc[course].lecture);
 
-  let earliestClassStartTime = Math.min.apply(Math, sc.map( function(a) {return a.start;} ));
-  let latestClassEndTime = Math.max.apply(Math, sc.map( function(b) {return b.start + b.length;} ));
+  const earliestClassStartTime = Math.min(...sc.map(course => course.start));
+  const latestClassEndTime = Math.max(...sc.map(course => course.start + course.length));
 
-  let calendarHeight = ((latestClassEndTime - earliestClassStartTime) / 50) * 60 + 30;
+  const calendarHeight = ((latestClassEndTime - earliestClassStartTime) / 50) * 60 + 30;
 
-  var heightFix = {
-    height: '' + calendarHeight + 'px',
+  const heightFix = {
+    height: `${calendarHeight}px`,
   };
 
-  const genLectures = (key) => key.map((key, i) => (
-    <div className={(sc[key].waitlisted ? 'waitlisted-course ' : '') + sc[key].day + " lecture-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
-      <div className="lecture-entry-header semibold">{sc[key].formatted}</div>
-      <div className={"lecture-entry-body block-" + sc[key].length}>{sc[key].desc} <br />{sc[key].room} </div>
-      <div className="lecture-entry-footer"></div>
-    </div>
-  ));
+  const lectures = rawLectures.map((lecture, i) => {
+    const outerClassName = `${(sc[lecture].waitlisted ? 'waitlisted-course ' : '')}\
+${sc[lecture].day} lecture-entry \
+rel-start-${parseInt(sc[lecture].start, 10) - earliestClassStartTime + 650}`;
+    return (
+      <div className={outerClassName} key={i}>
+        <div className="lecture-entry-header semibold">{sc[lecture].formatted}</div>
+        <div className={`lecture-entry-body block-${sc[lecture].length}`}>
+          {sc[lecture].desc}
+          <br />
+          {sc[lecture].room}
+        </div>
+        <div className="lecture-entry-footer"></div>
+      </div>
+    );
+  });
 
-  const genNonLectures = (key) => key.map((key, i) => (
-    <div className={(sc[key].waitlisted ? 'waitlisted-course ' : '') + sc[key].day + " other-entry rel-start-" + (parseInt(sc[key].start) - earliestClassStartTime + 650)} key={i}>
-      <div className={"other-entry-body block-" + sc[key].length}><span className="semibold">{sc[key].formatted}</span><br />{sc[key].desc} <br />{sc[key].room} </div>
-    </div>
-  ));
-
-  const lectures = genLectures(lecture);
-  const others = genNonLectures(other);
+  const others = rawSections.map((section, i) => {
+    const outerClassName = `${(sc[section].waitlisted ? 'waitlisted-course ' : '')}\
+${sc[section].day} other-entry \
+rel-start-${(parseInt(sc[section].start, 10) - earliestClassStartTime + 650)}`;
+    return (
+      <div className={outerClassName} key={i}>
+        <div className={`other-entry-body block-${sc[section].length}`}>
+          <span className="semibold">{sc[section].formatted}</span>
+          <br />
+          {sc[section].desc}
+          <br />
+          {sc[section].room}
+        </div>
+      </div>
+    );
+  });
 
   return (
     <div className="cal-enroll">
@@ -47,12 +64,16 @@ function Calendar({ courses }) {
         <div className="cal-dotw-column"></div>
         <div className="cal-dotw-column friday-column border-radius-bot-right"></div>
 
-        { lectures }
-        { others }
+        {lectures}
+        {others}
 
       </div>
     </div>
-  )
+  );
 }
+
+Calendar.propTypes = {
+  courses: React.PropTypes.array,
+};
 
 export default Calendar;

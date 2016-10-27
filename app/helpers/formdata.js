@@ -1,7 +1,9 @@
-/* 
+/*
  * Loosely based off of
  * https://github.com/inexorabletash/polyfill/blob/master/xhr.js
 */
+
+/* eslint-disable */
 
 (function(global) {
   if (!('window' in global && 'document' in global))

@@ -2,6 +2,7 @@ import { postFormData } from '../lib/forms';
 import { pages, parseResponse } from '../lib/responseParser';
 import { flatten } from '../helpers/flatten';
 
+/* eslint-disable no-shadow */
 
 export const REQUEST_COURSE_ADD = Symbol('REQUEST_COURSE_ADD');
 export function requestCourseAdd({ ccn, selections }) {
@@ -97,7 +98,7 @@ export function receiveSemesterChange({ career, enrolledCourses, shoppingCartCou
     enrolledCourses,
     term,
     shoppingCartCourses,
-  }
+  };
 }
 
 export const RECEIVE_SEMESTER_CHOICES = Symbol('RECEIVE_SEMESTER_CHOICES');
@@ -105,7 +106,7 @@ export function receiveSemesterChoices({ choices }) {
   return {
     type: RECEIVE_SEMESTER_CHOICES,
     choices,
-  }
+  };
 }
 
 const CART_URL = 'https://bcsweb.is.berkeley.edu/psc/bcsprd/EMPLOYEE/HRMS/c/SA_LEARNER_SERVICES_2.SSR_SSENRL_CART.GBL';
@@ -189,7 +190,8 @@ function sectionPageToConfirmation({ formData, selections }) {
          .then(doc => parseResponse(doc));
 }
 
-function confirmationPageToMainPage(formData, permissionNumber = '', graded = true, waitlistOk = false) {
+function confirmationPageToMainPage(formData, permissionNumber = '', graded = true,
+                                    waitlistOk = false) {
   formData.set('ICAJAX', '0');
   formData.set('ICAction', 'DERIVED_CLS_DTL_NEXT_PB$280$');
 
@@ -216,6 +218,24 @@ function reloadMainPage() {
     .then(response => response.text())
     .then(body => docFromBody(body))
     .then(doc => parseResponse(doc));
+}
+
+export function cancelShoppingCartAdd({ formData }) {
+  return (dispatch) => {
+    formData.set('ICAction', 'DERIVED_CLS_DTL_CANCEL_PB');
+    return postFormData(CART_URL, formData)
+      .then(body => docFromBody(body))
+      .then(doc => parseResponse(doc))
+      .then(({ formData }) => {
+        formData.set('ICAJAX', '0');
+        formData.set('ICAction', '#ICCancel');
+        formData.set('ICNAVTYPEDROPDWN', '0');
+        return postFormData(CART_URL, formData);
+      }) /* Returns XML, so we can't parse normally. */
+      .then(() => reloadMainPage())
+      .then(({ formData }) => dispatch(setFormData({ formData })))
+      .then(() => dispatch(canceledCartAdd()));
+  };
 }
 
 export function getSectionsAndAvailabilityForCCN({ ccn }) {
@@ -259,25 +279,6 @@ export function getSectionsAndAvailabilityForCCN({ ccn }) {
       .then(({ formData: newFormData }) => (
         dispatch(cancelShoppingCartAdd({ formData: newFormData }))
       ));
-  };
-}
-
-
-export function cancelShoppingCartAdd({ formData }) {
-  return (dispatch) => {
-    formData.set('ICAction', 'DERIVED_CLS_DTL_CANCEL_PB');
-    return postFormData(CART_URL, formData)
-      .then(body => docFromBody(body))
-      .then(doc => parseResponse(doc))
-      .then(({ formData }) => {
-        formData.set('ICAJAX', '0');
-        formData.set('ICAction', '#ICCancel');
-        formData.set('ICNAVTYPEDROPDWN', '0');
-        return postFormData(CART_URL, formData);
-      }) /* Returns XML, so we can't parse normally. */
-      .then(() => reloadMainPage())
-      .then(({ formData }) => dispatch(setFormData({ formData })))
-      .then(() => dispatch(canceledCartAdd()));
   };
 }
 
@@ -407,7 +408,9 @@ export function setSemester({ term }) {
     return chooseTerm({ formData, choice })
       .then(({ formData, career, term, enrolledCourses, shoppingCartCourses }) => {
         dispatch(setFormData({ formData }));
-        return dispatch(receiveSemesterChange({ career, enrolledCourses, term, shoppingCartCourses }));
+        return dispatch(
+          receiveSemesterChange({ career, enrolledCourses, term, shoppingCartCourses })
+        );
       });
   };
 }
@@ -421,7 +424,9 @@ export function setSemesterFromMainPage({ term }) {
       .then(({ formData }) => chooseTerm({ formData, choice }))
       .then(({ formData, career, term, enrolledCourses, shoppingCartCourses }) => {
         dispatch(setFormData({ formData }));
-        return dispatch(receiveSemesterChange({ career, enrolledCourses, term, shoppingCartCourses }));
+        return dispatch(
+          receiveSemesterChange({ career, enrolledCourses, term, shoppingCartCourses })
+        );
       });
   };
 }

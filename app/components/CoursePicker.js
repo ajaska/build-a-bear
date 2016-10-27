@@ -92,7 +92,7 @@ class CoursePicker extends React.Component {
     let sectionSelectors = this.props.sectionGroups.map((sectionGroup, i) => (
       <div className="row" key={i}>
         <Select
-          className={`cp-discussion-section${highlighted.section && !this.props.selections[i] ? " outline-blue" : ""}`}
+          className={`cp-discussion-section${highlighted.section && !this.props.selections[i] ? ' outline-blue' : ''}`}
           disabled={!enabled.section || sectionGroup.length <= 1}
           placeholder={this.props.isLoadingSections ? 'Loading sections...' : 'Choose a section'}
           value={this.props.selections[i]}
@@ -105,8 +105,8 @@ class CoursePicker extends React.Component {
       </div>
     ));
     const gradeOption = [
-      { value: "pnp", label: "P/NP" },
-      { value: "graded", label: "Letter Grade" },
+      { value: 'pnp', label: 'P/NP' },
+      { value: 'graded', label: 'Letter Grade' },
     ];
     let warning = null;
     if (this.props.warning) {
@@ -123,7 +123,7 @@ class CoursePicker extends React.Component {
         <div className="form">
           <div className="row">
             <input
-              className={`cp-CCN${highlighted.ccn ? " outline-blue" : ""}`}
+              className={`cp-CCN${highlighted.ccn ? ' outline-blue' : ''}`}
               disabled={globalDisable}
               placeholder="CCN"
               type="text"
@@ -131,7 +131,7 @@ class CoursePicker extends React.Component {
               onChange={this.handleCCNChange}
             />
             <Select
-              className={`cp-department${highlighted.dept ? " outline-blue" : ""}`}
+              className={`cp-department${highlighted.dept ? ' outline-blue' : ''}`}
               disabled={globalDisable}
               placeholder="Department"
               value={this.props.dept}
@@ -141,7 +141,7 @@ class CoursePicker extends React.Component {
               options={depts}
             />
             <Select
-              className={`cp-course-number${highlighted.deptNumber ? " outline-blue" : ""}`}
+              className={`cp-course-number${highlighted.deptNumber ? ' outline-blue' : ''}`}
               disabled={!enabled.deptNumber}
               placeholder="Course No."
               value={this.props.deptNumber}
@@ -153,7 +153,7 @@ class CoursePicker extends React.Component {
           </div>
           <div className="row">
             <Select
-              className={`cp-lecture-section${highlighted.lectureSection ? " outline-blue" : ""}`}
+              className={`cp-lecture-section${highlighted.lectureSection ? ' outline-blue' : ''}`}
               disabled={!enabled.lectureSection}
               placeholder="Section"
               value={this.props.lectureSection}
@@ -173,27 +173,27 @@ class CoursePicker extends React.Component {
             </div>
           </div>
           {sectionSelectors}
-           <div className="row">
-             <input
-               className="cp-CEC"
-               disabled={!enabled.gradeOption}
-               placeholder="Class Entry Code (optional)"
-               type="text"
-               value={this.props.cec}
-               onChange={this.handleCECChange}
-             />
-             <Select
-               className={`cp-grade-option${highlighted.gradeOption ? " outline-blue" : ""}`}
-               disabled={!enabled.gradeOption}
-               placeholder="Grade option"
-               value={this.props.gradingOption}
-               resetValue={resetValue}
-               options={gradeOption}
-               searchable={false}
-               clearable={false}
-               onChange={this.handleGradingOptionChange}
-             />
-           </div>
+          <div className="row">
+            <input
+              className="cp-CEC"
+              disabled={!enabled.gradeOption}
+              placeholder="Class Entry Code (optional)"
+              type="text"
+              value={this.props.cec}
+              onChange={this.handleCECChange}
+            />
+            <Select
+              className={`cp-grade-option${highlighted.gradeOption ? ' outline-blue' : ''}`}
+              disabled={!enabled.gradeOption}
+              placeholder="Grade option"
+              value={this.props.gradingOption}
+              resetValue={resetValue}
+              options={gradeOption}
+              searchable={false}
+              clearable={false}
+              onChange={this.handleGradingOptionChange}
+            />
+          </div>
           {warning}
           <div className="row">
             <label className="cp-waitlist">

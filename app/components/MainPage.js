@@ -12,18 +12,10 @@ import Banner from '../components/html/Banner';
 import MyAcademics from '../components/html/MyAcademics';
 
 function MainPage(props) {
-
-  const genAddCourse = (term) => {
-    if (term.includes("Fall")) {
-      return (
-        <div />
-      );
-    } else {
-      return (
-        <CoursePicker />
-      );
-    }
-  }
+  // TODO: remove this hack
+  const genAddCourse = (term) => (
+    term.includes('Fall') ? <div /> : <CoursePicker />
+  );
 
   return (
     <div>
@@ -57,6 +49,6 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   term: React.PropTypes.string.isRequired,
-}
+};
 
 export default MainPage;

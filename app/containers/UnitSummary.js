@@ -18,8 +18,9 @@ const mapStateToProps = (state) => {
   wc = wc || 0;
 
   const term = state.semester.toJS().term;
+  // TODO: remove this hack
   let maxUnits = 10.5;
-  if (term.includes("Fall")) {
+  if (term.includes('Fall')) {
     maxUnits = 20.5;
   }
 

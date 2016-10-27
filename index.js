@@ -49,7 +49,6 @@ function goReact() {
       store.dispatch(setSemester({ term: info.term, career: info.career })),
     ]);
   } else {
-    console.log(info);
     promise = Promise.all([
       store.dispatch(setSemesterChoices({ choices: info.semesters })),
       store.dispatch(setFormData({ formData: info.formData })),
@@ -70,7 +69,7 @@ function goReact() {
 try {
   initialize();
 } catch (e) {
-  alert('Failed to initialize?');
+  alert('Failed to initialize?'); // eslint-disable-line no-alert
   throw e;
 }
 goReact();

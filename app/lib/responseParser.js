@@ -92,7 +92,7 @@ export function parseResponse(doc) {
 
   const pageInfo = doc.getElementById('pt_pageinfo_win0');
   if (!pageInfo || !pageInfo.attributes || !pageInfo.attributes.page) {
-    console.error(doc);
+    console.error(doc); // eslint-disable-line no-console
     throw new Error('Couldn\'t find page info!');
   }
 

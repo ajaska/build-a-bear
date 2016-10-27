@@ -8,7 +8,9 @@ class ToGoogleCalendar extends React.Component {
 
   handleClickedAdd() {
     const download = document.createElement('a');
-    download.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.props.calendarFileBody));
+    download.setAttribute(
+      'href', `data:text/plain;charset=utf-8,${encodeURIComponent(this.props.calendarFileBody)}`
+    );
     download.setAttribute('download', 'CourseScheduleSp2017.ics');
     if (document.createEvent) {
       const event = document.createEvent('MouseEvents');
@@ -49,12 +51,12 @@ class ToGoogleCalendar extends React.Component {
           <p className="modal-confirm-text">You should see a download start. This file contains your course schedule in a CSV format. You can follow the simple steps <a className="semibold" target="_blank" href="https://digibites.zendesk.com/hc/en-us/articles/200134792-How-do-I-import-ics-ical-csv-files-into-Google-Calendar-">here</a> on how to use this file to import your class schedule into google calendar.</p>
         </div>
       </div>
-    )
+    );
   }
 }
 
 ToGoogleCalendar.propTypes = {
   calendarFileBody: React.PropTypes.string.isRequired,
-}
+};
 
 export default ToGoogleCalendar;

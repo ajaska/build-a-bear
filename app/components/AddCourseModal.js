@@ -84,7 +84,8 @@ class AddCourseModal extends React.Component {
               <div className="modal-course-info">
                 <span>
                   <span className="semibold color-blue">{ lecture.courseName }</span><br />
-                  <span className="semibold">{ lecture.room }</span> | { lecture.time.toString() }<br />
+                  <span className="semibold">{ lecture.room }</span> | { lecture.time.toString() }
+                  <br />
                   Instructor: <span className="semibold">{ lecture.instructor }</span><br />
                   Grading Option: <span className="semibold">{ gradingOption }</span><br />
                   Course Entry Code: <span className="semibold">{ this.props.cec }</span><br />

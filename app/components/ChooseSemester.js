@@ -5,7 +5,7 @@ function ChooseSemester(props) {
     <button
       key={i}
       className="semester semibold"
-      onClick={(() => props.selectedSemester({term: choice.term}))}
+      onClick={(() => props.selectedSemester({ term: choice.term }))}
     >
       {choice.term}
     </button>
@@ -33,7 +33,3 @@ ChooseSemester.propTypes = {
 };
 
 export default ChooseSemester;
-/*
-        <button className="semester-fall semibold">Fall 2016</button>
-        <button className="semester-spring semibold">Spring 2017</button>
-*/

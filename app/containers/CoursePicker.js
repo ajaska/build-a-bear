@@ -23,7 +23,8 @@ function checkError(state, lectureSection) {
 
   const term = state.semester.toJS().term;
   let maxUnits = 10.5;
-  if (term.includes("Fall")) {
+  // TODO: remove this hack
+  if (term.includes('Fall')) {
     maxUnits = 20.5;
   }
 

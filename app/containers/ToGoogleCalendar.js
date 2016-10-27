@@ -8,7 +8,7 @@ const mapStateToProps = (state) => {
   const calendarFileBody = coursesToCal(courses);
   return {
     calendarFileBody,
-  }
+  };
 };
 
 export default connect(mapStateToProps)(ToGoogleCalendar);
