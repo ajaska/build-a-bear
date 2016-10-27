@@ -4,7 +4,6 @@ class ToGoogleCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.handleClickedAdd = this.handleClickedAdd.bind(this);
-    console.log(this.props);
   }
 
   handleClickedAdd() {

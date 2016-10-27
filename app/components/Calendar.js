@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Calendar({ courses }) {
-  console.log(courses);
   const sc = courses;
   const lecture = Object.keys(sc).filter(course => sc[course].lecture);
   const other = Object.keys(sc).filter(course => !sc[course].lecture);
