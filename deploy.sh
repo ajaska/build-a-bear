@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+export NODE_ENV="production";
 export ROOT_URL="//bear.plus";
 
 npm run-script build
