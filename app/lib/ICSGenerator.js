@@ -2,8 +2,7 @@ import ICAL from 'ical.js';
 import { flatten } from '../helpers/flatten';
 
 function sectionToEvent(section) {
-  const vevent = new ICAL.Component('vevent');
-  const event = new ICAL.Event(vevent);
+  const event = new ICAL.Event();
 
   event.dtstamp = ICAL.Time.now();
 
@@ -41,9 +40,9 @@ function sectionToEvent(section) {
   }, 'WEEKLY');
   // https://github.com/mozilla-comm/ical.js/issues/271
   recur.freq = 'WEEKLY';
-  vevent.addPropertyWithValue('rrule', recur);
+  event.component.addPropertyWithValue('rrule', recur);
 
-  return vevent;
+  return event.component;
 }
 
 function courseToEvents(course) {

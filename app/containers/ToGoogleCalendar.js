@@ -4,7 +4,7 @@ import ToGoogleCalendar from '../components/ToGoogleCalendar';
 import { coursesToCal } from '../lib/ICSGenerator';
 
 const mapStateToProps = (state) => {
-  const courses = state.enrolled.toJS().courses;
+  const courses = state.enrolled.get('courses');
   const calendarFileBody = coursesToCal(courses);
   return {
     calendarFileBody,
